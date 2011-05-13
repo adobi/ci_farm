@@ -1,5 +1,5 @@
 a {
-	text-decoration: none; padding:3px; color: #0099cc;
+	text-decoration: none; padding:3px; color: #6498CC;
 }
 
 a:hover{
@@ -21,7 +21,7 @@ a:hover{
 }
 
 #header {
-    background: #f2fcff;
+/*    background: #f2fcff;*/
 }
     
     #header-menu {
@@ -38,7 +38,8 @@ a:hover{
     }
 
 #sidebar {
-    background:#f5f5f5;
+    background:#ededed;
+    margin-top:10px;
 }
 
     #side-navigation {

@@ -34,7 +34,7 @@
 	    
 		<div id="container" class = "container">
 			<?php if ($this->session->userdata('current_user_id')) : ?>
-        		<div id = "header" class = "span-24">
+        		<div id = "header" class = "span-24 ui-widget-header ui-corner-all">
         		    <div class = "prepend-3 span-18 append-3">
             			<ul id = "header-menu" class = "span-18">
             			    <li>
@@ -59,7 +59,7 @@
         		    </div>
         		</div> <!-- header -->
         		
-    			<div id = "sidebar" class = "span-5">
+    			<div id = "sidebar" class = "span-5 ui-corner-all">
     
                     <?php require_once '_sidebar.php'; ?>
     

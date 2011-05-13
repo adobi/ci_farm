@@ -8,7 +8,7 @@
 
 <fieldset class = "round">
     
-    <?= form_open(base_url() . 'eggtype/edit/'.$this->uri->segment(3)) ?>
+    <?= form_open(base_url() . 'eggtype/edit/') ?>
         <p>
             <label for="code" class = "block">Kód</label>
             <input type="text" class = "text" name = "code" value = "" id = "code"/>
