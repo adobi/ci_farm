@@ -9,10 +9,10 @@ App.facebox = function() {
     });
     
     $('body').delegate('a[rel*=dialog]', 'click', function() {
-        console.log($(this).attr('href'));
-        $.get($(this).attr('href'), function(response) {
-            console.log(response);
-            var elem = $('<div />', {id: 'dialog'}).html(response);
+        var self = $(this);
+        $.get(self.attr('href'), function(response) {
+            
+            var elem = $('<div />', {id: 'dialog', title: self.attr('title')}).html(response);
             
             //$('body').append('elem');
             
@@ -20,6 +20,7 @@ App.facebox = function() {
                 modal: true,
                 width: 'auto'   
             });
+            $('button').button();
         });
         
         return false;
@@ -29,7 +30,7 @@ App.facebox = function() {
 App.Confirm = function() {
     $('body').delegate('.delete', 'click', function() {
         var self = $(this);
-        var elem = $('<div />').html('Biztos törlöd?');
+        var elem = $('<div />', {title: 'Figyelmztetés'}).html('Biztos törlöd?');
         
         elem.dialog({
             modal: true,
@@ -53,4 +54,6 @@ App.Confirm = function() {
 $(function() {
     App.facebox();
     App.Confirm();
+    
+    $('button, input[type=submit]').button();
 })

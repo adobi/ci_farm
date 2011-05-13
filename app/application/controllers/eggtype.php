@@ -17,14 +17,25 @@ class Eggtype extends MY_Controller {
 	
 	public function edit() 
 	{
-	    if ($_POST) {
+	    $this->form_validation->set_rules('code', 'Kód', 'trim|required');
+	    $this->form_validation->set_rules('description', 'Leírás', 'trim|required');
+	    
+	    if ($this->form_validation->run()) {
 	        
 	        $this->load->model("Eggtypes", 'eggtype');
 	        
 	        $this->eggtype->insert($_POST);
 	        	    
             redirect($_SERVER['HTTP_REFERER']);
+	    } else {
+	        if ($_POST) {
+	            
+    	        $this->session->set_userdata('validation_error',validation_errors());
+    	        
+    	        redirect($_SERVER['HTTP_REFERER']);
+	        }
 	    }
+	    
 	    $this->template->build('eggtype/edit');
 	}
 	

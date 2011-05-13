@@ -25,7 +25,7 @@
                 </label>
             </p>
             <p>
-                <input type="submit" value = "Belépés" />
+                <button>Belépés</button>
             </p>
         <?= form_close() ?>
         

@@ -16,36 +16,9 @@ a:hover{
     border-radius:5px;
 }
 
-input[type="submit"] {
-    /*
-    border:0px;
-    background: #222 url(../img/alert-overlay.png) repeat-x;
-    display: inline-block;
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
-    line-height: 1;
-    -moz-border-radius: 5px; 
-	-webkit-border-radius: 5px;
-	-moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
-	-webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
-    -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
-    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
-    text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
-    border-bottom: 1px solid rgba(0,0,0,0.25); 
-	text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
-	border-bottom: 1px solid rgba(0,0,0,0.25);
-	position: relative;
-	cursor: pointer;
-    padding: 6px 16px 8px; */
-    font-size:1.6em;
-    padding:5px 8px;
+.block {
+    display:block;
 }
-
-//input[type="submit"]:hover { background-color: #111; color: #fff; }
-input[type="submit"]:active { top: 1px; }
-
-
 
 #header {
     background: #f2fcff;

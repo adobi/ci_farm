@@ -17,8 +17,8 @@
 
 		<link rel="stylesheet" href="<?= base_url() ?>css/facebox.css" type="text/css" media="print"charset="utf-8">
 		
-		<script type="text/javascript" charset="utf-8" src = "http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-        <script type="text/javascript" charset="utf-8" src = "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.7/jquery-ui.js"></script>
+		<script type="text/javascript" charset="utf-8" src = "http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+        <script type="text/javascript" charset="utf-8" src = "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/jquery-ui.js"></script>
         
         <script type="text/javascript" charset="utf-8" src = "<?= base_url() ?>js/facebox.js"></script>
 
