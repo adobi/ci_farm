@@ -1,0 +1,18 @@
+- tojastermeles
+    - fakk csoportok
+        - fakkok
+            - tyukallomanyok
+                - termelesi adatok
+                - elhullasi adatok
+            - tapanyag
+    - erkezesi telephelyek
+    - tojas tipusok
+    - tojas raktar
+    
+- keltetes
+
+
+- neveles
+    - nevelesi naplo
+
+- ertekesites    

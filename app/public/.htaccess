@@ -1,0 +1,32 @@
+RewriteEngine On
+
+<Files .*>
+	Order Deny,Allow
+	Deny From All
+</Files>
+
+# Protect application and system files from being viewed
+RewriteRule ^(?:application|modules|system)\b.* index.php/$0 [L]
+
+# Allow any files or directories that exist to be displayed directly
+RewriteCond $1 !^(index\.php|/img|/js|/css|static|robots\.txt|css|js|googlehostedservice\.html)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Rewrite all other URLs to index.php/URL
+RewriteRule .* index.php/$0 [PT]
+
+Header unset ETag
+FileETag None
+
+<FilesMatch "(?i)^.*\.(ico|flv|jpg|jpeg|png|gif|js|css)$">
+    Header unset Last-Modified
+    Header set Expires "Fri, 21 Dec 2012 00:00:00 GMT"
+    Header set Cache-Control "public, no-transform"
+</FilesMatch>
+
+<IfModule mod_deflate.c>
+	<FilesMatch "\.(js|css)$">
+		SetOutputFilter DEFLATE
+	</FilesMatch>
+</IfModule>
