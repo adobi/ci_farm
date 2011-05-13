@@ -1,0 +1,14 @@
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
+require_once 'MY_Controller.php';
+
+class Egg extends MY_Controller {
+
+	public function index()
+	{
+		$this->template->build('egg/index');
+	}
+}
+
+/* End of file welcome.php */
+/* Location: ./application/controllers/welcome.php */

@@ -33,28 +33,28 @@
         		    <div class = "prepend-3 span-18 append-3">
             			<ul id = "header-menu" class = "span-18">
             			    <li>
-            			        <a href="<?= base_url(); ?>">kezdolap</a>
+            			        <a href="<?= base_url(); ?>welcome">kezdőlap</a>
             			    </li>
             			    <li>
-            			        <a href="<?= base_url(); ?>">tojastermeles</a>
+            			        <a href="<?= base_url(); ?>egg">tojástermelés</a>
             			    </li>
             			    <li>
-            			        <a href="<?= base_url(); ?>">keltetes</a>
+            			        <a href="<?= base_url(); ?>">keltetés</a>
             			    </li>
             			    <li>
-            			        <a href="<?= base_url(); ?>">neveles</a>
+            			        <a href="<?= base_url(); ?>">nevelés</a>
         			        </li>
         			        <li>
-        			            <a href="<?= base_url(); ?>">ertekesites</a>
+        			            <a href="<?= base_url(); ?>">értékesítés</a>
         			        </li>
         			        <li>
-        			            <a href="<?= base_url(); ?>auth/logout">kilepes</a>
+        			            <a href="<?= base_url(); ?>auth/logout">kilépes</a>
         			        </li>			        
             			</ul>
         		    </div>
         		</div> <!-- header -->
         		
-    			<div id = "sidebar" class = "span-4">
+    			<div id = "sidebar" class = "span-5">
     
                     <?php require_once '_sidebar.php'; ?>
     
@@ -62,5 +62,5 @@
     		<?php else: ?>
     		    <p>&nbsp;</p>
 			<?php endif; ?>
-			<div id="content" class = "span-20 last">
+			<div id="content" class = "span-19 last">
 			    
