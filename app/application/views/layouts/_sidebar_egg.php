@@ -2,11 +2,11 @@
     <a href="<?= base_url(); ?>breeder">Tenyésztők</a>
 </li>
 <li>
-    <a href="breedersite">Tenyésztők telephelyei</a>
+    <a href="<?= base_url(); ?>breedersite">Tenyésztők telephelyei</a>
 </li>
 <li>
-    <a href="eggtype">Tojástípusok</a>
+    <a href="<?= base_url(); ?>eggtype" <?= $this->uri->segment(1) === 'eggtype' ? 'class = "selected-sidemenu-item"' : '' ?>>Tojás típusok</a>
 </li>
 <li>
-    <a href="chickentype">Tyúk típusok</a>
+    <a href="<?= base_url(); ?>chickentype">Tyúk típusok</a>
 </li>

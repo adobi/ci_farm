@@ -1,3 +1,4 @@
+/*
 $(function() {
     
    if (App.Subs.length) {
@@ -6,3 +7,4 @@ $(function() {
        }
    } 
 });
+*/

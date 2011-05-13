@@ -1,5 +1,5 @@
                 <ul id = "side-navigation">
-                    <?php if ($this->uri->segment(1) === 'egg'): ?>
+                    <?php if (in_array($this->uri->segment(1), array('egg', 'eggtype'))): ?>
                         <?php require_once '_sidebar_egg.php'; ?>
                     <?php endif ?>
                 </ul>
