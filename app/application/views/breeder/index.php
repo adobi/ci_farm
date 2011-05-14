@@ -14,7 +14,7 @@
             </ul>
             <a href="<?= base_url() ?>breeder/delete/<?= $item->id ?>" class = "delete">töröl</a>
             <a href="<?= base_url() ?>breeder/edit/<?= $item->id ?>" rel = "dialog" dialog_id = "<?= $item->id ?>" title = "Tenyésztő szerkesztése">szerkeszt</a>
-            <a href="<?= base_url() ?>breeder/sites/<?= $item->id ?>">telephelyei</a>
+            <a href="<?= base_url() ?>site/for_breeder/<?= $item->id ?>">telephelyei</a>
         </div>
     <?php endforeach ?>
 <?php endif ?>
