@@ -1,21 +1,13 @@
 var App = App || {};
 
-App.facebox = function() {
-    
-    $('a[rel*=facebox]').facebox({
-        opacity: 0.6,
-        loadingImage : App.URL + 'img/loading.gif',
-        closeImage   : App.URL + 'img/cancel.png'
-    });
-    
+App.Dialog = function() {
+
     $('body').delegate('a[rel*=dialog]', 'click', function() {
         var self = $(this);
         $.get(self.attr('href'), function(response) {
             
             var elem = $('<div />', {id: 'dialog', title: self.attr('title')}).html(response);
-            
-            //$('body').append('elem');
-            
+
             elem.dialog({
                 modal: true,
                 width: 'auto'   
@@ -25,6 +17,10 @@ App.facebox = function() {
         
         return false;
     });
+};
+
+App.TriggerDialogOpen = function(dialogId) {
+    $('[dialog_id='+dialogId+']').trigger('click');
 };
 
 App.Confirm = function() {
@@ -52,7 +48,7 @@ App.Confirm = function() {
 };
 
 $(function() {
-    App.facebox();
+    App.Dialog();
     App.Confirm();
     
     $('button, input[type=submit]').button();

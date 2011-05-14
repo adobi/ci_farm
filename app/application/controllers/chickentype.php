@@ -2,17 +2,17 @@
 
 require_once 'MY_Controller.php';
 
-class Eggtype extends MY_Controller {
+class Chickentype extends MY_Controller {
 
 	public function index()
 	{
 	    $data = array();
 	    
-	    $this->load->model('Eggtypes', 'eggtypes');
+	    $this->load->model('Chickentypes', 'chickentypes');
 	    
-	    $data['eggtypes'] = $this->eggtypes->fetchAll();
+	    $data['chickentypes'] = $this->chickentypes->fetchAll();
 	    
-		$this->template->build('eggtype/index', $data);
+		$this->template->build('chickentype/index', $data);
 	}
 	
 	public function edit() 
@@ -20,27 +20,29 @@ class Eggtype extends MY_Controller {
 	    $data = array();
 	    
 	    $this->form_validation->set_rules('code', 'Kód', 'trim|required');
-	    $this->form_validation->set_rules('description', 'Leírás', 'trim|required');
-	    
-	    $this->load->model("Eggtypes", 'eggtype');
+	    $this->form_validation->set_rules('name', 'Leírás', 'trim|required');
 	    
 	    $id = $this->uri->segment(3);
-	    $eggtype = false;
+	    
+	    $this->load->model("Chickentypes", 'chickentype');
+	    
+	    $chickentype = false;
 	    if ($id) {
-	        $eggtype = $this->eggtype->find((int)$id);
+	        $chickentype = $this->chickentype->find((int)$id);
+	        
 	    }
-	    $data['eggtype'] = $eggtype;
+        $data['chickentype'] = $chickentype;
 	    
 	    if ($this->form_validation->run()) {
 	        
 	        if ($id) {
-                
-	            $this->eggtype->update($_POST, $id);
+	            
+	            $this->chickentype->update($_POST, array('id'=>$id));
 	        } else {
 	            
-                $this->eggtype->insert($_POST);
+    	        $this->chickentype->insert($_POST);
 	        }
-	        
+	        	    
             redirect($_SERVER['HTTP_REFERER']);
 	    } else {
 	        if ($_POST) {
@@ -52,7 +54,7 @@ class Eggtype extends MY_Controller {
 	        }
 	    }
 	    
-	    $this->template->build('eggtype/edit', $data);
+	    $this->template->build('chickentype/edit', $data);
 	}
 	
 	public function delete()
@@ -61,9 +63,9 @@ class Eggtype extends MY_Controller {
 	    
 	    if ($id) {
 	        
-	        $this->load->model('Eggtypes', 'eggtypes');
+	        $this->load->model('Chickentypes', 'chickentypes');
 	        
-	        $this->eggtypes->delete($id);
+	        $this->chickentypes->delete($id);
 	        
 	        redirect($_SERVER['HTTP_REFERER']);
 	    }

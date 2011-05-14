@@ -11,14 +11,14 @@
 
 <fieldset class = "round">
     
-    <?= form_open(base_url() . 'eggtype/edit/' . $this->uri->segment(3)) ?>
+    <?= form_open(base_url() . 'chickentype/edit/' . $this->uri->segment(3)) ?>
         <p>
             <label for="code" class = "block">Kód</label>
-            <input type="text" class = "text" name = "code" value = "<?= $eggtype ? $eggtype->code : '' ?>" id = "code"/>
+            <input type="text" class = "text" name = "code" value = "<?= $chickentype ? $chickentype->code : '' ?>" id = "code"/>
         </p>
         <p>
-            <label for="description" class = "block">Leírás</label>
-            <input type="text" name="description" value="<?= $eggtype ? $eggtype->description : '' ?>" id="description" class = "text" />
+            <label for="name" class = "block">Leírás</label>
+            <input type="text" name="name" value="<?= $chickentype ? $chickentype->name : '' ?>" id="name" class = "text" />
         </p>
         <p>
             <button>Mentés</button>

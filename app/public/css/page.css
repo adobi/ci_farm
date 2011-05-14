@@ -59,11 +59,20 @@ a:hover{
     margin-top:10px;
 }
 
-p.zebra {
+.zebra {
     padding:5px;
     border-bottom:1px solid #ccc;
 }
-    p.zebra a {
+    .zebra a {
         float:right;
     }
-
+div.zebra {
+    margin-bottom:10px;
+}
+    div.zebra ul {
+        margin-bottom:0px;
+    }
+.name {
+    color:#777;
+    font-size:1.2em;
+}

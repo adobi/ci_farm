@@ -305,6 +305,11 @@ class My_Model extends CI_Model
 		    
 		    return false;
 		}
+		
+		if (!is_array($where) && is_numeric($where)) {
+		    $_w = $where;
+		    $where = array($this->_primary=>$_w);
+		}
 		//dump($where); dump($data);
 		$db->update($this->_name, $data, $where);
 		

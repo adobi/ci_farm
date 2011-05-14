@@ -1,6 +1,6 @@
 <li>
     <strong style = "font-size:1.4em">›</strong>
-    <a href="<?= base_url(); ?>breeder">Tenyésztők</a>
+    <a href="<?= base_url(); ?>breeder" <?= $this->uri->segment(1) === 'breeder' ? 'class = "selected-sidemenu-item"' : ''?>>Tenyésztők</a>
     
 </li>
 <li>
