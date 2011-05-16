@@ -2,7 +2,7 @@
 
 if (! defined('BASEPATH')) exit('No direct script access');
 
-class BreederSites extends MY_Model 
+class Breedersites extends MY_Model 
 {
     protected $_name = "breeder_site";
     protected $_primary = "id";

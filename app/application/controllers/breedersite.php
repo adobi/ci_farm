@@ -4,14 +4,14 @@ if (! defined('BASEPATH')) exit('No direct script access');
 
 require_once 'MY_Controller.php';
 
-class Site extends MY_Controller 
+class Breedersite extends MY_Controller 
 {
     public function index() 
     {
         
         $data = array();
         
-        $this->load->model('BreederSite', 'model');
+        $this->load->model('Breedersites', 'model');
         
         $this->template->build('breeder_site/index', $data);
     }
@@ -22,17 +22,28 @@ class Site extends MY_Controller
         
         $id = $this->uri->segment(3);
         
-        $this->load->model('BreederSite', 'model');
+        $this->load->model('Breedersites', 'model');
+        $this->load->model('Breeders', 'breeder');
         
-        $item = false;
+        $item = false; $breederId = false; $currentBreeder = false;
         if ($id) {
-            if (is_numeric($id)) {
-                
-            }
-            
+            // breedersite/edit/breeder/1
             if ($id === 'breeder') {
                 
-                $id = $this->uri->segment('4');
+                $breederId = $this->uri->segment('4');
+                
+                $currentBreeder = $this->breeder->find($breederId);
+                
+                $data['current_breeder'] = $currentBreeder;
+            }
+            
+            $currentBreederSite = false;
+            // breedersite/edit/1/breeder/1
+            if (is_numeric($id)) {
+                
+                $currentBreederSite = $this->model->find($id);
+                
+                $data['current_breeder_site'] = $currentBreederSite;
             }
         }
         $data['current_item'] = $item;
@@ -60,7 +71,7 @@ class Site extends MY_Controller
         $id = $this->uri->segment(3);
         
         if ($id) {
-            $this->load->model('BreederSite', 'model');
+            $this->load->model('Breedersites', 'model');
             
             $this->model->delete($id);
         }
@@ -79,7 +90,7 @@ class Site extends MY_Controller
         
         
         $this->load->model('Breeders', 'breeder');
-        $this->load->model('BreederSites', 'site');
+        $this->load->model('Breedersites', 'site');
         
         $data = array();
         

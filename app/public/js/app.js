@@ -3,16 +3,25 @@ var App = App || {};
 App.Dialog = function() {
 
     $('body').delegate('a[rel*=dialog]', 'click', function() {
+        
         var self = $(this);
-        $.get(self.attr('href'), function(response) {
-            
-            var elem = $('<div />', {id: 'dialog', title: self.attr('title')}).html(response);
+        
+        
+        var elem = $('<div />', {id: 'dialog', title: self.attr('title')}).html('<p style = "width: 300px;text-align:center"><img src = "'+App.URL+'img/fb-loader.gif" /></p>');
 
-            elem.dialog({
-                modal: true,
-                width: 'auto'   
-            });
-            $('button').button();
+        elem.dialog({
+            modal: true,
+            width: 'auto',
+            minWidth: 500,
+            position:[Math.floor((window.innerWidth / 2)-150), 20],
+            open: function(event, ui) {
+                
+                $.get(self.attr('href'), function(response) {
+                    elem.html(response);
+                    $('button').button();
+                });
+                
+            }
         });
         
         return false;
