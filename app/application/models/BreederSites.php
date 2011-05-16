@@ -19,7 +19,7 @@ class Breedersites extends MY_Model
                 'where'=>array('breeder_id'=>$id)
             )
         );
-        
+        //dump($result);
         return $result;
     }
 }

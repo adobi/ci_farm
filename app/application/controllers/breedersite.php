@@ -26,6 +26,8 @@ class Breedersite extends MY_Controller
         $this->load->model('Breeders', 'breeder');
         
         $item = false; $breederId = false; $currentBreeder = false;
+        $currentBreederSite = false;
+
         if ($id) {
             // breedersite/edit/breeder/1
             if ($id === 'breeder') {
@@ -33,32 +35,44 @@ class Breedersite extends MY_Controller
                 $breederId = $this->uri->segment('4');
                 
                 $currentBreeder = $this->breeder->find($breederId);
-                
-                $data['current_breeder'] = $currentBreeder;
             }
             
-            $currentBreederSite = false;
             // breedersite/edit/1/breeder/1
             if (is_numeric($id)) {
                 
-                $currentBreederSite = $this->model->find($id);
+                $breederId = $this->uri->segment('5');
                 
-                $data['current_breeder_site'] = $currentBreederSite;
+                $currentBreederSite = $this->model->find($id);
             }
         }
+
+        $data['current_breeder'] = $currentBreeder;
+        $data['current_breeder_site'] = $currentBreederSite;
         $data['current_item'] = $item;
         
-        if ($this->form_validation->run()) {
+        $this->form_validation->set_rules('code', 'Kód', 'trime|required');
+        $this->form_validation->set_rules('mgszh', 'MGSZH', 'trime|required');
+        $this->form_validation->set_rules('postal_code_id', 'Irányítószám', 'trime|required');
+        $this->form_validation->set_rules('address', 'Cím', 'trime|required');
         
-            if ($id) {
+        
+        if ($this->form_validation->run()) {
+            
+            if (is_numeric($id)) {
                 $this->model->update($_POST, $id);
             } else {
+                
+                $_POST['breeder_id'] = $breederId;
+                
                 $this->model->insert($_POST);
             }
             redirect($_SERVER['HTTP_REFERER']);
         } else {
             if ($_POST) {
                 
+    	        $this->session->set_userdata('validation_error',validation_errors());
+    	        $this->session->set_userdata('current_dialog_item', (is_numeric($id) ? $id : 0));
+    	        
                 redirect($_SERVER['HTTP_REFERER']);
             }
         }
@@ -102,7 +116,7 @@ class Breedersite extends MY_Controller
         }
         
         $data['breeder'] = $breeder;
-        $data['site'] = $this->site->fetchForBreeder($id);
+        $data['breeder_sites'] = $this->site->fetchForBreeder($id);
         
         $this->template->build('breeder_site/for_breeder', $data);
     }

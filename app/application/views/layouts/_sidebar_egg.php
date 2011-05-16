@@ -5,7 +5,7 @@
 </li>
 <li>
     <strong style = "font-size:1.4em">›</strong>
-    <a href="<?= base_url(); ?>site" <?= $this->uri->segment(1) === 'breedersite' ? 'class = "selected-sidemenu-item"' : ''?>>Tenyésztők telephelyei</a>
+    <a href="<?= base_url(); ?>breedersite" <?= $this->uri->segment(1) === 'breedersite' ? 'class = "selected-sidemenu-item"' : ''?>>Tenyésztők telephelyei</a>
     
 </li>
 <li>
