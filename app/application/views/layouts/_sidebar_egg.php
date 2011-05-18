@@ -16,3 +16,7 @@
     <strong style = "font-size:1.4em">›</strong>
     <a href="<?= base_url(); ?>chickentype" <?= $this->uri->segment(1) === 'chickentype' ? 'class = "selected-sidemenu-item"' : '' ?>>Tyúk típusok</a>
 </li>
+<li>
+    <strong style = "font-size:1.4em">›</strong>
+    <a href="<?= base_url(); ?>fakk" <?= $this->uri->segment(1) === 'fakk' ? 'class = "selected-sidemenu-item"' : '' ?>>Fakkok</a>
+</li>

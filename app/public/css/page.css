@@ -65,7 +65,7 @@ a:hover{
 
 .zebra {
     padding:5px;
-    border-bottom:1px solid #ccc;
+    border:1px solid #ccc;
 }
     .zebra a {
         float:right;
