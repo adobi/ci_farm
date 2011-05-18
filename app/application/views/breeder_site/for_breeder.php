@@ -9,7 +9,7 @@
             <ul>
                 <li><strong>Kód</strong>: <?= $item->code; ?></li>
                 <li><strong>MGSZH</strong>: <?= $item->mgszh; ?></li>
-                <li><strong>Irányítószám</strong>: <?= $item->postal_code_id; ?></li>
+                <li><strong>Irányítószám</strong>: <?= $item->code; ?> - <?= $item->city; ?></li>
                 <li><strong>Cím</strong>: <?= $item->address; ?></li>
                 <li><strong>Megjegyzés</strong>: <?= $item->description; ?></li>
             </ul>

@@ -37,3 +37,24 @@
         </p>
     <?= form_close(); ?>
 </fieldset>
+
+<script type="text/javascript">
+
+    
+    $('#postal_code_id').autocomplete({
+        source: App.URL + 'postalcode/index/',
+        select: function(e, ui) {
+            var id = ui.item.id;
+            console.log(ui);
+            console.log(id)
+            $('#postal_code_id').after($('<input />', {
+                type: 'hidden',
+                name: 'postal_code_id',
+                value: id    
+            }));
+            
+            $('#postal_code_id').removeAttr('name');
+        }
+    });
+
+</script>

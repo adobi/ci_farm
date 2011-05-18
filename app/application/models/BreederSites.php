@@ -16,6 +16,13 @@ class Breedersites extends MY_Model
         
         $result = $this->fetchRows(
             array(
+                'join'=>array(
+                    array(
+                        'table'=>'postal_code',
+                        'columns'=>array('postal_code.code', 'city'),
+                        'condition'=>"postal_code.id = $this->_name.postal_code_id"
+                    )
+                ),
                 'where'=>array('breeder_id'=>$id)
             )
         );

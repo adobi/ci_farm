@@ -10,7 +10,7 @@ App.Dialog = function() {
         var elem = $('<div />', {id: 'dialog', title: self.attr('title')}).html('<p style = "width: 300px;text-align:center"><img src = "'+App.URL+'img/fb-loader.gif" /></p>');
 
         elem.dialog({
-            modal: true,
+            modal: false,
             width: 'auto',
             minWidth: 500,
             position:[Math.floor((window.innerWidth / 2)-150), 20],
