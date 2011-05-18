@@ -15,7 +15,7 @@
             </ul>
             <a href="<?= base_url(); ?>breedersite/delete/<?= $item->id; ?>" class = "delete">töröl</a>
             <a href="<?= base_url(); ?>breedersite/edit/<?= $item->id; ?>" dialog_id = "<?= $item->id; ?>" rel = "dialog" title = "Telephely szerkesztése">szerkeszt</a>
-            <a href="<?= base_url(); ?>fakkgroup/show/breedersite/<?= $item->id; ?>">fakk csoportok</a>
+            <a href="<?= base_url(); ?>fakkgroup/for_breedersite/<?= $item->id; ?>">fakk csoportok</a>
         </div>            
     <?php endforeach ?>
 <?php endif ?>

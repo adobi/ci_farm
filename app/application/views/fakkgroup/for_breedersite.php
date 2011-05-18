@@ -10,7 +10,7 @@
             
             <a href="<?= base_url(); ?>fakkgroup/delete/<?= $item->id; ?>" class = "delete">töröl</a>
             <a href="<?= base_url(); ?>fakkgroup/edit/<?= $item->id; ?>" dialog_id = "<?= $item->id; ?>" rel = "dialog" title = "Fakkcsoport szerkesztése">szerkeszt</a>
-            
+            <a href="<?= base_url(); ?>">fakkok</a>
         </div>
     <?php endforeach ?>
 <?php endif ?>

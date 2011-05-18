@@ -92,9 +92,9 @@ class Fakkgroup extends MY_Controller
      * @return void
      * @author Dobi Attila
      */
-    public function show()
+    public function for_breedersite()
     {
-        $site = $this->uri->segment(4);
+        $site = $this->uri->segment(3);
         
         $this->load->model('Breedersites', 'breedersites');
         $this->load->model('Fakkgroups', 'groups');
@@ -105,6 +105,6 @@ class Fakkgroup extends MY_Controller
         
         $data['groups'] = $groups;
         
-        $this->template->build('fakkgroup/show', $data);
+        $this->template->build('fakkgroup/for_breedersite', $data);
     }    
 }
