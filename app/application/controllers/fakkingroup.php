@@ -4,7 +4,7 @@ if (! defined('BASEPATH')) exit('No direct script access');
 
 require_once 'MY_Controller.php';
 
-class Fakk extends MY_Controller 
+class Fakkingroup extends MY_Controller 
 {
     public function index() 
     {
@@ -52,7 +52,7 @@ class Fakk extends MY_Controller
         $id = $this->uri->segment(3);
         
         if ($id) {
-            $this->load->model('Fakks', 'model');
+            $this->load->model('Fakksingroup', 'model');
             
             $this->model->delete($id);
         }
@@ -60,33 +60,17 @@ class Fakk extends MY_Controller
         redirect($_SERVER['HTTP_REFERER']);
     }
     
-    public function add_to_group()
+    public function change_group()
     {
-        $group = $this->uri->segment(3);
-        
-        $this->load->model('Fakks', 'fakks');
-        
-        $this->form_validation->set_rules('name', 'Név', 'trim|required');
-        
-        if ($this->form_validation->run()) {
+        if ($_POST) {
             
-            $fakkId = $this->fakks->insert($_POST);
-            //dump($fakkId); dump($group); die;
-            if ($fakkId && $group) {
-                
-                $this->load->model('Fakksingroup', 'fig');
-                
-                $this->fig->insert(array('fakk_id'=>$fakkId, 'fakk_group_id'=>$group));
-            } else {
-                
-                /*
-                    TODO valamilyen hibat adunk
-                */
-            }
+            $this->load->model('Fakksingroup', 'fig');
             
-            redirect($_SERVER['HTTP_REFERER']);
+            echo $this->fig->update(
+                array('fakk_group_id'=>$_POST['new_group']), 
+                array('fakk_id'=>$_POST['fakk_id'], 'fakk_group_id'=>$_POST['old_group'])
+            );
         }
-        
-        $this->template->build('fakk/edit');
+        die;
     }
-}
+}  

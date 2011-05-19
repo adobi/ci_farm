@@ -19,7 +19,20 @@ class Fakkgroups extends MY_Model
                 'where'=>array('breeder_site_id'=>$site)    
             )
         );
-        
-        return $result;
+
+        $return = false;
+        if ($result) {
+            
+            $this->load->model('Fakksingroup', 'fig');
+            
+            foreach ($result as $r) {
+                
+                $fakks = $this->fig->fetchFakksForGroup($r->id);
+                
+                $return[] = array('group'=>$r, 'fakks'=>$fakks);
+            }
+        }
+                
+        return $return;
     }
 }
