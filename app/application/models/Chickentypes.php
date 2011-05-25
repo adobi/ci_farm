@@ -6,5 +6,4 @@ class Chickentypes extends MY_Model
 {
     protected $_name = "chicken_type";
     protected $_primary = "id";
-
 }

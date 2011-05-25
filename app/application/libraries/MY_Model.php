@@ -389,4 +389,18 @@ class My_Model extends CI_Model
 	{
 	    return "`" . $column . "`";
 	}
+	
+	
+	public function toAssocArray($key, $value, $data) 
+	{
+	    $ret = array(0=>'');
+	    if ($data) {
+	        foreach ($data as $d) {
+	            
+	            $ret[$d->$key] = $d->$value;
+	        }
+	    }
+	    
+	    return $ret;
+	}
 }

@@ -4,6 +4,8 @@ App.Dialog = function() {
 
     $('body').delegate('a[rel*=dialog]', 'click', function() {
         
+        $('#dialog').remove();
+        
         var self = $(this);
         
         
@@ -18,6 +20,9 @@ App.Dialog = function() {
                 
                 $.get(self.attr('href'), function(response) {
                     elem.html(response);
+                    //alert(Math.floor((window.innerWidth / 2)) - elem.outerWidth())
+                    elem.dialog('option', 'position', [Math.floor(((window.innerWidth  - elem.width()) / 2)), 20]);
+                    
                     $('button').button();
                 });
                 
@@ -56,9 +61,22 @@ App.Confirm = function() {
     });  
 };
 
+App.Datepicker = function() {
+    $('.datepicker').datepicker({
+        dateFormat: 'yy-mm-dd',
+        changeYear: true,
+        changeMonth: true,
+        showMonthAfterYear:true,
+        yearRange: '1940:+0'
+	});
+  
+};
+
 $(function() {
     App.Dialog();
     App.Confirm();
     
     $('button, input[type=submit]').button();
-})
+    
+    App.Datepicker();
+});
