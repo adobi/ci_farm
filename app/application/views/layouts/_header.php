@@ -35,8 +35,8 @@
 		<div id="container" class = "container">
 			<?php if ($this->session->userdata('current_user_id')) : ?>
         		<div id = "header" class = "span-24 ui-widget-header ui-corner-all">
-        		    <div class = "prepend-3 span-18 append-3">
-            			<ul id = "header-menu" class = "span-18">
+        		    <div class = "prepend-2 span-20 append-2">
+            			<ul id = "header-menu" class = "span-20">
             			    <li>
             			        <a href="<?= base_url(); ?>welcome">kezdőlap</a>
             			    </li>
@@ -51,6 +51,9 @@
         			        </li>
         			        <li>
         			            <a href="<?= base_url(); ?>">értékesítés</a>
+        			        </li>
+        			        <li>
+        			            <a href="<?= base_url(); ?>backgrounddata">háttér adatok</a>
         			        </li>
         			        <li>
         			            <a href="<?= base_url(); ?>auth/logout">kilépes</a>

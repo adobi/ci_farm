@@ -21,6 +21,7 @@
                             <p class = "p-list-item yellow round" fakkid = "<?= $fakk->fakk_id; ?>" style = "cursor:move;">
                                 <?= $fakk->fakk_name; ?>
                                 <a style = "float:right;" href="<?= base_url(); ?>fakk/delete/<?= $fakk->fakk_id; ?>">töröl</a>
+                                <a href="<?= base_url(); ?>stock/for_fakk/<?= $fakk->fakk_id; ?>">állományok</a>
                             </p>
                         <?php endforeach ?>
                     <?php else: ?>
