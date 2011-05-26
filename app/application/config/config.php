@@ -14,7 +14,9 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://localhost/chickenfarm/app/public/';
+echo '<pre>';
+print_r($_SERVER);
+$config['base_url']	= $_SERVER['HTTP_HOST'] === 'localhost' ? 'http://localhost/chickenfarm/app/public/' : $_SERVER['HTTP_HOST'].'/app/public/';
 
 /*
 |--------------------------------------------------------------------------
