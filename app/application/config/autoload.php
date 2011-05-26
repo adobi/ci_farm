@@ -42,7 +42,7 @@
 |	$autoload['libraries'] = array('database', 'session', 'xmlrpc');
 */
 
-$autoload['libraries'] = array('database', 'session', 'template', 'form_validation', 'encrypt'/*, 'my_Controller'*/, 'my_Model');
+$autoload['libraries'] = array('database', 'session', 'template', 'form_validation', 'encrypt'/*, 'my_Controller'*/, 'MY_Model');
 
 
 /*
