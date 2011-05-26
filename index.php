@@ -1,5 +1,5 @@
 <?php  
 
-    header('Location: app/public')
-
+    //header('Location: app/public');
+    //die;
 ?>
