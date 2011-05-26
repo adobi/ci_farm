@@ -14,9 +14,9 @@
 | path to your installation.
 |
 */
-echo '<pre>';
-print_r($_SERVER);
-$config['base_url']	= $_SERVER['HTTP_HOST'] === 'localhost' ? 'http://localhost/chickenfarm/app/public/' : $_SERVER['HTTP_HOST'].'/app/public/';
+//echo '<pre>';
+//print_r($_SERVER);
+$config['base_url']	= $_SERVER['HTTP_HOST'] === 'localhost' ? 'http://localhost/chickenfarm/app/public/' : 'http://cifarm.pagodabox.com/app/public/';
 
 /*
 |--------------------------------------------------------------------------
