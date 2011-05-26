@@ -23,11 +23,11 @@ class Fakkgroups extends MY_Model
         $return = false;
         if ($result) {
             
-            $this->load->model('Fakksingroup', 'fig');
+            $this->load->model('Fakks', 'fakk');
             
             foreach ($result as $r) {
                 
-                $fakks = $this->fig->fetchFakksForGroup($r->id);
+                $fakks = $this->fakk->fetchForGroup($r->id);
                 
                 $return[] = array('group'=>$r, 'fakks'=>$fakks);
             }

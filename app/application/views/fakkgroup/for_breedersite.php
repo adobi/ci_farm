@@ -18,10 +18,10 @@
                 <div class = "fakks-list" group = "<?= $item['group']->id; ?>">
                     <?php if ($item['fakks']): ?>
                         <?php foreach ($item['fakks'] as $fakk): ?>
-                            <p class = "p-list-item yellow round" fakkid = "<?= $fakk->fakk_id; ?>" style = "cursor:move;">
-                                <?= $fakk->fakk_name; ?>
-                                <a style = "float:right;" href="<?= base_url(); ?>fakk/delete/<?= $fakk->fakk_id; ?>">töröl</a>
-                                <a href="<?= base_url(); ?>stock/for_fakk/<?= $fakk->fakk_id; ?>">állományok</a>
+                            <p class = "p-list-item yellow round" fakkid = "<?= $fakk->id; ?>" style = "cursor:move;">
+                                <?= $fakk->name; ?>
+                                <a style = "float:right;" href="<?= base_url(); ?>fakk/delete/<?= $fakk->id; ?>">töröl</a>
+                                <a href="<?= base_url(); ?>stock/for_fakk/<?= $fakk->id; ?>">állományok</a>
                             </p>
                         <?php endforeach ?>
                     <?php else: ?>
@@ -49,7 +49,7 @@
 			        o = $(event.target).attr('group'),
 			        n = el.parents('.fakks-list').attr('group');
 			    
-			    $.post(App.URL+'fakkingroup/change_group', 
+			    $.post(App.URL+'fakk/change_group', 
 			        {
 			            ci_csrf_token:$.cookie('ci_csrf_token'),
 			            old_group: o,

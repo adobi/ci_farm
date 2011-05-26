@@ -70,23 +70,27 @@ class Fakk extends MY_Controller
         
         if ($this->form_validation->run()) {
             
-            $fakkId = $this->fakks->insert($_POST);
-            //dump($fakkId); dump($group); die;
-            if ($fakkId && $group) {
-                
-                $this->load->model('Fakksingroup', 'fig');
-                
-                $this->fig->insert(array('fakk_id'=>$fakkId, 'fakk_group_id'=>$group));
-            } else {
-                
-                /*
-                    TODO valamilyen hibat adunk
-                */
-            }
+            $_POST['fakk_group_id'] = $group;
             
+            $fakkId = $this->fakks->insert($_POST);
+
             redirect($_SERVER['HTTP_REFERER']);
         }
         
         $this->template->build('fakk/edit');
     }
+
+    public function change_group()
+    {
+        if ($_POST) {
+            
+            $this->load->model('Fakks', 'fig');
+            
+            echo $this->fig->update(
+                array('fakk_group_id'=>$_POST['new_group']), 
+                array('id'=>$_POST['fakk_id'])
+            );
+        }
+        die;
+    }    
 }
