@@ -9,7 +9,7 @@ App.Dialog = function() {
         var self = $(this);
         
         
-        var elem = $('<div />', {id: 'dialog', title: self.attr('title')}).html('<p style = "width: 300px;text-align:center"><img src = "'+App.URL+'img/fb-loader.gif" /></p>');
+        var elem = $('<div />', {id: 'dialog_'+(new Date()).getTime(), title: self.attr('title')}).html('<p style = "width: 300px;text-align:center"><img src = "'+App.URL+'img/fb-loader.gif" /></p>');
 
         elem.dialog({
             modal: false,
@@ -20,8 +20,33 @@ App.Dialog = function() {
                 
                 $.get(self.attr('href'), function(response) {
                     elem.html(response);
-                    //alert(Math.floor((window.innerWidth / 2)) - elem.outerWidth())
+                    
                     elem.dialog('option', 'position', [Math.floor(((window.innerWidth  - elem.width()) / 2)), 20]);
+                    
+                    if ($('form input[type=text]').length) {
+                        
+                        $.each($('form input[type=text]'), function(index, item) {
+                            if ($(item).attr('size') === undefined) {
+                                
+                                $(item).attr('size', 45);
+                            }
+                        });
+                    }
+
+                    if ($('.datepicker').length) {
+                        
+                        App.Datepicker();
+                    }
+                    
+                    if ($('#postal_code_id').length) {
+                        
+                        App.Autocomplete($('#postal_code_id'),  'postalcode/index/');
+                    }
+                    
+                    if ($('#buyer_breeder_site_id').length) {
+                        
+                        App.Autocomplete($('#buyer_breeder_site_id'),  'breedersite/search_code_and_name');
+                    }
                     
                     $('button').button();
                 });
@@ -47,12 +72,9 @@ App.Confirm = function() {
             buttons: {
                 'Igen': function() {
                     window.location = self.attr('href');
-                    //location.reload();
-                    //return true;
                 },
                 'Nem': function() {
                     $(this).dialog('close');
-                    //return false;
                 }
             }
         });
@@ -71,6 +93,24 @@ App.Datepicker = function() {
 	});
   
 };
+
+App.Autocomplete = function (element, url) {
+    
+    element.autocomplete({
+        source: App.URL + url,
+        select: function(e, ui) {
+            var id = ui.item.id;
+            
+            element.after($('<input />', {
+                type: 'hidden',
+                name: element.attr('id'),
+                value: id    
+            }));
+            
+            element.removeAttr('name');
+        }
+    });    
+}
 
 $(function() {
     App.Dialog();

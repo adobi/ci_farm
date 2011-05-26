@@ -30,4 +30,24 @@ class Breedersites extends MY_Model
         //dump($result);
         return $result;
     }
+    
+    public function searchByCodeOrBreeder($term)
+    {
+        if (!$term) {
+            
+            return false;
+        }
+        
+        $db = $this->db;
+        
+        $query =    $db->select()
+                       ->from($this->_name)
+                       ->join('breeder', "breeder.id=$this->_name.breeder_id")
+                       ->where('code LIKE', $db->escape_like_str($term).'%')
+                       ->or_where('name LIKE', $db->escape_like_str($term).'%');
+    
+        $result = $query->get()->result();
+        //dump($result);
+        return $result;
+    }
 }

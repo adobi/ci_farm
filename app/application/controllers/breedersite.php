@@ -120,4 +120,29 @@ class Breedersite extends MY_Controller
         
         $this->template->build('breeder_site/for_breeder', $data);
     }
+    
+    /**
+     * autocomplete functiohoz listazza a telephely kodokatny tenyeszto nevevel egyutt
+     *
+     * @return void
+     * @author Dobi Attila
+     */
+    public function search_code_and_name()
+    {
+        $this->load->model('Breedersites', 'sites');
+        
+        $sites = $this->sites->searchByCodeOrBreeder($_GET['term']);
+        
+        $result = array();
+        if ($sites) {
+            
+            foreach ($sites as $item) {
+                $result[] = array('id'=>$item->id, 'label'=>$item->name . ' - ' . $item->code, 'value' =>$item->name . ' - ' . $item->code);
+            }
+        }
+        //dump($sites);
+        echo json_encode($result);
+        
+        die;
+    }
 }

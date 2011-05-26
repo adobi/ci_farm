@@ -103,4 +103,32 @@ class Stock extends MY_Controller
         
         $this->template->build('stock/for_fakk', $data);
     }
+    
+    public function sell()
+    {
+        $id = $this->uri->segment(3);
+        
+        $data = array();
+        
+        $this->form_validation->set_rules('buyer_breeder_site_id', 'Vevő telephely kódja', 'trim|required');
+        $this->form_validation->set_rules('buy_date', 'Eladás dátuma', 'trim|required');
+        
+        if ($this->form_validation->run()) {
+            
+            $this->load->model('Chickenstock', 'stock');
+            
+            /**
+             * innen volt attol kikerul 
+             *
+             * @author Dobi Attila
+             */
+            $_POST['fakk_id'] = null;
+                        
+            $this->stock->update($_POST, array('id'=>$id));
+            
+            redirect($_SERVER['HTTP_REFERER']);
+        }
+        
+        $this->template->build('stock/sell', $data);    
+    }
 }
