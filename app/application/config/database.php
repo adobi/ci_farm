@@ -41,9 +41,9 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'root';
-$db['default']['password'] = '';
+$db['default']['hostname'] = 'adobi.hu';
+$db['default']['username'] = 'dobiattila';
+$db['default']['password'] = 'Adobi.1982';
 $db['default']['database'] = 'chickenfarm';
 $db['default']['dbdriver'] = 'mysqli';
 $db['default']['dbprefix'] = '';

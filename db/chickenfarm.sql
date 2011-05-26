@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50133
 File Encoding         : 65001
 
-Date: 2011-05-19 21:14:24
+Date: 2011-05-26 23:21:12
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -56,8 +56,43 @@ CREATE TABLE `breeder_site` (
 -- ----------------------------
 -- Records of breeder_site
 -- ----------------------------
-INSERT INTO `breeder_site` VALUES ('3', '21123', 'alma323', '421', 'alma utva 4', 'szep jo es minden ilyen', '3');
+INSERT INTO `breeder_site` VALUES ('3', '14456', 'alma323', '421', 'alma utva 4', 'szep jo es minden ilyen', '3');
 INSERT INTO `breeder_site` VALUES ('4', '21123', 'izemize', '1310', 'kassai ut 65', '', '3');
+
+-- ----------------------------
+-- Table structure for `chicken_stock`
+-- ----------------------------
+DROP TABLE IF EXISTS `chicken_stock`;
+CREATE TABLE `chicken_stock` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `code` varchar(45) DEFAULT NULL,
+  `birth_date` datetime DEFAULT NULL,
+  `chicken_type_id` int(11) DEFAULT NULL,
+  `klass` varchar(5) DEFAULT NULL,
+  `parent_male_code` varchar(45) DEFAULT NULL,
+  `parent_male_code_2` varchar(45) DEFAULT NULL,
+  `parent_female_code` varchar(45) DEFAULT NULL,
+  `parent_female_code_2` varchar(45) DEFAULT NULL,
+  `number_of_male` int(11) DEFAULT NULL,
+  `number_of_female` int(11) DEFAULT NULL,
+  `egg_code` varchar(45) DEFAULT NULL,
+  `validity_date` datetime DEFAULT NULL,
+  `buy_date` datetime DEFAULT NULL,
+  `buyer_breeder_site_id` int(11) DEFAULT NULL,
+  `fakk_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_chicken_type` (`chicken_type_id`),
+  KEY `fk_buyer_breeder_site` (`buyer_breeder_site_id`),
+  KEY `fk_fakk` (`fakk_id`),
+  CONSTRAINT `fk_buyer_breeder_site_id` FOREIGN KEY (`buyer_breeder_site_id`) REFERENCES `breeder_site` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_chicken_type` FOREIGN KEY (`chicken_type_id`) REFERENCES `chicken_type` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_fakk` FOREIGN KEY (`fakk_id`) REFERENCES `fakk` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of chicken_stock
+-- ----------------------------
+INSERT INTO `chicken_stock` VALUES ('1', '21123', '2011-05-01 00:00:00', '1', 'V', '123', '(5c.2c.4n.7n) INTRA.FR.2009.0055972', '345', '(5c.2c.4n.7n) INTRA.FR.2009.0055972', '120', '100', 'a 1', '2011-05-31 00:00:00', null, null, '7');
 
 -- ----------------------------
 -- Table structure for `chicken_type`
@@ -4276,17 +4311,21 @@ CREATE TABLE `fakk` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(150) DEFAULT NULL,
   `breeder_site_id` int(11) DEFAULT NULL,
+  `fakk_group_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_fakk_breeder_site` (`breeder_site_id`),
+  KEY `fk_fakk_group` (`fakk_group_id`),
+  CONSTRAINT `fk_fakk_group` FOREIGN KEY (`fakk_group_id`) REFERENCES `fakk_group` (`id`),
   CONSTRAINT `fk_fakk_breeder_site` FOREIGN KEY (`breeder_site_id`) REFERENCES `breeder_site` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of fakk
 -- ----------------------------
-INSERT INTO `fakk` VALUES ('7', 'alma_fakk_1', null);
-INSERT INTO `fakk` VALUES ('8', 'korte_fakk_1', null);
-INSERT INTO `fakk` VALUES ('9', 'alma_fakk_2', null);
+INSERT INTO `fakk` VALUES ('7', 'alma_fakk_1', null, '4');
+INSERT INTO `fakk` VALUES ('8', 'korte_fakk_1', null, '4');
+INSERT INTO `fakk` VALUES ('9', 'alma_fakk_2', null, '5');
+INSERT INTO `fakk` VALUES ('10', 'szilva fakk', null, '6');
 
 -- ----------------------------
 -- Table structure for `fakk_group`
@@ -4307,28 +4346,6 @@ CREATE TABLE `fakk_group` (
 INSERT INTO `fakk_group` VALUES ('4', 'fakk_1', '3');
 INSERT INTO `fakk_group` VALUES ('5', 'fakk_2', '3');
 INSERT INTO `fakk_group` VALUES ('6', 'fakk_3', '3');
-
--- ----------------------------
--- Table structure for `fakk_in_group`
--- ----------------------------
-DROP TABLE IF EXISTS `fakk_in_group`;
-CREATE TABLE `fakk_in_group` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `fakk_id` int(11) DEFAULT NULL,
-  `fakk_group_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_fakk_fakk_in_group` (`fakk_id`),
-  KEY `fk_fakk_group_fakk_in_group` (`fakk_group_id`),
-  CONSTRAINT `fk_fakk_fakk_in_group` FOREIGN KEY (`fakk_id`) REFERENCES `fakk` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_fakk_group_fakk_in_group` FOREIGN KEY (`fakk_group_id`) REFERENCES `fakk_group` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of fakk_in_group
--- ----------------------------
-INSERT INTO `fakk_in_group` VALUES ('2', '7', '5');
-INSERT INTO `fakk_in_group` VALUES ('3', '8', '4');
-INSERT INTO `fakk_in_group` VALUES ('4', '9', '6');
 
 -- ----------------------------
 -- Table structure for `postal_code`
