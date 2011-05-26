@@ -34,7 +34,7 @@
 	    
 		<div id="container" class = "container">
 			<?php if ($this->session->userdata('current_user_id')) : ?>
-        		<div id = "header" class = "span-24 ui-widget-header ui-corner-all">
+        		<div id = "header" class = "span-24 _ui-widget-header ui-corner-all">
         		    <div class = "prepend-2 span-20 append-2">
             			<ul id = "header-menu" class = "span-20">
             			    <li>

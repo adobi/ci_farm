@@ -712,9 +712,9 @@ button.ui-button::-moz-focus-inner { border: 0; padding: 0; } /* reset extra pad
 /* Extra Input Field Styling */
 select, textarea, input:not([type="checkbox"]):not([type="radio"]):not([type="file"]) {
 	padding: 5px;
-	-webkit-border-radius: 2px;
-	-moz-border-radius: 2px;
-	border-radius: 2px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
 	border: 1px solid #cecece;
 	outline: none;
 	-webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.1) inset, 0 1px 0 rgba(255,255,255,0.2);
@@ -731,8 +731,9 @@ select:hover, textarea:hover, input:not([type="checkbox"]):not([type="radio"]):n
 	box-shadow: 0 1px 3px rgba(0,0,0,0.2) inset, 0 1px 0 rgba(255,255,255,0.2);
 }
 select:hover, textarea:focus, input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):focus {
-	border: 1px solid #95bdd4;
+	border: 1px solid rgba(82, 168, 236, 0.75) !important;
 	-webkit-box-shadow: 0 2px 3px rgba(161,202,226,0.5) inset, 0 1px 0 rgba(255,255,255,0.2);
 	-moz-box-shadow: 0 2px 3px rgba(161,202,226,0.5) inset, 0 1px 0 rgba(255,255,255,0.2);
-	box-shadow: 0 2px 3px rgba(161,202,226,0.5) inset, 0 1px 0 rgba(255,255,255,0.2);
+	//box-shadow: 0 2px 3px rgba(161,202,226,0.5) inset, 0 1px 0 rgba(255,255,255,0.2);
+	box-shadow:0 0 8px rgba(82, 168, 236, 0.5)
 }
