@@ -35,4 +35,34 @@ class Fakkgroups extends MY_Model
                 
         return $return;
     }
+    
+    /**
+     * minden csoportot listaz a hozza tartozo fakkokkal egyutt
+     *
+     * @return void
+     * @author Dobi Attila
+     */
+    public function fetchAll()
+    {
+        $groups = parent::fetchAll(array(
+            'columns'=>array('fakk_group.*'),
+            'join'=>array(
+                array('table'=>'breeder_site', 'condition'=>'fakk_group.breeder_site_id = breeder_site.id', 'columns'=>array('breeder_site.code as breeder_site_code', 'breeder_site.mgszh as breeder_site_mgszh')),
+                array('table'=>'breeder', 'condition'=>'breeder.id = breeder_site.breeder_id', 'columns'=>array('breeder.name as breeder_name'))   
+            )    
+        ));
+        
+        $retrun = false;
+        if ($groups) {
+            
+            $this->load->model('Fakks', 'fakk');
+            
+            foreach ($groups as $group) {
+                $fakks = $this->fakk->fetchForGroup($group->id);
+                $return[] = array('group'=>$group, 'fakks'=>$fakks);
+            }
+        }
+        //dump($return); die;
+        return $return;
+    }
 }

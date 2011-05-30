@@ -4,4 +4,9 @@
                                 array('backgrounddata', 'eggtype', 'chickentype', 'breeder', 'breedersite', 'fakk', 'fakkgroup', 'stock'))): ?>
                         <?php require_once '_sidebar_backgrounddata.php'; ?>
                     <?php endif ?>
+                    <?php if (in_array(
+                                $this->uri->segment(1), 
+                                array('egg'))): ?>
+                        <?php require_once '_sidebar_egg.php'; ?>
+                    <?php endif ?>
                 </ul>

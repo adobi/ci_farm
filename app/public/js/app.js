@@ -110,7 +110,31 @@ App.Autocomplete = function (element, url) {
             element.removeAttr('name');
         }
     });    
-}
+};
+
+App.FakkSortable = function() {
+    $(".fakks-list").sortable({
+		connectWith: ".fakks-list",
+		stop: function (event, ui) {
+		    var el = ui.item,
+		        id = el.attr('fakkid'),
+		        o = $(event.target).attr('group'),
+		        n = el.parents('.fakks-list').attr('group');
+		    
+		    $.post(App.URL+'fakk/change_group', 
+		        {
+		            ci_csrf_token:$.cookie('ci_csrf_token'),
+		            old_group: o,
+		            new_group: n,
+		            fakk_id: id
+		        }, 
+		        function() {
+		        
+		        }
+		    );
+		}
+	}).disableSelection();     
+};
 
 $(function() {
     App.Dialog();

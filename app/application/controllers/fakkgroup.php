@@ -105,6 +105,8 @@ class Fakkgroup extends MY_Controller
         
         $data['groups'] = $groups;
         
+        $this->template->set_partial('fakk_groups', '_partials/fakk_groups');
+        
         $this->template->build('fakkgroup/for_breedersite', $data);
     }    
 }

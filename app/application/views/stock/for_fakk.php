@@ -17,6 +17,11 @@
                 <li>
                     <strong>Osztály</strong>: <?= $item->klass; ?>
                 </li>
+                <li>
+                    <strong><?= $item->number_of_male; ?></strong> M / 
+                    <strong><?= $item->number_of_female; ?></strong> F
+                    
+                </li>
             </ul>
             
             <p>

@@ -111,12 +111,12 @@ em {
     padding:5px;
     border:1px solid #eee;
     background:#fafafa;
+    margin:10px 5px;
 }
     .zebra a {
         float:right;
     }
 div.zebra {
-    margin-bottom:10px;
 }
     div.zebra ul {
         margin-bottom:0px;
@@ -151,4 +151,8 @@ div.zebra {
 
 .fakks-list {
     padding:3px 0;
+}
+
+.sub {
+    color:#999;
 }
