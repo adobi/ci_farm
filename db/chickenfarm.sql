@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50133
 File Encoding         : 65001
 
-Date: 2011-05-26 23:21:12
+Date: 2011-05-30 22:53:28
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -4315,17 +4315,41 @@ CREATE TABLE `fakk` (
   PRIMARY KEY (`id`),
   KEY `fk_fakk_breeder_site` (`breeder_site_id`),
   KEY `fk_fakk_group` (`fakk_group_id`),
-  CONSTRAINT `fk_fakk_group` FOREIGN KEY (`fakk_group_id`) REFERENCES `fakk_group` (`id`),
-  CONSTRAINT `fk_fakk_breeder_site` FOREIGN KEY (`breeder_site_id`) REFERENCES `breeder_site` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `fk_fakk_breeder_site` FOREIGN KEY (`breeder_site_id`) REFERENCES `breeder_site` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_fakk_group` FOREIGN KEY (`fakk_group_id`) REFERENCES `fakk_group` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of fakk
 -- ----------------------------
+INSERT INTO `fakk` VALUES ('-1', null, null, null);
 INSERT INTO `fakk` VALUES ('7', 'alma_fakk_1', null, '4');
 INSERT INTO `fakk` VALUES ('8', 'korte_fakk_1', null, '4');
 INSERT INTO `fakk` VALUES ('9', 'alma_fakk_2', null, '5');
 INSERT INTO `fakk` VALUES ('10', 'szilva fakk', null, '6');
+
+-- ----------------------------
+-- Table structure for `fakk_feed`
+-- ----------------------------
+DROP TABLE IF EXISTS `fakk_feed`;
+CREATE TABLE `fakk_feed` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `fakk_id` int(11) DEFAULT NULL,
+  `to_date` datetime DEFAULT NULL,
+  `feed_male` int(11) DEFAULT NULL,
+  `feed_female` int(11) DEFAULT NULL,
+  `feed_grain` int(11) DEFAULT NULL,
+  `is_for_group` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `_feed_fakk` (`fakk_id`),
+  CONSTRAINT `_feed_fakk` FOREIGN KEY (`fakk_id`) REFERENCES `fakk` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of fakk_feed
+-- ----------------------------
+INSERT INTO `fakk_feed` VALUES ('1', '7', '2011-05-01 00:00:00', '122', '120', '10', null);
+INSERT INTO `fakk_feed` VALUES ('4', '9', '2011-05-03 00:00:00', '122', '120', '10', null);
 
 -- ----------------------------
 -- Table structure for `fakk_group`
@@ -4344,7 +4368,7 @@ CREATE TABLE `fakk_group` (
 -- Records of fakk_group
 -- ----------------------------
 INSERT INTO `fakk_group` VALUES ('4', 'fakk_1', '3');
-INSERT INTO `fakk_group` VALUES ('5', 'fakk_2', '3');
+INSERT INTO `fakk_group` VALUES ('5', 'fakk_2', '4');
 INSERT INTO `fakk_group` VALUES ('6', 'fakk_3', '3');
 
 -- ----------------------------

@@ -24,11 +24,13 @@
                             <p class = "p-list-item yellow round" fakkid = "<?= $fakk->id; ?>" style = "cursor:move;">
                                 <?= $fakk->name; ?>
                                 <?php if ($this->uri->segment(1) === 'egg'): ?>
-                                    <a href="<?= base_url(); ?>eggproduction/">termelési adatok</a>
+                                
+                                    <a href = "#" _href="<?= base_url(); ?>stock/for_fakk/<?= $fakk->id; ?>">állományok</a>
                                 <?php endif ?>
                                 
                                 <?php if ($this->uri->segment(1) === 'fakkgroup'): ?>
                                     <a style = "float:right;" href="<?= base_url(); ?>fakk/delete/<?= $fakk->id; ?>">töröl</a>
+                                    
                                     <a href="<?= base_url(); ?>stock/for_fakk/<?= $fakk->id; ?>">állományok</a>
                                 <?php endif ?>
                             </p>
@@ -43,7 +45,8 @@
                 </p>
             </div>
             <?php if ($this->uri->segment(1) === 'egg'): ?>
-                <a href="<?= base_url(); ?>fakkfeed">tápanyagok</a>
+                <a href="<?= base_url(); ?>fakkfeed/for_fakk_group/<?= $item['group']->id; ?>" rel = "dialog" dialog_id = "<?= $item['group']->id; ?>" title = "Tápanyagok">tápanyag felvitel</a>
+                <a href="<?= base_url(); ?>fakkfeed/list_for_group/<?= $item['group']->id; ?>" rel = "dialog" dialog_id = "<?= $item['group']->id; ?>" title = "Tápanyagok">eddigi bejegyzések</a>
             <?php endif ?>
             
             <?php if ($this->uri->segment(1) === 'fakkgroup'): ?>
