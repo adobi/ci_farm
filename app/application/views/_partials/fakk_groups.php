@@ -25,7 +25,8 @@
                                 <?= $fakk->name; ?>
                                 <?php if ($this->uri->segment(1) === 'egg'): ?>
                                 
-                                    <a href = "#" _href="<?= base_url(); ?>stock/for_fakk/<?= $fakk->id; ?>">állományok</a>
+                                    <a href="<?= base_url(); ?>eggproduction/for_fakk/<?= $fakk->id; ?>">termelési adatok</a>
+                                    
                                 <?php endif ?>
                                 
                                 <?php if ($this->uri->segment(1) === 'fakkgroup'): ?>

@@ -6,7 +6,7 @@
                     <?php endif ?>
                     <?php if (in_array(
                                 $this->uri->segment(1), 
-                                array('egg'))): ?>
+                                array('egg', 'eggproduction'))): ?>
                         <?php require_once '_sidebar_egg.php'; ?>
                     <?php endif ?>
                 </ul>
