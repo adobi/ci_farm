@@ -169,6 +169,11 @@ div.day-number		{ -moz-border-radius-bottomleft:5px;-webkit-border-bottom-left-r
 /* shared */
 td.calendar-day, td.calendar-day-np { width:100px; padding:5px; border-bottom:1px solid #999; border-right:1px solid #999; }
 
+.day {
+    font-size:1.6em;
+    font-weight:bold;
+}
+
 .today {
     /*background:#FF6C00!important;*/
     color:#554444!important;
