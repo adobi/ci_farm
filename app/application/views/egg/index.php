@@ -20,7 +20,7 @@
     </div>
 </div>
 
-<div class = "span-20">
+<div class = "span-20" style = "padding-left:0px">
     <table cellspacing="5" cellpadding="5" class = "week-table first">
         <thead>
             <tr>

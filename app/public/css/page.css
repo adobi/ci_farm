@@ -191,7 +191,7 @@ td.calendar-day, td.calendar-day-np { width:100px; padding:5px; border-bottom:1p
 }
 
 #content div {
-    border:1px solid #ccc;
+    border:0px solid #ccc;
     padding:5px;
 }
 
@@ -221,7 +221,7 @@ td.calendar-day, td.calendar-day-np { width:100px; padding:5px; border-bottom:1p
 }
 
 .week-table {
-    
+    border-top:1px solid #ccc;
 }
     .week-table thead td {
         font-weight:bold;
