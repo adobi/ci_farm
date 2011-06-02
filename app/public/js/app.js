@@ -140,7 +140,7 @@ $(function() {
     App.Dialog();
     App.Confirm();
     
-    $('button, input[type=submit]').button();
+    $('button, input[type=submit], .button').button();
     
     App.Datepicker();
 });

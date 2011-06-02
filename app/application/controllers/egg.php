@@ -8,11 +8,11 @@ class Egg extends MY_Controller {
 	{
 	    $data = array();
 	    
-	    $this->load->model('Fakkgroups', 'groups');
+	    //$this->load->model('Fakkgroups', 'groups');
 	    
-	    $data['groups'] = $this->groups->fetchAll();
+	    //$data['groups'] = $this->groups->fetchAll();
 	    
-        $this->template->set_partial('fakk_groups', '_partials/fakk_groups');
+        //$this->template->set_partial('fakk_groups', '_partials/fakk_groups');
 	    
 		$this->template->build('egg/index', $data);
 	}

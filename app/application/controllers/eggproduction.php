@@ -62,6 +62,7 @@ class Eggproduction extends MY_Controller
     
     public function for_fakk()
     {
+        /*
         $id = $this->uri->segment(3);
         $year = $this->uri->segment(4);
         $month = $this->uri->segment(5);
@@ -121,5 +122,6 @@ class Eggproduction extends MY_Controller
         $data['calendar'] = $this->calendar->generate($year, $month);
         
         $this->template->build("eggproduction/for_fakk", $data);
+        */
     }
 }

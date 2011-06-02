@@ -62,7 +62,7 @@
         		    </div>
         		</div> <!-- header -->
         		
-    			<div id = "sidebar" class = "span-5 ui-corner-all">
+    			<div id = "sidebar" class = "span-4 ui-corner-all">
     
                     <?php require_once '_sidebar.php'; ?>
     
@@ -70,5 +70,5 @@
     		<?php else: ?>
     		    <p>&nbsp;</p>
 			<?php endif; ?>
-			<div id="content" class = "span-19 last">
+			<div id="content" class = "span-20 last">
 			    

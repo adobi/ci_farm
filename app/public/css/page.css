@@ -81,7 +81,7 @@ em {
     }
     
     #side-navigation li a {
-        padding:5px;
+        padding:0px;
         line-height:30px;
         color:#FF0052;
     }
@@ -104,7 +104,8 @@ em {
     margin-top:10px;
     height:auto !important;
     min-height:700px;
-    overflow:hidden;    
+    overflow:hidden;
+    background:#f1f1f1;    
 }
 
 .zebra {
@@ -189,3 +190,63 @@ td.calendar-day, td.calendar-day-np { width:100px; padding:5px; border-bottom:1p
     text-align:center;
 }
 
+#content div {
+    border:1px solid #ccc;
+    padding:5px;
+}
+
+.left-arrow-icon, .right-arrow-icon {
+    display:inline-block;
+    width:16px;
+    height:32px;
+}
+.left-arrow-icon {
+    background:url(../img/sprite-icons.png) no-repeat scroll -112px -144px ;
+}
+.right-arrow-icon {
+    background:url(../img/sprite-icons.png) no-repeat scroll -128px -144px ;
+}
+
+.text-right {
+    text-align:right;
+}
+
+.text-center {
+    text-align:center;
+}
+
+.current-week {
+    font-weight:bold;
+    font-size:2em;
+}
+
+.week-table {
+    
+}
+    .week-table thead td {
+        font-weight:bold;
+        font-size:1.2em;
+        text-align:center;
+    }
+    .week-table .td-first {
+        font-weight:bold;
+        vertical-align:middle;
+    }
+    .week-table .td-last {
+        vertical-align:middle;
+    }
+    .week-table tbody td, .week-table thead td {
+        border-bottom:1px solid #ccc;
+    }
+    .week-table td {
+        border-right:1px solid #ccc;
+        vertical-align:bottom;
+    }
+    
+    .week-table p {
+        margin-bottom:5px!important;
+    }
+    
+    .week-table tbody tr:nth-child(2n+1) {
+        background:#eaeaea;
+    }
