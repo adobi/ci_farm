@@ -4,7 +4,8 @@
         <a href="#" class = "button">Válasszon telephelyet</a>
     </div>
     <div class = "span-10 last text-right">
-        <a href="#" class = "button" rel = "dialog">Új állomány felvitele</a>
+        <a href="#" class = "button" rel = "dialog">Beólazás</a>
+        <a href="#" class = "button" rel = "dialog">Állomány felszámolása</a>
     </div>
 </div>
 
@@ -28,57 +29,39 @@
                 <td>Tojás termelés</td>
                 <td>Elhalálozás</td>
                 <td>Tápanyag felhasználás</td>
-                <td>Egyéb</td>
+                <td class = "span-3">Egyéb</td>
             </tr>
         </thead>
-        <tbody>
+        <tbody class = "week-tbody">
             
             <?php for ($i = 0; $i < 7; $i++) : ?>
             
-                <tr>
+                <tr class = "week-tr">
                     <td class = "td-first">05.30 Hétfő</td>
                     <td>
-                        <p>
-                            <ul>
-                                <li>Fakk1: 10 kicsi, 10 nagy, 10 ilyen</li>
-                                <li>Fakk2: 100 kicsi, 102 nagy, 50 ilyen</li>
-                            </ul>
-                        </p>
+                        <?php require '_egg_production.php'; ?>
                         <p>
                             <a href="#">Új felvite</a>
                             <a href="#">Töröl</a>
                         </p>                        
                     </td>
                     <td>
-                        <p>
-                            <ul>
-                                <li>Fakk1
-                                    <ul>
-                                        <li>Elhalt: 10 jerce, 20 kakas</li>
-                                        <li>Selejt: 20 jerce, 10 kakas</li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </p>
+                        <?php require '_chicken_death.php'; ?>
                         <p>
                             <a href="#">Új felvite</a>
                             <a href="#">Töröl</a>
                         </p>                        
                     </td>
                     <td>
-                        <p>
-                            <ul>
-                                <li>Fakk cs1:10kg</li>
-                                <li>Fakk cs2:40kg</li>
-                                <li>Fakk cs3:120kg</li>
-                            </ul>
-                        </p>
+                        <?php require '_chicken_food.php'; ?>
                         <p>
                             <a href="#">Új felvite</a>
                             <a href="#">Töröl</a>
                         </p>
                     </td>
-                    <td class = "td-last">
+                    <td class = "">
+                        <p>Megjegyzés: ez itt most valamilyen random szoveg amit jo lenne latni, hogy mennyire nyomjs szet ezt az egeszet</p>
+                        <p>Vitaminok:  ez itt most valamilyen random szoveg amit jo lenne latni, hogy mennyire nyomjs szet ezt az egeszet</p>
                         <p><a href="#">Megjegyzés</a></p>
                         <p><a href="#">Vitaminok</a></p>
                     </td>
