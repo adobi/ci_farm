@@ -41,29 +41,29 @@
                     <td>
                         <?php require '_egg_production.php'; ?>
                         <p>
-                            <a href="#">Új felvite</a>
-                            <a href="#">Töröl</a>
+                            <a href="<?= base_url() ?>edd/add_production" rel "dialog" title = "Tojástermelési adat felvitele">Új felvite</a>
+                            <a href="<?= base_url() ?>egg/delete_production">Töröl</a>
                         </p>                        
                     </td>
                     <td>
                         <?php require '_chicken_death.php'; ?>
                         <p>
-                            <a href="#">Új felvite</a>
-                            <a href="#">Töröl</a>
+                            <a href="<?= base_url() ?>egg/add_death" rel = "dialog" title = "Elhalálozási adat felvitele">Új felvite</a>
+                            <a href="<?= base_url() ?>edd/delete_death">Töröl</a>
                         </p>                        
                     </td>
                     <td>
                         <?php require '_chicken_food.php'; ?>
                         <p>
-                            <a href="#">Új felvite</a>
-                            <a href="#">Töröl</a>
+                            <a href="<?= base_url() ?>egg/add_food" rel = "dialog" title = "Tápanyag felvitele">Új felvite</a>
+                            <a href="<?= base_url() ?>egg/delete_food">Töröl</a>
                         </p>
                     </td>
                     <td class = "">
                         <p>Megjegyzés: ez itt most valamilyen random szoveg amit jo lenne latni, hogy mennyire nyomjs szet ezt az egeszet</p>
                         <p>Vitaminok:  ez itt most valamilyen random szoveg amit jo lenne latni, hogy mennyire nyomjs szet ezt az egeszet</p>
-                        <p><a href="#">Megjegyzés</a></p>
-                        <p><a href="#">Vitaminok</a></p>
+                        <p><a href="<?= base_url() ?>egg/comment" rel = "dialog" title = "Megjegyzés">Megjegyzés</a></p>
+                        <p><a href="<?= base_url() ?>egg/vitamin" rel = "dialog" title = "Vitaminok">Vitaminok</a></p>
                     </td>
                 </tr>            
             <?php endfor ?>
