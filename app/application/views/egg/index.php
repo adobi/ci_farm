@@ -41,7 +41,7 @@
                     <td>
                         <?php require '_egg_production.php'; ?>
                         <p>
-                            <a href="<?= base_url() ?>edd/add_production" rel "dialog" title = "Tojástermelési adat felvitele">Új felvite</a>
+                            <a href="<?= base_url() ?>egg/add_production" rel = "dialog" title = "Tojástermelési adat felvitele">Új felvite</a>
                             <a href="<?= base_url() ?>egg/delete_production">Töröl</a>
                         </p>                        
                     </td>

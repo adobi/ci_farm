@@ -2,7 +2,7 @@
     <h3>Fakk <?= $i ?></h3>
     <fieldset class="round inline-block">
         <?= form_open() ?>
-            <fieldset>
+            <fieldset class = "inner-fieldset">
                 <legend>Elhalt</legend>
                 <p>
                     <label for="death_female">Elhalt jérce</label>
@@ -15,7 +15,7 @@
                 
             </fieldset>
             
-            <fieldset>
+            <fieldset class = "inner-fieldset">
                 <legend>Selejt</legend>
                 <p>
                     <label for="reject_female">Selejt jérce</label>

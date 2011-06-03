@@ -262,4 +262,17 @@ td.calendar-day, td.calendar-day-np { width:100px; padding:5px; border-bottom:1p
         background:#f2fcff;
     }
 
+legend {
+    font-size:12px;
+}
+
+fieldset {
+    margin:5px!important;
+}
+
+.inner-fieldset {
+    padding:5px;
+    margin:5px;
+    background:#f1f1f1;
+}
 
