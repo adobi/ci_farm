@@ -11,13 +11,13 @@
 
 <div class = "span-20 week-picker-navigation">
     <div class = "span-4 first">
-        <a href="#"><span class = "left-arrow-icon"></span></a>
+        <a href="<?= base_url() ?>egg/week/<?= $week-1 ?>"><span class = "left-arrow-icon"></span></a>
     </div>
     <div class = "span-11 text-center current-week">
-        Majus 30 - Junius 5
+        <?= $week_begining ?> - <?= $week_end; ?>
     </div>
     <div class="span-4 last text-right">
-        <a href="#"><span class = "right-arrow-icon"></span></a>
+        <a href="<?= base_url() ?>egg/week/<?= $week+1 ?>"><span class = "right-arrow-icon"></span></a>
     </div>
 </div>
 
@@ -34,10 +34,10 @@
         </thead>
         <tbody class = "week-tbody">
             
-            <?php for ($i = 0; $i < 7; $i++) : ?>
+            <?php foreach ($selected_week_days as $day) : ?>
             
                 <tr class = "week-tr">
-                    <td class = "td-first">05.30 Hétfő</td>
+                    <td class = "td-first"><?= $day ?></td>
                     <td>
                         <?php require '_egg_production.php'; ?>
                         <p>
@@ -66,7 +66,7 @@
                         <p><a href="<?= base_url() ?>egg/vitamin" rel = "dialog" title = "Vitaminok">Vitaminok</a></p>
                     </td>
                 </tr>            
-            <?php endfor ?>
+            <?php endforeach ?>
         </tbody>
     </table>
 </div>

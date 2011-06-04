@@ -4,15 +4,67 @@ require_once 'MY_Controller.php';
 
 class Egg extends MY_Controller {
 
-	public function index()
+    public function index()
+    {
+        redirect(base_url().'egg/week/'.date('W'));
+    }
+    
+	public function week()
 	{
+	    $week =  $this->uri->segment(3);
+	    
+	    if (false === $week) {
+	        
+	        redirect(base_url() . '404');
+	    }
+	    
+	    /**
+	     * ha valtozik az ev akkor azt figyelni. amikor a $week eleri a 0-t az ev - 1, ha eleri a veget akkor ev + 1
+	     *
+	     * @author Dobi Attila
+	     */
+	    
 	    $data = array();
 	    
-	    //$this->load->model('Fakkgroups', 'groups');
+	    $now = time();
+	    $format = 'Y-m-d';
 	    
-	    //$data['groups'] = $this->groups->fetchAll();
+	    $oneDayInSeconds = 24*60*60;
 	    
-        //$this->template->set_partial('fakk_groups', '_partials/fakk_groups');
+	    
+	    $thisWeek = date('W', $now);
+	    $dayOfThisWeek = date('w', $now);
+	    
+	    if ($week === $thisWeek) {
+	        $dateFor = $now;
+	    }
+	    
+	    if ($week < $thisWeek) { //hatra lapozunk
+	        
+	        $diffOfWeeks = $thisWeek - $week;
+	        $dateFor = $now - $diffOfWeeks * 7 * $oneDayInSeconds;
+	    }
+	    
+	    if ($week > $thisWeek) { //elore lapozunk
+	        
+	        $diffOfWeeks = $week - $thisWeek;
+	        $dateFor = $now + $diffOfWeeks * 7 * $oneDayInSeconds;
+	    }
+	    $weekBeginingTimestamp = $dateFor - ($dayOfThisWeek - 1)*$oneDayInSeconds;
+	    $weekBegining = date($format, $weekBeginingTimestamp);
+	    $weekEndTimestamp = $dateFor + (7-$dayOfThisWeek)*$oneDayInSeconds;
+	    $weekEnd = date($format, $weekEndTimestamp);
+	    
+	    $selectedWeekDays = array();
+	    for ($i = $weekBeginingTimestamp; $i <= $weekEndTimestamp; $i= $i + $oneDayInSeconds) {
+	        
+	        $selectedWeekDays[] = date('m-d', $i);
+	    }
+	    
+	    $data['week'] = $week;
+	    $data['week_begining'] = $weekBegining;
+	    $data['week_end'] = $weekEnd;
+	    $data['selected_week_days'] = $selectedWeekDays;
 	    
 		$this->template->build('egg/index', $data);
 	}
