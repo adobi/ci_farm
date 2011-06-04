@@ -273,6 +273,10 @@ fieldset {
 .inner-fieldset {
     padding:5px;
     margin:5px;
+    margin-left:0px!important;
     background:#f1f1f1;
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
+    border-radius:3px;
 }
 

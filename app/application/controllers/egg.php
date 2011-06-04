@@ -19,7 +19,7 @@ class Egg extends MY_Controller {
 	    }
 	    
 	    /**
-	     * ha valtozik az ev akkor azt figyelni. amikor a $week eleri a 0-t az ev - 1, ha eleri a veget akkor ev + 1
+	     * TODO ha valtozik az ev akkor azt figyelni. amikor a $week eleri a 0-t az ev - 1, ha eleri a veget akkor ev + 1
 	     *
 	     * @author Dobi Attila
 	     */

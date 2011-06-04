@@ -15,13 +15,14 @@ App.Dialog = function() {
             modal: false,
             width: 'auto',
             minWidth: 500,
-            //position:[Math.floor((window.innerWidth / 2)-150),  window.pageYOffset],
+            position:[Math.floor((window.innerWidth / 2)-150),  20],
             open: function(event, ui) {
                 
                 $.get(self.attr('href'), function(response) {
                     elem.html(response);
                     //alert(window.innerHeight);
-                    //elem.dialog('option', 'position', [Math.floor(((window.innerWidth  - elem.width()) / 2)), window.pageYOffset]);
+                    elem.dialog('option', 'position', [Math.floor(((window.innerWidth  - elem.width()) / 2)), window.pageYOffset]);
+                    $('.ui-dialog').css('top',  window.pageYOffset + 20)
                     
                     if ($('form input[type=text]').length) {
                         
