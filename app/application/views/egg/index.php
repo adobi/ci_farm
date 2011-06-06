@@ -12,12 +12,13 @@
     <div class = "span-10 last text-right">
         <a href="<?= base_url(); ?>stock/add_to_breedersite" class = "button" rel = "dialog">Beólazás</a>
         <a href="#" class = "button">Állomány felszámolása</a>
-        
+        <!-- 
         <?php if (isset($stocks)): ?>
             <br />
             <label for="selected_chickenstock">Válasszon állományt</label>
             <?= form_dropdown('chicken_stock_id', $stocks, $this->session->userdata('selected_chickenstock')); ?>
         <?php endif ?>
+         -->
     </div>
 </div>
 
@@ -98,11 +99,11 @@
             if ($.trim(breederSite).length && breederSite != 0) {
                 
                 $.get(App.URL + "egg/set_selected_breedersite/"+breederSite, function() {
-                    location.reload();
+                    //location.reload();
                 });
             } 
         });
-
+/*
         $('select[name=chicken_stock_id]').bind('change', function() {
             var stock = $(this).val();
             
@@ -111,6 +112,6 @@
                 $.get(App.URL + "egg/set_selected_chickenstock/"+stock);
             } 
         });
-
+*/
     });
 </script>

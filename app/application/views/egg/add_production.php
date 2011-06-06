@@ -3,15 +3,8 @@
     <fieldset class="round inline-block">
         <?= form_open() ?>        
             <p>
-                <label for="fakk_id">Válassz fakkot</label>
-                <select id="fakk_id" name = "fakk_id">
-                    <option>-</option>
-                    <option>Fakk 1</option>
-                    <option>Fakk 2</option>
-                    <option>Fakk 3</option>
-                    <option>Fakk 4</option>
-                    <option>Fakk 5</option>
-                </select>
+                <label for="selected_chickenstock">Válasszon állományt</label>
+                <?= form_dropdown('chicken_stock_id', $stocks, $this->session->userdata('selected_chickenstock')); ?>
             </p>            
         
             <?php for ($j = 0; $j < 3; $j++) : ?>

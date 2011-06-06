@@ -26,46 +26,11 @@ class Egg extends MY_Controller {
 	    
 	    $data = array();
 	    
-	    $now = time();
-	    $format = 'Y-m-d';
-	    
-	    $oneDayInSeconds = 24*60*60;
-	    
-	    
-	    $thisWeek = date('W', $now);
-	    $dayOfThisWeek = date('w', $now);
-	    
-	    if ($week === $thisWeek) {
-	        $dateFor = $now;
-	    }
-	    
-	    if ($week < $thisWeek) { //hatra lapozunk
-	        
-	        $diffOfWeeks = $thisWeek - $week;
-	        $dateFor = $now - $diffOfWeeks * 7 * $oneDayInSeconds;
-	    }
-	    
-	    if ($week > $thisWeek) { //elore lapozunk
-	        
-	        $diffOfWeeks = $week - $thisWeek;
-	        $dateFor = $now + $diffOfWeeks * 7 * $oneDayInSeconds;
-	    }
-	    $weekBeginingTimestamp = $dateFor - ($dayOfThisWeek - 1)*$oneDayInSeconds;
-	    $weekBegining = date($format, $weekBeginingTimestamp);
-	    $weekEndTimestamp = $dateFor + (7-$dayOfThisWeek)*$oneDayInSeconds;
-	    $weekEnd = date($format, $weekEndTimestamp);
-	    
-	    $selectedWeekDays = array();
-	    for ($i = $weekBeginingTimestamp; $i <= $weekEndTimestamp; $i= $i + $oneDayInSeconds) {
-	        
-	        $selectedWeekDays[] = date('m-d', $i);
-	    }
-	    
+	    $dates = $this->generateWeek($week);
 	    $data['week'] = $week;
-	    $data['week_begining'] = $weekBegining;
-	    $data['week_end'] = $weekEnd;
-	    $data['selected_week_days'] = $selectedWeekDays;
-	    
+	    $data['week_begining'] = $dates['weekBegining'];
+	    $data['week_end'] = $dates['weekEnd'];
+	    $data['selected_week_days'] = $dates['selectedWeekDays'];
 	    
 	    /**
 	     * telephelyek lekerdezese
@@ -84,14 +49,15 @@ class Egg extends MY_Controller {
 	    $this->load->model("Breeders", "breeders");
 	    $data['breeder'] = $this->breeders->fetchAll(array(), true);
 	    
+	    
 	    /**
 	     * kivalasztott telephelyhez tartozo allaomanyok
 	     *
 	     * @author Dobi Attila
 	     */
-	    $this->load->model('Chickenstock', 'stock');
-	    $stocks = $this->stock->fetchForBreedersite($this->session->userdata('selected_breedersite'));
-	    $data['stocks'] = $this->stock->toAssocArray('id', 'code', $stocks);
+	    //$this->load->model('Chickenstock', 'stock');
+	    //$stocks = $this->stock->fetchForBreedersite($this->session->userdata('selected_breedersite'));
+	    //$data['stocks'] = $this->stock->toAssocArray('id', 'code', $stocks);
 	    
 		$this->template->build('egg/index', $data);
 	}
@@ -185,6 +151,22 @@ class Egg extends MY_Controller {
 	public function add_production()
 	{
 	    $data = array();
+
+	    /**
+	     * kivalasztott telephelyhez tartozo allaomanyok
+	     *
+	     * @author Dobi Attila
+	     */
+	    if (!$this->session->userdata('selected_breedersite')) {
+	        
+	        echo '<div class = "error">Előbb válasszon telephelyet</div>';
+	        
+	        die;
+	    }
+	     
+	    $this->load->model('Chickenstock', 'stock');
+	    $stocks = $this->stock->fetchForBreedersite($this->session->userdata('selected_breedersite'));
+	    $data['stocks'] = $this->stock->toAssocArray('id', 'code', $stocks);
 	    
 	    
 	    $this->template->build("egg/add_production", $data);
@@ -217,7 +199,8 @@ class Egg extends MY_Controller {
 	    die;
 	}
 	
-	/**
+	/** 
+	 * NEM HASZNALJUK
 	 * beallitja a kivalasztott allomanyt a termeles fooldalan
 	 *
 	 * @return void
@@ -231,6 +214,53 @@ class Egg extends MY_Controller {
 	    }
 	    
 	    die;
+	}
+	
+	/**
+	 * a het sorszamanak megfelelo napokat generalja le
+	 *
+	 * @param string $week 
+	 * @return void
+	 * @author Dobi Attila
+	 */
+	private function generateWeek($week) 
+	{
+	    $now = time();
+	    $format = 'Y-m-d';
+	    
+	    $oneDayInSeconds = 24*60*60;
+	    
+	    
+	    $thisWeek = date('W', $now);
+	    $dayOfThisWeek = date('w', $now);
+	    
+	    if ($week === $thisWeek) {
+	        $dateFor = $now;
+	    }
+	    
+	    if ($week < $thisWeek) { //hatra lapozunk
+	        
+	        $diffOfWeeks = $thisWeek - $week;
+	        $dateFor = $now - $diffOfWeeks * 7 * $oneDayInSeconds;
+	    }
+	    
+	    if ($week > $thisWeek) { //elore lapozunk
+	        
+	        $diffOfWeeks = $week - $thisWeek;
+	        $dateFor = $now + $diffOfWeeks * 7 * $oneDayInSeconds;
+	    }
+	    $weekBeginingTimestamp = $dateFor - ($dayOfThisWeek - 1)*$oneDayInSeconds;
+	    $weekBegining = date($format, $weekBeginingTimestamp);
+	    $weekEndTimestamp = $dateFor + (7-$dayOfThisWeek)*$oneDayInSeconds;
+	    $weekEnd = date($format, $weekEndTimestamp);
+	    
+	    $selectedWeekDays = array();
+	    for ($i = $weekBeginingTimestamp; $i <= $weekEndTimestamp; $i= $i + $oneDayInSeconds) {
+	        
+	        $selectedWeekDays[] = date('m-d', $i);
+	    }
+	    
+	    return array('weekBegining'=>$weekBegining, 'weekEnd'=>$weekEnd, 'selectedWeekDays'=>$selectedWeekDays);	    
 	}
 
 }
