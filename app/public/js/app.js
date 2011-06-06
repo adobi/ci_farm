@@ -137,6 +137,7 @@ App.FakkSortable = function() {
 	}).disableSelection();     
 };
 
+
 $(function() {
     App.Dialog();
     App.Confirm();
@@ -144,4 +145,5 @@ $(function() {
     $('button, input[type=submit], .button').button();
     
     App.Datepicker();
+
 });

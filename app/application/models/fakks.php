@@ -20,4 +20,16 @@ class Fakks extends MY_Model
                 
         return $result;        
     }
+    
+    public function fetchForBreedersite ($site) 
+    {
+        if (!$site) {
+            
+            return false;
+        }    
+        
+        $sql = "select f.* from $this->_name f join fakk_group fg on f.fakk_group_id = fg.id and fg.breeder_site_id = $site";
+        
+        return $this->execute($sql);
+    }
 }

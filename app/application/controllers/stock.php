@@ -86,6 +86,12 @@ class Stock extends MY_Controller
         redirect($_SERVER['HTTP_REFERER']);
     }
     
+    /**
+     * nem hasznaljuk!
+     *
+     * @return void
+     * @author Dobi Attila
+     */
     public function for_fakk()
     {
         $id = $this->uri->segment(3);
@@ -130,5 +136,55 @@ class Stock extends MY_Controller
         }
         
         $this->template->build('stock/sell', $data);    
+    }
+    
+    /**
+     * beolazas, fakk valasztoval
+     *
+     * @return void
+     * @author Dobi Attila
+     */
+    public function add_to_breedersite()
+    {
+        $data = array();
+        
+        if (!$this->session->userdata('selected_breedersite')) {
+            
+            echo 'Előbb válasszon telephelyet';
+            
+            die;
+        }
+        
+        /**
+         * minden olyan fakk ami az adott telephelyen van
+         *
+         * @author Dobi Attila
+         */
+        
+        $this->load->model("Fakks", 'fakks');
+        $fakks = $this->fakks->fetchForBreedersite($this->session->userdata('selected_breedersite'));
+        $data['fakks'] = $this->fakks->toAssocArray('id', 'name', $fakks);
+        
+        /**
+         * csirketipusok
+         *
+         * @author Dobi Attila
+         */
+        $this->load->model('Chickentypes', 'chickentypes');
+        $data['chickentypes'] = $this->chickentypes->toAssocArray('id', 'name', $this->chickentypes->fetchAll());
+
+
+        $this->form_validation->set_rules('code', 'Kód', 'required|trim');
+                
+        if ($this->form_validation->run()) {
+        
+             $this->load->model('Chickenstock', 'model');
+            
+            $this->model->insert($_POST);
+            
+            redirect($_SERVER['HTTP_REFERER']);
+        }
+                
+        $this->template->build('stock/add_to_breedersite', $data);    
     }
 }

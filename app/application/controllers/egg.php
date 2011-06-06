@@ -66,6 +66,33 @@ class Egg extends MY_Controller {
 	    $data['week_end'] = $weekEnd;
 	    $data['selected_week_days'] = $selectedWeekDays;
 	    
+	    
+	    /**
+	     * telephelyek lekerdezese
+	     *
+	     * @author Dobi Attila
+	     */
+	    $this->load->model("Breedersites", "sites");
+	    $sites = $this->sites->fetchAll();
+	    $data['breeder_sites'] = $this->sites->toAssocArray('id', 'code', $sites);
+	    
+	    /**
+	      * tenyeszto lekerdezese
+	      *
+	      * @author Dobi Attila
+	      */ 
+	    $this->load->model("Breeders", "breeders");
+	    $data['breeder'] = $this->breeders->fetchAll(array(), true);
+	    
+	    /**
+	     * kivalasztott telephelyhez tartozo allaomanyok
+	     *
+	     * @author Dobi Attila
+	     */
+	    $this->load->model('Chickenstock', 'stock');
+	    $stocks = $this->stock->fetchForBreedersite($this->session->userdata('selected_breedersite'));
+	    $data['stocks'] = $this->stock->toAssocArray('id', 'code', $stocks);
+	    
 		$this->template->build('egg/index', $data);
 	}
 	
@@ -79,6 +106,7 @@ class Egg extends MY_Controller {
 	{
 	    $data = array();
 	    
+        echo $this->session->userdata('selected_breedersite');
 	    
 	    $this->template->build("egg/comment", $data);
 	}
@@ -172,6 +200,39 @@ class Egg extends MY_Controller {
 	{
 	    redirect($_SERVER['HTTP_REFERER']);
 	}
+	
+	/**
+	 * beallitja session-be a kivalasztott telephelyet a termeles fooldalan
+	 *
+	 * @return void
+	 * @author Dobi Attila
+	 */
+	public function set_selected_breedersite()
+	{
+	    if ($this->uri->segment(3))
+	    {
+	        $this->session->set_userdata('selected_breedersite', $this->uri->segment(3));
+	    }
+	    
+	    die;
+	}
+	
+	/**
+	 * beallitja a kivalasztott allomanyt a termeles fooldalan
+	 *
+	 * @return void
+	 * @author Dobi Attila
+	 */
+	public function set_selected_chickenstock()
+	{
+	    if ($this->uri->segment(3))
+	    {
+	        $this->session->set_userdata('selected_chickenstock', $this->uri->segment(3));
+	    }
+	    
+	    die;
+	}
+
 }
 
 /* End of file welcome.php */
