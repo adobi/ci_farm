@@ -240,13 +240,43 @@ td.calendar-day, td.calendar-day-np { width:100px; padding:5px; border-bottom:1p
     }
     .week-table td {
         border-right:1px solid #ccc;
-        vertical-align:bottom;
+        vertical-align:top;
     }
     
     .week-table p {
         margin-bottom:5px!important;
     }
     
-    .week-table tbody tr:nth-child(2n+1) {
+    .week-table .week-tbody .week-tr:nth-child(2n+1) {
         background:#eaeaea;
     }
+    .inner-table thead td {
+        font-size:1em; border:1px solid #ccc;
+    }
+    
+    .inner-table .td-first {
+        border-left:1px solid #ccc;
+    }
+    
+    .inner-table tbody tr:nth-child(2n+1) {
+        background:#f2fcff;
+    }
+
+legend {
+    font-size:12px;
+}
+
+fieldset {
+    margin:5px!important;
+}
+
+.inner-fieldset {
+    padding:5px;
+    margin:5px;
+    margin-left:0px!important;
+    background:#f1f1f1;
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
+    border-radius:3px;
+}
+

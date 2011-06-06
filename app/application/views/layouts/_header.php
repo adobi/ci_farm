@@ -15,16 +15,16 @@
         
         <link rel="stylesheet" href="<?= base_url() ?>css/page.css" type="text/css" media="screen"charset="utf-8">
 
-		<link rel="stylesheet" href="<?= base_url() ?>css/facebox.css" type="text/css" media="print"charset="utf-8">
-		
+        <!--
 		<script type="text/javascript" charset="utf-8" src = "http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
-        <script type="text/javascript" charset="utf-8" src = "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/jquery-ui.js"></script>
-        
+        <script type="text/javascript" charset="utf-8" src = "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/jquery-ui.js"></script>
+        -->
+		<script type="text/javascript" charset="utf-8" src = "<?= base_url() ?>js/jquery.min.js"></script>
+        <script type="text/javascript" charset="utf-8" src = "<?= base_url() ?>js/jquery-ui.min.js"></script>
         <script type="text/javascript" charset="utf-8" src = "<?= base_url() ?>js/jquery.cookie.js"></script>
 
         <script type="text/javascript" charset="utf-8" src = "<?= base_url() ?>js/app.js"></script>
-        <script type="text/javascript" charset="utf-8" src = "<?= base_url() ?>js/bootstrap.js"></script>
-        
+
         <script type="text/javascript">
             App.URL = '<?= base_url() ?>';
         </script>

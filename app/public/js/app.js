@@ -4,24 +4,25 @@ App.Dialog = function() {
 
     $('body').delegate('a[rel*=dialog]', 'click', function() {
         
-        $('#dialog').remove();
+        $('.dialog').remove();
         
         var self = $(this);
         
         
-        var elem = $('<div />', {id: 'dialog_'+(new Date()).getTime(), title: self.attr('title')}).html('<p style = "width: 300px;text-align:center"><img src = "'+App.URL+'img/fb-loader.gif" /></p>');
+        var elem = $('<div />', {'class': 'dialog', id: 'dialog_'+(new Date()).getTime(), title: self.attr('title')}).html('<p style = "width: 300px;text-align:center"><img src = "'+App.URL+'img/fb-loader.gif" /></p>');
 
         elem.dialog({
             modal: false,
             width: 'auto',
             minWidth: 500,
-            position:[Math.floor((window.innerWidth / 2)-150), 20],
+            position:[Math.floor((window.innerWidth / 2)-150),  20],
             open: function(event, ui) {
                 
                 $.get(self.attr('href'), function(response) {
                     elem.html(response);
-                    
-                    elem.dialog('option', 'position', [Math.floor(((window.innerWidth  - elem.width()) / 2)), 20]);
+                    //alert(window.innerHeight);
+                    elem.dialog('option', 'position', [Math.floor(((window.innerWidth  - elem.width()) / 2)), window.pageYOffset]);
+                    $('.ui-dialog').css('top',  window.pageYOffset + 20)
                     
                     if ($('form input[type=text]').length) {
                         

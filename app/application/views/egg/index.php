@@ -4,19 +4,20 @@
         <a href="#" class = "button">Válasszon telephelyet</a>
     </div>
     <div class = "span-10 last text-right">
-        <a href="#" class = "button" rel = "dialog">Új állomány felvitele</a>
+        <a href="#" class = "button" rel = "dialog">Beólazás</a>
+        <a href="#" class = "button" rel = "dialog">Állomány felszámolása</a>
     </div>
 </div>
 
 <div class = "span-20 week-picker-navigation">
     <div class = "span-4 first">
-        <a href="#"><span class = "left-arrow-icon"></span></a>
+        <a href="<?= base_url() ?>egg/week/<?= $week-1 ?>"><span class = "left-arrow-icon"></span></a>
     </div>
     <div class = "span-11 text-center current-week">
-        Majus 30 - Junius 5
+        <?= $week_begining ?> - <?= $week_end; ?>
     </div>
     <div class="span-4 last text-right">
-        <a href="#"><span class = "right-arrow-icon"></span></a>
+        <a href="<?= base_url() ?>egg/week/<?= $week+1 ?>"><span class = "right-arrow-icon"></span></a>
     </div>
 </div>
 
@@ -28,62 +29,44 @@
                 <td>Tojás termelés</td>
                 <td>Elhalálozás</td>
                 <td>Tápanyag felhasználás</td>
-                <td>Egyéb</td>
+                <td class = "span-3">Egyéb</td>
             </tr>
         </thead>
-        <tbody>
+        <tbody class = "week-tbody">
             
-            <?php for ($i = 0; $i < 7; $i++) : ?>
+            <?php foreach ($selected_week_days as $day) : ?>
             
-                <tr>
-                    <td class = "td-first">05.30 Hétfő</td>
+                <tr class = "week-tr">
+                    <td class = "td-first"><?= $day ?></td>
                     <td>
+                        <?php require '_egg_production.php'; ?>
                         <p>
-                            <ul>
-                                <li>Fakk1: 10 kicsi, 10 nagy, 10 ilyen</li>
-                                <li>Fakk2: 100 kicsi, 102 nagy, 50 ilyen</li>
-                            </ul>
-                        </p>
-                        <p>
-                            <a href="#">Új felvite</a>
-                            <a href="#">Töröl</a>
+                            <a href="<?= base_url() ?>egg/add_production" rel = "dialog" title = "Tojástermelési adat felvitele">Új felvite</a>
+                            <a href="<?= base_url() ?>egg/delete_production">Töröl</a>
                         </p>                        
                     </td>
                     <td>
+                        <?php require '_chicken_death.php'; ?>
                         <p>
-                            <ul>
-                                <li>Fakk1
-                                    <ul>
-                                        <li>Elhalt: 10 jerce, 20 kakas</li>
-                                        <li>Selejt: 20 jerce, 10 kakas</li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </p>
-                        <p>
-                            <a href="#">Új felvite</a>
-                            <a href="#">Töröl</a>
+                            <a href="<?= base_url() ?>egg/add_death" rel = "dialog" title = "Elhalálozási adat felvitele">Új felvite</a>
+                            <a href="<?= base_url() ?>edd/delete_death">Töröl</a>
                         </p>                        
                     </td>
                     <td>
+                        <?php require '_chicken_food.php'; ?>
                         <p>
-                            <ul>
-                                <li>Fakk cs1:10kg</li>
-                                <li>Fakk cs2:40kg</li>
-                                <li>Fakk cs3:120kg</li>
-                            </ul>
-                        </p>
-                        <p>
-                            <a href="#">Új felvite</a>
-                            <a href="#">Töröl</a>
+                            <a href="<?= base_url() ?>egg/add_food" rel = "dialog" title = "Tápanyag felvitele">Új felvite</a>
+                            <a href="<?= base_url() ?>egg/delete_food">Töröl</a>
                         </p>
                     </td>
-                    <td class = "td-last">
-                        <p><a href="#">Megjegyzés</a></p>
-                        <p><a href="#">Vitaminok</a></p>
+                    <td class = "">
+                        <p>Megjegyzés: ez itt most valamilyen random szoveg amit jo lenne latni, hogy mennyire nyomjs szet ezt az egeszet</p>
+                        <p>Vitaminok:  ez itt most valamilyen random szoveg amit jo lenne latni, hogy mennyire nyomjs szet ezt az egeszet</p>
+                        <p><a href="<?= base_url() ?>egg/comment" rel = "dialog" title = "Megjegyzés">Megjegyzés</a></p>
+                        <p><a href="<?= base_url() ?>egg/vitamin" rel = "dialog" title = "Vitaminok">Vitaminok</a></p>
                     </td>
                 </tr>            
-            <?php endfor ?>
+            <?php endforeach ?>
         </tbody>
     </table>
 </div>
