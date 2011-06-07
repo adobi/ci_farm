@@ -4,7 +4,7 @@ App.Dialog = function() {
 
     $('body').delegate('a[rel*=dialog]', 'click', function() {
         
-        $('.dialog').remove();
+        //$('.dialog').remove();
         
         var self = $(this);
         
@@ -137,6 +137,18 @@ App.FakkSortable = function() {
 	}).disableSelection();     
 };
 
+App.DeleteProductionData = function() {
+    
+    $('body').delegate('.delete-production-data', 'click', function() {
+        
+        var self = $(this);
+        
+        self.parents('tr:first').find('.td-data').html('0');
+        self.remove();
+        
+        return false;
+    });
+};
 
 $(function() {
     App.Dialog();
@@ -145,5 +157,8 @@ $(function() {
     $('button, input[type=submit], .button').button();
     
     App.Datepicker();
+    
+    
+    App.DeleteProductionData();
 
 });

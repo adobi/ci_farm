@@ -240,7 +240,7 @@ td.calendar-day, td.calendar-day-np { width:100px; padding:5px; border-bottom:1p
     }
     .week-table td {
         border-right:1px solid #ccc;
-        vertical-align:top;
+        vertical-align:bottom;
     }
     
     .week-table p {
@@ -263,10 +263,15 @@ td.calendar-day, td.calendar-day-np { width:100px; padding:5px; border-bottom:1p
          border-right:1px solid #ccc;
     }
     
-    .inner-table tbody .td-first {
+    .inner-table tbody .td-first, .inner-table tbody .td-last {
         background:#f7f7f7;
         font-weight:bold;
         color:#666;
+    }
+    
+    .td-last a {
+        color: #41B5FF;
+        font-weight:normal;
     }
     
     .inner-table tbody tr:nth-child(2n+1) {

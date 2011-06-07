@@ -2,7 +2,7 @@
 <div class = "span-20">
     <div class = "span-9 first inline-block">
         
-        <a href="<?= base_url(); ?>breedersite/edit/breeder/<?= $breeder->id; ?>" class = "button" rel = "dialog">Új telephely</a>
+        <a href="<?= base_url(); ?>breedersite/edit/breeder/<?= $breeder->id; ?>" class = "button" rel = "dialog" title = "Új telephely felvitele">Új telephely</a>
         <br />
         <label for="breedersite-select" style="display:inline">Válasszon telephelyet</label>
         <?php if (isset($breeder_sites)): ?>
@@ -10,7 +10,7 @@
         <?php endif ?>
     </div>
     <div class = "span-10 last text-right">
-        <a href="<?= base_url(); ?>stock/add_to_breedersite" class = "button" rel = "dialog">Beólazás</a>
+        <a href="<?= base_url(); ?>stock/add_to_breedersite" class = "button" rel = "dialog" title = "Új állomany felvitele és beólazása">Beólazás</a>
         <a href="#" class = "button">Állomány felszámolása</a>
         <!-- 
         <?php if (isset($stocks)): ?>
@@ -57,12 +57,13 @@
                         <p>
                             <a href="<?= base_url(); ?>egg/show_production/<?= $day; ?>" rel = "dialog" title = "Termelési adatok <?= date('Y-m-d', $day); ?>">Bővebben</a>
                             <a href="<?= base_url() ?>egg/add_production/<?= $day; ?>" rel = "dialog" title = "Tojástermelési adat felvitele">Új felvite</a>
-                            <a href="<?= base_url() ?>egg/delete_production">Töröl</a>
+                            <!-- <a href="<?= base_url() ?>egg/delete_production">Töröl</a> -->
                         </p>                        
                     </td>
                     <td>
                         <?php //require '_chicken_death.php'; ?>
                         <p>
+                            <a href="#">Bővebben</a>
                             <a href="<?= base_url() ?>egg/add_death/<?= $day; ?>" rel = "dialog" title = "Elhalálozási adat felvitele">Új felvite</a>
                             <a href="<?= base_url() ?>edd/delete_death">Töröl</a>
                         </p>                        
