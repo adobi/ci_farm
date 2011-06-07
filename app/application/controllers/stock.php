@@ -60,7 +60,7 @@ class Stock extends MY_Controller
                 
                 //$_POST['breeder_site_id'] = $fakk->breeder_site_id;
 
-                $this->model->insert($_POST);
+                $this->insert($_POST);
             }
             redirect($_SERVER['HTTP_REFERER']);
         } else {
@@ -177,14 +177,40 @@ class Stock extends MY_Controller
         $this->form_validation->set_rules('code', 'Kód', 'required|trim');
                 
         if ($this->form_validation->run()) {
-        
-             $this->load->model('Chickenstock', 'model');
             
-            $this->model->insert($_POST);
+            $this->insert($_POST);
             
             redirect($_SERVER['HTTP_REFERER']);
         }
                 
         $this->template->build('stock/add_to_breedersite', $data);    
+    }
+    
+    /**
+     * beszur egy tyukallomany, es felviszi a neki megfelelo sort az egg_production tablaba
+     *
+     * @param array $data 
+     * @return void
+     * @author Dobi Attila
+     */
+    private function insert($data) 
+    {
+        
+        $this->load->model('Chickenstock', 'model');
+        
+        $inserted = $this->model->insert($data);
+        
+        
+        if ($inserted) {
+            
+            $this->load->model("Eggproductions", 'production');
+                
+            $data2 = array(
+                'chicken_stock_id'=>$inserted,
+                'conditionig_date'=>date('Y-m-d H:i:s')
+            );
+            
+            $this->production->insert($data2);
+        }
     }
 }

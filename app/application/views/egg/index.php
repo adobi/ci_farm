@@ -51,19 +51,19 @@
             <?php foreach ($selected_week_days as $day) : ?>
             
                 <tr class = "week-tr">
-                    <td class = "td-first text-center" style = "font-size:1.4em;"><?= $day ?></td>
+                    <td class = "td-first text-center" style = "font-size:1.4em;"><?= date('m-d', $day) ?></td>
                     <td>
                         <?php //require '_egg_production.php'; ?>
                         <p>
-                            <a href="#">Bővebben</a>
-                            <a href="<?= base_url() ?>egg/add_production" rel = "dialog" title = "Tojástermelési adat felvitele">Új felvite</a>
+                            <a href="<?= base_url(); ?>egg/show_production/<?= $day; ?>" rel = "dialog" title = "Termelési adatok <?= date('Y-m-d', $day); ?>">Bővebben</a>
+                            <a href="<?= base_url() ?>egg/add_production/<?= $day; ?>" rel = "dialog" title = "Tojástermelési adat felvitele">Új felvite</a>
                             <a href="<?= base_url() ?>egg/delete_production">Töröl</a>
                         </p>                        
                     </td>
                     <td>
                         <?php //require '_chicken_death.php'; ?>
                         <p>
-                            <a href="<?= base_url() ?>egg/add_death" rel = "dialog" title = "Elhalálozási adat felvitele">Új felvite</a>
+                            <a href="<?= base_url() ?>egg/add_death/<?= $day; ?>" rel = "dialog" title = "Elhalálozási adat felvitele">Új felvite</a>
                             <a href="<?= base_url() ?>edd/delete_death">Töröl</a>
                         </p>                        
                     </td>
@@ -71,7 +71,7 @@
                         <?php //require '_chicken_food.php'; ?>
                         <p>
                             <a href="#">Bővebben</a>
-                            <a href="<?= base_url() ?>egg/add_food" rel = "dialog" title = "Tápanyag felvitele">Új felvite</a>
+                            <a href="<?= base_url() ?>egg/add_food/<?= $day; ?>" rel = "dialog" title = "Tápanyag felvitele">Új felvite</a>
                             <a href="<?= base_url() ?>egg/delete_food">Töröl</a>
                         </p>
                     </td>

@@ -100,7 +100,8 @@ class Egg extends MY_Controller {
 	public function add_food()
 	{
 	    $data = array();
-	    
+
+
 	    
 	    $this->template->build("egg/add_food", $data);
 	}
@@ -157,16 +158,63 @@ class Egg extends MY_Controller {
 	     *
 	     * @author Dobi Attila
 	     */
-	    if (!$this->session->userdata('selected_breedersite')) {
+        $this->checkSessionForSelectedBreedersite();
+	    
+        /**
+         * allaomanyok lekerdezese
+         *
+         * @author Dobi Attila
+         */
+        $data['stocks'] = $this->getStocksForSelectedBreedersite(true);
+	    
+	    /**
+	     * tojastipusok lekerdezese
+	     *
+	     * @author Dobi Attila
+	     */
+	    $this->load->model("Eggtypes", "eggtype");
+	    $data['egg_types'] = $this->eggtype->fetchAll();
+	    
+	    $this->form_validation->set_rules('chicken_stock_id', 'trim|required');
+	    
+	    if ($this->form_validation->run()) {
 	        
-	        echo '<div class = "error">Előbb válasszon telephelyet</div>';
+	        $date = date('Y-m-d', $this->uri->segment(3));
 	        
-	        die;
+	        $this->load->model('Eggproductions', 'production');
+	        
+	        $production = $this->production->findByStockid($_POST['chicken_stock_id']);
+	        
+	        $this->load->model("Eggproductiondays", 'days');
+	        
+	        $productionDay = $this->days->findByDateAndProduction($date, $production->id);
+	        
+	        if (!$productionDay) {
+	            
+	            $productionDayId = $this->days->insert(array('to_date'=>$date, 'egg_production_id'=>$production->id));
+	        } else {
+	            
+	            $productionDayId = $productionDay->id;
+	        }
+	        
+	        if ($_POST['eggtypes_ids'] && $_POST['eggtypes_pieces']) {
+	            
+	            $this->load->model('Eggproductiondata', 'data');
+	            
+	            foreach ($_POST['eggtypes_ids'] as $index => $value) {
+	                
+	                $this->data->insert(array('edd_production_day_id'=>$productionDayId, 'egg_type_id'=>$value, 'piece'=>$_POST['eggtypes_pieces'][$index]));
+	            }
+	        }
+	        
+	        redirect($_SERVER['HTTP_REFERER']);
+	        
+	    } else {
+	        
+	        /*
+	            TODO hibat adni, elohozni a dialogot a napnak  megfeleloen
+	        */
 	    }
-	     
-	    $this->load->model('Chickenstock', 'stock');
-	    $stocks = $this->stock->fetchForBreedersite($this->session->userdata('selected_breedersite'));
-	    $data['stocks'] = $this->stock->toAssocArray('id', 'code', $stocks);
 	    
 	    
 	    $this->template->build("egg/add_production", $data);
@@ -181,6 +229,62 @@ class Egg extends MY_Controller {
 	public function delete_production()
 	{
 	    redirect($_SERVER['HTTP_REFERER']);
+	}
+	
+	/**
+	 * adott napra mutaja meg az adott telephely termelesi adatait (bovebben link)
+	 *
+	 * @return void
+	 * @author Dobi Attila
+	 */
+	public function show_production() 
+	{
+	    $data = array();
+	    
+	    /**
+	     * van a telephely kivalasztva
+	     *
+	     * @author Dobi Attila
+	     */
+        $this->checkSessionForSelectedBreedersite();
+        
+	    $date = date('Y-m-d', $this->uri->segment(3));
+	    
+	    //$data['date'] = $date;
+	    
+	    /**
+	     * tojastipusok
+	     *
+	     * @author Dobi Attila
+	     */
+	    $this->load->model("Eggtypes", 'eggtype');
+	    $data['egg_types'] = $this->eggtype->fetchAll();
+	    
+	    /**
+	     * allomanyok
+	     *
+	     * @author Dobi Attila
+	     */
+	    $stocks = $this->getStocksForSelectedBreedersite();
+
+        $this->load->model('Eggproductions', 'production');
+        
+        $this->load->model("Eggproductiondays", 'days');
+        
+        $this->load->model('Eggproductiondata', 'data');
+            
+	    $data['stocks'] = array();
+	
+	    foreach ($stocks as $stock) {
+
+            $production = $this->production->findByStockid($stock->id);
+            
+            $productionDay = $this->days->findByDateAndProduction($date, $production->id);
+            
+	        $data['stocks'][] = array('stock'=>$stock, 'data'=>$productionDay ? $this->data->fetchByProductionDayId($productionDay->id) : false);
+	    }
+	    
+	    $this->template->build('egg/show_production', $data);
 	}
 	
 	/**
@@ -257,10 +361,49 @@ class Egg extends MY_Controller {
 	    $selectedWeekDays = array();
 	    for ($i = $weekBeginingTimestamp; $i <= $weekEndTimestamp; $i= $i + $oneDayInSeconds) {
 	        
-	        $selectedWeekDays[] = date('m-d', $i);
+	        //$selectedWeekDays[] = date('m-d', $i);
+	        $selectedWeekDays[] = $i;
 	    }
 	    
 	    return array('weekBegining'=>$weekBegining, 'weekEnd'=>$weekEnd, 'selectedWeekDays'=>$selectedWeekDays);	    
+	}
+	
+	/**
+	 * ellenorzi, hogy lett e kivalasztva telephely
+	 *
+	 * @return void
+	 * @author Dobi Attila
+	 */
+	private function checkSessionForSelectedBreedersite()
+	{
+	    if (!$this->session->userdata('selected_breedersite')) {
+	        
+	        echo '<div class = "error">Előbb válasszon telephelyet</div>';
+	        
+	        die;
+	    }	    
+	}
+	
+	/**
+	 * ha vannak, visszaadja a kivalasztott telephely allaomanyait
+	 *
+	 * @param $assoc select elemhez kellenek e, vagy sima tombkent
+	 * @return void
+	 * @author Dobi Attila
+	 */
+	private function getStocksForSelectedBreedersite($assoc = false)
+	{
+	    $this->load->model('Chickenstock', 'stock');
+	    $stocks = $this->stock->fetchForBreedersite($this->session->userdata('selected_breedersite'));
+	    
+	    if (!$stocks) {
+	        
+	        echo '<div class = "error">Előbb vigyen fel állomanyt</div>';
+	        
+	        die;
+	    }
+	    
+	    return $assoc ? $this->stock->toAssocArray('id', 'code', $stocks) : $stocks;	    
 	}
 
 }

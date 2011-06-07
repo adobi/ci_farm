@@ -112,6 +112,8 @@ class My_Model extends CI_Model
 		if (array_key_exists('order', $params) && is_array($params['order']) && in_array(strtolower($params['order']['dest']), array('asc', 'desc'))) {
 		    
 			$query->order_by($params['order']['by'], $params['order']['dest']);
+		} else {
+		    $query->order_by($this->_primary, 'asc');    
 		}
 		
 		/**

@@ -7,12 +7,13 @@
                 <?= form_dropdown('chicken_stock_id', $stocks, $this->session->userdata('selected_chickenstock')); ?>
             </p>            
         
-            <?php for ($j = 0; $j < 3; $j++) : ?>
+            <?php foreach ($egg_types as $item): ?>
                 <p>
-                    <label for="">Tojás típus <?= $j ?></label>
-                    <input type="text" name = "" value = "" id = "" />
+                    <label for=""><?= $item->code; ?> - <?= $item->description; ?></label>
+                    <input type="text" name = "eggtypes_pieces[]" value = "" id = "" />
+                    <input type="hidden" name = "eggtypes_ids[]" value = "<?= $item->id; ?>">
                 </p>
-            <?php endfor; ?>
+            <?php endforeach; ?>
             <p><button>Mentés</button></p>
         <?= form_close(); ?>
     </fieldset>
