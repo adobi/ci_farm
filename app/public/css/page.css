@@ -275,7 +275,9 @@ td.calendar-day, td.calendar-day-np { width:100px; padding:5px; border-bottom:1p
     }
     
     .inner-table tbody tr:nth-child(2n+1) {
-        background:#FFFAEC;
+        //background:#FFFAEC;
+        //background:#F8FBFD;
+        background:#F8FBFD;
     }
     
     .inner-table tbody tr {

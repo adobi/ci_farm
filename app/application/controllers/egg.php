@@ -182,7 +182,7 @@ class Egg extends MY_Controller {
 	        $date = date('Y-m-d', $this->uri->segment(3));
 	        
 	        $this->load->model('Eggproductions', 'production');
-	        
+
 	        $production = $this->production->findByStockid($_POST['chicken_stock_id']);
 	        
 	        $this->load->model("Eggproductiondays", 'days');
@@ -203,7 +203,7 @@ class Egg extends MY_Controller {
 	            
 	            foreach ($_POST['eggtypes_ids'] as $index => $value) {
 	                
-	                $this->data->insert(array('edd_production_day_id'=>$productionDayId, 'egg_type_id'=>$value, 'piece'=>$_POST['eggtypes_pieces'][$index]));
+	                $this->data->insert(array('egg_production_day_id'=>$productionDayId, 'egg_type_id'=>$value, 'piece'=>$_POST['eggtypes_pieces'][$index]));
 	            }
 	        }
 	        
@@ -281,7 +281,11 @@ class Egg extends MY_Controller {
             
             $productionDay = $this->days->findByDateAndProduction($date, $production->id);
             
-	        $data['stocks'][] = array('stock'=>$stock, 'data'=>$productionDay ? $this->data->fetchByProductionDayId($productionDay->id) : false);
+	        $data['stocks'][] = array(
+	            'stock'=>$stock, 
+	            'production_day_id'=>$productionDay ? $productionDay->id : false,
+	            'data'=>$productionDay ? $this->data->fetchByProductionDayId($productionDay->id) : false
+	        );
 	    }
 	    
 	    $this->template->build('egg/show_production', $data);

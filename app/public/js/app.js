@@ -141,14 +141,74 @@ App.DeleteProductionData = function() {
     
     $('body').delegate('.delete-production-data', 'click', function() {
         
-        var self = $(this);
-        
-        self.parents('tr:first').find('.td-data').html('0');
-        self.remove();
+        var self = $(this), 
+            fieldset = self.parents("fieldset:first"),
+            notif;
+        $.post(self.attr('href'), function(response) {
+    
+            if (response == '0') {
+                notif = $('<div />', {'class': 'error round'}).html('Sikertelen művelet, próbálja később');
+            } else {
+                notif = $('<div />', {'class': 'success round'}).html('Sikeresen frissítve')
+            }            
+
+            self.parents('tr:first').find('.td-data').html('0');
+            self.remove();
+            
+            fieldset.before(notif).fadeIn('slow', function() {
+                
+                setTimeout(function() {
+                    fieldset.prev().fadeOut('slow');
+                }, 3000);
+            });            
+            
+        });
         
         return false;
     });
 };
+
+App.UpdatePeoductionData = function() {
+
+    $('body').delegate('.update-production-data', 'click', function() {
+
+        var self = $(this)
+            fieldset = self.parents("fieldset:first"),
+            tr = self.parents('tr:first'),
+            pieces = tr.find('input[type=text]'),
+            types = tr.find('input[type=hidden]'),
+            p = [], t = [];
+        $.each(pieces, function(i, v) {
+            p.push($(v).val());
+        });    
+        $.each(types, function(i, v) {
+            t.push($(v).val());
+        });    
+        
+        var data = {'pieces': p, 'egg_types': t};
+        data[$('#csrf-token').attr('name')] = $('#csrf-token').val();
+        $.post(self.attr('href'),data , function(response) {
+            
+            var notif;
+            
+            if (response == '0') {
+                notif = $('<div />', {'class': 'error round'}).html('Sikertelen művelet, próbálja később');
+            } else {
+                notif = $('<div />', {'class': 'success round'}).html('Sikeresen frissítve')
+            }
+            
+            fieldset.before(notif).fadeIn('slow', function() {
+                
+                setTimeout(function() {
+                    fieldset.prev().fadeOut('slow');
+                }, 3000);
+            });
+            
+        })    
+            
+        return false;
+    });
+}
 
 $(function() {
     App.Dialog();
@@ -158,7 +218,7 @@ $(function() {
     
     App.Datepicker();
     
-    
+    App.UpdatePeoductionData();
     App.DeleteProductionData();
 
 });

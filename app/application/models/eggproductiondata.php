@@ -22,7 +22,7 @@ class Eggproductiondata extends MY_Model
         }
         
         $result = $this->fetchRows(
-            array("where"=>array('edd_production_day_id'=>$id), 'order'=>array('by'=>'egg_type_id', 'dest'=>'desc'))
+            array("where"=>array('egg_production_day_id'=>$id), 'order'=>array('by'=>'egg_type_id', 'dest'=>'desc'))
         );
         
         return $result;         

@@ -6,7 +6,8 @@
         <include_paths>
           <path value="." />
           <path value="C:\wamp\bin\php\php5.2.9-2\pear" />
-          <path value="C:\wamp\www\chickenfarm\app" />
+          <path value="C:\wamp\www\chickenfarm\app\application" />
+          <path value="C:\wamp\www\chickenfarm\app\system" />
         </include_paths>
       </PhpSdkConfig>
     </sdk>

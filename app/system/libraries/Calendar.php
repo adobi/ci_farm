@@ -32,9 +32,9 @@ class CI_Calendar {
 	var $lang;
 	var $local_time;
 	var $template		= '';
-	var $start_day		= 'monday';
+	var $start_day		= 'sunday';
 	var $month_type		= 'long';
-	var $day_type		= 'long';
+	var $day_type		= 'abr';
 	var $show_next_prev	= FALSE;
 	var $next_prev_url	= '';
 
