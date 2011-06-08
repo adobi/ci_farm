@@ -32,6 +32,23 @@ class Egg extends MY_Controller {
 	    $data['week_end'] = $dates['weekEnd'];
 	    $data['selected_week_days'] = $dates['selectedWeekDays'];
 	    
+	    $eggProductionSum = array();
+        if ($this->session->userdata('selected_breedersite') && $dates['selectedWeekDays']) {
+            
+            $this->load->model("Eggproductiondata", "production");
+            
+            /**
+             * minden naphoz lekerdezzu az osszesitett termeloi adatokat
+             *
+             * @author Dobi Attila
+             */
+            foreach ($dates['selectedWeekDays'] as $day) {
+                $eggProductionSum[$day] = $this->production->getSummarizedForBreedersiteForDayByEggtype($this->session->userdata('selected_breedersite'), date('Y-m-d', $day));
+            }
+        }
+        $data['egg_production_sum'] = $eggProductionSum;
+        
+
 	    /**
 	     * telephelyek lekerdezese
 	     *
@@ -48,16 +65,6 @@ class Egg extends MY_Controller {
 	      */ 
 	    $this->load->model("Breeders", "breeders");
 	    $data['breeder'] = $this->breeders->fetchAll(array(), true);
-	    
-	    
-	    /**
-	     * kivalasztott telephelyhez tartozo allaomanyok
-	     *
-	     * @author Dobi Attila
-	     */
-	    //$this->load->model('Chickenstock', 'stock');
-	    //$stocks = $this->stock->fetchForBreedersite($this->session->userdata('selected_breedersite'));
-	    //$data['stocks'] = $this->stock->toAssocArray('id', 'code', $stocks);
 	    
 		$this->template->build('egg/index', $data);
 	}
@@ -309,6 +316,7 @@ class Egg extends MY_Controller {
 	
 	/** 
 	 * NEM HASZNALJUK
+	 *
 	 * beallitja a kivalasztott allomanyt a termeles fooldalan
 	 *
 	 * @return void

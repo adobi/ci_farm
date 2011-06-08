@@ -113,7 +113,7 @@ class My_Model extends CI_Model
 		    
 			$query->order_by($params['order']['by'], $params['order']['dest']);
 		} else {
-		    $query->order_by($this->_primary, 'asc');    
+		    $query->order_by($this->_primary, 'desc');    
 		}
 		
 		/**

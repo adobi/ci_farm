@@ -54,6 +54,20 @@
                     <td class = "td-first text-center" style = "font-size:1.4em;"><?= date('m-d', $day) ?></td>
                     <td>
                         <?php //require '_egg_production.php'; ?>
+                        
+                        <?php if ($egg_production_sum[$day]): ?>
+                            <table class = "inner-table">
+                                <?php foreach ($egg_production_sum[$day] as $item): ?>
+                                    <tr>
+                                        <td style = "text-align:left"><?= $item->code; ?> - <?= $item->description; ?></td>
+                                        <td style = "text-align:left"><strong><?= $item->pieces_sum; ?></strong> db</td>
+                                    </tr>
+                                <?php endforeach ?>
+                            </table>
+                        <?php else: ?>
+                            <p><em>nincs adat</em></p>
+                        <?php endif ?>
+                        
                         <p>
                             <a href="<?= base_url(); ?>egg/show_production/<?= $day; ?>" rel = "dialog" title = "Termelési adatok <?= date('Y-m-d', $day); ?>">Bővebben</a>
                             <a href="<?= base_url() ?>egg/add_production/<?= $day; ?>" rel = "dialog" title = "Tojástermelési adat felvitele">Új felvite</a>
