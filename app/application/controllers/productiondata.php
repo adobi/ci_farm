@@ -53,7 +53,10 @@ class Productiondata extends MY_Controller
         if ($dayId) {
             $this->load->model("Eggproductiondata", 'production');
             
-            echo $this->production->delete(array('egg_production_day_id'=>$dayId));
+            $this->load->model("Eggproductiondays", 'day');
+            
+            //echo $this->production->delete(array('egg_production_day_id'=>$dayId));
+            echo $this->day->delete($dayId);
         } else {
             
             echo 0;

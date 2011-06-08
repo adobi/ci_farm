@@ -48,6 +48,36 @@ class Chickenstock extends MY_Model
                 join fakk_group g on f.fakk_group_id = g.id and g.breeder_site_id = $site";
         //echo $sql;
         return $this->execute($sql);
+    }
+    
+    /**
+     * adott telephely azon allamanyait adja vissza amihez meg nem szerepel adott naphoz bejegyzes
+     *
+     * @param string $site 
+     * @param string $date 
+     * @return void
+     * @author Dobi Attila
+     */
+    public function fetchForBreedersiteWithoutData($site, $date) 
+    {
+        if (!$site) {
+            
+            return false;
+        }
+        
+        $sql = "select 
+                    c.* 
+                from $this->_name c 
+                join fakk f on c.fakk_id = f.id 
+                join fakk_group g on f.fakk_group_id = g.id and g.breeder_site_id = $site
+                where c.id not in (
+        			select 
+        					chicken_stock_id 
+        			from egg_production ep 
+        				join egg_production_day epd on ep.id = epd.egg_production_id and date(epd.to_date) = '$date'
+                )";
+
+        return $this->execute($sql);
         
     }
 }

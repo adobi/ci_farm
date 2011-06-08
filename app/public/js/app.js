@@ -149,7 +149,7 @@ App.DeleteProductionData = function() {
             if (response == '0') {
                 notif = $('<div />', {'class': 'error round'}).html('Sikertelen művelet, próbálja később');
             } else {
-                notif = $('<div />', {'class': 'success round'}).html('Sikeresen frissítve')
+                notif = $('<div />', {'class': 'success round'}).html('Sikeresen törölve')
             }            
 
             self.parents('tr:first').find('.td-data').html('0');

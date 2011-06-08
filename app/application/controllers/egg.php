@@ -158,6 +158,8 @@ class Egg extends MY_Controller {
 	 */
 	public function add_production()
 	{
+        $date = date('Y-m-d', $this->uri->segment(3));	    
+	    
 	    $data = array();
 
 	    /**
@@ -172,7 +174,7 @@ class Egg extends MY_Controller {
          *
          * @author Dobi Attila
          */
-        $data['stocks'] = $this->getStocksForSelectedBreedersite(true);
+        $data['stocks'] = $this->getStocksWithoutDataForSelectedBreedersite(true, $date);
 	    
 	    /**
 	     * tojastipusok lekerdezese
@@ -185,8 +187,6 @@ class Egg extends MY_Controller {
 	    $this->form_validation->set_rules('chicken_stock_id', 'trim|required');
 	    
 	    if ($this->form_validation->run()) {
-	        
-	        $date = date('Y-m-d', $this->uri->segment(3));
 	        
 	        $this->load->model('Eggproductions', 'production');
 
@@ -417,6 +417,22 @@ class Egg extends MY_Controller {
 	    
 	    return $assoc ? $this->stock->toAssocArray('id', 'code', $stocks) : $stocks;	    
 	}
+	
+	
+	private function getStocksWithoutDataForSelectedBreedersite($assoc = false, $date)
+	{
+	    $this->load->model('Chickenstock', 'stock');
+	    $stocks = $this->stock->fetchForBreedersiteWithoutData($this->session->userdata('selected_breedersite'), $date);
+	    
+	    if (!$stocks) {
+	        
+	        echo '<div class = "error">Minden állományhoz szerepel bejegyzés, mielőtt újat vihet fel törölie kell</div>';
+	        
+	        die;
+	    }
+	    
+	    return $assoc ? $this->stock->toAssocArray('id', 'code', $stocks) : $stocks;	    
+	}	
 
 }
 
