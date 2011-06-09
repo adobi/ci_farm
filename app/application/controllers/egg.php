@@ -33,9 +33,11 @@ class Egg extends MY_Controller {
 	    $data['selected_week_days'] = $dates['selectedWeekDays'];
 	    
 	    $eggProductionSum = array();
+	    $feedSum = array();
         if ($this->session->userdata('selected_breedersite') && $dates['selectedWeekDays']) {
             
             $this->load->model("Eggproductiondata", "production");
+            $this->load->model("Eggproductiondays", "days");
             
             /**
              * minden naphoz lekerdezzu az osszesitett termeloi adatokat
@@ -44,9 +46,12 @@ class Egg extends MY_Controller {
              */
             foreach ($dates['selectedWeekDays'] as $day) {
                 $eggProductionSum[$day] = $this->production->getSummarizedForBreedersiteForDayByEggtype($this->session->userdata('selected_breedersite'), date('Y-m-d', $day));
+                $feedSum[$day] = $this->days->getSummarizedFoodForDataAndBreedersite($this->session->userdata('selected_breedersite'), date('Y-m-d', $day));
             }
         }
         $data['egg_production_sum'] = $eggProductionSum;
+        
+        $data['feed_sum'] = $feedSum;
         //dump($data); die;
 
 	    /**

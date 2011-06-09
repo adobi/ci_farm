@@ -84,6 +84,24 @@
                     </td>
                     <td>
                         <?php //require '_chicken_food.php'; ?>
+                        <?php if (array_key_exists($day, $feed_sum)): ?>
+                            <table class = "inner-table">
+                                <tr>
+                                    <td style = "text-align:left">Jérce tápanyag</td>
+                                    <td style = "text-align:left"><strong><?= $feed_sum[$day]->sum_female; ?></strong></td>
+                                </tr>
+                                <tr>
+                                    <td style = "text-align:left">Kakas tápanyag</td>
+                                    <td style = "text-align:left"><strong><?= $feed_sum[$day]->sum_male; ?></strong></td>
+                                </tr>
+                                <tr>
+                                    <td style = "text-align:left">JSzemes tápanyag</td>
+                                    <td style = "text-align:left"><strong><?= $feed_sum[$day]->sum_grain; ?></strong></td>
+                                </tr>
+                            </table>
+                        <?php else: ?>
+                            <p><em>nincs adat</em></p>
+                        <?php endif ?>                        
                         <p>
                             <a href="<?= base_url(); ?>egg/show_food/<?= $day; ?>" rel = "dialog" title = "Táőanyag adatok <?= date('Y-m-d', $day); ?>">Bővebben</a>
                             <a href="<?= base_url() ?>egg/add_food/<?= $day; ?>" rel = "dialog" title = "Tápanyag felvitele">Új felvite</a>
