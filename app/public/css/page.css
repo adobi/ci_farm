@@ -316,14 +316,15 @@ fieldset {
 }
 
 #loading-global {
-    background: url("../img/fb-loader.gif") no-repeat scroll 15px 6px #D8DFEA;
+    background: url("../img/pie.gif") no-repeat scroll 15px 10px #FFF1A8;//#D8DFEA;
     display: none;
     font-size: 12px;
     font-weight: bold;
     left: 0;
-    padding: 15px 5px 10px 70px;
+    padding: 10px 5px 10px 40px;
     position: fixed;
     top: 0;
+    left:45%;
     z-index: 9999;
 }
 
