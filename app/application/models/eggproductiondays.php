@@ -55,7 +55,6 @@ class Eggproductiondays extends MY_Model
                 )";
                 
         $result = $this->execute($sql);
-        
         if ($result) {
             
             return current($result);

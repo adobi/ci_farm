@@ -55,7 +55,7 @@
                     <td>
                         <?php //require '_egg_production.php'; ?>
                         
-                        <?php if (array_key_exists($day, $egg_production_sum)): ?>
+                        <?php if (array_key_exists($day, $egg_production_sum) && $egg_production_sum[$day]): ?>
                             <table class = "inner-table">
                                 <?php foreach ($egg_production_sum[$day] as $item): ?>
                                     <tr>
@@ -79,12 +79,12 @@
                         <p>
                             <a href="#">Bővebben</a>
                             <a href="<?= base_url() ?>egg/add_death/<?= $day; ?>" rel = "dialog" title = "Elhalálozási adat felvitele">Új felvite</a>
-                            <a href="<?= base_url() ?>edd/delete_death">Töröl</a>
+                            <!-- <a href="<?= base_url() ?>edd/delete_death">Töröl</a> -->
                         </p>                        
                     </td>
                     <td>
                         <?php //require '_chicken_food.php'; ?>
-                        <?php if (array_key_exists($day, $feed_sum)): ?>
+                        <?php if (array_key_exists($day, $feed_sum) && ($feed_sum[$day]->sum_female || $feed_sum[$day]->sum_male || $feed_sum[$day]->sum_grain)): ?>
                             <table class = "inner-table">
                                 <tr>
                                     <td style = "text-align:left">Jérce tápanyag</td>
@@ -95,7 +95,7 @@
                                     <td style = "text-align:left"><strong><?= $feed_sum[$day]->sum_male; ?></strong></td>
                                 </tr>
                                 <tr>
-                                    <td style = "text-align:left">JSzemes tápanyag</td>
+                                    <td style = "text-align:left">Szemes tápanyag</td>
                                     <td style = "text-align:left"><strong><?= $feed_sum[$day]->sum_grain; ?></strong></td>
                                 </tr>
                             </table>
