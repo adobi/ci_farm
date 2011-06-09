@@ -139,7 +139,7 @@ App.FakkSortable = function() {
 
 App.DeleteProductionData = function() {
     
-    $('body').delegate('.delete-production-data', 'click', function() {
+    $('body').delegate('.delete-production-data, .delete-production-feed', 'click', function() {
         
         var self = $(this), 
             fieldset = self.parents("fieldset:first"),
@@ -151,10 +151,22 @@ App.DeleteProductionData = function() {
             } else {
                 notif = $('<div />', {'class': 'success round'}).html('Sikeresen törölve')
             }            
-
-            self.parents('tr:first').find('.td-data').html('0');
-            self.remove();
             
+            if (self.is('.delete-production-feed')) {
+                
+                self.parents('tr:first').find('td:eq(1)').remove();
+                
+                self.parents('td:first').before($('<td />', {'colspan': '4'}).html('<em>nincs bejegyzés</em>'));
+                self.parents('td:first').remove();
+            } 
+            
+            if (self.is('.delete-production-data')) {
+                
+                self.parents('tr:first').find('.td-data').html('0');
+                self.parents('td:first').html('');
+                
+            }
+
             fieldset.before(notif).fadeIn('slow', function() {
                 
                 setTimeout(function() {
@@ -208,17 +220,93 @@ App.UpdatePeoductionData = function() {
             
         return false;
     });
-}
+},
+
+App.UpdateFoodForDay = function () {
+    
+    $('body').delegate('.update-production-feed', 'click', function() {
+
+        var self = $(this)
+            fieldset = self.parents("fieldset:first"),
+            tr = self.parents('tr:first'),
+            form = tr.find('form'),
+            f = {};
+        
+        $.post(self.attr('href'),form.serialize() , function(response) {
+            
+            var notif;
+            
+            if (response == '0') {
+                notif = $('<div />', {'class': 'error round'}).html('Sikertelen művelet, próbálja később');
+            } else {
+                notif = $('<div />', {'class': 'success round'}).html('Sikeresen frissítve')
+            }
+            
+            fieldset.before(notif).fadeIn('slow', function() {
+                
+                setTimeout(function() {
+                    fieldset.prev().fadeOut('slow');
+                }, 3000);
+            });
+            
+        })    
+            
+        return false;
+    });
+};
+
+App.DeleteProductionFeed = function() {
+    
+    $('body').delegate('.delete-production-feed', 'click', function() {
+        
+        var self = $(this), 
+            fieldset = self.parents("fieldset:first"),
+            notif;
+        $.post(self.attr('href'), function(response) {
+    
+            if (response == '0') {
+                notif = $('<div />', {'class': 'error round'}).html('Sikertelen művelet, próbálja később');
+            } else {
+                notif = $('<div />', {'class': 'success round'}).html('Sikeresen törölve')
+            }            
+
+            self.parents('tr:first').find('.td-data').html('0');
+            self.remove();
+            
+            fieldset.before(notif).fadeIn('slow', function() {
+                
+                setTimeout(function() {
+                    fieldset.prev().fadeOut('slow');
+                }, 3000);
+            });            
+            
+        });
+        
+        return false;
+    });
+};
 
 $(function() {
     App.Dialog();
     App.Confirm();
     
     $('button, input[type=submit], .button').button();
+   
+    $('#loading-global')
+       .ajaxStart(function() {
+           
+    		$(this).show();
+       })
+       .ajaxStop(function() {
+    		$(this).hide();
+    });
     
+     
     App.Datepicker();
     
     App.UpdatePeoductionData();
     App.DeleteProductionData();
+    
+    App.UpdateFoodForDay();
 
 });

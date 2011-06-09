@@ -4,14 +4,7 @@
         <?= form_open() ?>
             <p>
                 <label for="fakk_id">Válassz fakkot</label>
-                <select id="fakk_id" name = "fakk_id">
-                    <option>-</option>
-                    <option>Fakkcsoport 1</option>
-                    <option>Fakkcsoport 2</option>
-                    <option>Fakkcsoport 3</option>
-                    <option>Fakkcsoport 4</option>
-                    <option>Fakkcsoport 5</option>
-                </select>
+                <?= form_dropdown('chicken_stock_id', $stocks, $this->session->userdata('selected_chickenstock')); ?>
             </p>
             <p>
                 <label for="feed_female">Jérce tápanyag</label>

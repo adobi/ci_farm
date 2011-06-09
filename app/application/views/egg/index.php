@@ -55,7 +55,7 @@
                     <td>
                         <?php //require '_egg_production.php'; ?>
                         
-                        <?php if ($egg_production_sum[$day]): ?>
+                        <?php if (array_key_exists($day, $egg_production_sum)): ?>
                             <table class = "inner-table">
                                 <?php foreach ($egg_production_sum[$day] as $item): ?>
                                     <tr>
@@ -85,9 +85,9 @@
                     <td>
                         <?php //require '_chicken_food.php'; ?>
                         <p>
-                            <a href="#">Bővebben</a>
+                            <a href="<?= base_url(); ?>egg/show_food/<?= $day; ?>" rel = "dialog" title = "Táőanyag adatok <?= date('Y-m-d', $day); ?>">Bővebben</a>
                             <a href="<?= base_url() ?>egg/add_food/<?= $day; ?>" rel = "dialog" title = "Tápanyag felvitele">Új felvite</a>
-                            <a href="<?= base_url() ?>egg/delete_food">Töröl</a>
+                            <!-- <a href="<?= base_url() ?>egg/delete_food">Töröl</a> -->
                         </p>
                     </td>
                     <td class = "">
@@ -114,7 +114,7 @@
             if ($.trim(breederSite).length && breederSite != 0) {
                 
                 $.get(App.URL + "egg/set_selected_breedersite/"+breederSite, function() {
-                    //location.reload();
+                    location.reload();
                 });
             } 
         });

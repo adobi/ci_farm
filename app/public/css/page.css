@@ -291,6 +291,11 @@ td.calendar-day, td.calendar-day-np { width:100px; padding:5px; border-bottom:1p
         background:#f7f7f7;
         color:#7BB750;
     }
+    
+    td.no-border {
+        border:0px;
+        padding:0px;
+    }
 
 legend {
     font-size:12px;
@@ -308,5 +313,17 @@ fieldset {
     -moz-border-radius:3px;
     -webkit-border-radius:3px;
     border-radius:3px;
+}
+
+#loading-global {
+    background: url("../img/fb-loader.gif") no-repeat scroll 15px 6px #D8DFEA;
+    display: none;
+    font-size: 12px;
+    font-weight: bold;
+    left: 0;
+    padding: 15px 5px 10px 70px;
+    position: fixed;
+    top: 0;
+    z-index: 9999;
 }
 

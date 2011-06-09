@@ -37,10 +37,13 @@
                             </td>
                         <?php endif ?>
                     <?php else: ?>
+                        <!-- 
                         <?php for ($i = 0; $i < sizeof($egg_types); $i++) : ?>
                             <td>0</td>
                         <?php endfor ?>
                         <td class = "td-last">&nbsp;</td>
+                        -->
+                        <td colspan = "<?= sizeof($egg_types)+1; ?>"><em>nincs bejegyzés</em></td>
                     <?php endif ?>
                     
                 </tr>

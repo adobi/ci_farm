@@ -47,7 +47,7 @@ class Egg extends MY_Controller {
             }
         }
         $data['egg_production_sum'] = $eggProductionSum;
-        
+        //dump($data); die;
 
 	    /**
 	     * telephelyek lekerdezese
@@ -79,8 +79,7 @@ class Egg extends MY_Controller {
 	{
 	    $data = array();
 	    
-        echo $this->session->userdata('selected_breedersite');
-	    
+        
 	    $this->template->build("egg/comment", $data);
 	}
 	
@@ -106,11 +105,106 @@ class Egg extends MY_Controller {
 	 */
 	public function add_food()
 	{
+        $date = date('Y-m-d', $this->uri->segment(3));	    
+	    
 	    $data = array();
 
+	    /**
+	     * kivalasztott telephelyhez tartozo allaomanyok
+	     *
+	     * @author Dobi Attila
+	     */
+        $this->checkSessionForSelectedBreedersite();
+	    
+        /**
+         * allaomanyok lekerdezese
+         *
+         * @author Dobi Attila
+         */
+        $data['stocks'] = $this->getStocksWithoutFoodForSelectedBreedersite(true, $date);
 
+	    $this->form_validation->set_rules('chicken_stock_id', 'trim|required');
+	    
+	    if ($this->form_validation->run()) {
+
+	        $this->load->model('Eggproductions', 'production');
+
+            // egg_production bejegyzest megkeressuk
+	        $production = $this->production->findByStockid($_POST['chicken_stock_id']);
+	        
+	        $this->load->model("Eggproductiondays", 'days');
+	        
+	        $productionDay = $this->days->findByDateAndProduction($date, $production->id);
+	        
+	        // ha meg nincs az adott naphoz bejegyzs akkkor felvisszuk
+	        if (!$productionDay) {
+	            
+	            $productionDayId = $this->days->insert(array('to_date'=>$date, 'egg_production_id'=>$production->id));
+	        } else {
+	            
+	            $productionDayId = $productionDay->id;
+	        }
+	        //dump($productionDayId); die;
+	        
+	        unset($_POST['chicken_stock_id']);
+	        
+	        $this->days->update($_POST, $productionDayId);
+	        
+	        redirect($_SERVER['HTTP_REFERER']);
+	    }
 	    
 	    $this->template->build("egg/add_food", $data);
+	}
+	
+	/**
+	 * adott datumhoz listazza a kivalasztott telephely osszes allomanyak tapanyagat
+	 *
+	 * @return void
+	 * @author Dobi Attila
+	 */
+	public function show_food()
+	{
+	    $data = array();
+	    
+	    /**
+	     * van a telephely kivalasztva
+	     *
+	     * @author Dobi Attila
+	     */
+        $this->checkSessionForSelectedBreedersite();
+        
+	    $date = date('Y-m-d', $this->uri->segment(3));
+	    
+	    /**
+	     * allomanyok
+	     *
+	     * @author Dobi Attila
+	     */
+	    $stocks = $this->getStocksForSelectedBreedersite();
+
+        $this->load->model('Eggproductions', 'production');
+        
+        $this->load->model("Eggproductiondays", 'days');
+        
+        $this->load->model('Eggproductiondata', 'data');
+            
+	    $data['stocks'] = array();
+	
+	    foreach ($stocks as $stock) {
+
+            $production = $this->production->findByStockid($stock->id);
+            
+            $productionDay = $this->days->findByDateAndProduction($date, $production->id);
+            //dump($productionDay); die;
+	        $data['stocks'][] = array(
+	            'stock'=>$stock, 
+	            'data'=>$productionDay
+	        );
+	    }
+	    
+
+
+	    $this->template->build('egg/show_food', $data);
 	}
 	
 	/**
@@ -423,6 +517,21 @@ class Egg extends MY_Controller {
 	{
 	    $this->load->model('Chickenstock', 'stock');
 	    $stocks = $this->stock->fetchForBreedersiteWithoutData($this->session->userdata('selected_breedersite'), $date);
+	    
+	    if (!$stocks) {
+	        
+	        echo '<div class = "error">Minden állományhoz szerepel bejegyzés, mielőtt újat vihet fel törölie kell</div>';
+	        
+	        die;
+	    }
+	    
+	    return $assoc ? $this->stock->toAssocArray('id', 'code', $stocks) : $stocks;	    
+	}
+	
+	private function getStocksWithoutFoodForSelectedBreedersite($assoc = false, $date) 
+	{
+	    $this->load->model('Chickenstock', 'stock');
+	    $stocks = $this->stock->fetchForBreedersiteWithoutFood($this->session->userdata('selected_breedersite'), $date);
 	    
 	    if (!$stocks) {
 	        
