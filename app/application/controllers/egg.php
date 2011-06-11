@@ -2,8 +2,14 @@
 
 require_once 'MY_Controller.php';
 
-class Egg extends MY_Controller {
-
+class Egg extends MY_Controller 
+{
+    
+    public function __construct()
+    {
+        parent::__construct();
+    }
+    
     public function index()
     {
         redirect(base_url().'egg/week/'.date('W'));

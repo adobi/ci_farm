@@ -2,7 +2,8 @@
 
 if (! defined('BASEPATH')) exit('No direct script access');
 
-require_once(BASEPATH.'core/Controller'.EXT);
+#require_once(BASEPATH.'core/Controller'.EXT);
+
 
 class MY_Controller extends CI_Controller 
 {
@@ -13,7 +14,7 @@ class MY_Controller extends CI_Controller
         
         if ($this->uri->segment(1) !== 'auth' && !$this->session->userdata('current_user_id')) {
             
-            redirect(base_url() . 'auth/login');
+            //redirect(base_url() . 'auth/login');
         }
         
        

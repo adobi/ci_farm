@@ -2,9 +2,16 @@
 
 if (! defined('BASEPATH')) exit('No direct script access');
 
+require_once 'MY_Controller.php';
 
-class Auth extends CI_Controller 
+class Auth extends MY_Controller 
 {   
+    
+    public function __construct()
+    {
+        parent::__construct();
+    }
+        
     public function index()
     {
         redirect(base_url() . 'auth/login');
