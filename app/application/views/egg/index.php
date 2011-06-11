@@ -77,7 +77,7 @@
                     <td>
                         <?php //require '_chicken_death.php'; ?>
                         <p>
-                            <a href="#">Bővebben</a>
+                            <a href="<?= base_url() ?>egg/show_death/<?= $day ?>" rel = "dialog" title = "Elhalálozási adatok <?= date('Y-m-d', $day) ?>">Bővebben</a>
                             <a href="<?= base_url() ?>egg/add_death/<?= $day; ?>" rel = "dialog" title = "Elhalálozási adat felvitele">Új felvite</a>
                             <!-- <a href="<?= base_url() ?>edd/delete_death">Töröl</a> -->
                         </p>                        

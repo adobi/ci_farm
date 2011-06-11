@@ -173,8 +173,37 @@ class Chickenstock extends MY_Model
                 )";
 
         return $this->execute($sql);
-        
     }      
-    
+
+    /**
+     * adott telephely azon allamanyait adja vissza amihez meg nem szerepel adott naphoz elhalalozasi bejegyzes
+     *
+     * @param string $site 
+     * @param string $date 
+     * @return void
+     * @author Dobi Attila
+     */
+    public function fetchForBreedersiteWithoutDeath($site, $date) 
+    {
+        if (!$site) {
+            
+            return false;
+        }
+        
+        $sql = "select 
+                    c.* 
+                from $this->_name c 
+                join fakk f on c.fakk_id = f.id 
+                join fakk_group g on f.fakk_group_id = g.id and g.breeder_site_id = $site
+                where c.id not in (
+        			select 
+        					chicken_stock_id 
+        			from egg_production ep 
+        				join egg_production_day epd on ep.id = epd.egg_production_id and date(epd.to_date) = '$date' and 
+        				    (dead_male is not null or dead_female is not null or reject_male is not null or reject_female is not null)
+                )";
+
+        return $this->execute($sql);
+    }          
     
 }

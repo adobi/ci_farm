@@ -3,29 +3,17 @@
     <fieldset class="round inline-block">
         <?= form_open() ?>
             <fieldset class = "inner-fieldset">
-                
-                <p>
-                    <label for="fakk_id">Válassz fakkot</label>
-                    <select id="fakk_id" name = "fakk_id">
-                        <option>-</option>
-                        <option>Fakk 1</option>
-                        <option>Fakk 2</option>
-                        <option>Fakk 3</option>
-                        <option>Fakk 4</option>
-                        <option>Fakk 5</option>
-                    </select>
-                </p>
-            
+                <?= $template['partials']['select_stock']; ?>    
             </fieldset>
             <fieldset class = "inner-fieldset">
                 <legend>Elhalt</legend>
                 <p>
                     <label for="death_female">Jérce</label>
-                    <input type="text" name = "death_female" id = "death_female" value = "" />
+                    <input type="text" name = "dead_female" id = "death_female" value = "" />
                 </p>
                 <p>
                     <label for="death_male">Kakas</label>
-                    <input type="text" name = "death_male" id = "death_male" value = "" />
+                    <input type="text" name = "dead_male" id = "death_male" value = "" />
                 </p>
                 
             </fieldset>

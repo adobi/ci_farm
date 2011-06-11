@@ -124,6 +124,7 @@ class Egg extends MY_Controller
             */
         }
 
+        $this->template->set_partial('select_stock', '_partials/select_stock');
         
 	    $this->template->build("egg/add_comment", $data);
 	}
@@ -147,33 +148,8 @@ class Egg extends MY_Controller
         
 	    $date = date('Y-m-d', $this->uri->segment(3));
 	    
-	    /**
-	     * allomanyok
-	     *
-	     * @author Dobi Attila
-	     */
-	    $stocks = $this->getStocksForSelectedBreedersite();
-
-        $this->load->model('Eggproductions', 'production');
-        
-        $this->load->model("Eggproductiondays", 'days');
-        
-        $this->load->model('Eggproductiondata', 'data');
-            
-	    $data['stocks'] = array();
-	
-	    foreach ($stocks as $stock) {
-
-            $production = $this->production->findByStockid($stock->id);
-            
-            $productionDay = $this->days->findByDateAndProduction($date, $production->id);
-            //dump($productionDay); die;
-	        $data['stocks'][] = array(
-	            'stock'=>$stock, 
-	            'data'=>$productionDay
-	        );
-	    }
-	    //echo '<pre>'; print_r($data); die;
+	    $data = $this->getProductionDataForAllStock($date);
+	    
 	    $this->template->build("egg/show_comment", $data);
 	}
 	
@@ -221,7 +197,8 @@ class Egg extends MY_Controller
             */
         }
         
-        
+        $this->template->set_partial('select_stock', '_partials/select_stock');
+
         $this->template->build("egg/add_vitamin", $data);
 	}
 	
@@ -244,32 +221,7 @@ class Egg extends MY_Controller
         
 	    $date = date('Y-m-d', $this->uri->segment(3));
 	    
-	    /**
-	     * allomanyok
-	     *
-	     * @author Dobi Attila
-	     */
-	    $stocks = $this->getStocksForSelectedBreedersite();
-
-        $this->load->model('Eggproductions', 'production');
-        
-        $this->load->model("Eggproductiondays", 'days');
-        
-        $this->load->model('Eggproductiondata', 'data');
-            
-	    $data['stocks'] = array();
-	
-	    foreach ($stocks as $stock) {
-
-            $production = $this->production->findByStockid($stock->id);
-            
-            $productionDay = $this->days->findByDateAndProduction($date, $production->id);
-            //dump($productionDay); die;
-	        $data['stocks'][] = array(
-	            'stock'=>$stock, 
-	            'data'=>$productionDay
-	        );
-	    }
+	    $data = $this->getProductionDataForAllStock($date);
 	    
 	    $this->template->build("egg/show_vitamin", $data);
 	    
@@ -314,6 +266,8 @@ class Egg extends MY_Controller
 	        redirect($_SERVER['HTTP_REFERER']);
 	    }
 	    
+        $this->template->set_partial('select_stock', '_partials/select_stock');
+	    
 	    $this->template->build("egg/add_food", $data);
 	}
 	
@@ -336,35 +290,8 @@ class Egg extends MY_Controller
         
 	    $date = date('Y-m-d', $this->uri->segment(3));
 	    
-	    /**
-	     * allomanyok
-	     *
-	     * @author Dobi Attila
-	     */
-	    $stocks = $this->getStocksForSelectedBreedersite();
-
-        $this->load->model('Eggproductions', 'production');
-        
-        $this->load->model("Eggproductiondays", 'days');
-        
-        $this->load->model('Eggproductiondata', 'data');
-            
-	    $data['stocks'] = array();
-	
-	    foreach ($stocks as $stock) {
-
-            $production = $this->production->findByStockid($stock->id);
-            
-            $productionDay = $this->days->findByDateAndProduction($date, $production->id);
-            //dump($productionDay); die;
-	        $data['stocks'][] = array(
-	            'stock'=>$stock, 
-	            'data'=>$productionDay
-	        );
-	    }
+	    $data = $this->getProductionDataForAllStock($date);
 	    
-
-
 	    $this->template->build('egg/show_food', $data);
 	}
 	
@@ -388,10 +315,58 @@ class Egg extends MY_Controller
 	 */
 	public function add_death()
 	{
-	    $data = array();
+        $date = date('Y-m-d', $this->uri->segment(3));	    
 	    
+	    $data = array();
+
+	    /**
+	     * kivalasztott telephelyhez tartozo allaomanyok
+	     *
+	     * @author Dobi Attila
+	     */
+        $this->checkSessionForSelectedBreedersite();
+	    
+        /**
+         * allaomanyok lekerdezese
+         *
+         * @author Dobi Attila
+         */
+        $data['stocks'] = $this->getStocksWithoutDeathForSelectedBreedersite(true, $date);
+
+	    $this->form_validation->set_rules('chicken_stock_id', 'trim|required');
+	    
+	    if ($this->form_validation->run()) {
+
+	        $productionDayId = $this->getProductionDayIdByStockIdAndDate($_POST['chicken_stock_id'], $date);
+	        
+	        unset($_POST['chicken_stock_id']);
+	        
+	        $this->days->update($_POST, $productionDayId);
+	        
+	        redirect($_SERVER['HTTP_REFERER']);
+	    }
+
+        $this->template->set_partial('select_stock', '_partials/select_stock');
 	    
 	    $this->template->build("egg/add_death", $data);
+	}
+	
+	public function show_death() 
+	{
+	    $data = array();
+	    
+	    /**
+	     * van a telephely kivalasztva
+	     *
+	     * @author Dobi Attila
+	     */
+        $this->checkSessionForSelectedBreedersite();
+        
+	    $date = date('Y-m-d', $this->uri->segment(3));
+        
+	    $data = $this->getProductionDataForAllStock($date);
+	    
+	    $this->template->build('egg/show_death', $data);
 	}
 	
 	/**
@@ -464,7 +439,8 @@ class Egg extends MY_Controller
 	        */
 	    }
 	    
-	    
+        $this->template->set_partial('select_stock', '_partials/select_stock');
+
 	    $this->template->build("egg/add_production", $data);
 	}
 	
@@ -690,6 +666,21 @@ class Egg extends MY_Controller
 	    return $assoc ? $this->stock->toAssocArray('id', 'code', $stocks) : $stocks;	    
 	}	
 
+	private function getStocksWithoutDeathForSelectedBreedersite($assoc = false, $date) 
+	{
+	    $this->load->model('Chickenstock', 'stock');
+	    $stocks = $this->stock->fetchForBreedersiteWithoutDeath($this->session->userdata('selected_breedersite'), $date);
+	    
+	    if (!$stocks) {
+	        
+	        echo '<div class = "error">Minden állományhoz szerepel bejegyzés, mielőtt újat vihet fel törölie kell</div>';
+	        
+	        die;
+	    }
+	    
+	    return $assoc ? $this->stock->toAssocArray('id', 'code', $stocks) : $stocks;	    
+	}
+
 	private function getStocksWithoutCommentOrVitaminForSelectedBreedersite($assoc = false, $date, $type) 
 	{
 	    
@@ -742,6 +733,39 @@ class Egg extends MY_Controller
         
         return $productionDayId;
     }
+    
+    private function getProductionDataForAllStock($date)
+    {
+	    $data = array();
+	    
+	    /**
+	     * allomanyok
+	     *
+	     * @author Dobi Attila
+	     */
+	    $stocks = $this->getStocksForSelectedBreedersite();
+
+        $this->load->model('Eggproductions', 'production');
+        
+        $this->load->model("Eggproductiondays", 'days');
+        
+	    $data['stocks'] = array();
+	
+	    foreach ($stocks as $stock) {
+
+            $production = $this->production->findByStockid($stock->id);
+            
+            $productionDay = $this->days->findByDateAndProduction($date, $production->id);
+            //dump($productionDay); die;
+	        $data['stocks'][] = array(
+	            'stock'=>$stock, 
+	            'data'=>$productionDay
+	        );
+	    }        
+	    
+	    return $data;
+    }
+
 }
 
 /* End of file welcome.php */

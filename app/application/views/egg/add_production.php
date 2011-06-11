@@ -2,10 +2,8 @@
     <!--<h3>Fakk <?= $i ?></h3>-->
     <fieldset class="round inline-block">
         <?= form_open() ?>        
-            <p>
-                <label for="selected_chickenstock">Válasszon állományt</label>
-                <?= form_dropdown('chicken_stock_id', $stocks, $this->session->userdata('selected_chickenstock')); ?>
-            </p>            
+        
+            <?= $template['partials']['select_stock']; ?>
         
             <?php foreach ($egg_types as $item): ?>
                 <p>
