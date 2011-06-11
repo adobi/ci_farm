@@ -312,7 +312,7 @@ $(function() {
     
     App.UpdateFoodForDay();
     
-    App.UpdateCommenOrVitamin('.update-production-comment', 'commet');
+    App.UpdateCommenOrVitamin('.update-production-comment', 'comment');
     App.UpdateCommenOrVitamin('.update-production-vitamin', 'vitamin');
 
 });

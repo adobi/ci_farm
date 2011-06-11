@@ -105,25 +105,8 @@ class Egg extends MY_Controller {
         
         if ($this->form_validation->run()) {
             
-	        $this->load->model('Eggproductions', 'production');
+	        $productionDayId = $this->getProductionDayIdByStockIdAndDate($_POST['chicken_stock_id'], $date);
 
-            // egg_production bejegyzest megkeressuk
-	        $production = $this->production->findByStockid($_POST['chicken_stock_id']);
-	        
-	        $this->load->model("Eggproductiondays", 'days');
-	        
-	        $productionDay = $this->days->findByDateAndProduction($date, $production->id);
-	        
-	        // ha meg nincs az adott naphoz bejegyzs akkkor felvisszuk
-	        if (!$productionDay) {
-	            
-	            $productionDayId = $this->days->insert(array('to_date'=>$date, 'egg_production_id'=>$production->id));
-	        } else {
-	            
-	            $productionDayId = $productionDay->id;
-	        }
-	        //dump($productionDayId); die;
-	        
 	        unset($_POST['chicken_stock_id']);
 	        
 	        $this->days->update($_POST, $productionDayId);
@@ -219,24 +202,7 @@ class Egg extends MY_Controller {
         
         if ($this->form_validation->run()) {
             
-	        $this->load->model('Eggproductions', 'production');
-
-            // egg_production bejegyzest megkeressuk
-	        $production = $this->production->findByStockid($_POST['chicken_stock_id']);
-	        
-	        $this->load->model("Eggproductiondays", 'days');
-	        
-	        $productionDay = $this->days->findByDateAndProduction($date, $production->id);
-	        
-	        // ha meg nincs az adott naphoz bejegyzs akkkor felvisszuk
-	        if (!$productionDay) {
-	            
-	            $productionDayId = $this->days->insert(array('to_date'=>$date, 'egg_production_id'=>$production->id));
-	        } else {
-	            
-	            $productionDayId = $productionDay->id;
-	        }
-	        //dump($productionDayId); die;
+	        $productionDayId = $this->getProductionDayIdByStockIdAndDate($_POST['chicken_stock_id'], $date);
 	        
 	        unset($_POST['chicken_stock_id']);
 
@@ -333,24 +299,7 @@ class Egg extends MY_Controller {
 	    
 	    if ($this->form_validation->run()) {
 
-	        $this->load->model('Eggproductions', 'production');
-
-            // egg_production bejegyzest megkeressuk
-	        $production = $this->production->findByStockid($_POST['chicken_stock_id']);
-	        
-	        $this->load->model("Eggproductiondays", 'days');
-	        
-	        $productionDay = $this->days->findByDateAndProduction($date, $production->id);
-	        
-	        // ha meg nincs az adott naphoz bejegyzs akkkor felvisszuk
-	        if (!$productionDay) {
-	            
-	            $productionDayId = $this->days->insert(array('to_date'=>$date, 'egg_production_id'=>$production->id));
-	        } else {
-	            
-	            $productionDayId = $productionDay->id;
-	        }
-	        //dump($productionDayId); die;
+	        $productionDayId = $this->getProductionDayIdByStockIdAndDate($_POST['chicken_stock_id'], $date);
 	        
 	        unset($_POST['chicken_stock_id']);
 	        
@@ -488,21 +437,7 @@ class Egg extends MY_Controller {
 	    
 	    if ($this->form_validation->run()) {
 	        
-	        $this->load->model('Eggproductions', 'production');
-
-	        $production = $this->production->findByStockid($_POST['chicken_stock_id']);
-	        
-	        $this->load->model("Eggproductiondays", 'days');
-	        
-	        $productionDay = $this->days->findByDateAndProduction($date, $production->id);
-	        
-	        if (!$productionDay) {
-	            
-	            $productionDayId = $this->days->insert(array('to_date'=>$date, 'egg_production_id'=>$production->id));
-	        } else {
-	            
-	            $productionDayId = $productionDay->id;
-	        }
+	        $productionDayId = $this->getProductionDayIdByStockIdAndDate($_POST['chicken_stock_id'], $date);
 	        
 	        if ($_POST['eggtypes_ids'] && $_POST['eggtypes_pieces']) {
 	            
@@ -771,6 +706,36 @@ class Egg extends MY_Controller {
 	    
 	    return $assoc ? $this->stock->toAssocArray('id', 'code', $stocks) : $stocks;	    
 	}
+
+    /**
+     * adott alloamnyhoz es datumhoz megkeresi a prodction_day id-t 
+     * (tapanyag felivtelne, comment/vitamin felvitelnel, elhalalozas felvitelnel hasznaljuk)
+     *
+     * @param string $stockId 
+     * @param string $date
+     * @return int
+     * @author Dobi Attila
+     */
+    private function getProductionDayIdByStockIdAndDate($stockId, $date) 
+    {
+        $this->load->model('Eggproductions', 'production');
+
+        $production = $this->production->findByStockid($stockId);
+        
+        $this->load->model("Eggproductiondays", 'days');
+        
+        $productionDay = $this->days->findByDateAndProduction($date, $production->id);
+        
+        if (!$productionDay) {
+            
+            $productionDayId = $this->days->insert(array('to_date'=>$date, 'egg_production_id'=>$production->id));
+        } else {
+            
+            $productionDayId = $productionDay->id;
+        }
+        
+        return $productionDayId;
+    }
 }
 
 /* End of file welcome.php */
