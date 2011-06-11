@@ -80,12 +80,112 @@ class Egg extends MY_Controller {
 	 * @return void
 	 * @author Dobi Attila
 	 */
-	public function comment()
+	public function add_comment()
+	{
+        $date = date('Y-m-d', $this->uri->segment(3));	    
+	    
+	    $data = array();
+
+	    /**
+	     * kivalasztott telephelyhez tartozo allaomanyok
+	     *
+	     * @author Dobi Attila
+	     */
+        $this->checkSessionForSelectedBreedersite();
+	    
+        /**
+         * allaomanyok lekerdezese
+         *
+         * @author Dobi Attila
+         */
+        $data['stocks'] = $this->getStocksWithoutCommentOrVitaminForSelectedBreedersite(true, $date, 'comment');
+
+        $this->form_validation->set_rules('comment', 'Megjegyzés', 'trim|required');
+        $this->form_validation->set_rules('chicken_stock_id', 'Állomány', 'trim|required');
+        
+        if ($this->form_validation->run()) {
+            
+	        $this->load->model('Eggproductions', 'production');
+
+            // egg_production bejegyzest megkeressuk
+	        $production = $this->production->findByStockid($_POST['chicken_stock_id']);
+	        
+	        $this->load->model("Eggproductiondays", 'days');
+	        
+	        $productionDay = $this->days->findByDateAndProduction($date, $production->id);
+	        
+	        // ha meg nincs az adott naphoz bejegyzs akkkor felvisszuk
+	        if (!$productionDay) {
+	            
+	            $productionDayId = $this->days->insert(array('to_date'=>$date, 'egg_production_id'=>$production->id));
+	        } else {
+	            
+	            $productionDayId = $productionDay->id;
+	        }
+	        //dump($productionDayId); die;
+	        
+	        unset($_POST['chicken_stock_id']);
+	        
+	        $this->days->update($_POST, $productionDayId);
+	        
+	        redirect($_SERVER['HTTP_REFERER']);            
+        } else {
+            /*
+                TODO hibat adunk
+            */
+        }
+
+        
+	    $this->template->build("egg/add_comment", $data);
+	}
+	
+	/**
+	 * listazza adott napra vonatkozoan az osszes allomany  megjegyzeset
+	 *
+	 * @return void
+	 * @author Dobi Attila
+	 */
+	public function show_comment()
 	{
 	    $data = array();
 	    
+	    /**
+	     * van a telephely kivalasztva
+	     *
+	     * @author Dobi Attila
+	     */
+        $this->checkSessionForSelectedBreedersite();
         
-	    $this->template->build("egg/comment", $data);
+	    $date = date('Y-m-d', $this->uri->segment(3));
+	    
+	    /**
+	     * allomanyok
+	     *
+	     * @author Dobi Attila
+	     */
+	    $stocks = $this->getStocksForSelectedBreedersite();
+
+        $this->load->model('Eggproductions', 'production');
+        
+        $this->load->model("Eggproductiondays", 'days');
+        
+        $this->load->model('Eggproductiondata', 'data');
+            
+	    $data['stocks'] = array();
+	
+	    foreach ($stocks as $stock) {
+
+            $production = $this->production->findByStockid($stock->id);
+            
+            $productionDay = $this->days->findByDateAndProduction($date, $production->id);
+            //dump($productionDay); die;
+	        $data['stocks'][] = array(
+	            'stock'=>$stock, 
+	            'data'=>$productionDay
+	        );
+	    }
+	    //echo '<pre>'; print_r($data); die;
+	    $this->template->build("egg/show_comment", $data);
 	}
 	
 	/**
@@ -94,12 +194,113 @@ class Egg extends MY_Controller {
 	 * @return void
 	 * @author Dobi Attila
 	 */
-	public function vitamin()
+	public function add_vitamin()
 	{
-        $data = array();
+        $date = date('Y-m-d', $this->uri->segment(3));	    
+	    
+	    $data = array();
+
+	    /**
+	     * kivalasztott telephelyhez tartozo allaomanyok
+	     *
+	     * @author Dobi Attila
+	     */
+        $this->checkSessionForSelectedBreedersite();
+	    
+        /**
+         * allaomanyok lekerdezese
+         *
+         * @author Dobi Attila
+         */
+        $data['stocks'] = $this->getStocksWithoutCommentOrVitaminForSelectedBreedersite(true, $date, 'vitamin');
+
+        $this->form_validation->set_rules('vitamin', 'Vitamin', 'trim|required');
+        $this->form_validation->set_rules('chicken_stock_id', 'Állomány', 'trim|required');
+        
+        if ($this->form_validation->run()) {
+            
+	        $this->load->model('Eggproductions', 'production');
+
+            // egg_production bejegyzest megkeressuk
+	        $production = $this->production->findByStockid($_POST['chicken_stock_id']);
+	        
+	        $this->load->model("Eggproductiondays", 'days');
+	        
+	        $productionDay = $this->days->findByDateAndProduction($date, $production->id);
+	        
+	        // ha meg nincs az adott naphoz bejegyzs akkkor felvisszuk
+	        if (!$productionDay) {
+	            
+	            $productionDayId = $this->days->insert(array('to_date'=>$date, 'egg_production_id'=>$production->id));
+	        } else {
+	            
+	            $productionDayId = $productionDay->id;
+	        }
+	        //dump($productionDayId); die;
+	        
+	        unset($_POST['chicken_stock_id']);
+
+	        $this->days->update($_POST, $productionDayId);
+	        
+	        redirect($_SERVER['HTTP_REFERER']);            
+        } else {
+            /*
+                TODO hibat adunk
+            */
+        }
         
         
-        $this->template->build("egg/vitamin", $data);
+        $this->template->build("egg/add_vitamin", $data);
+	}
+	
+	/**
+	 * adott termelesi naphoz az allomanyok vitanim feljegyzeseit
+	 *
+	 * @return void
+	 * @author Dobi Attila
+	 */
+	public function show_vitamin()
+	{
+	    $data = array();
+	    
+	    /**
+	     * van a telephely kivalasztva
+	     *
+	     * @author Dobi Attila
+	     */
+        $this->checkSessionForSelectedBreedersite();
+        
+	    $date = date('Y-m-d', $this->uri->segment(3));
+	    
+	    /**
+	     * allomanyok
+	     *
+	     * @author Dobi Attila
+	     */
+	    $stocks = $this->getStocksForSelectedBreedersite();
+
+        $this->load->model('Eggproductions', 'production');
+        
+        $this->load->model("Eggproductiondays", 'days');
+        
+        $this->load->model('Eggproductiondata', 'data');
+            
+	    $data['stocks'] = array();
+	
+	    foreach ($stocks as $stock) {
+
+            $production = $this->production->findByStockid($stock->id);
+            
+            $productionDay = $this->days->findByDateAndProduction($date, $production->id);
+            //dump($productionDay); die;
+	        $data['stocks'][] = array(
+	            'stock'=>$stock, 
+	            'data'=>$productionDay
+	        );
+	    }
+	    
+	    $this->template->build("egg/show_vitamin", $data);
+	    
 	}
 	
 	/**
@@ -548,6 +749,28 @@ class Egg extends MY_Controller {
 	    return $assoc ? $this->stock->toAssocArray('id', 'code', $stocks) : $stocks;	    
 	}	
 
+	private function getStocksWithoutCommentOrVitaminForSelectedBreedersite($assoc = false, $date, $type) 
+	{
+	    
+	    $this->load->model('Chickenstock', 'stock');
+	    
+	    if ($type === 'vitamin') {
+    	    $stocks = $this->stock->fetchForBreedersiteWithoutVitamin($this->session->userdata('selected_breedersite'), $date);	        
+	    }
+
+	    if ($type === 'comment') {
+    	    $stocks = $this->stock->fetchForBreedersiteWithoutComment($this->session->userdata('selected_breedersite'), $date);	        
+	    }
+	    
+	    if (!$stocks) {
+	        
+	        echo '<div class = "error">Minden állományhoz szerepel bejegyzés, mielőtt újat vihet fel törölie kell</div>';
+	        
+	        die;
+	    }
+	    
+	    return $assoc ? $this->stock->toAssocArray('id', 'code', $stocks) : $stocks;	    
+	}
 }
 
 /* End of file welcome.php */

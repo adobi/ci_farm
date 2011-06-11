@@ -32,4 +32,61 @@ class Productionday extends MY_Controller
         
         die;
     }
+    
+    public function edit_comment()
+    {
+        $id = $this->uri->segment(3);
+        
+        if ($id && $_POST['comment']) {
+            
+            $this->load->model('Eggproductiondays', 'days');
+            
+            echo $this->days->update(array('comment'=>$_POST['comment']), $id);
+        }
+        
+        die;
+    }
+    
+    public function delete_comment()
+    {
+        $id = $this->uri->segment(3);
+        
+        if ($id) {
+            
+            $this->load->model('Eggproductiondays', 'days');
+            
+            echo $this->days->update(array('comment'=>null), $id);
+        }
+        
+        die;
+    }
+    
+    public function edit_vitamin()
+    {
+        $id = $this->uri->segment(3);
+        
+        if ($id && $_POST['vitamin']) {
+            
+            $this->load->model('Eggproductiondays', 'days');
+            
+            echo $this->days->update(array('vitamin'=>$_POST['vitamin']), $id);
+        }
+        
+        die;
+    }
+    
+    public function delete_vitamin()
+    {
+        $id = $this->uri->segment(3);
+        
+        if ($id) {
+            
+            $this->load->model('Eggproductiondays', 'days');
+            
+            echo $this->days->update(array('vitamin'=>null), $id);
+        }
+        
+        die;
+    }    
+    
 }

@@ -43,7 +43,7 @@
                 <td>Tojás termelés</td>
                 <td>Elhalálozás</td>
                 <td>Tápanyag felhasználás</td>
-                <td class = "span-3">Egyéb</td>
+                <td  style="width:130px">Egyéb</td>
             </tr>
         </thead>
         <tbody class = "week-tbody">
@@ -108,14 +108,23 @@
                             <!-- <a href="<?= base_url() ?>egg/delete_food">Töröl</a> -->
                         </p>
                     </td>
-                    <td class = "">
+                    <td class = "" style = "vertical-align:middle;">
                         <!-- 
                         <p>Megjegyzés: ez itt most valamilyen random szoveg amit jo lenne latni, hogy mennyire nyomjs szet ezt az egeszet</p>
                         <p>Vitaminok:  ez itt most valamilyen random szoveg amit jo lenne latni, hogy mennyire nyomjs szet ezt az egeszet</p>
                          -->
                          
-                        <p><a href="<?= base_url() ?>egg/comment" rel = "dialog" title = "Megjegyzés">Megjegyzés</a></p>
-                        <p><a href="<?= base_url() ?>egg/vitamin" rel = "dialog" title = "Vitaminok">Vitaminok</a></p>
+                        <p>
+                            <strong>Megjegyzés</strong><br/>
+                            <a href="<?= base_url() ?>egg/show_comment/<?= $day ?>" rel = "dialog" title = "Megjegyzések">Bővebben</a>
+                            <a href="<?= base_url() ?>egg/add_comment/<?= $day ?>" rel = "dialog" title = "Megjegyzés">Új felvitele</a>
+                        </p>
+                        <p>&nbsp;</p>
+                        <p>
+                            <strong>Vitamin</strong><br/>
+                            <a href="<?= base_url() ?>egg/show_vitamin/<?= $day ?>" rel = "dialog" title = "Megjegyzések">Bővebben</a>
+                            <a href="<?= base_url() ?>egg/add_vitamin/<?= $day ?>" rel = "dialog" title = "Vitaminok">Új felvitele</a>
+                        </p>
                     </td>
                 </tr>            
             <?php endforeach ?>

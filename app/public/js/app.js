@@ -139,7 +139,7 @@ App.FakkSortable = function() {
 
 App.DeleteProductionData = function() {
     
-    $('body').delegate('.delete-production-data, .delete-production-feed', 'click', function() {
+    $('body').delegate('.delete-production-data, .delete-production-feed, .delete-production-vitamin, .delete-production-comment', 'click', function() {
         
         var self = $(this), 
             fieldset = self.parents("fieldset:first"),
@@ -152,7 +152,7 @@ App.DeleteProductionData = function() {
                 notif = $('<div />', {'class': 'success round'}).html('Sikeresen törölve')
             }            
             
-            if (self.is('.delete-production-feed')) {
+            if (self.is('.delete-production-feed') || self.is('.delete-production-comment') || self.is('.delete-production-vitamin')) {
                 
                 self.parents('tr:first').find('td:eq(1)').remove();
                 
@@ -249,42 +249,45 @@ App.UpdateFoodForDay = function () {
                 }, 3000);
             });
             
-        })    
+        });    
             
         return false;
     });
 };
 
-App.DeleteProductionFeed = function() {
+App.UpdateCommenOrVitamin = function(selector, field) {
     
-    $('body').delegate('.delete-production-feed', 'click', function() {
+    $('body').delegate(selector, 'click', function() {
         
-        var self = $(this), 
+        var self = $(this)
             fieldset = self.parents("fieldset:first"),
-            notif;
-        $.post(self.attr('href'), function(response) {
-    
+            tr = self.parents('tr:first'), data = {};
+        
+        data[$('#csrf-token').attr('name')] = $('#csrf-token').val();
+        data[field] = tr.find('textarea').val();
+        
+        $.post(self.attr('href'), data , function(response) {
+            
+            var notif;
+            
             if (response == '0') {
                 notif = $('<div />', {'class': 'error round'}).html('Sikertelen művelet, próbálja később');
             } else {
-                notif = $('<div />', {'class': 'success round'}).html('Sikeresen törölve')
-            }            
-
-            self.parents('tr:first').find('.td-data').html('0');
-            self.remove();
+                notif = $('<div />', {'class': 'success round'}).html('Sikeresen frissítve')
+            }
             
             fieldset.before(notif).fadeIn('slow', function() {
                 
                 setTimeout(function() {
                     fieldset.prev().fadeOut('slow');
                 }, 3000);
-            });            
+            });
             
         });
         
         return false;
-    });
-};
+    });    
+}
 
 $(function() {
     App.Dialog();
@@ -308,5 +311,8 @@ $(function() {
     App.DeleteProductionData();
     
     App.UpdateFoodForDay();
+    
+    App.UpdateCommenOrVitamin('.update-production-comment', 'commet');
+    App.UpdateCommenOrVitamin('.update-production-vitamin', 'vitamin');
 
 });
