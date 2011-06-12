@@ -76,6 +76,30 @@
                     </td>
                     <td>
                         <?php //require '_chicken_death.php'; ?>
+                        
+                        <?php if (array_key_exists($day, $egg_production_death) && ($egg_production_death[$day]->sum_dead_female || $egg_production_death[$day]->sum_dead_male || $egg_production_death[$day]->sum_reject_female || $egg_production_death[$day]->sum_reject_male)): ?>
+                            <table class = "inner-table">
+                                <tr>
+                                    <td>Elhalt jérce</td>
+                                    <td><strong><?= $egg_production_death[$day]->sum_dead_female ?></strong> db</td>
+                                </tr>
+                                <tr>
+                                    <td>Elhalt kakas</td>
+                                    <td><strong><?= $egg_production_death[$day]->sum_dead_male ?></strong> db</td>
+                                </tr>
+                                <tr>
+                                    <td>Selejt jérce</td>
+                                    <td><strong><?= $egg_production_death[$day]->sum_reject_female ?></strong> db</td>
+                                </tr>
+                                <tr>
+                                    <td>Selejt kakas</td>
+                                    <td><strong><?= $egg_production_death[$day]->sum_reject_male ?></strong> db</td>
+                                </tr>
+                            </table>
+                        <?php else: ?>
+                            <p><em>nincs adat</em></p>
+                        <?php endif ?>
+                        
                         <p>
                             <a href="<?= base_url() ?>egg/show_death/<?= $day ?>" rel = "dialog" title = "Elhalálozási adatok <?= date('Y-m-d', $day) ?>">Bővebben</a>
                             <a href="<?= base_url() ?>egg/add_death/<?= $day; ?>" rel = "dialog" title = "Elhalálozási adat felvitele">Új felvite</a>

@@ -40,6 +40,7 @@ class Egg extends MY_Controller
 	    
 	    $eggProductionSum = array();
 	    $feedSum = array();
+	    $eggProductionDeath = array();
         if ($this->session->userdata('selected_breedersite') && $dates['selectedWeekDays']) {
             
             $this->load->model("Eggproductiondata", "production");
@@ -53,12 +54,13 @@ class Egg extends MY_Controller
             foreach ($dates['selectedWeekDays'] as $day) {
                 $eggProductionSum[$day] = $this->production->getSummarizedForBreedersiteForDayByEggtype($this->session->userdata('selected_breedersite'), date('Y-m-d', $day));
                 $feedSum[$day] = $this->days->getSummarizedFoodForDataAndBreedersite($this->session->userdata('selected_breedersite'), date('Y-m-d', $day));
+                $eggProductionDeath[$day] = $this->days->getSummarizedDeathForDataAndBreedersite($this->session->userdata('selected_breedersite'), date('Y-m-d', $day));
             }
         }
         $data['egg_production_sum'] = $eggProductionSum;
-        
         $data['feed_sum'] = $feedSum;
-        //dump($data); die;
+        $data['egg_production_death'] = $eggProductionDeath;
+        //dump($data['feed_sum']); die;
 
 	    /**
 	     * telephelyek lekerdezese

@@ -62,4 +62,31 @@ class Eggproductiondays extends MY_Model
         
         return false;
     }
+    
+    public function getSummarizedDeathForDataAndBreedersite($site, $date) 
+    {
+        if (!$date || !$site) {
+            
+            return false;
+        }
+        
+        $sql = "select sum(dead_female) as sum_dead_female, sum(dead_male) as sum_dead_male, sum(reject_male) as sum_reject_male, sum(reject_female) as sum_reject_female from egg_production_day where date(to_date) = '$date' and egg_production_id in (
+                	select ep.id as egg_production_id from egg_production ep where ep.chicken_stock_id in (
+                		select 
+                				c.id as breeders_stock_id
+                			from chicken_stock c 
+                			join fakk f on c.fakk_id = f.id 
+                			join fakk_group g on f.fakk_group_id = g.id and g.breeder_site_id = $site
+                	) 
+                )";
+                
+        $result = $this->execute($sql);
+        if ($result) {
+            
+            return current($result);
+        }
+        
+        return false;
+    }
+    
 }
