@@ -655,7 +655,7 @@ class Egg extends MY_Controller
 	    
 	    if (!$stocks) {
 	        
-	        echo '<div class = "error">Minden állományhoz szerepel bejegyzés, mielőtt újat vihet fel törölie kell</div>';
+	        echo '<div class = "error">Minden állományhoz szerepel bejegyzés, mielőtt újat vihet fel törölnie kell</div>';
 	        
 	        die;
 	    }
@@ -670,7 +670,7 @@ class Egg extends MY_Controller
 	    
 	    if (!$stocks) {
 	        
-	        echo '<div class = "error">Minden állományhoz szerepel bejegyzés, mielőtt újat vihet fel törölie kell</div>';
+	        echo '<div class = "error">Minden állományhoz szerepel bejegyzés, mielőtt újat vihet fel törölnie kell</div>';
 	        
 	        die;
 	    }
@@ -685,7 +685,7 @@ class Egg extends MY_Controller
 	    
 	    if (!$stocks) {
 	        
-	        echo '<div class = "error">Minden állományhoz szerepel bejegyzés, mielőtt újat vihet fel törölie kell</div>';
+	        echo '<div class = "error">Minden állományhoz szerepel bejegyzés, mielőtt újat vihet fel törölnie kell</div>';
 	        
 	        die;
 	    }
@@ -708,7 +708,7 @@ class Egg extends MY_Controller
 	    
 	    if (!$stocks) {
 	        
-	        echo '<div class = "error">Minden állományhoz szerepel bejegyzés, mielőtt újat vihet fel törölie kell</div>';
+	        echo '<div class = "error">Minden állományhoz szerepel bejegyzés, mielőtt újat vihet fel törölnie kell</div>';
 	        
 	        die;
 	    }
