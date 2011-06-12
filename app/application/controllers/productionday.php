@@ -87,6 +87,33 @@ class Productionday extends MY_Controller
         }
         
         die;
-    }    
+    } 
+    
+    public function delete_death()
+    {
+        $id = $this->uri->segment(3);
+        
+        if ($id) {
+            
+            $this->load->model('Eggproductiondays', 'days');
+            
+            echo $this->days->update(array('dead_male'=>null, 'dead_female'=>null, 'reject_male'=>null, 'reject_female'=>null), $id);
+        }
+        
+        die;        
+    }
+    
+    public function edit_death()
+    {
+        $id = $this->uri->segment(3);
+        
+        $this->load->model('Eggproductiondays', 'days');
+        
+        unset($_POST[$this->security->get_csrf_token_name()]);
+        
+        echo $this->days->update($_POST, $id);
+        
+        die;        
+    }
     
 }

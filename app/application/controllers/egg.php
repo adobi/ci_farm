@@ -12,11 +12,21 @@ class Egg extends MY_Controller
     
     public function index()
     {
-        redirect(base_url().'egg/week/'.date('W'));
+        $now = time();
+        $thisWeek = date('W', $now);
+        $dayOfThisWeek = date('w', $now);
+
+        if ($dayOfThisWeek === '0') {
+            // vasarnap meg az elozo hethez tartozik
+            $thisWeek = $thisWeek - 1;
+        }
+        redirect(base_url().'egg/week/'.$thisWeek);
     }
     
 	public function week()
 	{
+	    date_default_timezone_set('Europe/Budapest');
+
 	    $week =  $this->uri->segment(3);
 	    
 	    if (false === $week) {
@@ -565,7 +575,6 @@ class Egg extends MY_Controller
 	    
 	    $oneDayInSeconds = 24*60*60;
 	    
-	    
 	    $thisWeek = date('W', $now);
 	    $dayOfThisWeek = date('w', $now);
 	    
@@ -585,6 +594,7 @@ class Egg extends MY_Controller
 	        $dateFor = $now + $diffOfWeeks * 7 * $oneDayInSeconds;
 	    }
 	    $weekBeginingTimestamp = $dateFor - ($dayOfThisWeek - 1)*$oneDayInSeconds;
+	    
 	    $weekBegining = date($format, $weekBeginingTimestamp);
 	    $weekEndTimestamp = $dateFor + (7-$dayOfThisWeek)*$oneDayInSeconds;
 	    $weekEnd = date($format, $weekEndTimestamp);

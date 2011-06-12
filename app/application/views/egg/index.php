@@ -80,19 +80,21 @@
                         <?php if (array_key_exists($day, $egg_production_death) && ($egg_production_death[$day]->sum_dead_female || $egg_production_death[$day]->sum_dead_male || $egg_production_death[$day]->sum_reject_female || $egg_production_death[$day]->sum_reject_male)): ?>
                             <table class = "inner-table">
                                 <tr>
-                                    <td>Elhalt jérce</td>
+                                    <td rowspan = "2" style="vertical-align:middle; background:#F7F7F7;">Elhalt</td>
+                                    <td>jérce</td>
                                     <td><strong><?= $egg_production_death[$day]->sum_dead_female ?></strong> db</td>
                                 </tr>
                                 <tr>
-                                    <td>Elhalt kakas</td>
+                                    <td>kakas</td>
                                     <td><strong><?= $egg_production_death[$day]->sum_dead_male ?></strong> db</td>
                                 </tr>
                                 <tr>
-                                    <td>Selejt jérce</td>
+                                    <td rowspan = "2" style="vertical-align:middle; background:#F7F7F7;">Selejt</td>
+                                    <td>jérce</td>
                                     <td><strong><?= $egg_production_death[$day]->sum_reject_female ?></strong> db</td>
                                 </tr>
                                 <tr>
-                                    <td>Selejt kakas</td>
+                                    <td>kakas</td>
                                     <td><strong><?= $egg_production_death[$day]->sum_reject_male ?></strong> db</td>
                                 </tr>
                             </table>
@@ -109,17 +111,18 @@
                     <td>
                         <?php //require '_chicken_food.php'; ?>
                         <?php if (array_key_exists($day, $feed_sum) && ($feed_sum[$day]->sum_female || $feed_sum[$day]->sum_male || $feed_sum[$day]->sum_grain)): ?>
+                            <strong>Tápanyag</strong>
                             <table class = "inner-table">
                                 <tr>
-                                    <td style = "text-align:left">Jérce tápanyag</td>
+                                    <td style = "text-align:left">Jérce</td>
                                     <td style = "text-align:left"><strong><?= $feed_sum[$day]->sum_female; ?></strong></td>
                                 </tr>
                                 <tr>
-                                    <td style = "text-align:left">Kakas tápanyag</td>
+                                    <td style = "text-align:left">Kakas</td>
                                     <td style = "text-align:left"><strong><?= $feed_sum[$day]->sum_male; ?></strong></td>
                                 </tr>
                                 <tr>
-                                    <td style = "text-align:left">Szemes tápanyag</td>
+                                    <td style = "text-align:left">Szemes</td>
                                     <td style = "text-align:left"><strong><?= $feed_sum[$day]->sum_grain; ?></strong></td>
                                 </tr>
                             </table>

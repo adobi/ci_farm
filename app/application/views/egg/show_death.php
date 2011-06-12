@@ -46,9 +46,9 @@
                             <?= form_close(); ?>                            
                         </td>
                         <td class = "td-last">
-                            <a href="<?= base_url() ?>productionday/edit_vitamin/<?= $item['data']->id ?>" class = "update-production-death">mentés</a>
+                            <a href="<?= base_url() ?>productionday/edit_death/<?= $item['data']->id ?>" class = "update-production-death">mentés</a>
                             <br />
-                            <a href="<?= base_url() ?>productionday/delete_vitamin/<?= $item['data']->id ?>" class = "delete-production-death">töröl</a>
+                            <a href="<?= base_url() ?>productionday/delete_death/<?= $item['data']->id ?>" class = "delete-production-death">töröl</a>
                         </td>
                     <?php else: ?>
                         <td colspan = "5"><em>nincs bejegyzés</em></td>

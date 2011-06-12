@@ -139,7 +139,7 @@ App.FakkSortable = function() {
 
 App.DeleteProductionData = function() {
     
-    $('body').delegate('.delete-production-data, .delete-production-feed, .delete-production-vitamin, .delete-production-comment', 'click', function() {
+    $('body').delegate('.delete-production-data, .delete-production-feed, .delete-production-vitamin, .delete-production-comment, .delete-production-death', 'click', function() {
         
         var self = $(this), 
             fieldset = self.parents("fieldset:first"),
@@ -157,6 +157,13 @@ App.DeleteProductionData = function() {
                 self.parents('tr:first').find('td:eq(1)').remove();
                 
                 self.parents('td:first').before($('<td />', {'colspan': '4'}).html('<em>nincs bejegyzés</em>'));
+                self.parents('td:first').remove();
+            }
+            
+            if (self.is('.delete-production-death')) {
+                self.parents('tr:first').find('td:eq(1)').remove();
+                
+                self.parents('td:first').before($('<td />', {'colspan': '5'}).html('<em>nincs bejegyzés</em>'));
                 self.parents('td:first').remove();
             } 
             
@@ -222,9 +229,9 @@ App.UpdatePeoductionData = function() {
     });
 },
 
-App.UpdateFoodForDay = function () {
+App.UpdateFoodOrDeathForDay = function () {
     
-    $('body').delegate('.update-production-feed', 'click', function() {
+    $('body').delegate('.update-production-feed, .update-production-death', 'click', function() {
 
         var self = $(this)
             fieldset = self.parents("fieldset:first"),
@@ -310,7 +317,7 @@ $(function() {
     App.UpdatePeoductionData();
     App.DeleteProductionData();
     
-    App.UpdateFoodForDay();
+    App.UpdateFoodOrDeathForDay();
     
     App.UpdateCommenOrVitamin('.update-production-comment', 'comment');
     App.UpdateCommenOrVitamin('.update-production-vitamin', 'vitamin');
