@@ -16,11 +16,10 @@
 </li>
 <li>
     <span>›</span>
-    <a href="<?= base_url(); ?>chickentype" <?= $this->uri->segment(1) === 'chickentype' ? 'class = "selected-sidemenu-item"' : '' ?>>Tyúk típusok</a>
+    <a href="<?= base_url(); ?>chickentype" <?= $this->uri->segment(1) === 'chickentype' ? 'class = "selected-sidemenu-item"' : '' ?>>Tyúk (1) fajtakódok</a>
 </li>
-<!-- 
+
 <li>
     <span>›</span>
-    <a href="<?= base_url(); ?>fakk" <?= $this->uri->segment(1) === 'fakk' ? 'class = "selected-sidemenu-item"' : '' ?>>Fakkok</a>
+    <a href="<?= base_url(); ?>stock" <?= $this->uri->segment(1) === 'stock' ? 'class = "selected-sidemenu-item"' : '' ?>>Állományok</a>
 </li>
- -->

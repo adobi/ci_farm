@@ -2,12 +2,13 @@
 <div class = "span-20">
     <div class = "span-9 first inline-block">
         
-        <a href="<?= base_url(); ?>breedersite/edit/breeder/<?= $breeder->id; ?>" class = "button" rel = "dialog" title = "Új telephely felvitele">Új telephely</a>
-        <br />
+        
         <label for="breedersite-select" style="display:inline">Válasszon telephelyet</label>
         <?php if (isset($breeder_sites)): ?>
             <?= form_dropdown('breeder_site_id', $breeder_sites, $this->session->userdata('selected_breedersite')); ?>
         <?php endif ?>
+        <a href="<?= base_url(); ?>breedersite/edit/breeder/<?= $breeder->id; ?>" rel = "dialog" title = "Új telephely felvitele">Új telephely</a>
+        
     </div>
     <div class = "span-10 last text-right">
         <a href="<?= base_url(); ?>stock/add_to_breedersite" class = "button" rel = "dialog" title = "Új állomany felvitele és beólazása">Beólazás</a>
@@ -50,7 +51,10 @@
             
             <?php foreach ($selected_week_days as $day) : ?>
             
-                <tr class = "week-tr">
+                <tr class = "week-tr 
+                    <?= $last_blank && date('Y-m-d', $day) === date('Y-m-d', strtotime($last_blank->to_date)) ? " next-to-fill" : ""; ?>
+                    <?= array_key_exists($day, $is_filled) && $is_filled[$day] ? " filled" : ""; ?>
+                ">
                     <td class = "td-first text-center" style = "font-size:1.4em;"><?= date('m-d', $day) ?></td>
                     <td>
                         <?php //require '_egg_production.php'; ?>
@@ -115,15 +119,15 @@
                             <table class = "inner-table">
                                 <tr>
                                     <td style = "text-align:left">Jérce</td>
-                                    <td style = "text-align:left"><strong><?= $feed_sum[$day]->sum_female; ?></strong></td>
+                                    <td style = "text-align:left"><strong><?= $feed_sum[$day]->sum_female; ?></strong> kg</td>
                                 </tr>
                                 <tr>
                                     <td style = "text-align:left">Kakas</td>
-                                    <td style = "text-align:left"><strong><?= $feed_sum[$day]->sum_male; ?></strong></td>
+                                    <td style = "text-align:left"><strong><?= $feed_sum[$day]->sum_male; ?></strong> kg</td>
                                 </tr>
                                 <tr>
                                     <td style = "text-align:left">Szemes</td>
-                                    <td style = "text-align:left"><strong><?= $feed_sum[$day]->sum_grain; ?></strong></td>
+                                    <td style = "text-align:left"><strong><?= $feed_sum[$day]->sum_grain; ?></strong> kg</td>
                                 </tr>
                             </table>
                         <?php else: ?>

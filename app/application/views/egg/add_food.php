@@ -8,15 +8,15 @@
             </p>
             <p>
                 <label for="feed_female">Jérce tápanyag</label>
-                <input type="text" name = "feed_female" value = "" id = "feed_female"/>
+                <input type="text" name = "feed_female" value = "" id = "feed_female"/> kg
             </p>
             <p>
                 <label for="feed_male">Kakas tápanyag</label>
-                <input type="text" name ="feed_male" id = "feed_male" value = "" />
+                <input type="text" name ="feed_male" id = "feed_male" value = "" /> kg
             </p>
             <p>
                 <label for="feed_grain">Szemes tápanyag</label>
-                <input type="text" name = "feed_grain" id = "feed_grain" value = "" />
+                <input type="text" name = "feed_grain" id = "feed_grain" value = "" /> kg
             </p>
             <p><button>Mentés</button></p>
         <?= form_close() ?>

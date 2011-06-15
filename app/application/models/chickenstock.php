@@ -72,13 +72,13 @@ class Chickenstock extends MY_Model
                 join fakk_group g on f.fakk_group_id = g.id and g.breeder_site_id = $site
                 where c.id not in (
         			select 
-        					chicken_stock_id 
+        				chicken_stock_id 
         			from egg_production ep 
         				join egg_production_day epd on ep.id = epd.egg_production_id and date(epd.to_date) = '$date'
+        				join egg_production_data d on d.egg_production_day_id = epd.id
                 )";
-
+        //dump($sql);
         return $this->execute($sql);
-        
     }
     
     /**

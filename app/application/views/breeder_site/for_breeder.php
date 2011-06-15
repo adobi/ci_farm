@@ -7,6 +7,7 @@
     <?php foreach ($breeder_sites as $item): ?>
         <div class = "zebra span-9 round">
             <ul>
+                <li><strong>Név</strong>: <?= $item->name; ?></li>
                 <li><strong>Kód</strong>: <?= $item->code; ?></li>
                 <li><strong>MGSZH</strong>: <?= $item->mgszh; ?></li>
                 <li><strong>Irányítószám</strong>: <?= $item->code; ?> - <?= $item->city; ?></li>

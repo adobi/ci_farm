@@ -24,7 +24,9 @@ fieldset p {
     padding:0;
     margin:0px;
 }
-
+#content p {
+    padding:5px;
+}
 .block {
     display:block;
 }
@@ -223,6 +225,10 @@ td.calendar-day, td.calendar-day-np { width:100px; padding:5px; border-bottom:1p
 .week-table {
     border-top:1px solid #ccc;
 }
+
+    .week-table p {
+        padding:0px!important;
+    }
     .week-table thead td {
         font-weight:bold;
         font-size:1.2em;
@@ -252,6 +258,7 @@ td.calendar-day, td.calendar-day-np { width:100px; padding:5px; border-bottom:1p
     }
     .inner-table thead td {
         font-size:1em;
+        text-align:center;
     }
     .inner-table {
         border:1px solid #ccc;
@@ -278,6 +285,10 @@ td.calendar-day, td.calendar-day-np { width:100px; padding:5px; border-bottom:1p
         //background:#FFFAEC;
         //background:#F8FBFD;
         background:#F8FBFD;
+    }
+    
+    .inner-table tbody tr:nth-child(2n) {
+        background:#eaeaea;
     }
     
     .inner-table tbody tr {
@@ -328,3 +339,10 @@ fieldset {
     z-index: 9999;
 }
 
+.next-to-fill {
+    background:#FBE3E4!important;
+}
+
+.filled {
+    background:#D9F7BB!important;
+}

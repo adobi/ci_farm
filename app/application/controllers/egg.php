@@ -12,15 +12,29 @@ class Egg extends MY_Controller
     
     public function index()
     {
-        $now = time();
-        $thisWeek = date('W', $now);
-        $dayOfThisWeek = date('w', $now);
+        /**
+         * annak a datumnak a meghatarozasa amelyre meg nem szerpel mind a 3 bejegyzes
+         *
+         * @author Dobi Attila
+         */
+        $this->load->model('Eggproductiondays', 'days');
+        $lastBlank = $this->days->getLastBlankDate();
+        
+        $date = time();
+        if ($lastBlank) {
+              
+            $date = strtotime($lastBlank->to_date);
+        } 
+        
+        $week = date('W', $date);
+        $dayOfThisWeek = date('w', $date);
 
         if ($dayOfThisWeek === '0') {
             // vasarnap meg az elozo hethez tartozik
-            $thisWeek = $thisWeek - 1;
+            $week = $week - 1;
         }
-        redirect(base_url().'egg/week/'.$thisWeek);
+        
+        redirect(base_url().'egg/week/'.$week);
     }
     
 	public function week()
@@ -51,10 +65,12 @@ class Egg extends MY_Controller
 	    $eggProductionSum = array();
 	    $feedSum = array();
 	    $eggProductionDeath = array();
+	    $isFilled = array();
+        $this->load->model("Eggproductiondays", "days");
+	    
         if ($this->session->userdata('selected_breedersite') && $dates['selectedWeekDays']) {
             
             $this->load->model("Eggproductiondata", "production");
-            $this->load->model("Eggproductiondays", "days");
             
             /**
              * minden naphoz lekerdezzu az osszesitett termeloi adatokat
@@ -65,11 +81,16 @@ class Egg extends MY_Controller
                 $eggProductionSum[$day] = $this->production->getSummarizedForBreedersiteForDayByEggtype($this->session->userdata('selected_breedersite'), date('Y-m-d', $day));
                 $feedSum[$day] = $this->days->getSummarizedFoodForDataAndBreedersite($this->session->userdata('selected_breedersite'), date('Y-m-d', $day));
                 $eggProductionDeath[$day] = $this->days->getSummarizedDeathForDataAndBreedersite($this->session->userdata('selected_breedersite'), date('Y-m-d', $day));
+                
+                $isFilled[$day] = $this->days->isDayFilled(date('Y-m-d', $day));
             }
+
         }
+        $data['last_blank'] = $this->days->getLastBlankDate();
         $data['egg_production_sum'] = $eggProductionSum;
         $data['feed_sum'] = $feedSum;
         $data['egg_production_death'] = $eggProductionDeath;
+        $data['is_filled'] = $isFilled;
         //dump($data['feed_sum']); die;
 
 	    /**
@@ -78,8 +99,17 @@ class Egg extends MY_Controller
 	     * @author Dobi Attila
 	     */
 	    $this->load->model("Breedersites", "sites");
-	    $sites = $this->sites->fetchAll();
-	    $data['breeder_sites'] = $this->sites->toAssocArray('id', 'code', $sites);
+	    $sites = $this->sites->fetchAll(array('order'=>array('by'=>'name', 'dest'=>'asc')));
+	    
+	    $data['breeder_sites'] = $this->sites->toAssocArray('id', 'name+code', $sites);
+	    
+	    /**
+	     * mi van alapbol kivalasztva
+	     *
+	     * @author Dobi Attila
+	     */
+	    $this->session->set_userdata('selected_breedersite', $sites ? $sites[0]->id : 0);
+        
 	    
 	    /**
 	      * tenyeszto lekerdezese
@@ -401,7 +431,7 @@ class Egg extends MY_Controller
 	public function add_production()
 	{
         $date = date('Y-m-d', $this->uri->segment(3));	    
-	    
+
 	    $data = array();
 
 	    /**

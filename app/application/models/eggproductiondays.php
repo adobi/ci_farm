@@ -89,4 +89,45 @@ class Eggproductiondays extends MY_Model
         return false;
     }
     
+    public function getLastBlankDate()
+    {
+        $sql = "select 
+                    to_date 
+                from 
+                    $this->_name epd join egg_production ep on epd.egg_production_id = ep.id
+                where 
+                    dead_male is null or dead_female is null or 
+                    reject_male is null or reject_female is null or 
+                    feed_male is null or feed_female is null or feed_grain is null or
+                    epd.id not in (select egg_production_day_id from egg_production_data)
+                order by to_date asc limit 1";
+        //dump($sql); die;        
+        $result = $this->execute($sql);
+        
+        return $result ? current($result) : false;
+    }
+    
+    public function isDayFilled($date)
+    {
+        $sql = "select 
+                    to_date 
+                from 
+                    $this->_name epd join egg_production ep on epd.egg_production_id = ep.id
+                where
+                    date(epd.to_date) = '$date' and 
+                    dead_male is not null and dead_female is not null and 
+                    reject_male is not null and reject_female is not null and 
+                    feed_male is not null and feed_female is not null and feed_grain is not null and
+                    epd.id in (select egg_production_day_id from egg_production_data)
+                -- order by to_date asc limit 1";
+        
+        $result = $this->execute($sql);
+        
+        $sql = "select id from egg_production where is_finished is null and finish_date is null";
+        
+        $stocks = $this->execute($sql);
+        
+        return count($result) === count($stocks);
+    }
+    
 }

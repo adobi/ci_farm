@@ -4,9 +4,9 @@
         <thead>
             <tr>
                 <td>&nbsp;</td>
-                <td>Mennyiség jérce</td>
-                <td>Mennyiség kakas</td>
-                <td>Mennyiseg szemes</td>
+                <td style="width:150px;">Mennyiség jérce</td>
+                <td style="width:150px;">Mennyiség kakas</td>
+                <td style="width:150px;">Mennyiseg szemes</td>
                 <td>&nbsp;</td>
             </tr>
         </thead>
@@ -19,14 +19,14 @@
                             <?= form_open(); ?>
                             <table cellspacing = "0" cellpadding = "0">
                                 <tr>
-                                    <td class = "td-data no-border" style = "border-right:1px solid #ccc">
-                                        <input type="text" name = "feed_female" value = "<?= $item['data']->feed_female; ?>" size="6" />
+                                    <td class = "td-data no-border" style = "width:150px;border-right:1px solid #ccc">
+                                        <input type="text" name = "feed_female" value = "<?= $item['data']->feed_female; ?>" size="6" /> kg
                                     </td>
-                                    <td class = "td-data no-border" style = "border-right:1px solid #ccc">
-                                        <input type="text" name = "feed_male" value = "<?= $item['data']->feed_male; ?>" size="6" style = "width:70px;"/>
+                                    <td class = "td-data no-border" style = "width:150px;border-right:1px solid #ccc">
+                                        <input type="text" name = "feed_male" value = "<?= $item['data']->feed_male; ?>" size="6"/> kg
                                     </td>
-                                    <td class = "td-data no-border">
-                                        <input type="text" name = "feed_grain" value = "<?= $item['data']->feed_grain; ?>" size="8" style = "width:77px;"/>
+                                    <td class = "td-data no-border" style = "width:150px;">
+                                        <input type="text" name = "feed_grain" value = "<?= $item['data']->feed_grain; ?>" size="6"/> kg
                                     </td>
                                 </tr>
                             </table>

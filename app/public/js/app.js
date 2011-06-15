@@ -4,7 +4,7 @@ App.Dialog = function() {
 
     $('body').delegate('a[rel*=dialog]', 'click', function() {
         
-        //$('.dialog').remove();
+        $('.dialog').remove();
         
         var self = $(this);
         
@@ -35,7 +35,7 @@ App.Dialog = function() {
                     }
 
                     if ($('.datepicker').length) {
-                        
+                        console.log('datepicker found');
                         App.Datepicker();
                     }
                     
@@ -85,12 +85,15 @@ App.Confirm = function() {
 };
 
 App.Datepicker = function() {
+    
+    $('.datepicker').datepicker('destroy');
+    
     $('.datepicker').datepicker({
         dateFormat: 'yy-mm-dd',
         changeYear: true,
         changeMonth: true,
         showMonthAfterYear:true,
-        yearRange: '1940:+0'
+        yearRange: '1980:+5'
 	});
   
 };
