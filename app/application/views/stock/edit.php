@@ -18,19 +18,19 @@
         </p>
         <p>
             <label for="parent_male_code">Szülőállomány(M):</label>
-            <input type="text" name = "parent_male_code" id = "parent_male_code" />
+            <input type="text" name = "parent_male_code" id = "parent_male_code" value = "<?= $current_stock_item ? $current_stock_item->parent_male_code : ''; ?>"/>
         </p> 
         <p>
             <label for="parent_male_code_2">Szülőállomány(M)<br /><em>INTRA/KÁBO</em>:</label>
-            <input type="text" name = "parent_male_code_2" id = "parent_male_code_2" />
+            <input type="text" name = "parent_male_code_2" id = "parent_male_code_2"value = "<?= $current_stock_item ? $current_stock_item->parent_male_code_2 : ''; ?>" />
         </p> 
         <p>
             <label for="parent_female_code">Szülőállomány(M):</label>
-            <input type="text" name = "parent_female_code" id = "parent_female_code" />
+            <input type="text" name = "parent_female_code" id = "parent_female_code" value = "<?= $current_stock_item ? $current_stock_item->parent_female_code : ''; ?>"/>
         </p> 
         <p>
             <label for="parent_female_code_2">Szülőállomány(M)<br /><em>INTRA/KÁBO</em>:</label>
-            <input type="text" name = "parent_female_code_2" id = "parent_female_code_2" />
+            <input type="text" name = "parent_female_code_2" id = "parent_female_code_2" value = "<?= $current_stock_item ? $current_stock_item->parent_female_code_2 : ''; ?>"/>
         </p>                         
         <p>
             <label for="number_of_male">Kakasok száma:</label>

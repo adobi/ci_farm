@@ -348,3 +348,12 @@ fieldset {
 .filled {
     background:#D9F7BB!important;
 }
+
+.show-details-icon {
+    display:inline-block;
+    width:14px;
+    height:12px;
+    background:url(../img/sprite-icons.png) no-repeat scroll -176px -112px;
+    position:relative;
+    top:2px;
+}

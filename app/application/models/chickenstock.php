@@ -6,7 +6,34 @@ class Chickenstock extends MY_Model
 {
     protected $_name = "chicken_stock";
     protected $_primary = "id";
-    
+   
+    /** 
+     * listazza az allomanyokat a $all-nak megfeleloen. ha igaz akkor minden a rendszerben elofordulo allomanyt hoz,
+     * ha hamis akkor csak azokat amik eppen be vannak olazva 
+     *
+     * @param string $all 
+     * @return array
+     * @author Dobi Attila
+     */
+    public function fetchWithDetails($all = false)
+    {
+        if ($all) {
+            $where = array(); // hack :)
+        } else {
+            $where = array("chicken_stock.id in (select chicken_stock_id from egg_production)"=>null);
+        }
+        
+        $result = $this->fetchRows(array(
+            'where'=>$where,
+            'join'=>array(
+                array('table'=>'chicken_type ct', 'condition'=>'chicken_stock.chicken_type_id = ct.id', 'columns'=>array('ct.name as chicken_type_name')),
+                array('table'=>'fakk f', 'condition'=>'chicken_stock.fakk_id = f.id', 'columns'=>array('f.name as fakk_name')),    
+            )
+        ));
+        
+        return $result;
+    }
+     
     /**
      * adott fakkhoz tartozo allomanyokat adja vissza
      *

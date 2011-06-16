@@ -6,13 +6,28 @@ require_once 'MY_Controller.php';
 
 class Stock extends MY_Controller 
 {
-    public function index() 
+    public function index()
     {
+        redirect(base_url() . 'stock/show/active');
+    }
+    
+    public function show() 
+    {
+        $all = $this->uri->segment(3);
+        
         $data = array();
         
         $this->load->model('ChickenStock', 'model');
         
-        $data['stocks'] = $this->model->fetchAll();
+        if ($all && $all === "all") {
+            
+            $data['stocks'] = $this->model->fetchWithDetails(true);
+        } elseif ($all && $all === 'active') {
+            
+            $data['stocks'] = $this->model->fetchWithDetails();
+        } else {
+            redirect(base_url() . '404');
+        }
         
         $this->template->build('stock/index', $data);
     }
@@ -186,6 +201,25 @@ class Stock extends MY_Controller
         }
                 
         $this->template->build('stock/add_to_breedersite', $data);    
+    }
+    
+    /**
+     * megmutatja az adott allomany szuloallomanyainak kodjait
+     *
+     * @return void
+     * @author Dobi Attila
+     */
+    public function show_parents()
+    {
+        $id = $this->uri->segment(3);
+        
+        $this->load->model("Chickenstock", 'stock');
+        
+        $data = array();
+        
+        $data['stock'] = $this->stock->find($id);
+        
+        $this->template->build("stock/show_parents", $data);
     }
     
     /**
