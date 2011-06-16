@@ -55,7 +55,24 @@ class Egg extends MY_Controller
 	     */
 	    
 	    $data = array();
+
+	    /**
+	     * telephelyek lekerdezese
+	     *
+	     * @author Dobi Attila
+	     */
+	    $this->load->model("Breedersites", "sites");
+	    $sites = $this->sites->fetchAll(array('order'=>array('by'=>'name', 'dest'=>'asc')));
 	    
+	    $data['breeder_sites'] = $this->sites->toAssocArray('id', 'name+code', $sites);
+	    
+	    /**
+	     * mi van alapbol kivalasztva
+	     *
+	     * @author Dobi Attila
+	     */
+	    $this->session->set_userdata('selected_breedersite', $sites ? $sites[0]->id : 0);
+        	    
 	    $dates = $this->generateWeek($week);
 	    $data['week'] = $week;
 	    $data['week_begining'] = $dates['weekBegining'];
@@ -93,24 +110,6 @@ class Egg extends MY_Controller
         $data['is_filled'] = $isFilled;
         //dump($data['feed_sum']); die;
 
-	    /**
-	     * telephelyek lekerdezese
-	     *
-	     * @author Dobi Attila
-	     */
-	    $this->load->model("Breedersites", "sites");
-	    $sites = $this->sites->fetchAll(array('order'=>array('by'=>'name', 'dest'=>'asc')));
-	    
-	    $data['breeder_sites'] = $this->sites->toAssocArray('id', 'name+code', $sites);
-	    
-	    /**
-	     * mi van alapbol kivalasztva
-	     *
-	     * @author Dobi Attila
-	     */
-	    $this->session->set_userdata('selected_breedersite', $sites ? $sites[0]->id : 0);
-        
-	    
 	    /**
 	      * tenyeszto lekerdezese
 	      *

@@ -12,7 +12,9 @@ class Stock extends MY_Controller
         
         $this->load->model('ChickenStock', 'model');
         
-        $this->template->build('/index', $data);
+        $data['stocks'] = $this->model->fetchAll();
+        
+        $this->template->build('stock/index', $data);
     }
     
     public function edit() 

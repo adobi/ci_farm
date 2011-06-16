@@ -248,7 +248,9 @@ td.calendar-day, td.calendar-day-np { width:100px; padding:5px; border-bottom:1p
         border-right:1px solid #ccc;
         vertical-align:bottom;
     }
-    
+    .middle td {
+        vertical-align:middle;
+    }
     .week-table p {
         margin-bottom:5px!important;
     }

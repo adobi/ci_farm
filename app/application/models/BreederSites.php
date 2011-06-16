@@ -19,7 +19,7 @@ class Breedersites extends MY_Model
                 'join'=>array(
                     array(
                         'table'=>'postal_code',
-                        'columns'=>array('postal_code.code', 'city'),
+                        'columns'=>array('postal_code.code as postal_code', 'city'),
                         'condition'=>"postal_code.id = $this->_name.postal_code_id"
                     )
                 ),
