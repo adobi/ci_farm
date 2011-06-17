@@ -297,6 +297,19 @@ App.UpdateCommenOrVitamin = function(selector, field) {
         
         return false;
     });    
+},
+
+App.SetSelectedBreedersite = function() {
+    $('select[name=breeder_site_id]').bind('change', function() {
+        var breederSite = $(this).val();
+        
+        if ($.trim(breederSite).length && breederSite != 0) {
+            
+            $.get(App.URL + "egg/set_selected_breedersite/"+breederSite, function() {
+                location.reload();
+            });
+        } 
+    });    
 }
 
 $(function() {
@@ -316,6 +329,8 @@ $(function() {
     
      
     App.Datepicker();
+    
+    App.SetSelectedBreedersite();
     
     App.UpdatePeoductionData();
     App.DeleteProductionData();

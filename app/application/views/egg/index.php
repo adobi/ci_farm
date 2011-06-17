@@ -166,16 +166,6 @@
 <script type="text/javascript">
     $(function() {
         
-        $('select[name=breeder_site_id]').bind('change', function() {
-            var breederSite = $(this).val();
-            
-            if ($.trim(breederSite).length && breederSite != 0) {
-                
-                $.get(App.URL + "egg/set_selected_breedersite/"+breederSite, function() {
-                    location.reload();
-                });
-            } 
-        });
 /*
         $('select[name=chicken_stock_id]').bind('change', function() {
             var stock = $(this).val();

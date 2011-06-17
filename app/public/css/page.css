@@ -144,12 +144,12 @@ div.zebra {
 }
 
 .yellow {
-    background:#7BB750;
+    background:#D9F7BB;//7BB750;
     color:#000;
 }
 
 .yellow a {
-    color:#fff;
+    //color:#fff;
 }
 
 .fakks-list {

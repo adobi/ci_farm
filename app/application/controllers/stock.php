@@ -16,6 +16,17 @@ class Stock extends MY_Controller
         $all = $this->uri->segment(3);
         
         $data = array();
+
+	    /**
+	     * telephelyek lekerdezese
+	     *
+	     * @author Dobi Attila
+	     */
+	    $this->load->model("Breedersites", "sites");
+	    $sites = $this->sites->fetchAll(array('order'=>array('by'=>'name', 'dest'=>'asc')));
+	    
+	    $data['breeder_sites'] = $this->sites->toAssocArray('id', 'name+code', $sites);
+
         
         $this->load->model('ChickenStock', 'model');
         
@@ -165,12 +176,19 @@ class Stock extends MY_Controller
     {
         $data = array();
         
+        /**
+         * ha a tojastermeloi oldalrol jott a keres
+         *
+         * @author Dobi Attila
+         */
         if (!$this->session->userdata('selected_breedersite')) {
             
             echo 'Előbb válasszon telephelyet';
             
             die;
         }
+        
+        
         
         /**
          * minden olyan fakk ami az adott telephelyen van

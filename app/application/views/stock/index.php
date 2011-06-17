@@ -1,7 +1,16 @@
 <p  style="padding: 10px;">
+    <label for="breedersite-select" style="display:inline">Válasszon telephelyet</label>
+    <?php if (isset($breeder_sites)): ?>
+        <?= form_dropdown('breeder_site_id', $breeder_sites, $this->session->userdata('selected_breedersite')); ?>
+    <?php endif ?>
+
     <a href="<?= base_url(); ?>stock/add_to_breedersite" class = "button" rel = "dialog" title = "Ój állomány felvitele">Új állomány felvitele</a>
-    <a href="<?= base_url(); ?>stock/show/all" style="float:right;" class = "button <?= $this->uri->segment(3) && $this->uri->segment(3) === 'all'?'ui-state-focus':''; ?>">Eddigi összes állomány</a>
-    <a href="<?= base_url(); ?>stock/show/active" style="float:right;" class = "button <?= $this->uri->segment(3) && $this->uri->segment(3) === 'active'?'ui-state-focus':''; ?>">Beólazott állományok</a>
+
+</p>
+
+<p  style="padding: 10px;">
+    <a href="<?= base_url(); ?>stock/show/all" class = "button <?= $this->uri->segment(3) && $this->uri->segment(3) === 'all'?'ui-state-focus':''; ?>">Eddigi összes állomány</a>
+    <a href="<?= base_url(); ?>stock/show/active"  class = "button <?= $this->uri->segment(3) && $this->uri->segment(3) === 'active'?'ui-state-focus':''; ?>">Beólazott állományok</a>
 </p>
 
 <?php if ($stocks): ?>
