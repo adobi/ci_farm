@@ -108,7 +108,6 @@ class Egg extends MY_Controller
         $data['feed_sum'] = $feedSum;
         $data['egg_production_death'] = $eggProductionDeath;
         $data['is_filled'] = $isFilled;
-        //dump($data['feed_sum']); die;
 
 	    /**
 	      * tenyeszto lekerdezese

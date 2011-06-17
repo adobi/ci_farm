@@ -1,6 +1,6 @@
 <h2><?= $breeder->name; ?> telephelyei</h2>
 <p>
-    <a href="<?= base_url() ?>breedersite/edit/breeder/<?= $breeder->id ?>" dialog_id = "0" rel = "dialog" title = "Új telephely felvitele">új telephely</a>
+    <a class = "button" href="<?= base_url() ?>breedersite/edit/breeder/<?= $breeder->id ?>" dialog_id = "0" rel = "dialog" title = "Új telephely felvitele">új telephely</a>
 </p>
 
 <?php if ($breeder_sites): ?>
@@ -25,7 +25,8 @@
             <td><?= $item->postal_code; ?> - <?= $item->city; ?> <?= $item->address; ?></td>
             <td><?= $item->description; ?></td>
             <td>
-                <a href="<?= base_url(); ?>fakkgroup/for_breedersite/<?= $item->id; ?>">fakk csoportok</a><br />
+                <!--<a href="<?= base_url(); ?>fakkgroup/for_breedersite/<?= $item->id; ?>">fakk csoportok</a><br />-->
+                <a href="<?= base_url(); ?>stockyard/for_breedersite/<?= $item->id; ?>">istállók</a><br />
                 <a href="<?= base_url(); ?>breedersite/edit/<?= $item->id; ?>" dialog_id = "<?= $item->id; ?>" rel = "dialog" title = "Telephely szerkesztése">szerkeszt</a><br />
                 <a href="<?= base_url(); ?>breedersite/delete/<?= $item->id; ?>" class = "delete">töröl</a>
             </td>

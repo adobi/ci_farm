@@ -7,16 +7,16 @@ class Fakkgroups extends MY_Model
     protected $_name = "fakk_group";
     protected $_primary = "id";
     
-    public function fetchForBreederSite($site) 
+    public function fetchForStockYard($yard) 
     {
-        if (!$site) {
+        if (!$yard) {
             
             return false;
         }
         
         $result = $this->fetchRows(
             array(
-                'where'=>array('breeder_site_id'=>$site)    
+                'where'=>array('stock_yard_id'=>$yard)    
             )
         );
 
