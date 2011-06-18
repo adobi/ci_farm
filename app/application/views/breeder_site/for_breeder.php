@@ -1,5 +1,5 @@
-<h2><?= $breeder->name; ?> telephelyei</h2>
-<p>
+<h2 style="padding:10px;"><?= $breeder->name; ?> telephelyei</h2>
+<p style="padding:10px;">
     <a class = "button" href="<?= base_url() ?>breedersite/edit/breeder/<?= $breeder->id ?>" dialog_id = "0" rel = "dialog" title = "Új telephely felvitele">új telephely</a>
 </p>
 

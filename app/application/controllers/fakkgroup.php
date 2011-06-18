@@ -77,7 +77,7 @@ class Fakkgroup extends MY_Controller
         $id = $this->uri->segment(3);
         
         if ($id) {
-            $this->load->model('', 'model');
+            $this->load->model('Fakkgroups', 'model');
             
             $this->model->delete($id);
         }

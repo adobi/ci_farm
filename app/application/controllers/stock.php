@@ -183,12 +183,10 @@ class Stock extends MY_Controller
          */
         if (!$this->session->userdata('selected_breedersite')) {
             
-            echo 'Előbb válasszon telephelyet';
+            echo '<div class = "error">Előbb válasszon telephelyet</div>';
             
             die;
         }
-        
-        
         
         /**
          * minden olyan fakk ami az adott telephelyen van
@@ -198,6 +196,14 @@ class Stock extends MY_Controller
         
         $this->load->model("Fakks", 'fakks');
         $fakks = $this->fakks->fetchForBreedersite($this->session->userdata('selected_breedersite'));
+        
+        if (!$fakks) {
+            
+            echo '<div class = "error">Előbb vigyen fel istállót/fakkcsoportot/fakkot a kiválasztott telephelyhez</div>';
+            
+            die;
+        }
+        
         $data['fakks'] = $this->fakks->toAssocArray('id', 'name', $fakks);
         
         /**

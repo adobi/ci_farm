@@ -104,6 +104,7 @@ class Egg extends MY_Controller
 
         }
         $data['last_blank'] = $this->days->getLastBlankDate();
+        //dump(date('Y-m-d', $data['last_blank']->to_date)); die;
         $data['egg_production_sum'] = $eggProductionSum;
         $data['feed_sum'] = $feedSum;
         $data['egg_production_death'] = $eggProductionDeath;

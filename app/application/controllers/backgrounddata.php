@@ -6,7 +6,9 @@ class Backgrounddata extends MY_Controller {
 
 	public function index()
 	{
-		$this->template->build('backgrounddata/index');
+	    redirect(base_url() . 'breeder');
+	    
+		//$this->template->build('backgrounddata/index');
 	}
 }
 

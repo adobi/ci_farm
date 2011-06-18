@@ -50,7 +50,8 @@ class Eggproductiondays extends MY_Model
                 				c.id as breeders_stock_id
                 			from chicken_stock c 
                 			join fakk f on c.fakk_id = f.id 
-                			join fakk_group g on f.fakk_group_id = g.id and g.breeder_site_id = $site
+                			join fakk_group g on f.fakk_group_id = g.id 
+                			join stock_yard sy on g.stock_yard_id = sy.id and sy.breeder_site_id = $site
                 	) 
                 )";
                 
@@ -76,7 +77,8 @@ class Eggproductiondays extends MY_Model
                 				c.id as breeders_stock_id
                 			from chicken_stock c 
                 			join fakk f on c.fakk_id = f.id 
-                			join fakk_group g on f.fakk_group_id = g.id and g.breeder_site_id = $site
+                			join fakk_group g on f.fakk_group_id = g.id
+                			join stock_yard sy on g.stock_yard_id = sy.id and sy.breeder_site_id = $site
                 	) 
                 )";
                 
@@ -95,6 +97,7 @@ class Eggproductiondays extends MY_Model
                     to_date 
                 from 
                     $this->_name epd join egg_production ep on epd.egg_production_id = ep.id
+                    join chicken_stock cs on ep.chicken_stock_id = cs.id and cs.fakk_id is not null
                 where 
                     dead_male is null or dead_female is null or 
                     reject_male is null or reject_female is null or 
@@ -104,7 +107,58 @@ class Eggproductiondays extends MY_Model
         //dump($sql); die;        
         $result = $this->execute($sql);
         
+        $return = false;
+        
+        if ($result) {
+            
+            $return = current($result);
+            
+        } else {
+            
+            $lastFilled = $this->getLastFilled();
+            
+            $lastFilled->to_date = strtotime($lastFilled->to_date) + 24*3600; // 1 nap, azaz az utolso kitoltott nap utani nap
+            
+            $return = $lastFilled;
+        }
+        
+        return $return;
+    }
+    
+    public function getLastFilled()
+    {
+        $sql = "select 
+                    max(to_date) as to_date
+                from 
+                    $this->_name epd 
+                    join egg_production ep on epd.egg_production_id = ep.id 
+                    join chicken_stock cs on ep.chicken_stock_id = cs.id and cs.fakk_id is not null
+                where
+                    
+                    dead_male is not null and dead_female is not null and 
+                    reject_male is not null and reject_female is not null and 
+                    feed_male is not null and feed_female is not null and feed_grain is not null and
+                    epd.id in (select egg_production_day_id from egg_production_data)
+                -- order by to_date asc limit 1";
+        //dump($sql); die;        
+        $result = $this->execute($sql);
+        
+        $sql = "select 
+                    ep.id 
+                from egg_production ep
+                    join chicken_stock cs on ep.chicken_stock_id = cs.id and cs.fakk_id is not null
+                where ep.is_finished is null and ep.finish_date is null";
+        
+        $stocks = $this->execute($sql);
+        /*
+        if (count($result) !== count($stocks)) {
+            
+            return false;
+        }
+        */
+        
         return $result ? current($result) : false;
+        
     }
     
     public function isDayFilled($date)
@@ -112,7 +166,9 @@ class Eggproductiondays extends MY_Model
         $sql = "select 
                     to_date 
                 from 
-                    $this->_name epd join egg_production ep on epd.egg_production_id = ep.id
+                    $this->_name epd 
+                    join egg_production ep on epd.egg_production_id = ep.id 
+                    join chicken_stock cs on ep.chicken_stock_id = cs.id and cs.fakk_id is not null
                 where
                     date(epd.to_date) = '$date' and 
                     dead_male is not null and dead_female is not null and 
@@ -122,11 +178,15 @@ class Eggproductiondays extends MY_Model
                 -- order by to_date asc limit 1";
         
         $result = $this->execute($sql);
-        
-        $sql = "select id from egg_production where is_finished is null and finish_date is null";
+        //dump($result);
+        $sql = "select 
+                    ep.id 
+                from egg_production ep
+                    join chicken_stock cs on ep.chicken_stock_id = cs.id and cs.fakk_id is not null
+                where ep.is_finished is null and ep.finish_date is null";
         
         $stocks = $this->execute($sql);
-        
+        //dump($stocks);
         return count($result) === count($stocks);
     }
     

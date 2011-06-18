@@ -30,7 +30,7 @@
                                 <?php endif ?>
                                 
                                 <?php if ($this->uri->segment(1) === 'fakkgroup'): ?>
-                                    <a style = "float:right;" href="<?= base_url(); ?>fakk/delete/<?= $fakk->id; ?>">töröl</a>
+                                    <a style = "float:right;" href="<?= base_url(); ?>fakk/delete/<?= $fakk->id; ?>" class = "delete">töröl</a>
                                     
                                     <!-- <a href="<?= base_url(); ?>stock/for_fakk/<?= $fakk->id; ?>">állományok</a> -->
                                 <?php endif ?>

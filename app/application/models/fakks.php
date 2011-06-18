@@ -28,7 +28,7 @@ class Fakks extends MY_Model
             return false;
         }    
         
-        $sql = "select f.* from $this->_name f join fakk_group fg on f.fakk_group_id = fg.id and fg.breeder_site_id = $site";
+        $sql = "select f.* from $this->_name f join fakk_group g on f.fakk_group_id = g.id join stock_yard sy on g.stock_yard_id = sy.id and sy.breeder_site_id = $site";
         
         return $this->execute($sql);
     }

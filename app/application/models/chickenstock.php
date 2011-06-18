@@ -72,7 +72,8 @@ class Chickenstock extends MY_Model
                     c.* 
                 from $this->_name c 
                 join fakk f on c.fakk_id = f.id 
-                join fakk_group g on f.fakk_group_id = g.id and g.breeder_site_id = $site";
+                join fakk_group g on f.fakk_group_id = g.id 
+                join stock_yard sy on g.stock_yard_id = sy.id and sy.breeder_site_id = $site";
         //echo $sql;
         return $this->execute($sql);
     }
@@ -96,7 +97,8 @@ class Chickenstock extends MY_Model
                     c.* 
                 from $this->_name c 
                 join fakk f on c.fakk_id = f.id 
-                join fakk_group g on f.fakk_group_id = g.id and g.breeder_site_id = $site
+                join fakk_group g on f.fakk_group_id = g.id 
+                join stock_yard sy on g.stock_yard_id = sy.id and sy.breeder_site_id = $site
                 where c.id not in (
         			select 
         				chicken_stock_id 
@@ -127,7 +129,8 @@ class Chickenstock extends MY_Model
                     c.* 
                 from $this->_name c 
                 join fakk f on c.fakk_id = f.id 
-                join fakk_group g on f.fakk_group_id = g.id and g.breeder_site_id = $site
+                join fakk_group g on f.fakk_group_id = g.id 
+                join stock_yard sy on g.stock_yard_id = sy.id and sy.breeder_site_id = $site
                 where c.id not in (
         			select 
         					chicken_stock_id 
@@ -159,7 +162,8 @@ class Chickenstock extends MY_Model
                     c.* 
                 from $this->_name c 
                 join fakk f on c.fakk_id = f.id 
-                join fakk_group g on f.fakk_group_id = g.id and g.breeder_site_id = $site
+                join fakk_group g on f.fakk_group_id = g.id 
+                join stock_yard sy on g.stock_yard_id = sy.id and sy.breeder_site_id = $site
                 where c.id not in (
         			select 
         					chicken_stock_id 
@@ -190,7 +194,8 @@ class Chickenstock extends MY_Model
                     c.* 
                 from $this->_name c 
                 join fakk f on c.fakk_id = f.id 
-                join fakk_group g on f.fakk_group_id = g.id and g.breeder_site_id = $site
+                join fakk_group g on f.fakk_group_id = g.id
+                join stock_yard sy on g.stock_yard_id = sy.id and sy.breeder_site_id = $site
                 where c.id not in (
         			select 
         					chicken_stock_id 
@@ -221,7 +226,8 @@ class Chickenstock extends MY_Model
                     c.* 
                 from $this->_name c 
                 join fakk f on c.fakk_id = f.id 
-                join fakk_group g on f.fakk_group_id = g.id and g.breeder_site_id = $site
+                join fakk_group g on f.fakk_group_id = g.id
+                join stock_yard sy on g.stock_yard_id = sy.id and sy.breeder_site_id = $site
                 where c.id not in (
         			select 
         					chicken_stock_id 

@@ -24,7 +24,7 @@ class Auth extends MY_Controller
         
         if ($this->form_validation->run()) {
             
-            redirect(base_url() . 'welcome');
+            redirect(base_url() . 'egg');
         }
         
         $this->template->build('auth/login');

@@ -37,9 +37,9 @@
         		<div id = "header" class = "span-24 _ui-widget-header ui-corner-all">
         		    <div class = "prepend-2 span-20 append-2">
             			<ul id = "header-menu" class = "span-20">
-            			    <li>
+            			    <!--<li>
             			        <a href="<?= base_url(); ?>welcome">kezdőlap</a>
-            			    </li>
+            			    </li>-->
             			    <li>
             			        <a href="<?= base_url(); ?>egg">tojástermelés</a>
             			    </li>
