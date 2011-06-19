@@ -115,7 +115,6 @@
                     <td>
                         <?php //require '_chicken_food.php'; ?>
                         <?php if (array_key_exists($day, $feed_sum) && ($feed_sum[$day]->sum_female || $feed_sum[$day]->sum_male || $feed_sum[$day]->sum_grain)): ?>
-                            <strong>Tápanyag</strong>
                             <table class = "inner-table">
                                 <tr>
                                     <td style = "text-align:left">Jérce</td>

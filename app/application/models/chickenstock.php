@@ -80,10 +80,12 @@ class Chickenstock extends MY_Model
         $sql = "select 
                     c.*, ct.name as chicken_type_name, f.name as fakk_name, sy.name as stock_yard_name
                 from $this->_name c 
+                join egg_production ep on ep.chicken_stock_id = c.id and ep.is_finished is null
                 join chicken_type ct on c.chicken_type_id = ct.id
                 join fakk f on c.fakk_id = f.id 
                 join fakk_group g on f.fakk_group_id = g.id 
-                join stock_yard sy on g.stock_yard_id = sy.id and sy.breeder_site_id = $site";
+                join stock_yard sy on g.stock_yard_id = sy.id and sy.breeder_site_id = $site
+                where c.fakk_id is not null";
         //echo $sql;
         return $this->execute($sql);
     }
@@ -106,6 +108,7 @@ class Chickenstock extends MY_Model
         $sql = "select 
                     c.* 
                 from $this->_name c 
+                join egg_production ep on ep.chicken_stock_id = c.id and ep.is_finished is null
                 join fakk f on c.fakk_id = f.id 
                 join fakk_group g on f.fakk_group_id = g.id 
                 join stock_yard sy on g.stock_yard_id = sy.id and sy.breeder_site_id = $site
@@ -115,7 +118,7 @@ class Chickenstock extends MY_Model
         			from egg_production ep 
         				join egg_production_day epd on ep.id = epd.egg_production_id and date(epd.to_date) = '$date'
         				join egg_production_data d on d.egg_production_day_id = epd.id
-                )";
+                ) and c.fakk_id is not null";
         //dump($sql);
         return $this->execute($sql);
     }
@@ -138,6 +141,7 @@ class Chickenstock extends MY_Model
         $sql = "select 
                     c.* 
                 from $this->_name c 
+                join egg_production ep on ep.chicken_stock_id = c.id and ep.is_finished is null
                 join fakk f on c.fakk_id = f.id 
                 join fakk_group g on f.fakk_group_id = g.id 
                 join stock_yard sy on g.stock_yard_id = sy.id and sy.breeder_site_id = $site
@@ -147,7 +151,7 @@ class Chickenstock extends MY_Model
         			from egg_production ep 
         				join egg_production_day epd on ep.id = epd.egg_production_id and date(epd.to_date) = '$date' and 
         				    (feed_male is not null or feed_female is not null or feed_grain is not null)
-                )";
+                ) and c.fakk_id is not null";
 
         return $this->execute($sql);
         
@@ -171,6 +175,7 @@ class Chickenstock extends MY_Model
         $sql = "select 
                     c.* 
                 from $this->_name c 
+                join egg_production ep on ep.chicken_stock_id = c.id and ep.is_finished is null
                 join fakk f on c.fakk_id = f.id 
                 join fakk_group g on f.fakk_group_id = g.id 
                 join stock_yard sy on g.stock_yard_id = sy.id and sy.breeder_site_id = $site
@@ -180,7 +185,7 @@ class Chickenstock extends MY_Model
         			from egg_production ep 
         				join egg_production_day epd on ep.id = epd.egg_production_id and date(epd.to_date) = '$date' and 
         				    (comment is not null)
-                )";
+                ) and c.fakk_id is not null";
 
         return $this->execute($sql);
     }      
@@ -203,6 +208,7 @@ class Chickenstock extends MY_Model
         $sql = "select 
                     c.* 
                 from $this->_name c 
+                join egg_production ep on ep.chicken_stock_id = c.id and ep.is_finished is null
                 join fakk f on c.fakk_id = f.id 
                 join fakk_group g on f.fakk_group_id = g.id
                 join stock_yard sy on g.stock_yard_id = sy.id and sy.breeder_site_id = $site
@@ -212,7 +218,7 @@ class Chickenstock extends MY_Model
         			from egg_production ep 
         				join egg_production_day epd on ep.id = epd.egg_production_id and date(epd.to_date) = '$date' and 
         				    (vitamin is not null)
-                )";
+                ) and c.fakk_id is not null";
 
         return $this->execute($sql);
     }      
@@ -235,6 +241,7 @@ class Chickenstock extends MY_Model
         $sql = "select 
                     c.* 
                 from $this->_name c 
+                join egg_production ep on ep.chicken_stock_id = c.id and ep.is_finished is null
                 join fakk f on c.fakk_id = f.id 
                 join fakk_group g on f.fakk_group_id = g.id
                 join stock_yard sy on g.stock_yard_id = sy.id and sy.breeder_site_id = $site
@@ -244,7 +251,7 @@ class Chickenstock extends MY_Model
         			from egg_production ep 
         				join egg_production_day epd on ep.id = epd.egg_production_id and date(epd.to_date) = '$date' and 
         				    (dead_male is not null or dead_female is not null or reject_male is not null or reject_female is not null)
-                )";
+                ) and c.fakk_id is not null";
 
         return $this->execute($sql);
     }          
