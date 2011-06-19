@@ -3,7 +3,7 @@
     <table class = "inner-table">
         <thead>
             <tr>
-                <td>&nbsp;</td>
+                <td>Istálló / Fakk / Típus / Kód</td>
                 <td style="width:150px;">Mennyiség jérce</td>
                 <td style="width:150px;">Mennyiség kakas</td>
                 <td style="width:150px;">Mennyiseg szemes</td>
@@ -13,7 +13,12 @@
         <tbody>
             <?php foreach ($stocks as $item): ?>
                 <tr>
-                    <td class = "td-first"><?= $item['stock']->code; ?></td>
+                    <td class = "td-first">
+                        <?= $item['stock']->stock_yard_name ?> /
+                        <?= $item['stock']->fakk_name ?> /
+                        <?= $item['stock']->chicken_type_name ?> /
+                        <?= $item['stock']->code; ?>
+                    </td>
                     <?php if ($item['data'] && ($item['data']->feed_female || $item['data']->feed_male || $item['data']->feed_grain)): ?>
                         <td colspan = "3" style = "padding:0px;">
                             <?= form_open(); ?>

@@ -4,7 +4,7 @@
     <table class="inner-table">
         <thead>
             <tr>
-                <td>&nbsp;</td>
+                <td>Istálló / Fakk / Típus / Kód</td>
                 <td class = "text-center" colspan = "2">Elhalálozás</td>
                 <td class = "text-center" colspan = "2">Selejt</td>
                 <td>&nbsp;</td>
@@ -21,7 +21,12 @@
         <tbody>
             <?php foreach ($stocks as $item): ?>
                 <tr>
-                    <td class = "td-first"><?= $item['stock']->code; ?></td>
+                    <td class = "td-first">
+                        <?= $item['stock']->stock_yard_name ?> /
+                        <?= $item['stock']->fakk_name ?> /
+                        <?= $item['stock']->chicken_type_name ?> /
+                        <?= $item['stock']->code; ?>
+                    </td>
                     <?php if ($item['data'] && ($item['data']->dead_female || $item['data']->dead_male || $item['data']->reject_female || $item['data']->reject_male)): ?>
                         
                         <td colspan = "4" style = "padding:0px;">

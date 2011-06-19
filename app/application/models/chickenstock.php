@@ -78,8 +78,9 @@ class Chickenstock extends MY_Model
         }
         
         $sql = "select 
-                    c.* 
+                    c.*, ct.name as chicken_type_name, f.name as fakk_name, sy.name as stock_yard_name
                 from $this->_name c 
+                join chicken_type ct on c.chicken_type_id = ct.id
                 join fakk f on c.fakk_id = f.id 
                 join fakk_group g on f.fakk_group_id = g.id 
                 join stock_yard sy on g.stock_yard_id = sy.id and sy.breeder_site_id = $site";

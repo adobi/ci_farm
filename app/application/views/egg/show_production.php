@@ -3,7 +3,7 @@
     <table class = "inner-table">
         <thead>
             <tr>
-                <td>&nbsp;</td>
+                <td>Istálló / Fakk / Típus / Kód</td>
                 <?php foreach ($egg_types as $type): ?>
                     <td><?= $type->code; ?> - <?= $type->description; ?></td>
                 <?php endforeach ?>
@@ -13,7 +13,12 @@
         <tbody>
             <?php foreach ($stocks as $item): ?>
                 <tr>
-                    <td class = "td-first"><?= $item['stock']->code; ?></td>
+                    <td class = "td-first">
+                        <?= $item['stock']->stock_yard_name ?> /
+                        <?= $item['stock']->fakk_name ?> /
+                        <?= $item['stock']->chicken_type_name ?> /
+                        <?= $item['stock']->code; ?>
+                    </td>
                     <?php if ($item['data']): ?>
                         
                         <?php foreach ($item['data'] as $eggPieces): ?>
