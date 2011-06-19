@@ -72,6 +72,17 @@
                             <p><em>nincs adat</em></p>
                         <?php endif ?>
                         
+                        <?php if (array_key_exists($day, $egg_production_farmer_sum) && $egg_production_farmer_sum[$day]): ?>
+                            <strong>Termelői</strong>
+                            <table class = "inner-table">
+                                <?php foreach ($egg_production_farmer_sum[$day] as $item): ?>
+                                    <tr>
+                                        <td style = "text-align:left"><?= $item->chicken_type_name; ?></td>
+                                        <td style = "text-align:left"><strong><?= $item->pieces_sum; ?></strong> db</td>
+                                    </tr>
+                                <?php endforeach ?>
+                            </table>
+                        <?php endif ?>                        
                         <p>
                             <a href="<?= base_url(); ?>egg/show_production/<?= $day; ?>" rel = "dialog" title = "Termelési adatok <?= date('Y-m-d', $day); ?>">Bővebben</a>
                             <a href="<?= base_url() ?>egg/add_production/<?= $day; ?>" rel = "dialog" title = "Tojástermelési adat felvitele">Új felvite</a>

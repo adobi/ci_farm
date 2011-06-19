@@ -48,8 +48,9 @@ class Eggproductiondata extends MY_Model
                 	et.* 
                 from 
                 	egg_production_data epd join egg_type et on epd.egg_type_id = et.id
-                where 
-                	egg_production_day_id in (
+                where
+                    egg_type_id != 1 
+                	and egg_production_day_id in (
                 		select id from egg_production_day where date(to_date) = '$date' and egg_production_id in (
                 			select ep.id as egg_production_id from egg_production ep where ep.chicken_stock_id in (
                 				select 
@@ -62,6 +63,41 @@ class Eggproductiondata extends MY_Model
                 		)
                 	) 
                 group by egg_type_id order by et.id desc ";
+        
+        return $this->execute($sql);
+    }
+    
+    /**
+     * termeloi tojastipus tyuktipusra bontra adott telephelyhez adott napra
+     *
+     * @param string $site 
+     * @param string $date 
+     * @return void
+     * @author Dobi Attila
+     */
+    public function getSummarizedFarmerForBreedersiteByDay($site, $date)
+    {
+        if (!$date || !$site) {
+            
+            return false;
+        }
+        
+        $sql = "select 
+                	sum(epdata.piece) as pieces_sum, ct.name as chicken_type_name
+                from
+                	egg_production_data epdata
+                	join egg_production_day epday on epday.id = epdata.egg_production_day_id
+                	join egg_production ep on ep.id = epday.egg_production_id
+                	join chicken_stock cs on cs.id = ep.chicken_stock_id
+                	join chicken_type ct on ct.id = cs.chicken_type_id
+                	join fakk f on f.id = cs.fakk_id
+                	join fakk_group fg on fg.id = f.fakk_group_id
+                	join stock_yard sy on fg.stock_yard_id = sy.id and sy.breeder_site_id = $site
+                where 
+                	epdata.egg_type_id = 1 and date(epday.to_date) = '$date'
+                group by ct.id
+        
+        ";
         
         return $this->execute($sql);
     }

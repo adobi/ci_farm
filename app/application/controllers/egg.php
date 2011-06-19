@@ -89,6 +89,7 @@ class Egg extends MY_Controller
 	    $data['selected_week_days'] = $dates['selectedWeekDays'];
 	    
 	    $eggProductionSum = array();
+	    $eggProductionFarmerSum = array();
 	    $feedSum = array();
 	    $eggProductionDeath = array();
 	    $isFilled = array();
@@ -104,6 +105,7 @@ class Egg extends MY_Controller
              */
             foreach ($dates['selectedWeekDays'] as $day) {
                 $eggProductionSum[$day] = $this->production->getSummarizedForBreedersiteForDayByEggtype($this->session->userdata('selected_breedersite'), date('Y-m-d', $day));
+                $eggProductionFarmerSum[$day] = $this->production->getSummarizedFarmerForBreedersiteByDay($this->session->userdata('selected_breedersite'), date('Y-m-d', $day));
                 $feedSum[$day] = $this->days->getSummarizedFoodForDataAndBreedersite($this->session->userdata('selected_breedersite'), date('Y-m-d', $day));
                 $eggProductionDeath[$day] = $this->days->getSummarizedDeathForDataAndBreedersite($this->session->userdata('selected_breedersite'), date('Y-m-d', $day));
                 
@@ -113,6 +115,7 @@ class Egg extends MY_Controller
         }
         $data['last_blank'] = $lastBlank;
         //dump(date('Y-m-d', $data['last_blank']->to_date)); die;
+        $data['egg_production_farmer_sum'] = $eggProductionFarmerSum;
         $data['egg_production_sum'] = $eggProductionSum;
         $data['feed_sum'] = $feedSum;
         $data['egg_production_death'] = $eggProductionDeath;
@@ -532,7 +535,7 @@ class Egg extends MY_Controller
 	     */
 	    $this->load->model("Eggtypes", 'eggtype');
 	    $data['egg_types'] = $this->eggtype->fetchAll();
-	    
+	    //dump($data);die;
 	    /**
 	     * allomanyok
 	     *

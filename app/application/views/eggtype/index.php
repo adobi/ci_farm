@@ -6,7 +6,9 @@
     <?php foreach ($eggtypes as $et): ?>
         <p class = "zebra">
             <strong><?= $et->code ?></strong> - <?= $et->description ?>
-            <a href="<?= base_url() ?>eggtype/delete/<?= $et->id ?>" class = "delete">töröl</a>
+            <?php if ($et->id != 1): ?>
+                <a href="<?= base_url() ?>eggtype/delete/<?= $et->id ?>" class = "delete">töröl</a>
+            <?php endif ?>
             <a href="<?= base_url() ?>eggtype/edit/<?= $et->id ?>" dialog_id = "<?= $et->id ?>" rel = "dialog" title = "Tojástípus szerkesztése">szerkeszt</a>
         </p>
     <?php endforeach ?>

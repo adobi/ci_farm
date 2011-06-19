@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50133
 File Encoding         : 65001
 
-Date: 2011-06-18 21:43:11
+Date: 2011-06-19 16:56:16
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -31,7 +31,7 @@ CREATE TABLE `breeder` (
 -- ----------------------------
 -- Records of breeder
 -- ----------------------------
-INSERT INTO `breeder` VALUES ('3', 'alma máter', '06531231122', '06705301132', 'zsuzsa.kassay@gmail.com');
+INSERT INTO `breeder` VALUES ('3', 'alma máter', '06531231122', '06705301132', 'alma.mater@gmail.com');
 
 -- ----------------------------
 -- Table structure for `breeder_site`
@@ -87,7 +87,7 @@ CREATE TABLE `chicken_stock` (
   CONSTRAINT `fk_buyer_breeder_site_id` FOREIGN KEY (`buyer_breeder_site_id`) REFERENCES `breeder_site` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_chicken_stock_fakk` FOREIGN KEY (`fakk_id`) REFERENCES `fakk` (`id`) ON DELETE SET NULL ON UPDATE SET NULL,
   CONSTRAINT `fk_chicken_type` FOREIGN KEY (`chicken_type_id`) REFERENCES `chicken_type` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of chicken_stock
@@ -95,6 +95,8 @@ CREATE TABLE `chicken_stock` (
 INSERT INTO `chicken_stock` VALUES ('6', '21123', '2011-05-01 00:00:00', '1', 'V', '123', '(5c.2c.4n.7n) INTRA.FR.2009.0055972', '345', '(5c.2c.4n.7n) INTRA.FR.2009.0055972', '120', '100', 'c 4', '2011-09-01 00:00:00', null, null, null);
 INSERT INTO `chicken_stock` VALUES ('7', '166725', '2011-04-01 00:00:00', '2', 'V', '123', '(5c.2c.4n.7n) INTRA.FR.2009.0055972', '345', '(5c.2c.4n.7n) INTRA.FR.2009.0055972', '110', '100', 'a 1', '2011-06-30 00:00:00', null, null, null);
 INSERT INTO `chicken_stock` VALUES ('8', '1001', '2011-06-01 00:00:00', '4', 'V', '123', '(5c.2c.4n.7n) INTRA.FR.2009.0055972', '124', '(5c.2c.4n.7n) INTRA.FR.2009.0055972', '100', '120', 'c 1', '2011-08-31 00:00:00', null, null, '11');
+INSERT INTO `chicken_stock` VALUES ('9', '1003', '2011-06-01 00:00:00', '2', 'V', '123', '(5c.2c.4n.7n) INTRA.FR.2009.0055972', '126', '(5c.2c.4n.7n) INTRA.FR.2009.0055972', '100', '120', 'a 3', '2011-06-30 00:00:00', null, null, '12');
+INSERT INTO `chicken_stock` VALUES ('10', '1004', '2011-06-21 00:00:00', '2', 'III', '127', '(5c.2c.4n.7n) INTRA.FR.2009.0055972', '129', '(5c.2c.4n.7n) INTRA.FR.2009.0055972', '120', '250', 'd 3', '2011-10-25 00:00:00', null, null, '11');
 
 -- ----------------------------
 -- Table structure for `chicken_type`
@@ -4292,7 +4294,7 @@ INSERT INTO `cities` VALUES ('4154', 'Szentgotthárd', 'VA', '9955');
 DROP TABLE IF EXISTS `egg_production`;
 CREATE TABLE `egg_production` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `conditionig_date` datetime DEFAULT NULL,
+  `conditioning_date` datetime DEFAULT NULL,
   `chicken_stock_id` int(11) DEFAULT NULL,
   `is_finished` int(11) DEFAULT NULL,
   `finish_date` datetime DEFAULT NULL,
@@ -4301,7 +4303,7 @@ CREATE TABLE `egg_production` (
   PRIMARY KEY (`id`),
   KEY `fk_egg_production_chicken_stock` (`chicken_stock_id`),
   CONSTRAINT `fk_egg_production_chicken_stock` FOREIGN KEY (`chicken_stock_id`) REFERENCES `chicken_stock` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of egg_production
@@ -4309,6 +4311,8 @@ CREATE TABLE `egg_production` (
 INSERT INTO `egg_production` VALUES ('1', '2011-06-07 20:02:15', '6', null, null, null, null);
 INSERT INTO `egg_production` VALUES ('2', '2011-06-07 20:29:25', '7', null, null, null, null);
 INSERT INTO `egg_production` VALUES ('3', '2011-06-18 21:09:16', '8', null, null, null, null);
+INSERT INTO `egg_production` VALUES ('4', '2011-06-19 15:00:06', '9', null, null, null, null);
+INSERT INTO `egg_production` VALUES ('5', '2011-06-19 16:48:34', '10', null, null, null, null);
 
 -- ----------------------------
 -- Table structure for `egg_production_data`
@@ -4324,35 +4328,31 @@ CREATE TABLE `egg_production_data` (
   KEY `fk_egg_production_data_egg_type` (`egg_type_id`),
   CONSTRAINT `fk_egg_production_data_egg_production_day` FOREIGN KEY (`egg_production_day_id`) REFERENCES `egg_production_day` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_egg_production_data_egg_type` FOREIGN KEY (`egg_type_id`) REFERENCES `egg_type` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of egg_production_data
 -- ----------------------------
-INSERT INTO `egg_production_data` VALUES ('5', '3', '5', '50');
-INSERT INTO `egg_production_data` VALUES ('6', '3', '6', '60');
-INSERT INTO `egg_production_data` VALUES ('7', '3', '8', '70');
-INSERT INTO `egg_production_data` VALUES ('8', '3', '14', '80');
-INSERT INTO `egg_production_data` VALUES ('9', '4', '5', '100');
-INSERT INTO `egg_production_data` VALUES ('10', '4', '6', '100');
-INSERT INTO `egg_production_data` VALUES ('11', '4', '8', '100');
-INSERT INTO `egg_production_data` VALUES ('12', '4', '14', '100');
-INSERT INTO `egg_production_data` VALUES ('17', '5', '14', '10');
-INSERT INTO `egg_production_data` VALUES ('18', '5', '8', '100');
-INSERT INTO `egg_production_data` VALUES ('19', '5', '6', '20');
-INSERT INTO `egg_production_data` VALUES ('20', '5', '5', '102');
-INSERT INTO `egg_production_data` VALUES ('21', '9', '14', '4');
-INSERT INTO `egg_production_data` VALUES ('22', '9', '8', '5');
-INSERT INTO `egg_production_data` VALUES ('23', '9', '6', '6');
-INSERT INTO `egg_production_data` VALUES ('24', '9', '5', '7');
-INSERT INTO `egg_production_data` VALUES ('25', '10', '14', '1');
-INSERT INTO `egg_production_data` VALUES ('26', '10', '8', '1');
-INSERT INTO `egg_production_data` VALUES ('27', '10', '6', '1');
-INSERT INTO `egg_production_data` VALUES ('28', '10', '5', '1');
-INSERT INTO `egg_production_data` VALUES ('29', '11', '14', '10');
-INSERT INTO `egg_production_data` VALUES ('30', '11', '8', '20');
-INSERT INTO `egg_production_data` VALUES ('31', '11', '6', '30');
-INSERT INTO `egg_production_data` VALUES ('32', '11', '5', '40');
+INSERT INTO `egg_production_data` VALUES ('33', '11', '14', '10');
+INSERT INTO `egg_production_data` VALUES ('34', '11', '8', '20');
+INSERT INTO `egg_production_data` VALUES ('35', '11', '6', '30');
+INSERT INTO `egg_production_data` VALUES ('36', '11', '5', '40');
+INSERT INTO `egg_production_data` VALUES ('37', '11', '1', '50');
+INSERT INTO `egg_production_data` VALUES ('38', '12', '14', '1');
+INSERT INTO `egg_production_data` VALUES ('39', '12', '8', '2');
+INSERT INTO `egg_production_data` VALUES ('40', '12', '6', '3');
+INSERT INTO `egg_production_data` VALUES ('41', '12', '5', '4');
+INSERT INTO `egg_production_data` VALUES ('42', '12', '1', '5');
+INSERT INTO `egg_production_data` VALUES ('43', '13', '14', '11');
+INSERT INTO `egg_production_data` VALUES ('44', '13', '8', '22');
+INSERT INTO `egg_production_data` VALUES ('45', '13', '6', '33');
+INSERT INTO `egg_production_data` VALUES ('46', '13', '5', '44');
+INSERT INTO `egg_production_data` VALUES ('47', '13', '1', '55');
+INSERT INTO `egg_production_data` VALUES ('48', '14', '14', '100');
+INSERT INTO `egg_production_data` VALUES ('49', '14', '8', '200');
+INSERT INTO `egg_production_data` VALUES ('50', '14', '6', '300');
+INSERT INTO `egg_production_data` VALUES ('51', '14', '5', '400');
+INSERT INTO `egg_production_data` VALUES ('52', '14', '1', '500');
 
 -- ----------------------------
 -- Table structure for `egg_production_day`
@@ -4374,7 +4374,7 @@ CREATE TABLE `egg_production_day` (
   PRIMARY KEY (`id`),
   KEY `fk_egg_production_egg_production_day` (`egg_production_id`),
   CONSTRAINT `fk_egg_production_egg_production_day` FOREIGN KEY (`egg_production_id`) REFERENCES `egg_production` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of egg_production_day
@@ -4386,6 +4386,9 @@ INSERT INTO `egg_production_day` VALUES ('6', '2011-06-06 00:00:00', '2', null, 
 INSERT INTO `egg_production_day` VALUES ('9', '2011-06-08 00:00:00', '1', '20', '200', '10', '100', '100', '50', '150', 'asd asd', 'asd');
 INSERT INTO `egg_production_day` VALUES ('10', '2011-06-08 00:00:00', '2', '10', '10', '10', '10', '2', '2', '2', null, null);
 INSERT INTO `egg_production_day` VALUES ('11', '2011-06-13 00:00:00', '3', '21', '41', '11', '31', '2', '1', '3', null, null);
+INSERT INTO `egg_production_day` VALUES ('12', '2011-06-13 00:00:00', '4', null, null, null, null, null, null, null, null, null);
+INSERT INTO `egg_production_day` VALUES ('13', '2011-06-14 00:00:00', '3', null, null, null, null, null, null, null, null, null);
+INSERT INTO `egg_production_day` VALUES ('14', '2011-06-13 00:00:00', '5', null, null, null, null, null, null, null, null, null);
 
 -- ----------------------------
 -- Table structure for `egg_type`
@@ -4396,11 +4399,12 @@ CREATE TABLE `egg_type` (
   `code` int(11) DEFAULT NULL,
   `description` varchar(150) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of egg_type
 -- ----------------------------
+INSERT INTO `egg_type` VALUES ('1', '1000', 'termelői');
 INSERT INTO `egg_type` VALUES ('5', '301', 'nagy');
 INSERT INTO `egg_type` VALUES ('6', '40', 'óriási');
 INSERT INTO `egg_type` VALUES ('8', '20', 'közepes');
