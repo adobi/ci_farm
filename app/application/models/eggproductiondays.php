@@ -117,11 +117,11 @@ class Eggproductiondays extends MY_Model
             
             $lastFilled = $this->getLastFilled();
             
-            $lastFilled->to_date = strtotime($lastFilled->to_date) + 24*3600; // 1 nap, azaz az utolso kitoltott nap utani nap
+            $lastFilled->to_date = date('Y-m-d', strtotime($lastFilled->to_date) + 24*3600); // 1 nap, azaz az utolso kitoltott nap utani nap
             
             $return = $lastFilled;
         }
-        
+        //dump($return);die;
         return $return;
     }
     

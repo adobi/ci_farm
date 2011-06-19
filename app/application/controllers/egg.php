@@ -19,13 +19,13 @@ class Egg extends MY_Controller
          */
         $this->load->model('Eggproductiondays', 'days');
         $lastBlank = $this->days->getLastBlankDate();
-        
+
         $date = time();
         if ($lastBlank) {
-              
+            
             $date = strtotime($lastBlank->to_date);
         } 
-        
+
         $week = date('W', $date);
         $dayOfThisWeek = date('w', $date);
 
@@ -72,8 +72,17 @@ class Egg extends MY_Controller
 	     * @author Dobi Attila
 	     */
 	    $this->session->set_userdata('selected_breedersite', $sites ? $sites[0]->id : 0);
+
+        $this->load->model("Eggproductiondays", "days");
+        $lastBlank = $this->days->getLastBlankDate();
+        
+        $date = time();
+        if ($lastBlank) {
+            
+            $date = strtotime($lastBlank->to_date);
+        }         
         	    
-	    $dates = $this->generateWeek($week);
+	    $dates = $this->generateWeek($week, $date);
 	    $data['week'] = $week;
 	    $data['week_begining'] = $dates['weekBegining'];
 	    $data['week_end'] = $dates['weekEnd'];
@@ -83,7 +92,6 @@ class Egg extends MY_Controller
 	    $feedSum = array();
 	    $eggProductionDeath = array();
 	    $isFilled = array();
-        $this->load->model("Eggproductiondays", "days");
 	    
         if ($this->session->userdata('selected_breedersite') && $dates['selectedWeekDays']) {
             
@@ -103,7 +111,7 @@ class Egg extends MY_Controller
             }
 
         }
-        $data['last_blank'] = $this->days->getLastBlankDate();
+        $data['last_blank'] = $lastBlank;
         //dump(date('Y-m-d', $data['last_blank']->to_date)); die;
         $data['egg_production_sum'] = $eggProductionSum;
         $data['feed_sum'] = $feedSum;
@@ -594,12 +602,13 @@ class Egg extends MY_Controller
 	 * a het sorszamanak megfelelo napokat generalja le
 	 *
 	 * @param string $week 
+	 * @param timestamp $date a het egy datuma
 	 * @return void
 	 * @author Dobi Attila
 	 */
-	private function generateWeek($week) 
+	private function generateWeek($week, $date) 
 	{
-	    $now = time();
+	    $now = $date;
 	    $format = 'Y-m-d';
 	    
 	    $oneDayInSeconds = 24*60*60;
