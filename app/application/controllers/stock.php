@@ -267,7 +267,7 @@ class Stock extends MY_Controller
                 
             $data2 = array(
                 'chicken_stock_id'=>$inserted,
-                'conditionig_date'=>date('Y-m-d H:i:s')
+                'conditioning_date'=>date('Y-m-d H:i:s')
             );
             
             $this->production->insert($data2);

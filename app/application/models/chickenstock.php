@@ -20,15 +20,24 @@ class Chickenstock extends MY_Model
         if ($all) {
             $where = array(); // hack :)
         } else {
-            $where = array("chicken_stock.id in (select chicken_stock_id from egg_production)"=>null);
+            $where = array("chicken_stock.fakk_id is not null" => null, "chicken_stock.id in (select chicken_stock_id from egg_production)"=>null);
+        }
+        
+        $join = array(
+            array('table'=>'chicken_type ct', 'condition'=>'chicken_stock.chicken_type_id = ct.id', 'columns'=>array('ct.name as chicken_type_name')),
+            array('table'=>'fakk f', 'condition'=>'chicken_stock.fakk_id = f.id', 'columns'=>array('f.name as fakk_name')),
+            array('table'=>'egg_production ep', 'condition'=>'ep.chicken_stock_id = chicken_stock.id', 'columns'=>array('is_finished', 'conditioning_date', 'finish_date')),
+            array('table'=>'fakk_group g', 'condition'=>'f.fakk_group_id = g.id', 'columns'=>array('g.name as fakk_group_name')),
+            array('table'=>'stock_yard sy', 'condition'=>'g.stock_yard_id = sy.id', 'columns'=>array('sy.name as stock_yard_name')),
+        );
+        
+        if (!empty($where)) {
+            
         }
         
         $result = $this->fetchRows(array(
             'where'=>$where,
-            'join'=>array(
-                array('table'=>'chicken_type ct', 'condition'=>'chicken_stock.chicken_type_id = ct.id', 'columns'=>array('ct.name as chicken_type_name')),
-                array('table'=>'fakk f', 'condition'=>'chicken_stock.fakk_id = f.id', 'columns'=>array('f.name as fakk_name')),    
-            )
+            'join'=>$join
         ));
         
         return $result;

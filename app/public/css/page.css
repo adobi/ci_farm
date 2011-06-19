@@ -341,11 +341,11 @@ fieldset {
     z-index: 9999;
 }
 
-.next-to-fill {
+.next-to-fill, .not-in-fakk {
     background:#FBE3E4!important;
 }
 
-.filled {
+.filled, .finished-stock {
     background:#D9F7BB!important;
 }
 

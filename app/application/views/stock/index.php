@@ -19,9 +19,9 @@
         <thead>
             <tr>
                 <td class="span-1">Kód</td>
-                <td class="span-2">Fakk</td>
+                <td class="span-3">Fakk</td>
                 <td class="span-4">Részletek</td>
-                <td class="span-4">Szülők</td>
+                <td class="span-3">Szülők</td>
                 <td class="span-2">Számosság</td>
                 <td class="span-4">Dátum</td>
                 <td class="span-2">&nbsp;</td>
@@ -29,33 +29,49 @@
         </thead>
         <tbody class="week-tbody">
         <?php foreach ($stocks as $item): ?>
-            <tr  class="week-tr middle">
+            <tr  class="week-tr middle
+                <?php if ($this->uri->segment(3) === 'all' && $item->is_finished): ?>
+                    finished-stock     
+                <?php endif ?>
+                <?php if (!$item->fakk_id): ?>
+                    not-in-fakk
+                <?php endif ?>
+            ">
                 <td><?= $item->code; ?></td>
-                <td><?= $item->fakk_name; ?></td>
                 <td>
-                    <p>Tyúk: <?= $item->chicken_type_name; ?></p>
-                    <p>Tojás kód: <?= $item->egg_code; ?></p>
-                    <p>Osztály: <?= $item->klass; ?></p>
+                    <?php if ($item->stock_yard_name && $item->fakk_name && $item->fakk_group_name): ?>
+                        <p><strong>Istálló</strong>: <?= $item->stock_yard_name; ?></p>
+                        <p><strong>Fakkcsoport</strong>: <?= $item->fakk_group_name; ?></p>
+                        <p><strong>Fakk</strong>: <?= $item->fakk_name; ?></p>
+                    <?php else: ?>
+                        <em>nincs fakk</em>
+                    <?php endif ?>
+
+                </td>
+                <td>
+                    <p><strong>Tyúk</strong>: <?= $item->chicken_type_name; ?></p>
+                    <p><strong>Tojás kód</strong>: <?= $item->egg_code; ?></p>
+                    <p><strong>Osztály</strong>: <?= $item->klass; ?></p>
                     
                 </td>
                 <td>
                     <p>
-                        Kakas: <?= $item->parent_male_code; ?>
+                        <strong>Kakas</strong>: <?= $item->parent_male_code; ?>
                     <a style="float:right;position:relative;_right:-135px;" href="<?= base_url(); ?>stock/show_parents/<?= $item->id; ?>" rel = "dialog" title = "Szülő állományok">
                         <span class = "show-details-icon"></span>
                     </a>
                     </p>
                     <p>
-                        Jérce: <?= $item->parent_female_code; ?>
+                        <strong>Jérce</strong>: <?= $item->parent_female_code; ?>
                     </p>
                 </td>
                 <td>
-                    <p>Kakas: <?= $item->number_of_male; ?></p>
-                    <p>Jérce: <?= $item->number_of_female; ?></p>
+                    <p><strong>Kakas</strong>: <?= $item->number_of_male; ?></p>
+                    <p><strong>Jérce</strong>: <?= $item->number_of_female; ?></p>
                 </td>
                 <td>
-                    <p>Kelés: <?= date('Y-m-d', strtotime($item->birth_date)); ?></p>
-                    <p>Érvényes: <?= date('Y-m-d', strtotime($item->validity_date)); ?></p>
+                    <p><strong>Kelés</strong>: <?= date('Y-m-d', strtotime($item->birth_date)); ?></p>
+                    <p><strong>Érvényes</strong>: <?= date('Y-m-d', strtotime($item->validity_date)); ?></p>
                 </td>
                 <td>
                     <a href="<?= base_url(); ?>stock/edit/<?= $item->id; ?>" rel = "dialog" title = "Állomány szerkesztése">szerkeszt</a>
