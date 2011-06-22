@@ -23,3 +23,8 @@
     <span>›</span>
     <a href="<?= base_url(); ?>stock" <?= $this->uri->segment(1) === 'stock' ? 'class = "selected-sidemenu-item"' : '' ?>>Állományok</a>
 </li>
+
+<li>
+    <span>›</span>
+    <a href="<?= base_url(); ?>machine" <?= $this->uri->segment(1) === 'machine' ? 'class = "selected-sidemenu-item"' : '' ?>>Keltető gépek</a>
+</li>

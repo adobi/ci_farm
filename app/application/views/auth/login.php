@@ -1,4 +1,4 @@
-<div class = "span-14">
+<div style = "width: 940px;">
     
     <?php if (validation_errors()): ?>
         
@@ -7,8 +7,8 @@
         </div>
         
     <?php endif ?>
-    <fieldset class = "round">
-        <legend>Bejelentkezés</legend>
+    <fieldset class = "round" style = "border:0px;">
+        
         
         <?= form_open('auth/login') ?>
             <p>

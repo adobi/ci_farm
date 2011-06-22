@@ -32,7 +32,11 @@
 	
 	<body>
 	    
-		<div id="container" class = "container">
+		<div id="container" class = "container" 
+		    <?php if (!$this->session->userdata('current_user_id')) : ?>
+		        style = "background:#f1f1f1;"
+		    <?php endif; ?>
+		>
 			<?php if ($this->session->userdata('current_user_id')) : ?>
         		<div id = "header" class = "span-24 _ui-widget-header ui-corner-all">
         		    <div class = "prepend-2 span-20 append-2">
@@ -68,7 +72,11 @@
     
     			</div> <!-- sidebar -->
     		<?php else: ?>
-    		    <p>&nbsp;</p>
+    		    
 			<?php endif; ?>
-			<div id="content" class = "span-20 last">
+			<div id="content" class = "span-20 last"
+    		    <?php if (!$this->session->userdata('current_user_id')) : ?>
+    		        style = "width: 940px;"
+    		    <?php endif; ?>			
+			>
 			    
