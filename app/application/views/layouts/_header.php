@@ -24,6 +24,9 @@
         <script type="text/javascript" charset="utf-8" src = "<?= base_url() ?>js/jquery.cookie.js"></script>
 
         <script type="text/javascript" charset="utf-8" src = "<?= base_url() ?>js/app.js"></script>
+        <script type="text/javascript" charset="utf-8" src = "<?= base_url() ?>js/egg.js"></script>
+        <script type="text/javascript" charset="utf-8" src = "<?= base_url() ?>js/hatching.js"></script>
+        <script type="text/javascript" charset="utf-8" src = "<?= base_url() ?>js/run.js"></script>
 
         <script type="text/javascript">
             App.URL = '<?= base_url() ?>';
@@ -48,7 +51,7 @@
             			        <a href="<?= base_url(); ?>egg">tojástermelés</a>
             			    </li>
             			    <li>
-            			        <a href="<?= base_url(); ?>">keltetés</a>
+            			        <a href="<?= base_url(); ?>hatching">keltetés</a>
             			    </li>
             			    <li>
             			        <a href="<?= base_url(); ?>">nevelés</a>

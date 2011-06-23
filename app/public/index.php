@@ -47,6 +47,10 @@ if (defined('ENVIRONMENT'))
 	}
 }
 
+date_default_timezone_set('Europe/Budapest');
+
+
+
 /*
  *---------------------------------------------------------------
  * SYSTEM FOLDER NAME

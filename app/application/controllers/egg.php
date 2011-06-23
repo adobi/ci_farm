@@ -39,8 +39,6 @@ class Egg extends MY_Controller
     
 	public function week()
 	{
-	    date_default_timezone_set('Europe/Budapest');
-
 	    $week =  $this->uri->segment(3);
 	    
 	    if (false === $week) {
@@ -73,6 +71,19 @@ class Egg extends MY_Controller
 	     */
 	    $this->session->set_userdata('selected_breedersite', $sites ? $sites[0]->id : 0);
 
+	    /**
+	      * tenyeszto lekerdezese
+	      *
+	      * @author Dobi Attila
+	      */ 
+	    $this->load->model("Breeders", "breeders");
+	    $data['breeder'] = $this->breeders->fetchAll(array(), true);
+	    
+		$this->template->build('egg/index', $data);
+	}
+	
+	public function loadweek()
+	{
         $this->load->model("Eggproductiondays", "days");
         $lastBlank = $this->days->getLastBlankDate();
         
@@ -81,8 +92,12 @@ class Egg extends MY_Controller
             
             $date = strtotime($lastBlank->to_date);
         }         
+        $week = $this->uri->segment(3);
+        $data = array();
+        
+        $this->load->library('Week');
         	    
-	    $dates = $this->generateWeek($week, $date);
+	    $dates = $this->week->generate($week, $date);
 	    $data['week'] = $week;
 	    $data['week_begining'] = $dates['weekBegining'];
 	    $data['week_end'] = $dates['weekEnd'];
@@ -120,16 +135,8 @@ class Egg extends MY_Controller
         $data['feed_sum'] = $feedSum;
         $data['egg_production_death'] = $eggProductionDeath;
         $data['is_filled'] = $isFilled;
-
-	    /**
-	      * tenyeszto lekerdezese
-	      *
-	      * @author Dobi Attila
-	      */ 
-	    $this->load->model("Breeders", "breeders");
-	    $data['breeder'] = $this->breeders->fetchAll(array(), true);
-	    
-		$this->template->build('egg/index', $data);
+        
+        $this->template->build('egg/week', $data);
 	}
 	
 	/**
@@ -601,54 +608,6 @@ class Egg extends MY_Controller
 	    die;
 	}
 	
-	/**
-	 * a het sorszamanak megfelelo napokat generalja le
-	 *
-	 * @param string $week 
-	 * @param timestamp $date a het egy datuma
-	 * @return void
-	 * @author Dobi Attila
-	 */
-	private function generateWeek($week, $date) 
-	{
-	    $now = $date;
-	    $format = 'Y-m-d';
-	    
-	    $oneDayInSeconds = 24*60*60;
-	    
-	    $thisWeek = date('W', $now);
-	    $dayOfThisWeek = date('w', $now);
-	    
-	    if ($week === $thisWeek) {
-	        $dateFor = $now;
-	    }
-	    
-	    if ($week < $thisWeek) { //hatra lapozunk
-	        
-	        $diffOfWeeks = $thisWeek - $week;
-	        $dateFor = $now - $diffOfWeeks * 7 * $oneDayInSeconds;
-	    }
-	    
-	    if ($week > $thisWeek) { //elore lapozunk
-	        
-	        $diffOfWeeks = $week - $thisWeek;
-	        $dateFor = $now + $diffOfWeeks * 7 * $oneDayInSeconds;
-	    }
-	    $weekBeginingTimestamp = $dateFor - ($dayOfThisWeek - 1)*$oneDayInSeconds;
-	    
-	    $weekBegining = date($format, $weekBeginingTimestamp);
-	    $weekEndTimestamp = $dateFor + (7-$dayOfThisWeek)*$oneDayInSeconds;
-	    $weekEnd = date($format, $weekEndTimestamp);
-	    
-	    $selectedWeekDays = array();
-	    for ($i = $weekBeginingTimestamp; $i <= $weekEndTimestamp; $i= $i + $oneDayInSeconds) {
-	        
-	        //$selectedWeekDays[] = date('m-d', $i);
-	        $selectedWeekDays[] = $i;
-	    }
-	    
-	    return array('weekBegining'=>$weekBegining, 'weekEnd'=>$weekEnd, 'selectedWeekDays'=>$selectedWeekDays);	    
-	}
 	
 	/**
 	 * ellenorzi, hogy lett e kivalasztva telephely

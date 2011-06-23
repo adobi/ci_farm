@@ -9,4 +9,9 @@
                                 array('egg', 'eggproduction'))): ?>
                         <?php require_once '_sidebar_egg.php'; ?>
                     <?php endif ?>
+                    <?php if (in_array(
+                                $this->uri->segment(1), 
+                                array('hatching'))): ?>
+                        <?php require_once '_sidebar_hatching.php'; ?>
+                    <?php endif ?>
                 </ul>
