@@ -12,7 +12,7 @@ class Machine extends MY_Controller
         
         $this->load->model('Machines', 'model');
         
-        $data['machines'] = $this->model->fetchAll();
+        $data['machines'] = $this->model->fetchAllWithBreedersite();
         
         $this->template->build('machine/index', $data);
     }
@@ -31,7 +31,15 @@ class Machine extends MY_Controller
         }
         $data['current_item'] = $item;
         
+	    $this->load->model("Breedersites", "sites");
+	    $sites = $this->sites->fetchAll(array('order'=>array('by'=>'name', 'dest'=>'asc')));
+	    
+	    $data['breeder_sites'] = $this->sites->toAssocArray('id', 'name+code', $sites);
+	            
+        
         $this->form_validation->set_rules('name', 'Név', 'required|trim');
+        $this->form_validation->set_rules('code', 'Code', 'required|trim');
+        $this->form_validation->set_rules('breeder_site_id', 'Telephely', 'required|trim');
         
         if ($this->form_validation->run()) {
         
