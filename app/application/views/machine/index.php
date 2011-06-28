@@ -6,7 +6,7 @@
     <?php foreach ($machines as $et): ?>
         <p class = "zebra">
             
-            <strong><?= $et->name; ?></strong>
+            <strong><?= $et->breeder_site_name; ?> - <?= $et->name; ?></strong> (<?= $et->code; ?>)
             
             <a href="<?= base_url() ?>machine/delete/<?= $et->id ?>" class = "delete">töröl</a>
 

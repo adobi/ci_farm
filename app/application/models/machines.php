@@ -9,6 +9,12 @@ class Machines extends MY_Model
     
     public function fetchAllWithBreedersite()
     {
-        
+        return $this->fetchAll(
+            array(
+                'join'=>array(
+                    array('table'=>'breeder_site', 'condition'=>'machine.breeder_site_id=breeder_site.id', 'columns'=>array('breeder_site.name as breeder_site_name'))    
+                )    
+            )    
+        );
     }
 }
