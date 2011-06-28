@@ -65,7 +65,7 @@
                                 array('stockyard', 'backgrounddata', 'eggtype', 'chickentype', 'breeder', 'breedersite', 'fakk', 'fakkgroup', 'stock', 'machine')) ? 'class = "selected-header-menu-item"' : ''; ?>>háttér adatok</a>
         			        </li>
         			        <li>
-        			            <a href="<?= base_url(); ?>auth/logout">kilépes</a>
+        			            <a href="<?= base_url(); ?>auth/logout" style="color:#554444;">kilépes <span style="font-family:'lucida grande'">&raquo;</span></a>
         			        </li>			        
             			</ul>
         		    </div>

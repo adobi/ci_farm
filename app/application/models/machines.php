@@ -17,4 +17,16 @@ class Machines extends MY_Model
             )    
         );
     }
+    
+    public function fetchForBreeder($breederSite) 
+    {
+        if (!$breederSite) {
+            
+            return false;
+        }
+        
+        return $this->fetchRows(
+            array('where'=>array('breeder_site_id'=>$breederSite))    
+        );
+    }
 }

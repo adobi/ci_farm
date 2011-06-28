@@ -6,7 +6,7 @@ require_once 'MY_Controller.php';
 
 class Hatching extends MY_Controller 
 {
-    public function index() 
+    public function _index() 
     {
         /**
          * annak a datumnak a meghatarozasa amelyre meg nem szerpel mind a 3 bejegyzes
@@ -33,15 +33,8 @@ class Hatching extends MY_Controller
         redirect(base_url().'hatching/week/'.$week);
     }
     
-    public function week()
+    public function index()
     {
-	    $week =  $this->uri->segment(3);
-	    
-	    if (false === $week) {
-	        
-	        redirect(base_url() . '404');
-	    }
-	    
 	    /**
 	     * TODO ha valtozik az ev akkor azt figyelni. amikor a $week eleri a 0-t az ev - 1, ha eleri a veget akkor ev + 1
 	     *
@@ -67,25 +60,6 @@ class Hatching extends MY_Controller
 	     */
 	    $this->session->set_userdata('selected_breedersite', $sites ? $sites[0]->id : 0);
 
-        //$this->load->model("Eggproductiondays", "days");
-        $lastBlank = false;//$this->days->getLastBlankDate();
-        
-        $date = time();
-        if ($lastBlank) {
-            
-            $date = strtotime($lastBlank->to_date);
-        }         
-        
-        $this->load->library('Week');
-        	    
-	    $dates = $this->week->generate($week, $date);
-	    $data['week'] = $week;
-	    $data['week_begining'] = $dates['weekBegining'];
-	    $data['week_end'] = $dates['weekEnd'];
-	    $data['selected_week_days'] = $dates['selectedWeekDays'];
-	    
-        
-	    
 	    /**
 	      * tenyeszto lekerdezese
 	      *
@@ -93,6 +67,14 @@ class Hatching extends MY_Controller
 	      */ 
 	    $this->load->model("Breeders", "breeders");
 	    $data['breeder'] = $this->breeders->fetchAll(array(), true);
+	    
+	    /**
+	     * a kivalasztott telephelynek megfeleo gepek lekerdezese 
+	     *
+	     * @author Dobi Attila
+	     */
+	    $this->load->model('Machines', 'machines');
+	    $data['machines'] = $this->machines->fetchForBreeder($this->session->userdata('selected_breedersite'));
 	    
 		$this->template->build('hatching/index', $data);	    
     }
