@@ -48,10 +48,10 @@
             			        <a href="<?= base_url(); ?>welcome">kezdőlap</a>
             			    </li>-->
             			    <li>
-            			        <a href="<?= base_url(); ?>egg">tojástermelés</a>
+            			        <a href="<?= base_url(); ?>egg" <?= $this->uri->segment(1) === "egg" ? 'class = "selected-header-menu-item"' : ''; ?>>tojástermelés</a>
             			    </li>
             			    <li>
-            			        <a href="<?= base_url(); ?>hatching">keltetés</a>
+            			        <a href="<?= base_url(); ?>hatching" <?= $this->uri->segment(1) === "hatching" ? 'class = "selected-header-menu-item"' : ''; ?>>keltetés</a>
             			    </li>
             			    <li>
             			        <a href="<?= base_url(); ?>">nevelés</a>
@@ -60,7 +60,9 @@
         			            <a href="<?= base_url(); ?>">értékesítés</a>
         			        </li>
         			        <li>
-        			            <a href="<?= base_url(); ?>backgrounddata">háttér adatok</a>
+        			            <a href="<?= base_url(); ?>backgrounddata" <?= in_array(
+                                $this->uri->segment(1), 
+                                array('stockyard', 'backgrounddata', 'eggtype', 'chickentype', 'breeder', 'breedersite', 'fakk', 'fakkgroup', 'stock', 'machine')) ? 'class = "selected-header-menu-item"' : ''; ?>>háttér adatok</a>
         			        </li>
         			        <li>
         			            <a href="<?= base_url(); ?>auth/logout">kilépes</a>

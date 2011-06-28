@@ -19,12 +19,12 @@
         <thead>
             <tr>
                 <td class="span-1">Kód</td>
-                <td class="span-3">Fakk</td>
+                <td class="span-4">Fakk</td>
                 <td class="span-4">Részletek</td>
                 <td class="span-3">Szülők</td>
                 <td class="span-2">Számosság</td>
                 <td class="span-4">Dátum</td>
-                <td class="span-2">&nbsp;</td>
+                <td class="span-1">&nbsp;</td>
             </tr>
         </thead>
         <tbody class="week-tbody">
