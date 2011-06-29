@@ -58,7 +58,10 @@ class Hatching extends MY_Controller
 	     *
 	     * @author Dobi Attila
 	     */
-	    $this->session->set_userdata('selected_breedersite', $sites ? $sites[0]->id : 0);
+	    if (!$this->session->userdata('selected_breedersite')) {
+	        
+    	    $this->session->set_userdata('selected_breedersite', $sites ? $sites[0]->id : 0);
+	    }
 
 	    /**
 	      * tenyeszto lekerdezese
