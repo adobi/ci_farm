@@ -4,44 +4,122 @@
     </div>
 <?php else: ?>
     <h2 style="padding:5px;"><?= $machine->name ?> (<?= $machine->code ?>) állományai</h2>
+
+    <style type="text/css">
+        .inner-table tr td:nth-child(1) {
+            text-align:left!important;
+        }
+    </style>
     
     <?php if ($eggstocks): ?>
         <table cellspacing="5" cellpadding="5" class = "week-table first">
             <thead>
                 <tr>
-                    <td>Berakva</td>
-                    <td>Darabszám</td>
-                    <td>Tojás</td>
-                    <td>Opciók</td>
+                    <td class="span-4">Berakás</td>
+                    <td class="span-5">Lámpázás</td>
+                    <td class="span-5">Bujtatás</td>
+                    <td class="span-5">Kelés</td>
                 </tr>
             </thead>
             <tbody class = "week-tbody">
                 <?php foreach ($eggstocks as $item): ?>
-                    <!--
-                    <div class="span-19 machine">
-                        Berakva 
-                        <strong>
-                            <?= to_date($item->put_in_date) ?>:
-                            <?= $item->piece ?> 
-                        </strong>
-                        darab
-                        <?= $item->egg_type_description ?>
-                        (<?= $item->egg_type_code ?>)
-                        <div class="inner-nav">
-                            <a href="#">Lámpázás</a> |
-                            <a href="#">Bujtatás</a> |
-                            <a href="#">Kelés</a>
-                        </div>
-                    </div>
-                    -->
+                    
                     <tr class="week-tr">
-                        <td class="text-center"><?= to_date($item->put_in_date) ?></td>
-                        <td class="text-center"><?= $item->piece ?> </td>
-                        <td><?= $item->egg_type_description ?> (Kód: <?= $item->egg_type_code ?>)</td>
-                        <td class="text-center">
-                            <a href="<?= base_url() ?>hatching/step/1/<?= $item->id ?>" rel = "dialog" title = "Lámpázás">Lámpázás</a> |
-                            <a href="<?= base_url() ?>hatching/step/2/<?= $item->id ?>" rel = "dialog" title = "Bujtatás">Bujtatás</a> |
-                            <a href="<?= base_url() ?>hatching/step/3/<?= $item->id ?>" rel = "dialog" title = "Kelés">Kelés</a>
+                        <td style="vertical-align:middle">
+                            <p><strong>Állomány</strong>: <?= $item->stock_code ?></p>
+                            <p><strong>Dátum</strong>: <?= to_date($item->put_in_date) ?></p>
+                            <p><strong>Darab</strong>: <?= $item->piece ?></p>
+                            <p><strong>Fajta</strong>: <?= $item->egg_type_description ?> (Kód: <?= $item->egg_type_code ?>)</p>
+                        </td>
+                        <td>
+                            <?php if ($item->step_1): ?>
+                                <p>
+                                    <strong>Dátum</strong>: <?= to_date($item->step_1->step_date) ?>
+                                </p>
+                                <table class = "inner-table">
+                                    <tr>
+                                        <td>Alkalmatlan</td>
+                                        <td><?= $item->step_1->useless ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Terméketlen</td>
+                                        <td><?= $item->step_1->steril ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Elhalt</td>
+                                        <td><?= $item->step_1->dead ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Befulladt</td>
+                                        <td><?= $item->step_1->rotten ?></td>
+                                    </tr> 
+                                    <tr>
+                                        <td>Selejt</td>
+                                        <td><?= $item->step_1->waste ?></td>
+                                    </tr>                                                                                                                                                
+                                </table>
+                            <?php endif ?>
+                            <p><a href="<?= base_url() ?>hatching/step/1/<?= $item->id ?>" rel = "dialog" title = "Lámpázás">Lámpázás</a></p>
+                        </td>
+                        <td>
+                            <?php if ($item->step_2): ?>
+                                <p>
+                                    <strong>Dátum</strong>: <?= to_date($item->step_2->step_date) ?>
+                                </p>
+                                <table class = "inner-table">
+                                    <tr>
+                                        <td>Alkalmatlan</td>
+                                        <td><?= $item->step_2->useless ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Terméketlen</td>
+                                        <td><?= $item->step_2->steril ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Elhalt</td>
+                                        <td><?= $item->step_2->dead ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Befulladt</td>
+                                        <td><?= $item->step_2->rotten ?></td>
+                                    </tr> 
+                                    <tr>
+                                        <td>Selejt</td>
+                                        <td><?= $item->step_2->waste ?></td>
+                                    </tr>                                                                                                                                                
+                                </table>
+                            <?php endif ?>
+                            <p><a href="<?= base_url() ?>hatching/step/2/<?= $item->id ?>" rel = "dialog" title = "Bujtatás">Bujtatás</a></p>
+                        </td>
+                        <td>
+                            <?php if ($item->step_3): ?>
+                                <p>
+                                    <strong>Dátum</strong>: <?= to_date($item->step_3->step_date) ?>
+                                </p>
+                                <table class = "inner-table">
+                                    <tr>
+                                        <td>Alkalmatlan</td>
+                                        <td><?= $item->step_3->useless ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Terméketlen</td>
+                                        <td><?= $item->step_3->steril ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Elhalt</td>
+                                        <td><?= $item->step_3->dead ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Befulladt</td>
+                                        <td><?= $item->step_3->rotten ?></td>
+                                    </tr> 
+                                    <tr>
+                                        <td>Selejt</td>
+                                        <td><?= $item->step_3->waste ?></td>
+                                    </tr>                                                                                                                                                
+                                </table>
+                            <?php endif ?>
+                            <p><a href="<?= base_url() ?>hatching/step/3/<?= $item->id ?>" rel = "dialog" title = "Kelés">Kelés</a></p>
                         </td>
                     </tr>
                 <?php endforeach ?>

@@ -220,9 +220,15 @@ class Hatching extends MY_Controller
             $_POST['egg_stock_in_machine_id'] = $egg_stock_in_machine_id;
             $_POST['step_id'] = $step;
             
-            $this->hatchingdata->insert($_POST);
+            if ($data['step']) {
+                
+                $this->hatchingdata->update($_POST, $data['step']->id);
+            } else {
+                
+                $this->hatchingdata->insert($_POST);
+            }
             
-            redirect(base_url().$_SERVER['HTTP_REFERER']);
+            redirect($_SERVER['HTTP_REFERER']);
         }
         
         

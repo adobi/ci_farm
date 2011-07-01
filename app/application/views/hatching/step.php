@@ -1,9 +1,6 @@
 <fieldset class = "round inline-block" id = "stock-form">
-    <?php if (!$step): ?>
         
     <?= form_open(); ?>
-
-    <?php endif ?>
         <p>
             <label for="step_date">Dátum</label>
             <input type="text" name = "step_date" value = "<?= $step ? to_date($step->step_date) : date('Y-m-d') ?>" id = "step_date" size = "10"  class = "datepicker"/>
@@ -32,11 +29,8 @@
             <label for="description" style="display:block">Megjegyzés</label>
             <textarea id="description" cols="30" rows="1" name = "description"></textarea>
         </p>
-    <?php if (!$step): ?>
-                
         <p>
             <button>Mentés</button>
         </p>  
     <?= form_close(); ?>
-    <?php endif ?>        
 </fieldset>        

@@ -31,6 +31,17 @@ class Eggstockinmachine extends MY_Model
             )
         );
         
+        if ($result) {
+            
+            $this->load->model('Hatchingdata', 'data');
+            foreach ($result as $item) {
+                
+                $item->step_1 = $this->data->fetchByStepAndInMachineId(1, $item->id);
+                $item->step_2 = $this->data->fetchByStepAndInMachineId(2, $item->id);
+                $item->step_3 = $this->data->fetchByStepAndInMachineId(3, $item->id);
+            }
+        }
+        
         return $result;
     }
 }
