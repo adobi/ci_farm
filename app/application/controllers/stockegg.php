@@ -61,7 +61,7 @@ class Stockegg extends MY_Controller
     }
     
     /**
-     * beolazas, fakk valasztoval
+     * uj tojas allomany
      *
      * @return void
      * @author Dobi Attila
@@ -83,52 +83,28 @@ class Stockegg extends MY_Controller
         }
         
         /**
-         * csirketipusok
+         * tojas tipusok
          *
          * @author Dobi Attila
          */
-        $this->load->model('Chickentypes', 'chickentypes');
-        $data['chickentypes'] = $this->chickentypes->toAssocArray('id', 'name', $this->chickentypes->fetchAll());
-
-
+        $this->load->model('Eggtypes', 'eggtypes');
+        $data['eggtypes'] = $this->eggtypes->toAssocArray('id', 'code+description', $this->eggtypes->fetchAll());
+        
         $this->form_validation->set_rules('code', 'Kód', 'required|trim');
                 
         if ($this->form_validation->run()) {
             
-            $this->insert($_POST);
+        
+            $this->load->model('Eggstock', 'model');
+            
+            $_POST['buyer_breeder_site_id'] = $this->session->userdata('selected_breedersite');
+            
+            $this->model->insert($_POST);
             
             redirect($_SERVER['HTTP_REFERER']);
         }
                 
         $this->template->build('stockegg/add_to_breedersite', $data);    
     }    
-    
-    /**
-     * beszur egy tyukallomany, es felviszi a neki megfelelo sort az egg_production tablaba
-     *
-     * @param array $data 
-     * @return void
-     * @author Dobi Attila
-     */
-    private function insert($data) 
-    {
-        
-        $this->load->model('Eggstock', 'model');
-        
-        $inserted = $this->model->insert($data);
-        
-        
-        if ($inserted) {
-            
-            $this->load->model("Eggproductions", 'production');
-                
-            $data2 = array(
-                'chicken_stock_id'=>$inserted,
-                'conditioning_date'=>date('Y-m-d H:i:s')
-            );
-            
-            $this->production->insert($data2);
-        }
-    }
     
 }

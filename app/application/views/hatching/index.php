@@ -25,10 +25,10 @@
     <?php if ($machines): ?>
         <?php foreach ($machines as $item): ?>
             <div class = "span-19 machine">
-                <strong><?= $item->name; ?></strong> <?= $item->code; ?>
+                <strong><?= $item->name; ?></strong> kód: <?= $item->code; ?>
                 <div class = "inner-nav">
-                    <a href="#">tojás allomány berakása</a> |
-                    <a href="#">tojás állományok</a> |
+                    <a href="<?= base_url() ?>hatching/add_to_machine/<?= $item->id ?>" rel = "dialog" title = "Tojás állomány gépbe rakása">tojás allomány berakása</a> |
+                    <a href="<?= base_url() ?>hatching/eggstocks_in_machine/<?= $item->id ?>">tojás állományok</a> |
                     <a href="#">előző kelések</a>
                 </div>
             </div>

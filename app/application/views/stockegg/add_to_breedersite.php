@@ -10,8 +10,8 @@
             <input type="text" name = "birth_date" id = "birth_date" class = "datepicker" size = "20" value = ""/>
         </p>
         <p>
-            <label for="chicken_type_id">Tyúk típus:</label>
-            <?= form_dropdown('chicken_type_id', $chickentypes, null); ?>
+            <label for="egg_type_id">Tojás típus:</label>
+            <?= form_dropdown('egg_type_id', $eggtypes, null); ?>
         </p>
         <p>
             <label for="klass">Törzskönyvi osztály:</label>
@@ -32,7 +32,12 @@
         <p>
             <label for="parent_female_code_2">Szülőállomány(M)<br /><em>INTRA/KÁBO</em>:</label>
             <input type="text" name = "parent_female_code_2" id = "parent_female_code_2" />
-        </p>                         
+        </p>
+        <p>
+            <label for="piece">Darabszám:</label>
+            <input type="text" name = "piece" id = "piece"  size = "10" value = ""/>
+        </p>  
+        <!--                       
         <p>
             <label for="number_of_male">Kakasok száma:</label>
             <input type="text" name = "number_of_male" id = "number_of_male"  size = "10" value = ""/>
@@ -40,7 +45,8 @@
         <p>
             <label for="number_of_female">Jércék száma:</label>
             <input type="text" name = "number_of_female" id = "number_of_female"  size = "10" value = ""/>
-        </p> 
+        </p>
+        --> 
         <p>
             <label for="egg_code">Tojáskód:</label>
             <input type="text" name = "egg_code" id = "egg_code"  size = "10" value = ""/>

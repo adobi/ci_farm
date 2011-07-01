@@ -219,6 +219,8 @@ class Stock extends MY_Controller
                 
         if ($this->form_validation->run()) {
             
+            $_POST['buyer_breeder_site_id'] = $this->session->userdata('selected_breedersite');
+            
             $this->insert($_POST);
             
             redirect($_SERVER['HTTP_REFERER']);

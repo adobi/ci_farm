@@ -126,4 +126,106 @@ class Hatching extends MY_Controller
         
         redirect($_SERVER['HTTP_REFERER']);
     }
+    
+    /**
+     * elso lepesben, berak egy tojas allomanyt a gepbe
+     *
+     * @return void
+     * @author Dobi Attila
+     */
+    public function add_to_machine()
+    {
+        $data = array();
+        
+        $machine = $this->uri->segment(3);
+        
+        $this->load->model('Eggstock', 'eggstock');
+        $egg_stocks = $this->eggstock->fetchNoInMachine();
+        $data['egg_stocks'] = $this->eggstock->toAssocArray('id', 'code+description', $egg_stocks);
+        
+
+        if (!$egg_stocks) {
+            
+            echo '<div class = "error">Nincs olyan tojás állomány ami ne szerepelne gépben.<br />Vigyen fel új állományt.</div>';
+            die;
+        }
+        
+        
+        $this->form_validation->set_rules('egg_stock_id', 'Tojás állomány', 'trim|required');
+        
+        if ($this->form_validation->run()) {
+            
+            $this->load->model('Eggstockinmachine', 'in_machine');
+            
+            $_POST['put_in_date'] = date('Y-m-d H:i:s');
+            $_POST['machine_id'] = $machine;
+            $this->in_machine->insert($_POST);
+            
+            redirect($_SERVER['HTTP_REFERER']);
+        }
+        
+        $this->template->build('hatching/add_to_machine', $data);
+    }
+    
+    /**
+     * azokat az allomanyokat listazzuk amik adott gepben vannak
+     *
+     * @return void
+     * @author Dobi Attila
+     */
+    public function eggstocks_in_machine()
+    {
+        $machine = $this->uri->segment(3);
+        
+        $data = array();
+        
+        $this->load->model('Machines', 'machine');
+        
+        $data['machine'] = $this->machine->find($machine);
+        
+        $this->load->model('Eggstockinmachine', 'in_machine');
+        
+        $data['eggstocks'] = $this->in_machine->fetchStocksInMachine($machine);
+        
+        $this->template->build('hatching/eggstocks_in_machine', $data);
+    }
+    
+    /**
+     * az lampazas, bujtatas, keles lepeseit
+     *
+     * @return void
+     * @author Dobi Attila
+     */
+    public function step()
+    {
+        $step = $this->uri->segment(3);
+        $egg_stock_in_machine_id = $this->uri->segment(4);
+        
+        if (!$step || $step < 1 || $step > 3) {
+            
+            echo '<div class = "error">Hibás lépés</div>';
+            
+            die;
+        }
+        
+        $data = array();
+        
+        $this->load->model('Hatchingdata', 'hatchingdata');
+        $data['step'] = $this->hatchingdata->fetchByStepAndInMachineId($step, $egg_stock_in_machine_id);
+        
+        $this->form_validation->set_rules('step_date','Dátum', 'trim|required');
+        
+        if ($this->form_validation->run())
+        {
+            $_POST['egg_stock_in_machine_id'] = $egg_stock_in_machine_id;
+            $_POST['step_id'] = $step;
+            
+            $this->hatchingdata->insert($_POST);
+            
+            redirect(base_url().$_SERVER['HTTP_REFERER']);
+        }
+        
+        
+        $this->template->build('hatching/step', $data);
+    }
 }
