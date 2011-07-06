@@ -27,7 +27,7 @@
         </p>                       
         <p>
             <label for="description" style="display:block">Megjegyzés</label>
-            <textarea id="description" cols="30" rows="1" name = "description"></textarea>
+            <textarea id="description" cols="30" rows="1" name = "description"><?= $step ? $step->description : ''; ?></textarea>
         </p>
         <p>
             <button>Mentés</button>
