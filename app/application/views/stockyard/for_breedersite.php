@@ -1,4 +1,4 @@
-<h3 style="padding:10px"><?= $current_breedersite->name ?> istállói</h3>
+<h3 style="padding:10px"><?= $current_breedersite->name ?> ólai</h3>
 
 <p style="padding:10px">
     <a href="<?= base_url() ?>stockyard/edit/breeder_site/<?= $current_breedersite->id ?>" class = "button" rel = "dialog" dialog_id = "0" title = "Új istálló">Új istálló felvitele</a>

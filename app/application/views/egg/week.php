@@ -70,7 +70,7 @@
                         <?php if (array_key_exists($day, $egg_production_death) && ($egg_production_death[$day]->sum_dead_female || $egg_production_death[$day]->sum_dead_male || $egg_production_death[$day]->sum_reject_female || $egg_production_death[$day]->sum_reject_male)): ?>
                             <table class = "inner-table">
                                 <tr>
-                                    <td rowspan = "2" style="vertical-align:middle; background:#F7F7F7;">Elhalt</td>
+                                    <td rowspan = "2" style="vertical-align:middle; background:#F7F7F7;">Elhullás</td>
                                     <td>jérce</td>
                                     <td><strong><?= $egg_production_death[$day]->sum_dead_female ?></strong> db</td>
                                 </tr>

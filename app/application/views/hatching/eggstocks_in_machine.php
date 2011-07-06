@@ -1,9 +1,10 @@
 <?php if (!$machine): ?>
     <div class="error">
-        Nem lett kiválasztva gép, vagy nincs ilyen gép
+        Nem lett kiválasztva gép, vagy nincs ilyen gép. 
+        <a href="<?= base_url() ?>machine/edit" dialog_id = "0" rel = "dialog" title = "Keltető gép felvitele">új keltető gép felvitele</a>
     </div>
 <?php else: ?>
-    <h2 style="padding:5px;"><?= $machine->name ?> (<?= $machine->code ?>) állományai</h2>
+    <h2 style="padding:5px;"><?= $machine->name ?> (<?= $machine->code ?>) aktuális állományai</h2>
 
     <style type="text/css">
         .inner-table tr td:nth-child(1) {
@@ -46,7 +47,7 @@
                                         <td><?= $item->step_1->steril ?></td>
                                     </tr>
                                     <tr>
-                                        <td>Elhalt</td>
+                                        <td>Elhulllt</td>
                                         <td><?= $item->step_1->dead ?></td>
                                     </tr>
                                     <tr>
@@ -59,7 +60,7 @@
                                     </tr>                                                                                                                                                
                                 </table>
                             <?php endif ?>
-                            <p><a href="<?= base_url() ?>hatching/step/1/<?= $item->id ?>" rel = "dialog" title = "Lámpázás">Lámpázás</a></p>
+                            <p style = "margin-top:5px;"><a href="<?= base_url() ?>hatching/step/1/<?= $item->id ?>" rel = "dialog" title = "Lámpázás <?= $item->step_1 ? 'módosítása' : 'felvitele'; ?>" class = "button">Lámpázás</a></p>
                         </td>
                         <td>
                             <?php if ($item->step_2): ?>
@@ -76,7 +77,7 @@
                                         <td><?= $item->step_2->steril ?></td>
                                     </tr>
                                     <tr>
-                                        <td>Elhalt</td>
+                                        <td>Elhulllt</td>
                                         <td><?= $item->step_2->dead ?></td>
                                     </tr>
                                     <tr>
@@ -89,7 +90,7 @@
                                     </tr>                                                                                                                                                
                                 </table>
                             <?php endif ?>
-                            <p><a href="<?= base_url() ?>hatching/step/2/<?= $item->id ?>" rel = "dialog" title = "Bujtatás">Bujtatás</a></p>
+                            <p style = "margin-top:5px;"><a href="<?= base_url() ?>hatching/step/2/<?= $item->id ?>" rel = "dialog" title = "Bujtatás <?= $item->step_2 ? 'módosítása' : 'felvitele'; ?>" class = "button">Bujtatás</a></p>
                         </td>
                         <td>
                             <?php if ($item->step_3): ?>
@@ -106,7 +107,7 @@
                                         <td><?= $item->step_3->steril ?></td>
                                     </tr>
                                     <tr>
-                                        <td>Elhalt</td>
+                                        <td>Elhulllt</td>
                                         <td><?= $item->step_3->dead ?></td>
                                     </tr>
                                     <tr>
@@ -119,7 +120,8 @@
                                     </tr>                                                                                                                                                
                                 </table>
                             <?php endif ?>
-                            <p><a href="<?= base_url() ?>hatching/step/3/<?= $item->id ?>" rel = "dialog" title = "Kelés">Kelés</a></p>
+                            
+                            <p style = "margin-top:5px;"><a href="<?= base_url() ?>hatching/step/3/<?= $item->id ?>" rel = "dialog" title = "Kelés <?= $item->step_3 ? 'módosítása' : 'felvitele'; ?>" class = "button">Kelés</a></p>
                         </td>
                     </tr>
                 <?php endforeach ?>

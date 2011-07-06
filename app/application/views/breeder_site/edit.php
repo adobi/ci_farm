@@ -14,11 +14,11 @@
     <?= form_open(); ?>
     
         <p>
-            <label for="name" class = "block">Név</label>
+            <label for="name" class = "block">Telephely megnevezése</label>
             <input type="text" name="name" value="<?= $current_breeder_site ? $current_breeder_site->name : ''; ?>" id="name" class = "text"/>
         </p>
         <p>
-            <label for="code" class = "block">Kód</label>
+            <label for="code" class = "block">Tenyészet kódja</label>
             <input type="text" name="code" value="<?= $current_breeder_site ? $current_breeder_site->code : ''; ?>" id="code" class = "text"/>
         </p>
         <p>

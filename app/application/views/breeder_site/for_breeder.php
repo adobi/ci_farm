@@ -26,7 +26,7 @@
             <td><?= $item->description; ?></td>
             <td>
                 <!--<a href="<?= base_url(); ?>fakkgroup/for_breedersite/<?= $item->id; ?>">fakk csoportok</a><br />-->
-                <a href="<?= base_url(); ?>stockyard/for_breedersite/<?= $item->id; ?>">istállók</a><br />
+                <a href="<?= base_url(); ?>stockyard/for_breedersite/<?= $item->id; ?>">ólak</a><br />
                 <a href="<?= base_url(); ?>breedersite/edit/<?= $item->id; ?>" dialog_id = "<?= $item->id; ?>" rel = "dialog" title = "Telephely szerkesztése">szerkeszt</a><br />
                 <a href="<?= base_url(); ?>breedersite/delete/<?= $item->id; ?>" class = "delete">töröl</a>
             </td>

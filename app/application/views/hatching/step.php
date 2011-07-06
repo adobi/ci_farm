@@ -7,23 +7,23 @@
         </p>        
         <p>
             <label for="useless">Alkalmatlan</label>
-            <input type="text" name = "useless" value = "<?= $step ? $step->useless : '' ?>" id = "useless" size = "10" />
+            <input type="text" name = "useless" value = "<?= $step ? $step->useless : '' ?>" id = "useless" size = "10" /> darab
         </p>
         <p>
             <label for="steril">Terméketlen</label>
-            <input type="text" name = "steril" value = "<?= $step ? $step->steril : '' ?>" id = "steril" size = "10" />
+            <input type="text" name = "steril" value = "<?= $step ? $step->steril : '' ?>" id = "steril" size = "10" /> darab
         </p>    
         <p>
             <label for="dead">Elhalt</label>
-            <input type="text" name = "dead" value = "<?= $step ? $step->dead : '' ?>" id = "dead" size = "10" />
+            <input type="text" name = "dead" value = "<?= $step ? $step->dead : '' ?>" id = "dead" size = "10" /> darab
         </p>   
         <p>
             <label for="rotten">Befulladt</label>
-            <input type="text" name = "rotten" value = "<?= $step ? $step->rotten : '' ?>" id = "rotten" size = "10" />
+            <input type="text" name = "rotten" value = "<?= $step ? $step->rotten : '' ?>" id = "rotten" size = "10" /> darab
         </p> 
         <p>
             <label for="waste">Selejt</label>
-            <input type="text" name = "waste" value = "<?= $step ? $step->waste : '' ?>" id = "waste" size = "10" />
+            <input type="text" name = "waste" value = "<?= $step ? $step->waste : '' ?>" id = "waste" size = "10" /> darab
         </p>                       
         <p>
             <label for="description" style="display:block">Megjegyzés</label>

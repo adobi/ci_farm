@@ -12,7 +12,7 @@
     </div>
     
     <div class = "span-10 last text-right">
-        <a href="<?= base_url(); ?>stockegg/add_to_breedersite" class = "button" rel = "dialog" title = "Új állomany felvitele és beólazása">Beólazás</a>
+        <a href="<?= base_url(); ?>stockegg/add_to_breedersite" class = "button" rel = "dialog" title = "Új állomany felvitele és beólazása">Új tojás állomány</a>
         <!-- <a href="#" class = "button">Állomány felszámolása</a> -->
     </div>
 </div>
@@ -27,9 +27,9 @@
             <div class = "span-19 machine">
                 <strong><?= $item->name; ?></strong> kód: <?= $item->code; ?>
                 <div class = "inner-nav">
-                    <a href="<?= base_url() ?>hatching/add_to_machine/<?= $item->id ?>" rel = "dialog" title = "Tojás állomány gépbe rakása">tojás allomány berakása</a> |
-                    <a href="<?= base_url() ?>hatching/eggstocks_in_machine/<?= $item->id ?>">tojás állományok</a> |
-                    <a href="#">előző kelések</a>
+                    <a href="<?= base_url() ?>hatching/add_to_machine/<?= $item->id ?>" rel = "dialog" title = "Tojás állomány gépbe rakása" class = "button">tojás allomány berakása</a>
+                    <a href="<?= base_url() ?>hatching/eggstocks_in_machine/<?= $item->id ?>" class = "button">tojás állományok</a>
+                    <a href="#" class = "button">előző kelések</a>
                 </div>
             </div>
         <?php endforeach ?>

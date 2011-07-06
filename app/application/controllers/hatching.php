@@ -157,7 +157,7 @@ class Hatching extends MY_Controller
             
             $this->load->model('Eggstockinmachine', 'in_machine');
             
-            $_POST['put_in_date'] = date('Y-m-d H:i:s');
+            $_POST['put_in_date'] = isset($_POST['put_in_date']) ? $_POST['put_in_date'] : date('Y-m-d H:i:s');
             $_POST['machine_id'] = $machine;
             $this->in_machine->insert($_POST);
             
