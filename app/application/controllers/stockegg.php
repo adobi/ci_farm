@@ -87,8 +87,8 @@ class Stockegg extends MY_Controller
          *
          * @author Dobi Attila
          */
-        $this->load->model('Eggtypes', 'eggtypes');
-        $data['eggtypes'] = $this->eggtypes->toAssocArray('id', 'code+description', $this->eggtypes->fetchAll());
+        $this->load->model('Chickentypes', 'chicken_type');
+        $data['chicken_type'] = $this->chicken_type->toAssocArray('id', 'code+name', $this->chicken_type->fetchAll());
         
         $this->form_validation->set_rules('code', 'Kód', 'required|trim');
                 

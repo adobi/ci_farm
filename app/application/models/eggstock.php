@@ -18,7 +18,7 @@ class Eggstock extends MY_Model
         $result = $this->fetchRows(
             array(
                 'join'=>array(
-                    array('table'=>'egg_type', 'condition'=>'egg_type.id = egg_stock.egg_type_id', 'columns'=>array('egg_type.code as egg_type_code', 'egg_type.description as description'))    
+                    array('table'=>'chicken_type', 'condition'=>'chicken_type.id = egg_stock.chicken_type_id', 'columns'=>array('chicken_type.code as chicken_type_code', 'chicken_type.name as name'))    
                 ),
                 'where'=> array(
                     'egg_stock.id not in (select egg_stock_id from egg_stock_in_machine)' => null   

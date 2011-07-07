@@ -35,7 +35,7 @@ App.Dialog = function() {
                     }
 
                     if ($('.datepicker').length) {
-                        console.log('datepicker found');
+                        //console.log('datepicker found');
                         App.Datepicker();
                     }
                     
@@ -158,7 +158,10 @@ App.CatchLoadWeekDataEvent = function() {
     
     $('body').bind('event_load_week_data', function(event, container, controller) {
          
-        container.load(App.URL+controller+'/loadweek/'+container.attr('data-week'));
+        container.load(App.URL+controller+'/loadweek/'+container.attr('data-week'), function() {
+            
+            $('.button').button();
+        });
     });
 };
 

@@ -141,7 +141,7 @@ class Hatching extends MY_Controller
         
         $this->load->model('Eggstock', 'eggstock');
         $egg_stocks = $this->eggstock->fetchNoInMachine();
-        $data['egg_stocks'] = $this->eggstock->toAssocArray('id', 'code+description', $egg_stocks);
+        $data['egg_stocks'] = $this->eggstock->toAssocArray('id', 'code+name', $egg_stocks);
         
 
         if (!$egg_stocks) {

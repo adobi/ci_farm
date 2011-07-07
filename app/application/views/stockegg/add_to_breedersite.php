@@ -10,8 +10,8 @@
             <input type="text" name = "birth_date" id = "birth_date" class = "datepicker" size = "20" value = ""/>
         </p>
         <p>
-            <label for="egg_type_id">Tojás típus:</label>
-            <?= form_dropdown('egg_type_id', $eggtypes, null); ?>
+            <label for="chicken_type_id">Tyúk típus:</label>
+            <?= form_dropdown('chicken_type_id', $chicken_type, null); ?>
         </p>
         <p>
             <label for="klass">Törzskönyvi osztály:</label>

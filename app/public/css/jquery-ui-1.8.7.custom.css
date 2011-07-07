@@ -126,7 +126,7 @@
 
 /* Interaction Cues
 ----------------------------------*/
-.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight  { border: 1px solid #d2dbf4; background: #f4f8fd; color: #0d2054; -moz-border-radius: 0 !important; -webkit-border-radius: 0 !important; border-radius: 0 !important; }
+.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight  { border: 1px solid #d2dbf4; background: #f4f8fd; color: #0d2054!important; -moz-border-radius: 0 !important; -webkit-border-radius: 0 !important; border-radius: 0 !important; }
 .ui-state-highlight a, .ui-widget-content .ui-state-highlight a,.ui-widget-header .ui-state-highlight a { color: #363636; }
 .ui-state-error, .ui-widget-content .ui-state-error, .ui-widget-header .ui-state-error { border: 1px solid #e2d0d0; background: #fcf0f0; color: #280b0b; -moz-border-radius: 0 !important; -webkit-border-radius: 0 !important; border-radius: 0 !important; }
 .ui-state-error a, .ui-widget-content .ui-state-error a, .ui-widget-header .ui-state-error a { color: #cd0a0a; }
@@ -654,12 +654,13 @@ button.ui-button::-moz-focus-inner { border: 0; padding: 0; } /* reset extra pad
 .ui-datepicker table {width: 100%; font-size: .9em; border-collapse: collapse; margin:0 0 .4em; }
 .ui-datepicker th { padding: .7em .3em; text-align: center; font-weight: bold; border: 0;  }
 .ui-datepicker td { border: 0; padding: 1px; }
-.ui-datepicker td span, .ui-datepicker td a { display: block; padding: .2em; text-align: right; text-decoration: none; }
+.ui-datepicker td span, .ui-datepicker td a { display: block; padding: .2em; text-align: right; text-decoration: none; color: #5F83B9!important}
+.ui-datepicker td a:hover {  background: #5F83B9!important; border-color: #5F83B9!important; color: #FFF!important;  text-shadow: 0 1px 1px #234386; }
 .ui-datepicker .ui-datepicker-buttonpane { background-image: none; margin: .7em 0 0 0; padding:0 .2em; border-left: 0; border-right: 0; border-bottom: 0; }
 .ui-datepicker .ui-datepicker-buttonpane button { float: right; margin: .5em .2em .4em; cursor: pointer; padding: .2em .6em .3em .6em; width:auto; overflow:visible; }
 .ui-datepicker .ui-datepicker-buttonpane button.ui-datepicker-current { float:left; }
 .ui-datepicker .ui-state-default { background: transparent; border-color: #FFF; }
-.ui-datepicker .ui-state-active { background: #5F83B9; border-color: #5F83B9; color: #FFF; font-weight: bold; text-shadow: 0 1px 1px #234386; }
+.ui-datepicker .ui-state-active { background: #5F83B9!important; border-color: #5F83B9!important; color: #FFF; font-weight: bold; text-shadow: 0 1px 1px #234386; }
 
 /* with multiple calendars */
 .ui-datepicker.ui-datepicker-multi { width:auto; }

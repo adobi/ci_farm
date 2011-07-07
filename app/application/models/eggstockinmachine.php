@@ -25,7 +25,7 @@ class Eggstockinmachine extends MY_Model
             array(
                 'join'=>array(
                     array('table'=>'egg_stock', 'condition'=>'egg_stock_in_machine.egg_stock_id = egg_stock.id', 'columns'=>array('egg_stock.code as stock_code', 'egg_stock.piece as piece')),
-                    array('table'=>'egg_type', 'condition'=>'egg_stock.egg_type_id = egg_type.id', 'columns'=>array('egg_type.description as egg_type_description', 'egg_type.code as egg_type_code'))
+                    array('table'=>'chicken_type', 'condition'=>'egg_stock.chicken_type_id = chicken_type.id', 'columns'=>array('chicken_type.name as chicken_type_name', 'chicken_type.code as chicken_type_code'))
                 ),
                 'where'=>array('machine_id'=>$machine)
             )

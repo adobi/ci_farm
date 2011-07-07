@@ -12,14 +12,14 @@
     </div>
 </div>
     
-    <table cellspacing="5" cellpadding="5" class = "week-table first">
+    <table cellspacing="0" cellpadding="0" class = "week-table first">
         <thead>
             <tr>
                 <td></td>
                 <td>Tojás termelés</td>
                 <td>Elhalálozás</td>
                 <td>Tápanyag felhasználás</td>
-                <td  style="width:130px">Egyéb</td>
+                <td  style="width:150px">Egyéb</td>
             </tr>
         </thead>
         <tbody class = "week-tbody">
@@ -59,8 +59,8 @@
                             </table>
                         <?php endif ?>                        
                         <p>
-                            <a href="<?= base_url(); ?>egg/show_production/<?= $day; ?>" rel = "dialog" title = "Termelési adatok <?= date('Y-m-d', $day); ?>">Bővebben</a>
-                            <a href="<?= base_url() ?>egg/add_production/<?= $day; ?>" rel = "dialog" title = "Tojástermelési adat felvitele">Új felvite</a>
+                            <a href="<?= base_url(); ?>egg/show_production/<?= $day; ?>" rel = "dialog" title = "Termelési adatok <?= date('Y-m-d', $day); ?>" class = "button button-small">Bővebben</a>
+                            <a href="<?= base_url() ?>egg/add_production/<?= $day; ?>" rel = "dialog" title = "Tojástermelési adat felvitele" class = "button button-small">Új felvite</a>
                             <!-- <a href="<?= base_url() ?>egg/delete_production">Töröl</a> -->
                         </p>                        
                     </td>
@@ -93,8 +93,8 @@
                         <?php endif ?>
                         
                         <p>
-                            <a href="<?= base_url() ?>egg/show_death/<?= $day ?>" rel = "dialog" title = "Elhalálozási adatok <?= date('Y-m-d', $day) ?>">Bővebben</a>
-                            <a href="<?= base_url() ?>egg/add_death/<?= $day; ?>" rel = "dialog" title = "Elhalálozási adat felvitele">Új felvite</a>
+                            <a href="<?= base_url() ?>egg/show_death/<?= $day ?>" rel = "dialog" title = "Elhalálozási adatok <?= date('Y-m-d', $day) ?>" class = "button button-small">Bővebben</a>
+                            <a href="<?= base_url() ?>egg/add_death/<?= $day; ?>" rel = "dialog" title = "Elhalálozási adat felvitele" class = "button button-small">Új felvite</a>
                             <!-- <a href="<?= base_url() ?>edd/delete_death">Töröl</a> -->
                         </p>                        
                     </td>
@@ -119,8 +119,8 @@
                             <p><em>nincs adat</em></p>
                         <?php endif ?>                        
                         <p>
-                            <a href="<?= base_url(); ?>egg/show_food/<?= $day; ?>" rel = "dialog" title = "Táőanyag adatok <?= date('Y-m-d', $day); ?>">Bővebben</a>
-                            <a href="<?= base_url() ?>egg/add_food/<?= $day; ?>" rel = "dialog" title = "Tápanyag felvitele">Új felvite</a>
+                            <a href="<?= base_url(); ?>egg/show_food/<?= $day; ?>" rel = "dialog" title = "Táőanyag adatok <?= date('Y-m-d', $day); ?>" class = "button button-small">Bővebben</a>
+                            <a href="<?= base_url() ?>egg/add_food/<?= $day; ?>" rel = "dialog" title = "Tápanyag felvitele" class = "button button-small">Új felvite</a>
                             <!-- <a href="<?= base_url() ?>egg/delete_food">Töröl</a> -->
                         </p>
                     </td>
@@ -132,14 +132,14 @@
                          
                         <p>
                             <strong>Megjegyzés</strong><br/>
-                            <a href="<?= base_url() ?>egg/show_comment/<?= $day ?>" rel = "dialog" title = "Megjegyzések">Bővebben</a>
-                            <a href="<?= base_url() ?>egg/add_comment/<?= $day ?>" rel = "dialog" title = "Megjegyzés">Új felvitele</a>
+                            <a href="<?= base_url() ?>egg/show_comment/<?= $day ?>" rel = "dialog" title = "Megjegyzések" class = "button button-small">Bővebben</a>
+                            <a href="<?= base_url() ?>egg/add_comment/<?= $day ?>" rel = "dialog" title = "Megjegyzés" class = "button button-small">Új felvitele</a>
                         </p>
                         <p>&nbsp;</p>
                         <p>
                             <strong>Vitamin</strong><br/>
-                            <a href="<?= base_url() ?>egg/show_vitamin/<?= $day ?>" rel = "dialog" title = "Megjegyzések">Bővebben</a>
-                            <a href="<?= base_url() ?>egg/add_vitamin/<?= $day ?>" rel = "dialog" title = "Vitaminok">Új felvitele</a>
+                            <a href="<?= base_url() ?>egg/show_vitamin/<?= $day ?>" rel = "dialog" title = "Megjegyzések" class = "button button-small">Bővebben</a>
+                            <a href="<?= base_url() ?>egg/add_vitamin/<?= $day ?>" rel = "dialog" title = "Vitaminok" class = "button button-small">Új felvitele</a>
                         </p>
                     </td>
                 </tr>            

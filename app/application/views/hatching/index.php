@@ -32,9 +32,9 @@
                 <div class = "span-19 machine">
                     <strong><?= $item->name; ?></strong> kód: <?= $item->code; ?>
                     <div class = "inner-nav">
-                        <a href="<?= base_url() ?>hatching/add_to_machine/<?= $item->id ?>" rel = "dialog" title = "Tojás állomány gépbe rakása" class = "button">tojás allomány berakása</a>
-                        <a href="<?= base_url() ?>hatching/eggstocks_in_machine/<?= $item->id ?>" class = "button">tojás állományok</a>
-                        <a href="#" class = "button">előző kelések</a>
+                        <a href="<?= base_url() ?>hatching/add_to_machine/<?= $item->id ?>" rel = "dialog" title = "Tojás állomány gépbe rakása" class = "button button-small">tojás allomány berakása</a>
+                        <a href="<?= base_url() ?>hatching/eggstocks_in_machine/<?= $item->id ?>" class = "button button-small">tojás állományok</a>
+                        <a href="#" class = "button button-small">előző kelések</a>
                     </div>
                 </div>
             <?php endforeach ?>

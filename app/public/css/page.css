@@ -381,3 +381,13 @@ fieldset {
     display:inline-block;
     float:right;
 }
+
+.button-small {
+    margin-top:5px;
+
+}
+
+.button-small span {
+    font-size:12px!important;
+    padding: 0.25em 0.45em!important;
+}
