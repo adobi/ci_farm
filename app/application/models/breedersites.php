@@ -23,12 +23,40 @@ class Breedersites extends MY_Model
                         'condition'=>"postal_code.id = $this->_name.postal_code_id"
                     )
                 ),
-                'where'=>array('breeder_id'=>$id)
+                'where'=>array('breeder_id'=>$id, 'is_deleted'=>null)
             )
         );
         
         //dump($result);
         return $result;
+    }
+    
+    public function fetchAll($params = array(), $current = false) 
+    {
+        $result = parent::fetchAll($params, $current);
+        
+        $return = false;
+        if ($result) {
+            
+            foreach ($result as $r) {
+                
+                if (!$r->is_deleted) {
+                    $return[] = $r;
+                }
+            }    
+        }
+        
+        return $return;
+    }
+    
+    public function delete($id) 
+    {
+        if (!$id) {
+            
+            return false;
+        }
+        
+        return $this->update(array('is_deleted'=>1), $id);
     }
     
     public function searchByCodeOrBreeder($term)
