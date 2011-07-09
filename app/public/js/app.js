@@ -49,6 +49,10 @@ App.Dialog = function() {
                         App.Autocomplete($('#postal_zip'),  'postalcode/index/');
                     }
                     
+                    if ($('#zip').length) {
+                        
+                        App.Autocomplete($('#zip'),  'postalcode/index/');
+                    }                    
                     
                     if ($('#buyer_breeder_site_id').length) {
                         

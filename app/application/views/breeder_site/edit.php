@@ -21,10 +21,12 @@
             <label for="code" class = "block">Tenyészet kódja</label>
             <input type="text" name="code" value="<?= $current_breeder_site ? $current_breeder_site->code : ''; ?>" id="code" class = "text"/>
         </p>
+        <!--
         <p>
             <label for="mgszh" class = "block">MGSZH</label>
             <input type="text" name="mgszh" value="<?= $current_breeder_site ? $current_breeder_site->mgszh : ''; ?>" id="mgszh" class = "text"/>
         </p>
+        -->
         <p>
             <label for="code" class = "block">Irányítószam</label>
             <input type="text" name="postal_code_id" value="<?= $current_breeder_site ? $current_breeder_site->postal_code_id : ''; ?>" id="postal_code_id" class = "text" />

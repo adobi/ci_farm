@@ -32,10 +32,45 @@ class Breedersites extends MY_Model
             )
         );
         
-        //dump($result);
+        if ($result) {
+            
+            $this->load->model('Holdingplaces', 'holdingplaces');
+            foreach ($result as $i=>$r) {
+                $r->holdingplaces = $this->holdingplaces->fetchForBreederSite($r->id);
+            }
+        }
+        
         return $result;
     }
-    
+    /*
+    public function find($id)
+    {
+        if (!$id) {
+            
+            return false;
+        }
+        
+        $result = $this->fetchRows(
+            array(
+                'join'=>array(
+                    array(
+                        'table'=>'postal_code pc1',
+                        'columns'=>array('pc1.code as postal_code', 'pc1.city'),
+                        'condition'=>"pc1.id = $this->_name.postal_code_id"
+                    ),
+                    array(
+                        'table'=>'postal_code pc2',
+                        'columns'=>array('pc2.code as postal_postal_code', 'pc2.city as postal_city'),
+                        'condition'=>"pc2.id = $this->_name.postal_zip"
+                    )
+                ),
+                'where'=>array($this->_primary=>$id)
+            ), true
+        );
+        
+        return $result;
+    }
+    */
     public function fetchAll($params = array(), $current = false) 
     {
         $result = parent::fetchAll($params, $current);
