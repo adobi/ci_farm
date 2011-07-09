@@ -23,7 +23,7 @@
         </p>
         <p>
             <label for="zip" class = "block">Tartási hely irányítószáma</label>
-            <input type="text" name = "zip" id = "zip" class = "text" value = "<?= $current_item ? $current_item->zip : '' ?>" />
+            <input type="text" name = "zip" id = "zip" class = "text" value = "<?= $current_item ? $current_item->postal_code . ', ' . $current_item->city : '' ?>" />
         </p>
         <p>
             <label for="address" class = "block">Tartási hely címe</label>

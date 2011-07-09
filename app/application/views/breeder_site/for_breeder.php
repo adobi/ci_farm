@@ -15,7 +15,7 @@
             
     <?php foreach ($breeder_sites as $item): ?>
         <tr class="week-tr middle">
-            <td>
+            <td style="vertical-align:top;">
                 <p>
                     <strong>Üzemeltető neve:</strong> <?= $breeder->name ?>
                 </p>
@@ -55,7 +55,7 @@
             </td>
             <td>
                 <fieldset>
-                    
+                    <legend>Tartási hely</legend>
                     <p><a class = "button button-small" href="<?= base_url() ?>holdingplace/edit/breedersite/<?= $item->id ?>" rel = "dialog" title = "Új tartási hely felvitele">Új tartási hely felvitele</a></p>
                     <?php if ($item->holdingplaces): ?>
                         <?php foreach ($item->holdingplaces as $place): ?>

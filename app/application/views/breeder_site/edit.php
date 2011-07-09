@@ -29,7 +29,7 @@
         -->
         <p>
             <label for="code" class = "block">Irányítószam</label>
-            <input type="text" name="postal_code_id" value="<?= $current_breeder_site ? $current_breeder_site->postal_code_id : ''; ?>" id="postal_code_id" class = "text" />
+            <input type="text" name="postal_code_id" value="<?= $current_breeder_site ? $current_breeder_site->postal_code . ', ' . $current_breeder_site->city : ''; ?>" id="postal_code_id" class = "text" />
         </p>
         <p>
             <label for="address" class = "block">Cím</label>
@@ -41,7 +41,7 @@
         </p>
         <p>
             <label for="postal_zip" class = "block">Tenyészet levelezési irányítószáma</label>
-            <input type="text" name = "postal_zip" class = "text" id = "postal_zip" value = "<?= $current_breeder_site ? $current_breeder_site->postal_zip : '' ?>" />
+            <input type="text" name = "postal_zip" class = "text" id = "postal_zip" value = "<?= $current_breeder_site ? $current_breeder_site->postal_postal_code . ', ' . $current_breeder_site->postal_city : '' ?>" />
         </p>        
         <p>
             <label for="postal_address" class = "block">Tenyészet levelezési címe</label>

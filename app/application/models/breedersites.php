@@ -42,7 +42,7 @@ class Breedersites extends MY_Model
         
         return $result;
     }
-    /*
+
     public function find($id)
     {
         if (!$id) {
@@ -64,13 +64,13 @@ class Breedersites extends MY_Model
                         'condition'=>"pc2.id = $this->_name.postal_zip"
                     )
                 ),
-                'where'=>array($this->_primary=>$id)
+                'where'=>array($this->_name . '.' . $this->_primary=>$id)
             ), true
         );
         
         return $result;
     }
-    */
+
     public function fetchAll($params = array(), $current = false) 
     {
         $result = parent::fetchAll($params, $current);
