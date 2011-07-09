@@ -10,10 +10,11 @@ Target Server Type    : MYSQL
 Target Server Version : 50133
 File Encoding         : 65001
 
-Date: 2011-07-07 23:51:50
+Date: 2011-07-09 19:21:23
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
 -- ----------------------------
 -- Table structure for `breeder`
 -- ----------------------------
@@ -54,6 +55,7 @@ CREATE TABLE `breeder_site` (
   `enar_name` varchar(255) DEFAULT NULL,
   `enar_phone` varchar(255) DEFAULT NULL,
   `enar_email` varchar(255) DEFAULT NULL,
+  `enar_fax` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_breeder_site_breeder` (`breeder_id`),
   KEY `fk_breeder_site_postal_code` (`postal_code_id`),
@@ -64,7 +66,7 @@ CREATE TABLE `breeder_site` (
 -- ----------------------------
 -- Records of breeder_site
 -- ----------------------------
-INSERT INTO `breeder_site` VALUES ('4', '21123', 'izemize', '1310', 'kassai ut 65', '', '3', 'Ebes 2', null, null, null, null, null, null, null, null);
+INSERT INTO `breeder_site` VALUES ('4', '21123', 'izemize', '1310', 'kassai ut 65', '', '3', 'Ebes 2', null, null, null, null, null, null, null, null, null);
 
 -- ----------------------------
 -- Table structure for `chicken_stock`
@@ -4568,6 +4570,71 @@ CREATE TABLE `hatching_data` (
 -- ----------------------------
 INSERT INTO `hatching_data` VALUES ('3', '1200', '200', '300', '123', '10', 'helloka nyaloka', '1', '2011-07-01 00:00:00', '1');
 INSERT INTO `hatching_data` VALUES ('4', '10', '20', '30', '40', '50', '', '2', '2011-07-11 00:00:00', '1');
+
+-- ----------------------------
+-- Table structure for `holding_capacity`
+-- ----------------------------
+DROP TABLE IF EXISTS `holding_capacity`;
+CREATE TABLE `holding_capacity` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type` varchar(150) DEFAULT NULL,
+  `created` datetime DEFAULT NULL,
+  `size` varchar(45) DEFAULT NULL,
+  `holding_place_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_holding_capacity_holding_place` (`holding_place_id`),
+  CONSTRAINT `fk_holding_capacity_holding_place` FOREIGN KEY (`holding_place_id`) REFERENCES `holding_place` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of holding_capacity
+-- ----------------------------
+INSERT INTO `holding_capacity` VALUES ('1', 'istálló hasznos nm', '2011-07-03 00:00:00', '500', '1');
+INSERT INTO `holding_capacity` VALUES ('2', 'istálló hasznos nm', '2011-03-14 00:00:00', '250', '1');
+
+-- ----------------------------
+-- Table structure for `holding_data`
+-- ----------------------------
+DROP TABLE IF EXISTS `holding_data`;
+CREATE TABLE `holding_data` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type` varchar(45) DEFAULT NULL,
+  `start_date` datetime DEFAULT NULL,
+  `end_date` datetime DEFAULT NULL,
+  `size` int(11) DEFAULT NULL,
+  `utilization` varchar(255) DEFAULT NULL,
+  `holding_place_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_holding_data_holding_place` (`holding_place_id`),
+  CONSTRAINT `fk_holding_data_holding_place` FOREIGN KEY (`holding_place_id`) REFERENCES `holding_place` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of holding_data
+-- ----------------------------
+INSERT INTO `holding_data` VALUES ('1', 'házityúk', '2011-07-01 00:00:00', null, '1321', 'hús', '1');
+INSERT INTO `holding_data` VALUES ('2', 'házityúk', '2011-03-01 00:00:00', '2011-05-10 00:00:00', '1200', 'hús', '1');
+
+-- ----------------------------
+-- Table structure for `holding_place`
+-- ----------------------------
+DROP TABLE IF EXISTS `holding_place`;
+CREATE TABLE `holding_place` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `code` varchar(45) DEFAULT NULL,
+  `name` varchar(150) DEFAULT NULL,
+  `zip` int(11) DEFAULT NULL,
+  `address` varchar(150) DEFAULT NULL,
+  `breeder_site_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_holding_place_breeder_site` (`breeder_site_id`),
+  CONSTRAINT `fk_holding_place_breeder_site` FOREIGN KEY (`breeder_site_id`) REFERENCES `breeder_site` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of holding_place
+-- ----------------------------
+INSERT INTO `holding_place` VALUES ('1', '5D076981', 'Baromfi telep', '645', 'Csillag utca 12', '4');
 
 -- ----------------------------
 -- Table structure for `machine`
