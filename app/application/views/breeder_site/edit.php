@@ -34,6 +34,38 @@
             <input type="text" name="address" value="<?= $current_breeder_site ? $current_breeder_site->address : ''; ?>" id="address" class = "text" />
         </p>
         <p>
+            <label for="registered" class = "block">Tartó viszony kezdete</label>
+            <input type="text" name = "registered" class = "datepicker text" id = "registered" value = "<?= $current_breeder_site ? to_date($current_breeder_site->registered) : '' ?>" />
+        </p>
+        <p>
+            <label for="postal_zip" class = "block">Tenyészet levelezési irányítószáma</label>
+            <input type="text" name = "postal_zip" class = "text" id = "postal_zip" value = "<?= $current_breeder_site ? $current_breeder_site->postal_zip : '' ?>" />
+        </p>        
+        <p>
+            <label for="postal_address" class = "block">Tenyészet levelezési címe</label>
+            <input type="text" name = "postal_address" class = "text" id = "postal_address" value = "<?= $current_breeder_site ? $current_breeder_site->postal_address : '' ?>" />
+        </p>        
+        <p>
+            <label for="type" class = "block">Típus</label>
+            <input type="text" name = "type" class = "text" id = "type" value = "<?= $current_breeder_site ? $current_breeder_site->type : '' ?>" />
+        </p> 
+        <p>
+            <label for="enar_name" class = "block">ENAR-felelős neve</label>
+            <input type="text" name = "enar_name" class = "text" id = "enar_name" value = "<?= $current_breeder_site ? $current_breeder_site->enar_name : '' ?>" />
+        </p> 
+        <p>
+            <label for="enar_phone" class = "block">ENAR-felelős telefonszáma</label>
+            <input type="text" name = "enar_phone" class = "text" id = "enar_phone" value = "<?= $current_breeder_site ? $current_breeder_site->enar_phone : '' ?>" />
+        </p> 
+        <p>
+            <label for="enar_fax" class = "block">ENAR-felelős faxszáma</label>
+            <input type="text" name = "enar_fax" class = "text" id = "enar_fax" value = "<?= $current_breeder_site ? $current_breeder_site->enar_fax : '' ?>" />
+        </p> 
+        <p>
+            <label for="enar_email" class = "block">ENAR-felelős email címe</label>
+            <input type="text" name = "enar_email" class = "text" id = "enar_email" value = "<?= $current_breeder_site ? $current_breeder_site->enar_email : '' ?>" />
+        </p>                                
+        <p>
             <label for="description" class = "block">Megjegyzés</label>
             <textarea name="description" cols="40" rows="2"><?= $current_breeder_site ? $current_breeder_site->description : ''; ?></textarea>
         </p>

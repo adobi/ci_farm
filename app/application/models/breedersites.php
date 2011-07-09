@@ -18,9 +18,14 @@ class Breedersites extends MY_Model
             array(
                 'join'=>array(
                     array(
-                        'table'=>'postal_code',
-                        'columns'=>array('postal_code.code as postal_code', 'city'),
-                        'condition'=>"postal_code.id = $this->_name.postal_code_id"
+                        'table'=>'postal_code pc1',
+                        'columns'=>array('pc1.code as postal_code', 'pc1.city'),
+                        'condition'=>"pc1.id = $this->_name.postal_code_id"
+                    ),
+                    array(
+                        'table'=>'postal_code pc2',
+                        'columns'=>array('pc2.code as postal_postal_code', 'pc2.city as postal_city'),
+                        'condition'=>"pc2.id = $this->_name.postal_zip"
                     )
                 ),
                 'where'=>array('breeder_id'=>$id, 'is_deleted'=>null)
