@@ -51,7 +51,6 @@ class Breedersite extends MY_Controller
         $data['current_item'] = $item;
         
         $this->form_validation->set_rules('code', 'Kód', 'trime|required');
-        $this->form_validation->set_rules('mgszh', 'MGSZH', 'trime|required');
         $this->form_validation->set_rules('postal_code_id', 'Irányítószám', 'trime|required');
         $this->form_validation->set_rules('address', 'Cím', 'trime|required');
         
@@ -116,8 +115,22 @@ class Breedersite extends MY_Controller
         }
         
         $data['breeder'] = $breeder;
-        $data['breeder_sites'] = $this->site->fetchForBreeder($id);
-        
+        $sites = $this->site->fetchAll();
+	    
+	    $data['breeder_sites_select'] = $this->site->toAssocArray('id', 'name+code', $sites);
+	    
+	    /**
+	     * mi van alapbol kivalasztva
+	     *
+	     * @author Dobi Attila
+	     */
+	    if (!$this->session->userdata('selected_breedersite')) {
+	        
+    	    $this->session->set_userdata('selected_breedersite', $sites ? $sites[0]->id : 0);
+	    }	    
+	    
+        $data['breeder_sites'] = $this->site->fetchWithHoldingData($this->session->userdata('selected_breedersite'));
+	    
         $this->template->build('breeder_site/for_breeder', $data);
     }
     

@@ -7,7 +7,7 @@ class Breedersites extends MY_Model
     protected $_name = "breeder_site";
     protected $_primary = "id";
     
-    public function fetchForBreeder($id) 
+    public function fetchWithHoldingData($id) 
     {
         if (!$id) {
             
@@ -28,10 +28,10 @@ class Breedersites extends MY_Model
                         'condition'=>"pc2.id = $this->_name.postal_zip"
                     )
                 ),
-                'where'=>array('breeder_id'=>$id, 'is_deleted'=>null)
+                'where'=>array("$this->_name.$this->_primary"=>$id, 'is_deleted'=>null)
             )
         );
-        
+        //dump($result); die;
         if ($result) {
             
             $this->load->model('Holdingplaces', 'holdingplaces');

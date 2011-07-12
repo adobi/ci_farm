@@ -1,7 +1,18 @@
-<h2 style="padding:10px;"><?= $breeder->name; ?> telephelyei</h2>
-<p style="padding:10px;">
-    <a class = "button" href="<?= base_url() ?>breedersite/edit/breeder/<?= $breeder->id ?>" dialog_id = "0" rel = "dialog" title = "Új telephely felvitele">új telephely</a>
-</p>
+<h2 style="padding:10px;margin-bottom:0px; padding-bottom:0px;"><?= $breeder->name; ?> telephelyei</h2>
+
+<div class = "span-20" style="margin-bottom:20px">
+    <div class = "span-20 first inline-block">
+        
+        <?php if (isset($breeder_sites_select) && count($breeder_sites_select) !== 1): ?>
+            <label for="breedersite-select" style="display:inline">Válasszon telephelyet</label>
+            <?= form_dropdown('breeder_site_id', $breeder_sites_select, $this->session->userdata('selected_breedersite')); ?>
+        <?php else: ?>
+            <strong>Előbb vigyen fel telephelyet</strong>              
+        <?php endif ?>
+        <a href="<?= base_url(); ?>breedersite/edit/breeder/<?= $breeder->id; ?>" rel = "dialog" title = "Új telephely felvitele">Új telephely</a>
+        
+    </div>
+</div>
 
 <?php if ($breeder_sites): ?>
     <table class = "week-table">
@@ -47,7 +58,7 @@
                     <strong>ENAR felelős email címe:</strong> <?= $item->enar_email ?>
                 </p>
                 <p>
-                    <a class = "button button-small" href="<?= base_url(); ?>stockyard/for_breedersite/<?= $item->id; ?>">ólak</a>
+                    <a class = "button button-small" href="<?= base_url(); ?>stockyard/for_breedersite/<?= $item->id; ?>">istállók</a>
                     <a class = "button button-small" href="<?= base_url(); ?>breedersite/edit/<?= $item->id; ?>" dialog_id = "<?= $item->id; ?>" rel = "dialog" title = "Telephely szerkesztése">szerkeszt</a>
                     <a class = "button button-small delete" href="<?= base_url(); ?>breedersite/delete/<?= $item->id; ?>">töröl</a>
                 </p>
