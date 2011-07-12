@@ -88,7 +88,7 @@ class Breedersite extends MY_Controller
             
             $this->model->delete($id);
         }
-        
+        $this->session->unset_userdata('selected_breedersite');
         redirect($_SERVER['HTTP_REFERER']);
     }
     

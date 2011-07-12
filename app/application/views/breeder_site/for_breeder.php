@@ -67,7 +67,6 @@
             <td>
                 <fieldset>
                     <legend>Tartási hely</legend>
-                    <p><a class = "button button-small" href="<?= base_url() ?>holdingplace/edit/breedersite/<?= $item->id ?>" rel = "dialog" title = "Új tartási hely felvitele">Új tartási hely felvitele</a></p>
                     <?php if ($item->holdingplaces): ?>
                         <?php foreach ($item->holdingplaces as $place): ?>
                             <p>
@@ -151,6 +150,9 @@
                                 
                             </fieldset>
                         <?php endforeach ?>
+                    <?php else: ?>
+                        <p><a class = "button button-small" href="<?= base_url() ?>holdingplace/edit/breedersite/<?= $item->id ?>" rel = "dialog" title = "Új tartási hely felvitele">Új tartási hely felvitele</a></p>
+
                     <?php endif ?>
                 </fieldset>
             </td>
