@@ -15,18 +15,12 @@
 </div>
 
 <?php if ($breeder_sites): ?>
-    <table class = "week-table">
-        <thead>
-            <tr>
-                <td class = "span-7">Telephely adatai</td>
-                <td class = "span-13">Tartási helyek</td>
-            </tr>
-        </thead>
-        <tbody class="week-tbody">
-            
+   
     <?php foreach ($breeder_sites as $item): ?>
-        <tr class="week-tr middle">
-            <td style="vertical-align:top;">
+        <fieldset>
+            <legend>Telepgely adatai</legend>
+            <div class="span-9">
+                
                 <p>
                     <strong>Üzemeltető neve:</strong> <?= $breeder->name ?>
                 </p>
@@ -37,11 +31,16 @@
                     <strong>Tenyészet neve:</strong> <?= $item->name ?>
                 </p>
                 <p>
-                    <strong>Tenyészet címe: </strong> <br /> <?= $item->postal_code ?>, <?= $item->city ?>, <?= $item->address ?>
+                    <strong>Tenyészet címe: </strong><?= $item->postal_code ?>, <?= $item->city ?>, <?= $item->address ?>
                 </p>
                 <p>
-                    <strong>Tenyészet levelezési címe: </strong><br/> <?= $item->postal_postal_code ?>, <?= $item->postal_city ?>, <?= $item->postal_address ?>
+                    <strong>Tenyészet levelezési címe: </strong>
+                    
+                    <?= $item->postal_postal_code ?>, <?= $item->postal_city ?>, <?= $item->postal_address ?>
                 </p>
+            </div>
+            <div class="span-9">
+                
                 <p>
                     <strong>Típus:</strong> <?= $item->type ?>
                 </p>
@@ -57,14 +56,16 @@
                 <p>
                     <strong>ENAR felelős email címe:</strong> <?= $item->enar_email ?>
                 </p>
+            </div>
+            <div class="span-20">
+                
                 <p>
                     <a class = "button button-small" href="<?= base_url(); ?>stockyard/for_breedersite/<?= $item->id; ?>">istállók</a>
                     <a class = "button button-small" href="<?= base_url(); ?>breedersite/edit/<?= $item->id; ?>" dialog_id = "<?= $item->id; ?>" rel = "dialog" title = "Telephely szerkesztése">szerkeszt</a>
                     <a class = "button button-small delete" href="<?= base_url(); ?>breedersite/delete/<?= $item->id; ?>">töröl</a>
                 </p>
-                
-            </td>
-            <td>
+            </div>
+        </fieldset>
                 <fieldset>
                     <legend>Tartási hely</legend>
                     <?php if ($item->holdingplaces): ?>
@@ -155,11 +156,7 @@
 
                     <?php endif ?>
                 </fieldset>
-            </td>
-        </tr>
     <?php endforeach ?>
-        </tbody>
-    </table>
 <?php endif ?>
 
 <?php if ($this->session->userdata('validation_error')): ?>
