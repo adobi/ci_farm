@@ -6,6 +6,8 @@ class Breeder extends MY_Controller {
 
 	public function index()
 	{
+	    $this->session->unset_userdata('selected_breedersite');
+	    
 	    $data = array();
 	    
 	    $this->load->model('Breeders', 'breeder');

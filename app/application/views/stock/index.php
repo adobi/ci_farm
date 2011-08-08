@@ -74,7 +74,8 @@
                     <p><strong>Érvényes</strong>: <?= date('Y-m-d', strtotime($item->validity_date)); ?></p>
                 </td>
                 <td>
-                    <a href="<?= base_url(); ?>stock/edit/<?= $item->id; ?>" rel = "dialog" title = "Állomány szerkesztése">szerkeszt</a>
+                    <a href="<?= base_url(); ?>stock/edit/<?= $item->id; ?>" class="button button-small" rel = "dialog" title = "Állomány szerkesztése">szerkeszt</a>
+                    <a href="<?= base_url(); ?>stock/delete/<?= $item->id; ?>" class="button button-small">töröl</a>
                 </td>
             </tr>
         <?php endforeach ?>

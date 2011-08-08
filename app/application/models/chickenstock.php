@@ -6,7 +6,7 @@ class Chickenstock extends MY_Model
 {
     protected $_name = "chicken_stock";
     protected $_primary = "id";
-   
+    
     /** 
      * listazza az allomanyokat a $all-nak megfeleloen. ha igaz akkor minden a rendszerben elofordulo allomanyt hoz,
      * ha hamis akkor csak azokat amik eppen be vannak olazva 

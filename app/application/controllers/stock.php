@@ -106,7 +106,7 @@ class Stock extends MY_Controller
         $id = $this->uri->segment(3);
         
         if ($id) {
-            $this->load->model('ChickenStock', 'model');
+            $this->load->model('Chickenstock', 'model');
             
             $this->model->delete($id);
         }
@@ -128,7 +128,7 @@ class Stock extends MY_Controller
         
         if ($id) {
             
-            $this->load->model('ChickenStock', 'stock');
+            $this->load->model('Chickenstock', 'stock');
             $this->load->model('Fakks', 'fakks');
             
             $data['current_fakk'] = $this->fakks->find($id);

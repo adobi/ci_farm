@@ -19,7 +19,7 @@
     <?php foreach ($breeder_sites as $item): ?>
         <fieldset>
             <legend>Telepgely adatai</legend>
-            <div class="span-9">
+            <div class="span-20">
                 
                 <p>
                     <strong>Üzemeltető neve:</strong> <?= $breeder->name ?>
@@ -39,7 +39,7 @@
                     <?= $item->postal_postal_code ?>, <?= $item->postal_city ?>, <?= $item->postal_address ?>
                 </p>
             </div>
-            <div class="span-9">
+            <div class="span-20">
                 
                 <p>
                     <strong>Típus:</strong> <?= $item->type ?>

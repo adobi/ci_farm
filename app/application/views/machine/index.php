@@ -1,17 +1,17 @@
 <p>
-    <a href="<?= base_url() ?>machine/edit" dialog_id = "0" rel = "dialog" title = "Keltető gép felvitele">új keltető gép felvitele</a>
+    <a class="button" href="<?= base_url() ?>machine/edit" dialog_id = "0" rel = "dialog" title = "Keltető gép felvitele">új keltető gép felvitele</a>
 </p>
 
 <?php if ($machines): ?>
     <?php foreach ($machines as $et): ?>
-        <p class = "zebra">
+        <div class = "zebra span-19">
             
             <strong><?= $et->breeder_site_name; ?> - <?= $et->name; ?></strong> (<?= $et->code; ?>)
             
-            <a href="<?= base_url() ?>machine/delete/<?= $et->id ?>" class = "delete">töröl</a>
+            <a class="button button-small" href="<?= base_url() ?>machine/delete/<?= $et->id ?>" class = "delete">töröl</a>
 
-            <a href="<?= base_url() ?>machine/edit/<?= $et->id ?>" dialog_id = "<?= $et->id ?>" rel = "dialog" title = "Tojástípus szerkesztése">szerkeszt</a>
-        </p>
+            <a class="button button-small" href="<?= base_url() ?>machine/edit/<?= $et->id ?>" dialog_id = "<?= $et->id ?>" rel = "dialog" title = "Tojástípus szerkesztése">szerkeszt</a>
+        </div>
     <?php endforeach ?>
 <?php endif ?>
 

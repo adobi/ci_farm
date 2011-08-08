@@ -44,9 +44,9 @@
         		<div id = "header" class = "span-24 _ui-widget-header ui-corner-all">
         		    <div class = "prepend-2 span-20 append-2">
             			<ul id = "header-menu" class = "span-20">
-            			    <!--<li>
-            			        <a href="<?= base_url(); ?>welcome">kezdőlap</a>
-            			    </li>-->
+            			    <li>
+            			        <a href="<?= base_url(); ?>welcome"><img src="<?= base_url(); ?>img/home.png" alt="" width=24 height=24></a>
+            			    </li>
             			    <li>
             			        <a href="<?= base_url(); ?>egg" <?= $this->uri->segment(1) === "egg" ? 'class = "selected-header-menu-item"' : ''; ?>>tojástermelés</a>
             			    </li>
@@ -70,18 +70,25 @@
             			</ul>
         		    </div>
         		</div> <!-- header -->
-        		
-    			<div id = "sidebar" class = "span-4 ui-corner-all">
-    
-                    <?php require_once '_sidebar.php'; ?>
-    
-    			</div> <!-- sidebar -->
+        		<?php if ($this->uri->segment(1) !== 'welcome'): ?>
+        		    
+        			<div id = "sidebar" class = "span-4 ui-corner-all">
+        
+                        <?php require_once '_sidebar.php'; ?>
+        
+        			</div> <!-- sidebar -->
+        		<?php else: ?>
+                    <div class="prepend-4"></div>
+        		<?php endif ?>
     		<?php else: ?>
     		    
 			<?php endif; ?>
-			<div id="content" class = "span-20 last"
+			<div id="content" class = "span-<?= $this->uri->segment(1) === 'welcome' ? 24 : 20 ?> last"
     		    <?php if (!$this->session->userdata('current_user_id')) : ?>
     		        style = "width: 940px;"
     		    <?php endif; ?>			
 			>
-			    
+			    <?php if ($this->session->userdata('current_user_id') && $this->uri->segment(1) !== 'welcome'): ?>
+			        <p class="span-20"><a href="<?= $_SERVER['HTTP_REFERER']; ?>"><span style="font-familye:'lucida grande';font-size:1.1em">&laquo;</span> vissza az előző oldalra</a></p>
+			    <?php endif ?>
+			        

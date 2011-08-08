@@ -126,7 +126,7 @@ class Breedersite extends MY_Controller
 	     */
 	    if (!$this->session->userdata('selected_breedersite')) {
 	        
-    	    $this->session->set_userdata('selected_breedersite', $sites ? $sites[0]->id : 0);
+    	    //$this->session->set_userdata('selected_breedersite', $sites ? $sites[0]->id : 0);
 	    }	    
 	    
         $data['breeder_sites'] = $this->site->fetchWithHoldingData($this->session->userdata('selected_breedersite'));
