@@ -9,9 +9,9 @@
         <div class = "zebra span-19 round" style = "border:1px solid #ccc;">
             <?= $item->name ?>
             <p style="text-align:right">
-                <a href="<?= base_url() ?>stockyard/delete/<?= $item->id ?>">töröl</a>
-                <a href="<?= base_url() ?>stockyard/edit/<?= $item->id ?>/breeder_site/<?= $item->breeder_site_id ?>" rel = "dialog" dialog_id = "<?= $item->id ?>" title = "Istálló szerkesztése">szerkeszt</a>
-                <a href="<?= base_url() ?>fakkgroup/for_stockyard/<?= $item->id ?>">fakk csoportok</a>
+                <a class="button button-small" href="<?= base_url() ?>stockyard/delete/<?= $item->id ?>">töröl</a>
+                <a class="button button-small" href="<?= base_url() ?>stockyard/edit/<?= $item->id ?>/breeder_site/<?= $item->breeder_site_id ?>" rel = "dialog" dialog_id = "<?= $item->id ?>" title = "Istálló szerkesztése">szerkeszt</a>
+                <a class="button button-small" href="<?= base_url() ?>fakkgroup/for_stockyard/<?= $item->id ?>">fakk csoportok</a>
             </p>
         </div>
     <?php endforeach ?>

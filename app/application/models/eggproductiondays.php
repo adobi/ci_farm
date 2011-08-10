@@ -52,6 +52,7 @@ class Eggproductiondays extends MY_Model
                 			join fakk f on c.fakk_id = f.id 
                 			join fakk_group g on f.fakk_group_id = g.id 
                 			join stock_yard sy on g.stock_yard_id = sy.id and sy.breeder_site_id = $site
+                			where c.is_deleted is null
                 	) 
                 )";
                 
@@ -79,6 +80,7 @@ class Eggproductiondays extends MY_Model
                 			join fakk f on c.fakk_id = f.id 
                 			join fakk_group g on f.fakk_group_id = g.id
                 			join stock_yard sy on g.stock_yard_id = sy.id and sy.breeder_site_id = $site
+                			where c.is_deleted is null
                 	) 
                 )";
                 
@@ -97,7 +99,7 @@ class Eggproductiondays extends MY_Model
                     to_date 
                 from 
                     $this->_name epd join egg_production ep on epd.egg_production_id = ep.id
-                    join chicken_stock cs on ep.chicken_stock_id = cs.id and cs.fakk_id is not null
+                    join chicken_stock cs on ep.chicken_stock_id = cs.id and cs.fakk_id is not null and cs.is_deleted is null
                 where 
                     dead_male is null or dead_female is null or 
                     reject_male is null or reject_female is null or 
@@ -116,12 +118,17 @@ class Eggproductiondays extends MY_Model
         } else {
             
             $lastFilled = $this->getLastFilled();
-            
-            $lastFilled->to_date = date('Y-m-d', strtotime($lastFilled->to_date) + 24*3600); // 1 nap, azaz az utolso kitoltott nap utani nap
-            
+            if ($lastFilled->to_date) {
+                
+                $lastFilled->to_date = date('Y-m-d', strtotime($lastFilled->to_date) + 24*3600); // 1 nap, azaz az utolso kitoltott nap utani nap
+                
+            } else {
+                $lastFilled->to_date = date('Y-m-d', time());
+            }
             $return = $lastFilled;
         }
         //dump($return);die;
+        //dump($return);
         return $return;
     }
     
@@ -132,7 +139,7 @@ class Eggproductiondays extends MY_Model
                 from 
                     $this->_name epd 
                     join egg_production ep on epd.egg_production_id = ep.id 
-                    join chicken_stock cs on ep.chicken_stock_id = cs.id and cs.fakk_id is not null
+                    join chicken_stock cs on ep.chicken_stock_id = cs.id and cs.fakk_id is not null and cs.is_deleted is null
                 where
                     
                     dead_male is not null and dead_female is not null and 
@@ -146,7 +153,7 @@ class Eggproductiondays extends MY_Model
         $sql = "select 
                     ep.id 
                 from egg_production ep
-                    join chicken_stock cs on ep.chicken_stock_id = cs.id and cs.fakk_id is not null
+                    join chicken_stock cs on ep.chicken_stock_id = cs.id and cs.fakk_id is not null and cs.is_deleted is null
                 where ep.is_finished is null and ep.finish_date is null";
         
         $stocks = $this->execute($sql);
@@ -156,7 +163,7 @@ class Eggproductiondays extends MY_Model
             return false;
         }
         */
-        
+        //dump($result);
         return $result ? current($result) : false;
         
     }
@@ -168,7 +175,7 @@ class Eggproductiondays extends MY_Model
                 from 
                     $this->_name epd 
                     join egg_production ep on epd.egg_production_id = ep.id 
-                    join chicken_stock cs on ep.chicken_stock_id = cs.id and cs.fakk_id is not null
+                    join chicken_stock cs on ep.chicken_stock_id = cs.id and cs.fakk_id is not null and cs.is_deleted is null
                 where
                     date(epd.to_date) = '$date' and 
                     dead_male is not null and dead_female is not null and 
@@ -182,12 +189,12 @@ class Eggproductiondays extends MY_Model
         $sql = "select 
                     ep.id 
                 from egg_production ep
-                    join chicken_stock cs on ep.chicken_stock_id = cs.id and cs.fakk_id is not null
+                    join chicken_stock cs on ep.chicken_stock_id = cs.id and cs.fakk_id is not null and cs.is_deleted is null
                 where ep.is_finished is null and ep.finish_date is null";
         
         $stocks = $this->execute($sql);
         //dump($stocks);
-        return count($result) === count($stocks);
+        return $result && $stocks && count($result) === count($stocks);
     }
     
 }

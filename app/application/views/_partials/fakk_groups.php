@@ -21,7 +21,7 @@
                 <div class = "fakks-list" group = "<?= $item['group']->id; ?>">
                     <?php if ($item['fakks']): ?>
                         <?php foreach ($item['fakks'] as $fakk): ?>
-                            <p class = "p-list-item yellow round" fakkid = "<?= $fakk->id; ?>" style = "cursor:move;">
+                            <div class = "span-8 p-list-item yellow round" fakkid = "<?= $fakk->id; ?>" style = "cursor:move;">
                                 <?= $fakk->name; ?>
                                 <?php if ($this->uri->segment(1) === 'egg'): ?>
                                 
@@ -30,18 +30,19 @@
                                 <?php endif ?>
                                 
                                 <?php if ($this->uri->segment(1) === 'fakkgroup'): ?>
-                                    <a style = "float:right;" href="<?= base_url(); ?>fakk/delete/<?= $fakk->id; ?>" class = "delete">töröl</a>
-                                    
+                                
+                                    <a style="float:right;" class="button button-small" href="<?= base_url(); ?>fakk/delete/<?= $fakk->id; ?>" class = "delete">töröl</a>
+                                
                                     <!-- <a href="<?= base_url(); ?>stock/for_fakk/<?= $fakk->id; ?>">állományok</a> -->
                                 <?php endif ?>
-                            </p>
+                            </div>
                         <?php endforeach ?>
                     <?php else: ?>
                         
                     <?php endif ?>
                 </div>
                 <p style = "margin-bottom:5px;">
-                    <a style = "float:none;" rel = "dialog" title = "Új fakk a(z) <?= $item['group']->name; ?> csoporthoz" 
+                    <a class="button button-small" style = "float:none;" rel = "dialog" title = "Új fakk a(z) <?= $item['group']->name; ?> csoporthoz" 
                        href="<?= base_url(); ?>fakk/add_to_group/<?= $item['group']->id; ?>">új fakk</a>
                 </p>
             </div>
@@ -51,8 +52,8 @@
             <?php endif ?>
             
             <?php if ($this->uri->segment(1) === 'fakkgroup'): ?>
-                <a href="<?= base_url(); ?>fakkgroup/delete/<?= $item['group']->id; ?>" class = "delete">töröl</a>
-                <a href="<?= base_url(); ?>fakkgroup/edit/<?= $item['group']->id; ?>" dialog_id = "<?= $item['group']->id; ?>" rel = "dialog" title = "Fakkcsoport szerkesztése">szerkeszt</a>
+                <a class="button button-small" href="<?= base_url(); ?>fakkgroup/delete/<?= $item['group']->id; ?>" class = "delete">töröl</a>
+                <a class="button button-small" href="<?= base_url(); ?>fakkgroup/edit/<?= $item['group']->id; ?>" dialog_id = "<?= $item['group']->id; ?>" rel = "dialog" title = "Fakkcsoport szerkesztése">szerkeszt</a>
             <?php endif ?>
         </div>
     <?php endforeach ?>

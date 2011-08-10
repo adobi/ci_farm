@@ -59,6 +59,7 @@ class Eggproductiondata extends MY_Model
                 					join fakk f on c.fakk_id = f.id 
                 					join fakk_group g on f.fakk_group_id = g.id 
                 					join stock_yard sy on g.stock_yard_id = sy.id and sy.breeder_site_id = $site
+                					where c.is_deleted is null
                 			) 
                 		)
                 	) 
@@ -88,7 +89,7 @@ class Eggproductiondata extends MY_Model
                 	egg_production_data epdata
                 	join egg_production_day epday on epday.id = epdata.egg_production_day_id
                 	join egg_production ep on ep.id = epday.egg_production_id
-                	join chicken_stock cs on cs.id = ep.chicken_stock_id
+                	join chicken_stock cs on cs.id = ep.chicken_stock_id and cs.is_deleted is null 
                 	join chicken_type ct on ct.id = cs.chicken_type_id
                 	join fakk f on f.id = cs.fakk_id
                 	join fakk_group fg on fg.id = f.fakk_group_id

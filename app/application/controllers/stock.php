@@ -193,7 +193,7 @@ class Stock extends MY_Controller
          *
          * @author Dobi Attila
          */
-        
+        //dump($this->session->userdata);
         $this->load->model("Fakks", 'fakks');
         $fakks = $this->fakks->fetchForBreedersite($this->session->userdata('selected_breedersite'));
         

@@ -69,7 +69,10 @@ class Egg extends MY_Controller
 	     *
 	     * @author Dobi Attila
 	     */
-	    $this->session->set_userdata('selected_breedersite', $sites ? $sites[0]->id : 0);
+	    if (!$this->session->userdata('selected_breedersite')) {
+	        
+	        $this->session->set_userdata('selected_breedersite', $sites ? $sites[0]->id : 0);
+	    }
 
 	    /**
 	      * tenyeszto lekerdezese
@@ -128,6 +131,7 @@ class Egg extends MY_Controller
             }
 
         }
+        //dump($isFilled);
         $data['last_blank'] = $lastBlank;
         //dump(date('Y-m-d', $data['last_blank']->to_date)); die;
         $data['egg_production_farmer_sum'] = $eggProductionFarmerSum;
@@ -582,11 +586,11 @@ class Egg extends MY_Controller
 	 */
 	public function set_selected_breedersite()
 	{
-	    if ($this->uri->segment(3))
-	    {
+	    if ($this->uri->segment(3)) {
 	        $this->session->set_userdata('selected_breedersite', $this->uri->segment(3));
 	    }
-	    
+	    //dump($this->uri->segment(3));
+	    //dump($this->session->userdata('selected_breedersite'));
 	    die;
 	}
 	

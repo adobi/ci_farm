@@ -44,6 +44,7 @@ em {
 #container {
     padding-top:0px;
     box-shadow:0 2px 8px #AAAAAA;  
+    background:#f7f7f7;
 }   
 
 #header {
@@ -51,17 +52,19 @@ em {
     //background:#f5f5f5;
     //box-shadow:0 2px 8px #AAAAAA;
     margin-bottom:10px;
+
 }
     
     #header-menu {
         list-style-type:none;
         margin-top:0px;
-        background:#f7f7f7;
+        background:#f1f1f1;
         -moz-border-radius-bottomleft:5px;
         -moz-border-radius-bottomright:5px;
         border-top:3px solid #ddd;
         padding-bottom:5px;
         padding-top:8px;
+        box-shadow:2px 2px 8px #AAAAAA;
     }
 
     #header-menu li a{
@@ -86,7 +89,7 @@ em {
     }
 
 #sidebar {
-    //background:#f5f5f5;
+    background:#f1f1f1;
     margin-top:10px;
     box-shadow:2px 2px 8px #AAAAAA;
 }
@@ -112,21 +115,27 @@ em {
     }
 
 #footer {
-    background:#F1F1F1;
+    background:#f1f1f1;
     height:80px;
+    box-shadow:0px -2px 8px #AAAAAA;
 }
 #content {
     margin-top:10px;
     height:auto !important;
     min-height:700px;
     overflow:hidden;
-    background:#f1f1f1;    
+    background:#f1f1f1; 
+    //box-shadow:-2px -2px 8px #AAAAAA;  
+}
+
+.box-shadow {
+    box-shadow:-2px 2px 8px #AAAAAA;
 }
 
 .zebra {
     padding:5px;
     border:1px solid #eee;
-    background:#fafafa;
+    background:#eaeaea;
     margin:10px 5px;
 }
     .zebra a {
@@ -147,7 +156,7 @@ div.zebra {
 }
 
 .fakks {
-    background:#f2f2f2;
+    background:#e1e1e1;
     padding:5px;
 }
 
@@ -157,7 +166,7 @@ div.zebra {
 }
 
 .yellow {
-    background:#D9F7BB;//7BB750;
+    background:#B7C9EB;//7BB750;
     color:#000;
 }
 

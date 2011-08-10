@@ -36,7 +36,7 @@
 	<body>
 	    
 		<div id="container" class = "container" 
-		    <?php if (!$this->session->userdata('current_user_id')) : ?>
+		    <?php if ($this->uri->segment(1) === 'welcome') : ?>
 		        style = "background:#f1f1f1;"
 		    <?php endif; ?>
 		>
@@ -54,10 +54,10 @@
             			        <a href="<?= base_url(); ?>hatching" <?= $this->uri->segment(1) === "hatching" ? 'class = "selected-header-menu-item"' : ''; ?>>keltetés</a>
             			    </li>
             			    <li>
-            			        <a href="<?= base_url(); ?>">nevelés</a>
+            			        <a href="#">nevelés</a>
         			        </li>
         			        <li>
-        			            <a href="<?= base_url(); ?>">értékesítés</a>
+        			            <a href="#">értékesítés</a>
         			        </li>
         			        <li>
         			            <a href="<?= base_url(); ?>backgrounddata" <?= in_array(
@@ -83,9 +83,9 @@
     		<?php else: ?>
     		    
 			<?php endif; ?>
-			<div id="content" class = "span-<?= $this->uri->segment(1) === 'welcome' ? 24 : 20 ?> last"
+			<div id="content" class = "span-<?= $this->uri->segment(1) === 'welcome' ? '24' : '20 box-shadow' ?> last"
     		    <?php if (!$this->session->userdata('current_user_id')) : ?>
-    		        style = "width: 940px;"
+    		        style = "width: 950px;"
     		    <?php endif; ?>			
 			>
 			    <?php if ($this->session->userdata('current_user_id') && $this->uri->segment(1) !== 'welcome'): ?>

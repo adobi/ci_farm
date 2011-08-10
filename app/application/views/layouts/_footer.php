@@ -3,7 +3,8 @@
 			    <?php endif ?>
 			    
 		        </div> <!-- content -->
-			<div id="footer" class = "span-24">
+		       
+			<div id="footer" class = "span-24 hidden">
     		</div> <!-- footer -->
 		
 		</div> <!-- container -->

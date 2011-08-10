@@ -7,6 +7,17 @@ class Chickenstock extends MY_Model
     protected $_name = "chicken_stock";
     protected $_primary = "id";
     
+	public function fetchAll($params = array(), $current = false) 
+	{
+	    return parent::fetchAll($params, $current);
+	}
+    
+	public function fetchRows($params, $current = false, $unprotected = false, $showSelfColumns = true) 
+    {
+        $params['where']['chicken_stock.is_deleted IS NULL'] = null;
+        
+        return parent::fetchRows($params, $current, $unprotected, $showSelfColumns);
+    }	
     /** 
      * listazza az allomanyokat a $all-nak megfeleloen. ha igaz akkor minden a rendszerben elofordulo allomanyt hoz,
      * ha hamis akkor csak azokat amik eppen be vannak olazva 
@@ -22,7 +33,6 @@ class Chickenstock extends MY_Model
         } else {
             $where = array("chicken_stock.fakk_id is not null" => null, "chicken_stock.id in (select chicken_stock_id from egg_production)"=>null);
         }
-        
         $join = array(
             array('table'=>'chicken_type ct', 'condition'=>'chicken_stock.chicken_type_id = ct.id', 'columns'=>array('ct.name as chicken_type_name')),
             array('table'=>'fakk f', 'condition'=>'chicken_stock.fakk_id = f.id', 'columns'=>array('f.name as fakk_name')),
@@ -85,7 +95,7 @@ class Chickenstock extends MY_Model
                 join fakk f on c.fakk_id = f.id 
                 join fakk_group g on f.fakk_group_id = g.id 
                 join stock_yard sy on g.stock_yard_id = sy.id and sy.breeder_site_id = $site
-                where c.fakk_id is not null";
+                where c.is_deleted is null and c.fakk_id is not null";
         //echo $sql;
         return $this->execute($sql);
     }
@@ -112,7 +122,7 @@ class Chickenstock extends MY_Model
                 join fakk f on c.fakk_id = f.id 
                 join fakk_group g on f.fakk_group_id = g.id 
                 join stock_yard sy on g.stock_yard_id = sy.id and sy.breeder_site_id = $site
-                where c.id not in (
+                where c.is_deleted is null and c.id not in (
         			select 
         				chicken_stock_id 
         			from egg_production ep 
@@ -145,7 +155,7 @@ class Chickenstock extends MY_Model
                 join fakk f on c.fakk_id = f.id 
                 join fakk_group g on f.fakk_group_id = g.id 
                 join stock_yard sy on g.stock_yard_id = sy.id and sy.breeder_site_id = $site
-                where c.id not in (
+                where c.is_deleted is null and c.id not in (
         			select 
         					chicken_stock_id 
         			from egg_production ep 
@@ -179,7 +189,7 @@ class Chickenstock extends MY_Model
                 join fakk f on c.fakk_id = f.id 
                 join fakk_group g on f.fakk_group_id = g.id 
                 join stock_yard sy on g.stock_yard_id = sy.id and sy.breeder_site_id = $site
-                where c.id not in (
+                where c.is_deleted is null and c.id not in (
         			select 
         					chicken_stock_id 
         			from egg_production ep 
@@ -212,7 +222,7 @@ class Chickenstock extends MY_Model
                 join fakk f on c.fakk_id = f.id 
                 join fakk_group g on f.fakk_group_id = g.id
                 join stock_yard sy on g.stock_yard_id = sy.id and sy.breeder_site_id = $site
-                where c.id not in (
+                where c.is_deleted is null and c.id not in (
         			select 
         					chicken_stock_id 
         			from egg_production ep 
@@ -245,7 +255,7 @@ class Chickenstock extends MY_Model
                 join fakk f on c.fakk_id = f.id 
                 join fakk_group g on f.fakk_group_id = g.id
                 join stock_yard sy on g.stock_yard_id = sy.id and sy.breeder_site_id = $site
-                where c.id not in (
+                where c.is_deleted is null and c.id not in (
         			select 
         					chicken_stock_id 
         			from egg_production ep 
@@ -254,6 +264,16 @@ class Chickenstock extends MY_Model
                 ) and c.fakk_id is not null";
 
         return $this->execute($sql);
-    }          
+    }
+     
+    public function delete($id) 
+    {
+        if (!$id) {
+            
+            return false;
+        }
+        
+        return $this->update(array('is_deleted'=>1), $id);
+    }        
     
 }
