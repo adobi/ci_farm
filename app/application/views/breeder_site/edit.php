@@ -14,9 +14,13 @@
     <?= form_open(); ?>
     
         <p>
-            <label for="name" class = "block">Telephely megnevezése</label>
+            <label for="name" class = "block">Telephely fantázianeve</label>
             <input type="text" name="name" value="<?= $current_breeder_site ? $current_breeder_site->name : ''; ?>" id="name" class = "text"/>
         </p>
+        <p>
+            <label for="designation" class = "block">Telephely megnevezése</label>
+            <input type="text" name="designation" value="<?= $current_breeder_site ? $current_breeder_site->designation : ''; ?>" id="designation" class = "text"/>
+        </p>        
         <p>
             <label for="code" class = "block">Tenyészet kódja</label>
             <input type="text" name="code" value="<?= $current_breeder_site ? $current_breeder_site->code : ''; ?>" id="code" class = "text"/>
@@ -29,7 +33,8 @@
         -->
         <p>
             <label for="code" class = "block">Irányítószam</label>
-            <input type="text" name="postal_code_id" value="<?= $current_breeder_site ? $current_breeder_site->postal_code . ', ' . $current_breeder_site->city : ''; ?>" id="postal_code_id" class = "text" />
+            <input type="text" value="<?= $current_breeder_site ? $current_breeder_site->postal_code . ', ' . $current_breeder_site->city : ''; ?>" id="postal_code_id" class = "text" />
+            <input type="hidden" name = "postal_code_id" value = "<?= $current_breeder_site->postal_code_id; ?>" />
         </p>
         <p>
             <label for="address" class = "block">Cím</label>
@@ -41,7 +46,8 @@
         </p>
         <p>
             <label for="postal_zip" class = "block">Tenyészet levelezési irányítószáma</label>
-            <input type="text" name = "postal_zip" class = "text" id = "postal_zip" value = "<?= $current_breeder_site ? $current_breeder_site->postal_postal_code . ', ' . $current_breeder_site->postal_city : '' ?>" />
+            <input type="text" class = "text" id = "postal_zip" value = "<?= $current_breeder_site ? $current_breeder_site->postal_postal_code . ', ' . $current_breeder_site->postal_city : '' ?>" />
+            <input type="hidden" name = "postal_zip" value = "<?= $current_breeder_site->postal_zip; ?>" />
         </p>        
         <p>
             <label for="postal_address" class = "block">Tenyészet levelezési címe</label>

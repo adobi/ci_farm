@@ -56,7 +56,7 @@ class Breedersite extends MY_Controller
         
         
         if ($this->form_validation->run()) {
-            
+            //dump($_POST); die;
             if (is_numeric($id)) {
                 $this->model->update($_POST, $id);
             } else {

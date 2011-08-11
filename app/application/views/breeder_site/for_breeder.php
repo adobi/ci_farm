@@ -28,8 +28,11 @@
                     <strong>Viszony kezdete:</strong> <?= to_date($item->registered) ?>
                 </p>
                 <p>
-                    <strong>Tenyészet neve:</strong> <?= $item->name ?>
+                    <strong>Tenyészet fentázianeve:</strong> <?= $item->name ?>
                 </p>
+                <p>
+                    <strong>Tenyészet megnevezése:</strong> <?= $item->designation ?>
+                </p>                
                 <p>
                     <strong>Tenyészet címe: </strong><?= $item->postal_code ?>, <?= $item->city ?>, <?= $item->address ?>
                 </p>
