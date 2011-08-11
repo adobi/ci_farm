@@ -6,7 +6,7 @@
             <label for="breedersite-select" style="display:inline">Válasszon telephelyet</label>
             <?= form_dropdown('breeder_site_id', $breeder_sites, $this->session->userdata('selected_breedersite')); ?>
         <?php else: ?>
-            <strong>Előbb vigyen fel telephelyet</strong>    
+            <strong>Előbb vigyen fel telephelyet, vagy a meglévőknél állítson be típust.</strong>  <br />  
         <?php endif ?>
         <a href="<?= base_url(); ?>breedersite/edit/breeder/<?= @$breeder->id; ?>" rel = "dialog" title = "Új telephely felvitele">Új telephely</a>
         
