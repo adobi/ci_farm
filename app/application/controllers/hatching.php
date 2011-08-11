@@ -49,7 +49,7 @@ class Hatching extends MY_Controller
 	     * @author Dobi Attila
 	     */
 	    $this->load->model("Breedersites", "sites");
-	    $sites = $this->sites->fetchAll(array('order'=>array('by'=>'name', 'dest'=>'asc')));
+	    $sites = $this->sites->fetchRows(array('where'=>array('site_type'=>2), 'order'=>array('by'=>'name', 'dest'=>'asc')));
 	    
 	    $data['breeder_sites'] = $this->sites->toAssocArray('id', 'name+code', $sites);
 	    

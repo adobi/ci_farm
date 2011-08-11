@@ -25,6 +25,8 @@ class Breedersite extends MY_Controller
         $this->load->model('Breedersites', 'model');
         $this->load->model('Breeders', 'breeder');
         
+        $data['site_types'] = $this->model->getTypes();
+        
         $item = false; $breederId = false; $currentBreeder = false;
         $currentBreederSite = false;
 
@@ -106,6 +108,8 @@ class Breedersite extends MY_Controller
         $this->load->model('Breedersites', 'site');
         
         $data = array();
+        
+        $data['site_types'] = $this->site->getTypes();
         
         $breeder = $this->breeder->find((int)$id);
         

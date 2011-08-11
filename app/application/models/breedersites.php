@@ -7,6 +7,18 @@ class Breedersites extends MY_Model
     protected $_name = "breeder_site";
     protected $_primary = "id";
     
+    private $_types = array('', 'termelés', 'keltetés', 'nevelés');
+    
+    public function getTypes()
+    {
+        return $this->_types;
+    }
+    
+    public function getType($index) 
+    {
+        return $this->_types[$index];
+    }
+    
     public function fetchWithHoldingData($id) 
     {
         if (!$id) {

@@ -60,6 +60,10 @@
         <p>
             <label for="type" class = "block">Típus</label>
             <input type="text" name = "type" class = "text" id = "type" value = "<?= $current_breeder_site ? $current_breeder_site->type : '' ?>" />
+        </p>
+        <p>
+            <label for="site_type" class = "block">Telephely típusa</label>
+            <?= form_dropdown('site_type', $site_types, $current_breeder_site->site_type); ?>
         </p> 
         <p>
             <label for="enar_name" class = "block">ENAR-felelős neve</label>

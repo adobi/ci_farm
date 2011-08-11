@@ -50,6 +50,9 @@
                     <strong>Típus:</strong> <?= $item->type ?>
                 </p>
                 <p>
+                    <strong>Telephely típus:</strong> <?= $site_types[$item->site_type] ?>
+                </p>                
+                <p>
                     <strong>ENAR felelős neve:</strong> <?= $item->enar_name ?>
                 </p>
                 <p>
