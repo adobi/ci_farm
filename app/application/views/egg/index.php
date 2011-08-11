@@ -8,7 +8,7 @@
         <?php else: ?>
             <strong>Előbb vigyen fel telephelyet</strong>    
         <?php endif ?>
-        <a href="<?= base_url(); ?>breedersite/edit/breeder/<?= $breeder->id; ?>" rel = "dialog" title = "Új telephely felvitele">Új telephely</a>
+        <a href="<?= base_url(); ?>breedersite/edit/breeder/<?= @$breeder->id; ?>" rel = "dialog" title = "Új telephely felvitele">Új telephely</a>
         
     </div>
     <?php if (isset($breeder_sites) && count($breeder_sites) !== 1): ?>

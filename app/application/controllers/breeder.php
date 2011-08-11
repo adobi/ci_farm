@@ -13,7 +13,7 @@ class Breeder extends MY_Controller {
 	    $this->load->model('Breeders', 'breeder');
 	    
 	    $data['breeders'] = $this->breeder->fetchAll(array('order'=>array('by'=>'name', 'dest'=>'asc')));
-	    
+	    $data['actualBreederId'] = $this->breeder->getId();
 		$this->template->build('breeder/index', $data);
 	}
 	

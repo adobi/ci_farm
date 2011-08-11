@@ -69,7 +69,7 @@ class Hatching extends MY_Controller
 	      * @author Dobi Attila
 	      */ 
 	    $this->load->model("Breeders", "breeders");
-	    $data['breeder'] = $this->breeders->fetchAll(array(), true);
+	    $data['breeder'] = $this->breeders->find($this->breeders->getId());
 	    
 	    /**
 	     * a kivalasztott telephelynek megfeleo gepek lekerdezese 

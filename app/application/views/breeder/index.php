@@ -14,6 +14,9 @@
                 <li><strong>Mobil: </strong><?= $item->cell ?></li>
                 <li><strong>Email: </strong><?= $item->email ?></li>
             </ul>
+            <?php if ($item->id != $actualBreederId): ?>
+                <a class="button button-small"  href="<?= base_url() ?>breeder/delete/<?= $item->id ?>" class = "delete">töröl</a>
+            <?php endif ?>
             <!-- <a href="<?= base_url() ?>breeder/delete/<?= $item->id ?>" class = "delete">töröl</a> -->
             <a class="button button-small" href="<?= base_url() ?>breeder/edit/<?= $item->id ?>" rel = "dialog" dialog_id = "<?= $item->id ?>" title = "Tenyésztő szerkesztése">szerkeszt</a>
             <a class="button button-small" href="<?= base_url() ?>breedersite/for_breeder/<?= $item->id ?>">telephelyei</a>

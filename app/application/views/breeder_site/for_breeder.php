@@ -18,9 +18,11 @@
    
     <?php foreach ($breeder_sites as $item): ?>
         <fieldset>
-            <legend>Telepgely adatai</legend>
+            <legend>Telephely adatai</legend>
             <div class="span-20">
-                
+                <p>
+                    <strong>Telephely iktatószáma:</strong> <?= $item->registration_number; ?>
+                </p>
                 <p>
                     <strong>Üzemeltető neve:</strong> <?= $breeder->name ?>
                 </p>

@@ -12,7 +12,11 @@
 
 <fieldset class="round">
     <?= form_open(); ?>
-    
+
+        <p>
+            <label for="registration_number" class = "block">Telephely iktatószáma</label>
+            <input type="text" name="registration_number" value="<?= $current_breeder_site ? $current_breeder_site->registration_number : ''; ?>" id="registration_number" class = "text"/>
+        </p>    
         <p>
             <label for="name" class = "block">Telephely fantázianeve</label>
             <input type="text" name="name" value="<?= $current_breeder_site ? $current_breeder_site->name : ''; ?>" id="name" class = "text"/>
