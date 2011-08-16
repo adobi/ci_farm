@@ -14,14 +14,14 @@ class Stockegg extends MY_Controller
         
         $this->template->build('/index', $data);
     }
-    
+/*    
     public function edit() 
     {
         $data = array();
         
         $id = $this->uri->segment(3);
         
-        $this->load->model('', 'model');
+        $this->load->model('Eggstock', 'model');
         
         $item = false;
         if ($id) {
@@ -44,15 +44,15 @@ class Stockegg extends MY_Controller
             }
         }
         
-        $this->template->build('/edit', $data);
+        $this->template->build('stockegg/edit', $data);
     }
-    
+*/
     public function delete()
     {
         $id = $this->uri->segment(3);
         
         if ($id) {
-            $this->load->model('', 'model');
+            $this->load->model('Eggstock', 'model');
             
             $this->model->delete($id);
         }
@@ -66,9 +66,19 @@ class Stockegg extends MY_Controller
      * @return void
      * @author Dobi Attila
      */
-    public function add_to_breedersite()
+    public function edit()
     {
         $data = array();
+
+        $id = $this->uri->segment(3);
+        
+        $this->load->model('Eggstock', 'model');
+        
+        $item = false;
+        if ($id) {
+            $item = $this->model->find((int)$id);
+        }
+        $data['current_stock_item'] = $item;
         
         /**
          * ha a tojastermeloi oldalrol jott a keres
@@ -88,7 +98,7 @@ class Stockegg extends MY_Controller
          * @author Dobi Attila
          */
         $this->load->model('Chickentypes', 'chicken_type');
-        $data['chicken_type'] = $this->chicken_type->toAssocArray('id', 'code+name', $this->chicken_type->fetchAll());
+        $data['chickentypes'] = $this->chicken_type->toAssocArray('id', 'code+name', $this->chicken_type->fetchAll());
         
         $this->form_validation->set_rules('code', 'Kód', 'required|trim');
                 
@@ -99,12 +109,19 @@ class Stockegg extends MY_Controller
             
             $_POST['buyer_breeder_site_id'] = $this->session->userdata('selected_breedersite');
             
-            $this->model->insert($_POST);
-            
-            redirect($_SERVER['HTTP_REFERER']);
+            if ($id) {
+                $this->model->update($_POST, $id);
+            } else {
+                $this->model->insert($_POST);
+            }            
+        } else {
+            if ($_POST) {
+                
+                redirect($_SERVER['HTTP_REFERER']);
+            }
         }
                 
-        $this->template->build('stockegg/add_to_breedersite', $data);    
+        $this->template->build('stockegg/edit', $data);    
     }    
     
 }

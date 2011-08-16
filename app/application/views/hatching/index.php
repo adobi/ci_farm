@@ -15,7 +15,7 @@
     <?php if (isset($breeder_sites) && count($breeder_sites) !== 1): ?>
     
         <div class = "span-10 last text-right">
-            <a href="<?= base_url(); ?>stockegg/add_to_breedersite" class = "button" rel = "dialog" title = "Új állomany felvitele és beólazása">Új tojás állomány</a>
+            <a href="<?= base_url(); ?>stockegg/edit" class = "button" rel = "dialog" title = "Új állomany felvitele és beólazása">Új tojás állomány</a>
             <!-- <a href="#" class = "button">Állomány felszámolása</a> -->
         </div>
     <?php endif; ?>

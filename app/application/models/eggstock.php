@@ -28,4 +28,37 @@ class Eggstock extends MY_Model
         
         return $result;
     }
+    
+    public function fetchWithDetails($all = false)
+    {
+        if ($all) {
+            $where = array(); // hack :)
+        } else {
+            $where = array("egg_stock.is_deleted is null" => null);
+        }
+        $join = array(
+            array('table'=>'chicken_type ct', 'condition'=>'egg_stock.chicken_type_id = ct.id', 'columns'=>array('ct.name as chicken_type_name')),
+        );
+        
+        if (!empty($where)) {
+            
+        }
+        
+        $result = $this->fetchRows(array(
+            'where'=>$where,
+            'join'=>$join
+        ));
+        
+        return $result;
+    }  
+    
+    public function delete($id) 
+    {
+        if (!$id) {
+            
+            return false;
+        }
+        
+        return $this->update(array('is_deleted'=>1), $id);
+    }       
 }

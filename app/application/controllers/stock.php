@@ -14,6 +14,7 @@ class Stock extends MY_Controller
     public function show() 
     {
         $all = $this->uri->segment(3);
+        $type = $this->uri->segment(4);
         
         $data = array();
 
@@ -27,17 +28,38 @@ class Stock extends MY_Controller
 	    
 	    $data['breeder_sites'] = $this->sites->toAssocArray('id', 'name+code', $sites);
 
-        
         $this->load->model('ChickenStock', 'model');
-        
-        if ($all && $all === "all") {
-            
-            $data['stocks'] = $this->model->fetchWithDetails(true);
-        } elseif ($all && $all === 'active') {
-            
+        $this->load->model("Eggstock", 'eggstock');
+
+        if (!$type) {
             $data['stocks'] = $this->model->fetchWithDetails();
-        } else {
-            redirect(base_url() . '404');
+            $data['eggstocks'] = $this->eggstock->fetchWithDetails();
+        }
+        
+        if ($type && $type === 'chicken') {
+            
+            if ($all && $all === "all") {
+                
+                $data['stocks'] = $this->model->fetchWithDetails(true);
+            } elseif ($all && $all === 'active') {
+                
+                $data['stocks'] = $this->model->fetchWithDetails();
+            } else {
+                redirect(base_url() . '404');
+            }
+        }
+
+        if ($type && $type === 'egg') {
+            
+            if ($all && $all === "all") {
+                
+                $data['eggstocks'] = $this->eggstock->fetchWithDetails(true);
+            } elseif ($all && $all === 'active') {
+                
+                $data['eggstocks'] = $this->eggstock->fetchWithDetails();
+            } else {
+                redirect(base_url() . '404');
+            }
         }
         
         $this->template->build('stock/index', $data);

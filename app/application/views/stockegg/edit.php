@@ -31,7 +31,8 @@
         <p>
             <label for="parent_female_code_2">Szülőállomány(F)<br /><em>INTRA/KÁBO</em>:</label>
             <input type="text" name = "parent_female_code_2" id = "parent_female_code_2" value = "<?= $current_stock_item ? $current_stock_item->parent_female_code_2 : ''; ?>"/>
-        </p>                         
+        </p>   
+        <!-- 
         <p>
             <label for="number_of_male">Kakasok száma:</label>
             <input type="text" name = "number_of_male" id = "number_of_male"  size = "10" value = "<?= $current_stock_item ? $current_stock_item->number_of_male : ''; ?>"/>
@@ -40,6 +41,7 @@
             <label for="number_of_female">Jércék száma:</label>
             <input type="text" name = "number_of_female" id = "number_of_female"  size = "10" value = "<?= $current_stock_item ? $current_stock_item->number_of_female : ''; ?>"/>
         </p> 
+         -->
         <p>
             <label for="egg_code">Tojáskód:</label>
             <input type="text" name = "egg_code" id = "egg_code"  size = "10" value = "<?= $current_stock_item ? $current_stock_item->egg_code : ''; ?>"/>
