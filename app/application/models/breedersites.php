@@ -51,8 +51,8 @@ class Breedersites extends MY_Model
                 $r->holdingplaces = $this->holdingplaces->fetchForBreederSite($r->id);
             }
         }
-        
-        return $result;
+        //dump($result);
+        return $result ? $result[0] : $result;
     }
 
     public function find($id)

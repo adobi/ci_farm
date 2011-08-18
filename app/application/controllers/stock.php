@@ -68,6 +68,37 @@ class Stock extends MY_Controller
     public function edit() 
     {
         $data = array();
+
+        /**
+         * ha a tojastermeloi oldalrol jott a keres
+         *
+         * @author Dobi Attila
+         */
+        if (!$this->session->userdata('selected_breedersite')) {
+            
+            echo '<div class = "error">Előbb válasszon telephelyet</div>';
+            
+            die;
+        }
+        
+        /**
+         * minden olyan fakk ami az adott telephelyen van
+         *
+         * @author Dobi Attila
+         */
+        //dump($this->session->userdata);
+        $this->load->model("Fakks", 'fakks');
+        $fakks = $this->fakks->fetchForBreedersite($this->session->userdata('selected_breedersite'));
+        
+        if (!$fakks) {
+            
+            echo '<div class = "error">Előbb vigyen fel istállót/fakkcsoportot/fakkot a kiválasztott telephelyhez</div>';
+            
+            die;
+        }
+        
+        $data['fakks'] = $this->fakks->toAssocArray('id', 'name', $fakks);
+        
         
         $id = $this->uri->segment(3);
         
@@ -95,7 +126,7 @@ class Stock extends MY_Controller
         $data['current_stock_item'] = $currentStockItem;
         
         
-        $this->form_validation->set_rules('code', 'Kód', 'required|trim');
+        $this->form_validation->set_rules('fakk_id', 'Fakk', 'required|trim');
                 
         if ($this->form_validation->run()) {
         
@@ -105,11 +136,6 @@ class Stock extends MY_Controller
 
                 $_POST['fakk_id'] = $fakkId;
                 
-                //$this->load->model('Fakks', 'fakks');
-                //$fakk = $this->fakks->find($fakkId);
-                
-                //$_POST['breeder_site_id'] = $fakk->breeder_site_id;
-
                 $this->insert($_POST);
             }
             redirect($_SERVER['HTTP_REFERER']);

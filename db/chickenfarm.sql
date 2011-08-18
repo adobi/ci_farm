@@ -10,11 +10,10 @@ Target Server Type    : MYSQL
 Target Server Version : 50133
 File Encoding         : 65001
 
-Date: 2011-07-09 19:21:23
+Date: 2011-08-18 21:40:36
 */
 
 SET FOREIGN_KEY_CHECKS=0;
-
 -- ----------------------------
 -- Table structure for `breeder`
 -- ----------------------------
@@ -27,12 +26,13 @@ CREATE TABLE `breeder` (
   `email` varchar(100) DEFAULT NULL,
   `fax` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of breeder
 -- ----------------------------
 INSERT INTO `breeder` VALUES ('3', 'alma máter', '06531231122', '06705301132', 'alma.mater@gmail.com', null);
+INSERT INTO `breeder` VALUES ('4', 'nagy aladar', '0652123589', '063021455889', 'nagy.aladar@gmail.com', null);
 
 -- ----------------------------
 -- Table structure for `breeder_site`
@@ -56,17 +56,21 @@ CREATE TABLE `breeder_site` (
   `enar_phone` varchar(255) DEFAULT NULL,
   `enar_email` varchar(255) DEFAULT NULL,
   `enar_fax` varchar(255) DEFAULT NULL,
+  `designation` varchar(255) DEFAULT NULL,
+  `registration_number` varchar(255) DEFAULT NULL,
+  `site_type` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_breeder_site_breeder` (`breeder_id`),
   KEY `fk_breeder_site_postal_code` (`postal_code_id`),
   CONSTRAINT `fk_breeder_site_breeder` FOREIGN KEY (`breeder_id`) REFERENCES `breeder` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_breeder_site_postal_code` FOREIGN KEY (`postal_code_id`) REFERENCES `postal_code` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of breeder_site
 -- ----------------------------
-INSERT INTO `breeder_site` VALUES ('4', '21123', 'izemize', '1310', 'kassai ut 65', '', '3', 'Ebes 2', null, null, null, null, null, null, null, null, null);
+INSERT INTO `breeder_site` VALUES ('4', '21123', 'izemize', '1310', 'kassai ut 65', '', '3', 'Ebes 2', null, '2011-08-01 00:00:00', '1304', 'csapo utca 10', 'állattartó', 'Kiss Dénes', '06708301123', 'kiss.jozsef@gmail.com', '0652187448', 'Ebes 2 megnevezés', '111', '2');
+INSERT INTO `breeder_site` VALUES ('5', '123122', null, '1294', 'kassai ut 65', '', '3', 'debreceni telep', '1', '2010-05-01 00:00:00', '1294', 'csapo utca 18', 'állattartó', 'Kiss Dénes', '06708301123', 'kiss.jozsef@gmail.com', '0652187448', null, null, null);
 
 -- ----------------------------
 -- Table structure for `chicken_stock`
@@ -89,6 +93,7 @@ CREATE TABLE `chicken_stock` (
   `buy_date` datetime DEFAULT NULL,
   `buyer_breeder_site_id` int(11) DEFAULT NULL,
   `fakk_id` int(11) DEFAULT NULL,
+  `is_deleted` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_chicken_type` (`chicken_type_id`),
   KEY `fk_buyer_breeder_site` (`buyer_breeder_site_id`),
@@ -101,11 +106,11 @@ CREATE TABLE `chicken_stock` (
 -- ----------------------------
 -- Records of chicken_stock
 -- ----------------------------
-INSERT INTO `chicken_stock` VALUES ('6', '21123', '2011-05-01 00:00:00', '1', 'V', '123', '(5c.2c.4n.7n) INTRA.FR.2009.0055972', '345', '(5c.2c.4n.7n) INTRA.FR.2009.0055972', '120', '100', 'c 4', '2011-09-01 00:00:00', null, null, null);
-INSERT INTO `chicken_stock` VALUES ('7', '166725', '2011-04-01 00:00:00', '2', 'V', '123', '(5c.2c.4n.7n) INTRA.FR.2009.0055972', '345', '(5c.2c.4n.7n) INTRA.FR.2009.0055972', '110', '100', 'a 1', '2011-06-30 00:00:00', null, null, null);
-INSERT INTO `chicken_stock` VALUES ('8', '1001', '2011-06-01 00:00:00', '4', 'V', '123', '(5c.2c.4n.7n) INTRA.FR.2009.0055972', '124', '(5c.2c.4n.7n) INTRA.FR.2009.0055972', '100', '120', 'c 1', '2011-08-31 00:00:00', null, null, '11');
-INSERT INTO `chicken_stock` VALUES ('9', '1003', '2011-06-01 00:00:00', '2', 'V', '123', '(5c.2c.4n.7n) INTRA.FR.2009.0055972', '126', '(5c.2c.4n.7n) INTRA.FR.2009.0055972', '100', '120', 'a 3', '2011-06-30 00:00:00', null, null, '12');
-INSERT INTO `chicken_stock` VALUES ('10', '1004', '2011-06-21 00:00:00', '2', 'III', '127', '(5c.2c.4n.7n) INTRA.FR.2009.0055972', '129', '(5c.2c.4n.7n) INTRA.FR.2009.0055972', '120', '250', 'd 3', '2011-10-25 00:00:00', null, null, '11');
+INSERT INTO `chicken_stock` VALUES ('6', '21123', '2011-05-01 00:00:00', '1', 'V', '123', '(5c.2c.4n.7n) INTRA.FR.2009.0055972', '345', '(5c.2c.4n.7n) INTRA.FR.2009.0055972', '120', '100', 'c 4', '2011-09-01 00:00:00', null, null, null, null);
+INSERT INTO `chicken_stock` VALUES ('7', '166725', '2011-04-01 00:00:00', '2', 'V', '123', '(5c.2c.4n.7n) INTRA.FR.2009.0055972', '345', '(5c.2c.4n.7n) INTRA.FR.2009.0055972', '110', '100', 'a 1', '2011-06-30 00:00:00', null, null, null, null);
+INSERT INTO `chicken_stock` VALUES ('8', '1001', '2011-06-01 00:00:00', '4', 'V', '123', '(5c.2c.4n.7n) INTRA.FR.2009.0055972', '124', '(5c.2c.4n.7n) INTRA.FR.2009.0055972', '100', '120', 'c 1', '2011-08-31 00:00:00', null, null, '11', null);
+INSERT INTO `chicken_stock` VALUES ('9', '1003', '2011-06-01 00:00:00', '2', 'V', '123', '(5c.2c.4n.7n) INTRA.FR.2009.0055972', '126', '(5c.2c.4n.7n) INTRA.FR.2009.0055972', '100', '120', 'a 3', '2011-06-30 00:00:00', null, null, '12', null);
+INSERT INTO `chicken_stock` VALUES ('10', '1004', '2011-06-21 00:00:00', '2', 'III', '127', '(5c.2c.4n.7n) INTRA.FR.2009.0055972', '129', '(5c.2c.4n.7n) INTRA.FR.2009.0055972', '120', '250', 'd 3', '2011-10-25 00:00:00', null, null, '11', null);
 
 -- ----------------------------
 -- Table structure for `chicken_type`
@@ -4426,19 +4431,20 @@ CREATE TABLE `egg_stock` (
   `buyer_breeder_site_id` int(11) DEFAULT NULL,
   `chicken_type_id` int(11) DEFAULT NULL,
   `piece` int(11) DEFAULT NULL,
+  `is_deleted` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_buyer_breeder_site` (`buyer_breeder_site_id`),
   KEY `fk_egg_stock_chickem_type` (`chicken_type_id`),
-  CONSTRAINT `fk_egg_stock_chickem_type` FOREIGN KEY (`chicken_type_id`) REFERENCES `chicken_type` (`id`),
-  CONSTRAINT `fk_buyer_breeder_site` FOREIGN KEY (`buyer_breeder_site_id`) REFERENCES `breeder_site` (`id`) ON DELETE SET NULL ON UPDATE SET NULL
+  CONSTRAINT `fk_buyer_breeder_site` FOREIGN KEY (`buyer_breeder_site_id`) REFERENCES `breeder_site` (`id`) ON DELETE SET NULL ON UPDATE SET NULL,
+  CONSTRAINT `fk_egg_stock_chickem_type` FOREIGN KEY (`chicken_type_id`) REFERENCES `chicken_type` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of egg_stock
 -- ----------------------------
-INSERT INTO `egg_stock` VALUES ('1', '112233', '2011-07-01 00:00:00', 'V', '123', '(5c.2c.4n.7n) INTRA.FR.2009.0055972', '124', '(5c.2c.4n.7n) INTRA.FR.2009.0055972', '0', '0', 'a 3', '2011-07-31 00:00:00', null, '4', '1', '1300');
-INSERT INTO `egg_stock` VALUES ('2', '334455', '2011-07-05 00:00:00', 'III', '123', '(5c.2c.4n.7n) INTRA.FR.2009.0055972', '126', '(5c.2c.4n.7n) INTRA.FR.2009.0055972', null, null, 'c 1', '2011-07-29 00:00:00', null, '4', '2', '1250');
-INSERT INTO `egg_stock` VALUES ('3', '667788', '2011-07-07 00:00:00', 'IV', '127', '(5c.2c.4n.7n) INTRA.FR.2009.0055972', '129', '(5c.2c.4n.7n) INTRA.FR.2009.0055972', null, null, 'd 3', '2011-09-30 00:00:00', null, '4', '3', '180');
+INSERT INTO `egg_stock` VALUES ('1', '112233', '2011-07-01 00:00:00', 'V', '123', '(5c.2c.4n.7n) INTRA.FR.2009.0055972', '124', '(5c.2c.4n.7n) INTRA.FR.2009.0055972', '0', '0', 'a 3', '2011-07-31 00:00:00', null, '4', '1', '1300', null);
+INSERT INTO `egg_stock` VALUES ('2', '334455', '2011-07-05 00:00:00', 'III', '123', '(5c.2c.4n.7n) INTRA.FR.2009.0055972', '126', '(5c.2c.4n.7n) INTRA.FR.2009.0055972', null, null, 'c 1', '2011-07-29 00:00:00', null, '4', '2', '1250', null);
+INSERT INTO `egg_stock` VALUES ('3', '667788', '2011-07-07 00:00:00', 'IV', '127', '(5c.2c.4n.7n) INTRA.FR.2009.0055972', '129', '(5c.2c.4n.7n) INTRA.FR.2009.0055972', null, null, 'd 3', '2011-09-30 00:00:00', null, '4', '3', '180', null);
 
 -- ----------------------------
 -- Table structure for `egg_stock_in_machine`

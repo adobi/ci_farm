@@ -12,12 +12,15 @@
 
 <fieldset class="round">
     <?= form_open(); ?>
-
+        <p class="highlighted">
+            <label for="site_type" class = "block">Telephely típusa</label>
+            <?= form_dropdown('site_type', $site_types, $current_breeder_site ? $current_breeder_site->site_type : ''); ?>
+        </p> 
         <p>
             <label for="registration_number" class = "block">Telephely iktatószáma</label>
             <input type="text" name="registration_number" value="<?= $current_breeder_site ? $current_breeder_site->registration_number : ''; ?>" id="registration_number" class = "text"/>
-        </p>    
-        <p>
+        </p>  
+        <p class="highlighted">
             <label for="name" class = "block">Telephely fantázianeve</label>
             <input type="text" name="name" value="<?= $current_breeder_site ? $current_breeder_site->name : ''; ?>" id="name" class = "text"/>
         </p>
@@ -38,7 +41,7 @@
         <p>
             <label for="code" class = "block">Irányítószam</label>
             <input type="text" value="<?= $current_breeder_site ? $current_breeder_site->postal_code . ', ' . $current_breeder_site->city : ''; ?>" id="postal_code_id" class = "text" />
-            <input type="hidden" name = "postal_code_id" value = "<?= $current_breeder_site->postal_code_id; ?>" />
+            <input type="hidden" name = "postal_code_id" value = "<?= $current_breeder_site ? $current_breeder_site->postal_code_id : ''; ?>" />
         </p>
         <p>
             <label for="address" class = "block">Cím</label>
@@ -51,7 +54,7 @@
         <p>
             <label for="postal_zip" class = "block">Tenyészet levelezési irányítószáma</label>
             <input type="text" class = "text" id = "postal_zip" value = "<?= $current_breeder_site ? $current_breeder_site->postal_postal_code . ', ' . $current_breeder_site->postal_city : '' ?>" />
-            <input type="hidden" name = "postal_zip" value = "<?= $current_breeder_site->postal_zip; ?>" />
+            <input type="hidden" name = "postal_zip" value = "<?= $current_breeder_site ? $current_breeder_site->postal_zip : ''; ?>" />
         </p>        
         <p>
             <label for="postal_address" class = "block">Tenyészet levelezési címe</label>
@@ -61,10 +64,6 @@
             <label for="type" class = "block">Típus</label>
             <input type="text" name = "type" class = "text" id = "type" value = "<?= $current_breeder_site ? $current_breeder_site->type : '' ?>" />
         </p>
-        <p>
-            <label for="site_type" class = "block">Telephely típusa</label>
-            <?= form_dropdown('site_type', $site_types, $current_breeder_site->site_type); ?>
-        </p> 
         <p>
             <label for="enar_name" class = "block">ENAR-felelős neve</label>
             <input type="text" name = "enar_name" class = "text" id = "enar_name" value = "<?= $current_breeder_site ? $current_breeder_site->enar_name : '' ?>" />

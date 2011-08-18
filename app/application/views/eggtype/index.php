@@ -3,17 +3,23 @@
 </p>
 
 <?php if ($eggtypes): ?>
+<fieldset>
+    <legend>Étkezési tojástípusok</legend>
     <?php foreach ($eggtypes as $et): ?>
-        <div class = "zebra span-19">
-            <strong><?= $et->code ?></strong> - <?= $et->description ?>
+    
+        <div class = "zebra span-18">
+            <strong><?= $et->description ?></strong>
             <?php if ($et->id != 1): ?>
                 <a class="button button-small" href="<?= base_url() ?>eggtype/delete/<?= $et->id ?>" class = "delete">töröl</a>
             <?php else: ?>
                 <em>(nem törölhető, csak szerkeszthető)</em>
             <?php endif ?>
+            <!-- 
             <a class="button button-small" href="<?= base_url() ?>eggtype/edit/<?= $et->id ?>" dialog_id = "<?= $et->id ?>" rel = "dialog" title = "Tojástípus szerkesztése">szerkeszt</a>
+             -->
         </div>
     <?php endforeach ?>
+</fieldset>
 <?php endif ?>
 
 <?php if ($this->session->userdata('validation_error')): ?>

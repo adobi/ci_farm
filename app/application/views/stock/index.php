@@ -4,7 +4,7 @@
         <?= form_dropdown('breeder_site_id', $breeder_sites, $this->session->userdata('selected_breedersite')); ?>
     <?php endif ?>
 
-    <a href="<?= base_url(); ?>stock/add_to_breedersite" class = "button" rel = "dialog" title = "Új állomány felvitele">Új állomány felvitele</a>
+    <a href="<?= base_url(); ?>stock/edit" class = "button" rel = "dialog" title = "Új állomány felvitele">Új állomány felvitele</a>
 
 </p>
 

@@ -22,7 +22,7 @@ a:hover{
 }
 
 fieldset p {
-    padding:0;
+    padding:3px;
     margin:0px;
 }
 #content p {
@@ -399,4 +399,8 @@ fieldset {
 .button-small span {
     font-size:12px!important;
     padding: 0.25em 0.45em!important;
+}
+
+.highlighted {
+    background:#D9F7BB;
 }
