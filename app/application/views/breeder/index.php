@@ -10,6 +10,7 @@
             
             <strong class = "name"><?= $item->name ?></strong>
             <ul style="list-style-type:none">
+                <li><strong>Cím:</strong><?= $item->postal_code ?>, <?= $item->city ?>, <?= $item->address ?></li>
                 <li><strong>Telefonszám: </strong><?= $item->phone ?></li>
                 <li><strong>Mobil: </strong><?= $item->cell ?></li>
                 <li><strong>Email: </strong><?= $item->email ?></li>
@@ -19,7 +20,7 @@
             <?php endif ?>
             <!-- <a href="<?= base_url() ?>breeder/delete/<?= $item->id ?>" class = "delete">töröl</a> -->
             <a class="button button-small" href="<?= base_url() ?>breeder/edit/<?= $item->id ?>" rel = "dialog" dialog_id = "<?= $item->id ?>" title = "Tenyésztő szerkesztése">szerkeszt</a>
-            <a class="button button-small" href="<?= base_url() ?>breedersite/for_breeder/<?= $item->id ?>">telephelyei</a>
+            <a class="button button-small" href="<?= base_url() ?>breedersite/for_breeder/<?= $item->id ?>">tenyészetei</a>
         </div>
     <?php endforeach ?>
 <?php endif ?>

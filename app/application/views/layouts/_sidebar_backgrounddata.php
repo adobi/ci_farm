@@ -1,6 +1,6 @@
 <li>
     <span>›</span>
-    <a href="<?= base_url(); ?>breeder" <?= $this->uri->segment(1) === 'breeder' ? 'class = "selected-sidemenu-item"' : ''?>>Tenyésztők</a>
+    <a href="<?= base_url(); ?>breeder" <?= $this->uri->segment(1) === 'breeder' || $this->uri->segment(1) === 'breedersite' ? 'class = "selected-sidemenu-item"' : ''?>>Tenyésztők</a>
     
 </li>
 <!-- 

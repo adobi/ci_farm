@@ -10,20 +10,24 @@
     
 <?php endif ?>
 
-<fieldset class="round">
-    <?= form_open(); ?>
+<?= form_open(); ?>
+    <fieldset class="round">
         <p class="highlighted">
             <label for="site_type" class = "block">Telephely típusa</label>
             <?= form_dropdown('site_type', $site_types, $current_breeder_site ? $current_breeder_site->site_type : ''); ?>
         </p> 
-        <p>
-            <label for="registration_number" class = "block">Telephely iktatószáma</label>
-            <input type="text" name="registration_number" value="<?= $current_breeder_site ? $current_breeder_site->registration_number : ''; ?>" id="registration_number" class = "text"/>
-        </p>  
         <p class="highlighted">
             <label for="name" class = "block">Telephely fantázianeve</label>
             <input type="text" name="name" value="<?= $current_breeder_site ? $current_breeder_site->name : ''; ?>" id="name" class = "text"/>
         </p>
+        
+    </fieldset>
+
+    <fieldset class="round">
+        <p>
+            <label for="registration_number" class = "block">Telephely iktatószáma</label>
+            <input type="text" name="registration_number" value="<?= $current_breeder_site ? $current_breeder_site->registration_number : ''; ?>" id="registration_number" class = "text"/>
+        </p>  
         <p>
             <label for="designation" class = "block">Telephely megnevezése</label>
             <input type="text" name="designation" value="<?= $current_breeder_site ? $current_breeder_site->designation : ''; ?>" id="designation" class = "text"/>
@@ -41,7 +45,9 @@
         <p>
             <label for="code" class = "block">Irányítószam</label>
             <input type="text" value="<?= $current_breeder_site ? $current_breeder_site->postal_code . ', ' . $current_breeder_site->city : ''; ?>" id="postal_code_id" class = "text" />
-            <input type="hidden" name = "postal_code_id" value = "<?= $current_breeder_site ? $current_breeder_site->postal_code_id : ''; ?>" />
+            <?php if ($current_breeder_site): ?>
+                <input type="hidden" name = "postal_code_id" value = "<?= $current_breeder_site ? $current_breeder_site->postal_code_id : ''; ?>" />
+            <?php endif ?>
         </p>
         <p>
             <label for="address" class = "block">Cím</label>
@@ -54,7 +60,9 @@
         <p>
             <label for="postal_zip" class = "block">Tenyészet levelezési irányítószáma</label>
             <input type="text" class = "text" id = "postal_zip" value = "<?= $current_breeder_site ? $current_breeder_site->postal_postal_code . ', ' . $current_breeder_site->postal_city : '' ?>" />
-            <input type="hidden" name = "postal_zip" value = "<?= $current_breeder_site ? $current_breeder_site->postal_zip : ''; ?>" />
+            <?php if ($current_breeder_site): ?>
+                <input type="hidden" name = "postal_zip" value = "<?= $current_breeder_site ? $current_breeder_site->postal_zip : ''; ?>" />
+            <?php endif ?>
         </p>        
         <p>
             <label for="postal_address" class = "block">Tenyészet levelezési címe</label>
@@ -87,5 +95,5 @@
         <p>
             <button>Mentés</button>
         </p>
-    <?= form_close(); ?>
-</fieldset>
+    </fieldset>
+<?= form_close(); ?>

@@ -20,10 +20,8 @@
 <?php if ($breeder_site): ?>
    
     <?php //foreach ($breeder_sites as $item): ?>
-        <fieldset>
+        <fieldset  class="breedersite">
             <legend>Telephely adatai</legend>
-            
-
             
             <div class="span-18">
                 <p>
@@ -82,7 +80,7 @@
                 </p>
             </div>
         </fieldset>
-        <fieldset>
+        <fieldset class="breedersite">
             <legend>Tartási hely</legend>
             <?php if ($breeder_site->holdingplaces): ?>
                 <?php foreach ($breeder_site->holdingplaces as $place): ?>

@@ -415,3 +415,8 @@ fieldset {
 .highlighted {
     background:#D9F7BB;
 }
+
+.breedersite p strong {
+    display:inline-block;
+    width: 40%;
+}

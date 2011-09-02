@@ -11,4 +11,45 @@ class Breeders extends MY_Model
     {
         return 3;
     }
+    
+    public function find($id)
+    {
+        if (!$id) {
+            
+            return false;
+        }
+        
+        $result = $this->fetchRows(
+            array(
+                'join'=>array(
+                    array(
+                        'table'=>'postal_code pc1',
+                        'columns'=>array('pc1.code as postal_code', 'pc1.city'),
+                        'condition'=>"pc1.id = $this->_name.postal_code_id"
+                    )
+                ),
+                'where'=>array($this->_name . '.' . $this->_primary=>$id)
+            ), true
+        );
+        
+        return $result;
+    } 
+    
+    public function fetchAll($params = array(), $current = false) 
+    {
+        $result = parent::fetchAll(
+            array(
+                'join'=>array(
+                    array(
+                        'table'=>'postal_code pc1',
+                        'columns'=>array('pc1.code as postal_code', 'pc1.city'),
+                        'condition'=>"pc1.id = $this->_name.postal_code_id"
+                    )
+                ),
+                'order'=>array('by'=>'name', 'dest'=>'asc')
+            ), true
+        );        
+        
+        return $result;
+    }   
 }
