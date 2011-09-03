@@ -1,176 +1,150 @@
 <h2 style="padding:10px;margin-bottom:0px; padding-bottom:0px;"><?= $breeder->name; ?> telephelyei</h2>
 
-<div class = "span-20" style="margin-bottom:20px">
-    <div class = "span-20 first inline-block">
+<div class = "span-19" style="margin-bottom:20px">
+    <div class = "span-19 first inline-block">
         
         <?php if (isset($breeder_sites_select) && count($breeder_sites_select) !== 1): ?>
-            <label for="breedersite-select" style="display:inline">Válasszon telephelyet</label>
+            <label for="breedersite-select" style="display:inline">Válasszon tenyészetet</label>
             <?= form_dropdown('breeder_site_id', $breeder_sites_select, $this->session->userdata('selected_breedersite')); ?>
         <?php else: ?>
-            <strong>Előbb vigyen fel telephelyet</strong>              
+            <strong>Előbb vigyen fel tenyészetet</strong>              
         <?php endif ?>
-        <a href="<?= base_url(); ?>breedersite/edit/breeder/<?= $breeder->id; ?>" rel = "dialog" title = "Új telephely felvitele">Új telephely</a>
-        <?php if ($breeder_site): ?>
-            
-            <a class = "button right" style = "margin-right: 30px;" href="<?= base_url(); ?>stockyard/for_breedersite/<?= $breeder_site->id; ?>">istállók</a>
-        <?php endif ?>
+        <a class="button" href="<?= base_url(); ?>breedersite/edit/breeder/<?= $breeder->id; ?>" rel = "dialog" title = "Új telephely felvitele">Új tenyészet felvitele</a>
     </div>
+    <?php if ($breeder_site): ?>
+        <div class="span-19 text-right">
+            <!-- <a class = "button" style = "margin-right: 30px;" href="<?= base_url(); ?>stockyard/for_breedersite/<?= $breeder_site->id; ?>">istállók</a> -->
+            <a href="<?= base_url() ?>breedersite/edit/<?= $breeder_site->id ?>" class="button" rel = "dialog" title = "tenyészet szerkesztése">szerkeszt</a>
+            <a href="<?= base_url() ?>breedersite/delete/<?= $breeder_site->id ?>" class="button delete">töröl</a>
+        </div>
+    <?php endif ?>
 </div>
 
 <?php if ($breeder_site): ?>
    
-    <?php //foreach ($breeder_sites as $item): ?>
-        <fieldset  class="breedersite">
+        <fieldset  class="breedersite round">
             <legend>Telephely adatai</legend>
             
-            <div class="span-18">
-                <p>
-                    <strong>Telephely iktatószáma:</strong> <?= $breeder_site->registration_number; ?>
-                </p>
-                <p>
-                    <strong>Telephely kódja:</strong> <?= $breeder_site->code; ?>
-                </p>
-                <p>
-                    <strong>Üzemeltető neve:</strong> <?= $breeder->name ?>
-                </p>
-                <p>
-                    <strong>Viszony kezdete:</strong> <?= to_date($breeder_site->registered) ?>
-                </p>
-                <p>
-                    <strong>Tenyészet fentázianeve:</strong> <?= $breeder_site->name ?>
-                </p>
-                <p>
-                    <strong>Tenyészet megnevezése:</strong> <?= $breeder_site->designation ?>
-                </p>                
-                <p>
-                    <strong>Tenyészet címe: </strong><?= $breeder_site->postal_code ?>, <?= $breeder_site->city ?>, <?= $breeder_site->address ?>
-                </p>
-                <p>
-                    <strong>Tenyészet levelezési címe: </strong>
-                    
-                    <?= $breeder_site->postal_postal_code ?>, <?= $breeder_site->postal_city ?>, <?= $breeder_site->postal_address ?>
-                </p>
-            </div>
-            <div class="span-18">
+            <p>
+                <strong>Telephely iktatószáma:</strong> <?= $breeder_site->registration_number; ?>
+            </p>
+            <p>
+                <strong>Tartó/üzemeltető ügyfél-regisztrációszsáma:</strong> <?= $breeder_site->code; ?>
+            </p>
+            <p>
+                <strong>Tartó/üzemeltető neve:</strong> <?= $breeder_site->breeder_name ?>
+            </p>
+            <p>
+                <strong>Tartó viszony kezdete:</strong> <?= to_date($breeder_site->registered) ?>
+            </p>
+            <p>
+                <strong>Tenyészet neve:</strong> <?= $breeder_site->designation ?>
+            </p>
+            <!-- 
+            <p>
+                <strong>Tenyészet megnevezése:</strong> <?= $breeder_site->designation ?>
+            </p>                
+             --> 
+            <p>
+                <strong>Tenyészet címe: </strong><?//= $breeder_site->postal_code ?> <?//= $breeder_site->city ?> <?= $breeder_site->address ?>
+            </p>
+            <p>
+                <strong>Tenyészet levelezési címe: </strong>
                 
-                <p>
-                    <strong>Típus:</strong> <?= $breeder_site->type ?>
-                </p>
-                <p>
-                    <strong>Telephely típus:</strong> <?= @$site_types[$breeder_site->site_type] ?>
-                </p>                
-                <p>
-                    <strong>ENAR felelős neve:</strong> <?= $breeder_site->enar_name ?>
-                </p>
-                <p>
-                    <strong>ENAR felelős telefonszáma:</strong> <?= $breeder_site->enar_phone ?>
-                </p>
-                <p>
-                    <strong>ENAR felelős faxszáma:</strong> <?= $breeder_site->enar_fax ?>
-                </p>
-                <p>
-                    <strong>ENAR felelős email címe:</strong> <?= $breeder_site->enar_email ?>
-                </p>
-            </div>
-            <div class="span-18">
+                <?//= $breeder_site->postal_postal_code ?> <?//= $breeder_site->postal_city ?> <?= $breeder_site->postal_address ?>
+            </p>
+            <p>
+                <strong>Típus:</strong> <?= $breeder_site->type ?>
+            </p>
+            <!-- 
+            <p>
+                <strong>Telephely típus:</strong> <?= @$site_types[$breeder_site->site_type] ?>
+            </p> 
+             -->               
+            <p>
+                <strong>ENAR felelős/kapcsolattartó/keltetésvezető neve:</strong> <?= $breeder_site->enar_name ?>
+            </p>
+            <p>
+                <strong>ENAR felelős/kapcsolattartó/keltetésvezető telefonszáma:</strong> <?= $breeder_site->enar_phone ?>
+            </p>
+            <p>
+                <strong>ENAR felelős/kapcsolattartó/keltetésvezető faxszáma:</strong> <?= $breeder_site->enar_fax ?>
+            </p>
+            <p>
+                <strong>ENAR felelős/kapcsolattartó/keltetésvezető email címe:</strong> <?= $breeder_site->enar_email ?>
+            </p>
+            
+        </fieldset>
+        <fieldset class="breedersite round">
+            <legend>Tartási helyek</legend>
+            <p>
+                <strong>Tartási/vágási hely azonosítója:</strong> <?= $breeder_site->holding_place_id ?>
+            </p>
+            <p>
+                <strong>Tartási/vágási hely megnevezése:</strong> <?= $breeder_site->holding_place_name ?>
+            </p>
+            <p>
+                <strong>Tartási/vágási hely címe:</strong> 
+                <?//= $breeder_site->holding_place_postal_code ?> <?//= $breeder_site->holding_place_city ?> <?= $breeder_site->holding_place_address ?>
+            </p>
+            <fieldset class="round">
                 
-                <p>
-                    <a class = "button button-small" href="<?= base_url(); ?>breedersite/edit/<?= $breeder_site->id; ?>" dialog_id = "<?= $breeder_site->id; ?>" rel = "dialog" title = "Telephely szerkesztése">szerkeszt</a>
-                    <a class = "button button-small delete" href="<?= base_url(); ?>breedersite/delete/<?= $breeder_site->id; ?>">töröl</a>
-                </p>
-            </div>
+                <legend>Tartási adatok</legend>
+                    <table class = "inner-table" style = "border-left: 1px solid #ccc">
+                        <thead>
+                            <tr>
+                                <td>Faj</td>
+                                <td>Tartás/vágás kezdete</td>
+                                <td>Tartás/vágás vége</td>
+                                <td>Létszám</td>
+                                <td>Hasznosítás</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><?= $breeder_site->holding_data_type ?></td>
+                                <td><?= to_date($breeder_site->holding_data_start) ?></td>
+                                <td><?= $breeder_site->holding_data_end ? to_date($breeder_site->holding_data_end) : '' ?></td>
+                                <td><?= $breeder_site->holding_data_count ?></td>
+                                <td><?= $breeder_site->holding_data_utilization ?></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                <?php //endif ?>
+                
+            </fieldset>
+            <fieldset class="round">
+                <legend>Kapacitás adatok</legend>
+                <p><a class = "button button-small" href="<?= base_url() ?>holdingcapacity/edit/place/<?= $breeder_site->id ?>" rel = "dialog" title = "Új kapacitási adat felvitele">Új adat felvitele</a></p>
+                <?php if ($breeder_site->capacity): ?>
+                    <table class = "inner-table" style = "border-left: 1px solid #ccc">
+                        <thead>
+                            <tr>
+                                <td>Típusa</td>
+                                <td>Mértéke</td>
+                                <td>Létrehozva</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($breeder_site->capacity as $data):?>
+                                <tr>
+                                    <td><?= $data->type ?></td>
+                                    <td><?= $data->size ?></td>
+                                    <td><?= to_date($data->created) ?></td>
+                                    <td class="span-4 text-right">
+                                        <a class = "button button-small" href="<?= base_url() ?>holdingcapacity/edit/<?= $data->id ?>" rel = "dialog" title = "Tartási adat szerkesztése">szerkeszt</a>
+                                        
+                                        <a class = "button button-small delete" href="<?= base_url() ?>holdingcapacity/delete/<?= $data->id ?>">töröl</a>
+                                    </td>
+                                </tr>
+                            <?php endforeach ?>
+                        </tbody>
+                    </table>
+                <?php endif ?>
+                
+            </fieldset>
         </fieldset>
-        <fieldset class="breedersite">
-            <legend>Tartási hely</legend>
-            <?php if ($breeder_site->holdingplaces): ?>
-                <?php foreach ($breeder_site->holdingplaces as $place): ?>
-                    <p>
-                        <strong>Azonosító:</strong> <?= $place->code ?>
-                    </p>
-                    <p>
-                        <strong>Megnevezés:</strong> <?= $place->name ?>
-                    </p>
-                    <p>
-                        <strong>Cím:</strong> <?= $place->postal_code ?>, <?= $place->city ?>, <?= $place->address ?>
-                    </p>
-                    <p>
-                        <a class = "button button-small" href="<?= base_url() ?>holdingplace/edit/<?= $place->id ?>" rel = "dialog" title = "<?= $place->name ?> szerkesztése">szerkeszt</a>
-                        <a class = "button button-small delete" href="<?= base_url() ?>holdingplace/delete/<?= $place->id ?>">töröl</a>
-                    </p>
-                    <fieldset style = "margin:5px -5px!important" class="round">
-                        <legend>Tartási adatok</legend>
-                        <p><a class = "button button-small" href="<?= base_url() ?>holdingdata/edit/place/<?= $place->id ?>" rel = "dialog" title = "Új adat fevitele">Új adat fevitele</a></p>
-                        
-                        <?php if ($place->holdingdata): ?>
-                            <table class = "inner-table" style = "border-left: 1px solid #ccc">
-                                <thead>
-                                    <tr>
-                                        <td>Faj</td>
-                                        <td>Tartás kezdete</td>
-                                        <td>Tartás vége</td>
-                                        <td>Létszám</td>
-                                        <td>Hasznosítás</td>
-                                        <td>&nbsp;</td>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php foreach ($place->holdingdata as $data):?>
-                                        <tr>
-                                            <td><?= $data->type ?></td>
-                                            <td><?= to_date($data->start_date) ?></td>
-                                            <td><?= $data->end_date ? to_date($data->end_date) : '' ?></td>
-                                            <td><?= $data->size ?></td>
-                                            <td><?= $data->utilization ?></td>
-                                            <td  style="text-align:left">
-                                                <a class = "button button-small" href="<?= base_url() ?>holdingdata/edit/<?= $data->id ?>" rel = "dialog" title = "Tartási adat szerkesztése">szerkeszt</a>
-                                                <br />
-                                                <a class = "button button-small delete" href="<?= base_url() ?>holdingdata/delete/<?= $data->id ?>">töröl</a>
-                                            </td>
-                                        </tr>
-                                    <?php endforeach ?>
-                                </tbody>
-                            </table>
-                        <?php endif ?>
-                        
-                    </fieldset>
-                    <fieldset style = "margin:5px -5px!important" class="round">
-                        <legend>Kapacitás adatok</legend>
-                        <p><a class = "button button-small" href="<?= base_url() ?>holdingcapacity/edit/place/<?= $place->id ?>" rel = "dialog" title = "Új kapacitási adat felvitele">Új adat felvitele</a></p>
-                        <?php if ($place->holdingcapacitites): ?>
-                            <table class = "inner-table" style = "border-left: 1px solid #ccc">
-                                <thead>
-                                    <tr>
-                                        <td>Típusa</td>
-                                        <td>Mértéke</td>
-                                        <td>Létrehozva</td>
-                                        <td>&nbsp;</td>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php foreach ($place->holdingcapacitites as $data):?>
-                                        <tr>
-                                            <td><?= $data->type ?></td>
-                                            <td><?= $data->size ?></td>
-                                            <td><?= to_date($data->created) ?></td>
-                                            <td  style="text-align:left">
-                                                <a class = "button button-small" href="<?= base_url() ?>holdingcapacity/edit/<?= $data->id ?>" rel = "dialog" title = "Tartási adat szerkesztése">szerkeszt</a>
-                                                <br />
-                                                <a class = "button button-small delete" href="<?= base_url() ?>holdingcapacity/delete/<?= $data->id ?>">töröl</a>
-                                            </td>
-                                        </tr>
-                                    <?php endforeach ?>
-                                </tbody>
-                            </table>
-                        <?php endif ?>
-                        
-                    </fieldset>
-                <?php endforeach ?>
-            <?php else: ?>
-                <p><a class = "button button-small" href="<?= base_url() ?>holdingplace/edit/breedersite/<?= $breeder_site->id ?>" rel = "dialog" title = "Új tartási hely felvitele">Új tartási hely felvitele</a></p>
-
-            <?php endif ?>
-        </fieldset>
-    <?php //endforeach ?>
 <?php endif ?>
 
 <?php if ($this->session->userdata('validation_error')): ?>

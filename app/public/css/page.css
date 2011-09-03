@@ -119,6 +119,7 @@ em {
     
     .selected-sidemenu-item {
         font-weight:bold;
+        text-decoration:underline;
     }
 
 #footer {
@@ -418,5 +419,9 @@ fieldset {
 
 .breedersite p strong {
     display:inline-block;
-    width: 40%;
+    width: 50%;
+}
+.dialog {
+    max-height:470px;
+    overflow-y:scroll;
 }

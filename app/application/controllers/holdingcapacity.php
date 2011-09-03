@@ -46,7 +46,7 @@ class Holdingcapacity extends MY_Controller
                 $this->model->update($_POST, $id);
             } else {
                 
-                $_POST['holding_place_id'] = $place;
+                $_POST['breeder_site_id'] = $place;
                 
                 $this->model->insert($_POST);
             }

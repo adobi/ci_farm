@@ -17,14 +17,15 @@
             <label for="name" class = "block">Név</label>
             <input type="text" class = "text" name = "name" value = "<?= $breeder ? $breeder->name : '' ?>" id = "name"/>
         </p>
+        <!-- 
         <p>
             <label for="code" class = "block">Irányítószam</label>
             <input type="text" value="<?= $breeder ? $breeder->postal_code . ', ' . $breeder->city : ''; ?>" id="postal_code_id" class = "text" />
-            <?php if ($breeder): ?>
-                
+            <?php if ($breeder && $breeder->postal_code_id): ?>
                 <input type="hidden" name = "postal_code_id" value = "<?= $breeder ? $breeder->postal_code_id : ''; ?>" />
             <?php endif ?>
         </p>
+         -->
         <p>
             <label for="address" class = "block">Cím</label>
             <input type="text" name="address" value="<?= $breeder ? $breeder->address : '' ?>" id="address" class = "text" />

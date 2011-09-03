@@ -38,7 +38,7 @@ App.Dialog = function() {
                         //console.log('datepicker found');
                         App.Datepicker();
                     }
-                    
+                    /*
                     if ($('#postal_code_id').length) {
                         
                         App.Autocomplete($('#postal_code_id'),  'postalcode/index/');
@@ -53,7 +53,7 @@ App.Dialog = function() {
                         
                         App.Autocomplete($('#zip'),  'postalcode/index/');
                     }                    
-                    
+                    */
                     if ($('#buyer_breeder_site_id').length) {
                         
                         App.Autocomplete($('#buyer_breeder_site_id'),  'breedersite/search_code_and_name');

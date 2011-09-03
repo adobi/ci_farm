@@ -19,7 +19,7 @@ class Breedersites extends MY_Model
         return $this->_types[$index];
     }
     
-    public function fetchWithHoldingData($id) 
+    public function fetchWithHoldingCapacity($id) 
     {
         if (!$id) {
             
@@ -27,7 +27,7 @@ class Breedersites extends MY_Model
         }
         
         $result = $this->fetchRows(
-            array(
+            array(/*
                 'join'=>array(
                     array(
                         'table'=>'postal_code pc1',
@@ -38,23 +38,28 @@ class Breedersites extends MY_Model
                         'table'=>'postal_code pc2',
                         'columns'=>array('pc2.code as postal_postal_code', 'pc2.city as postal_city'),
                         'condition'=>"pc2.id = $this->_name.postal_zip"
-                    )
-                ),
+                    ),
+                    array(
+                        'table'=>'postal_code pc3',
+                        'columns'=>array('pc3.code as holding_place_postal_code', 'pc3.city as holding_place_city'),
+                        'condition'=>"pc3.id = $this->_name.holding_place_zip"
+                    )                    
+                ),*/
                 'where'=>array("$this->_name.$this->_primary"=>$id, 'is_deleted'=>null)
             )
         );
         //dump($result); die;
         if ($result) {
             
-            $this->load->model('Holdingplaces', 'holdingplaces');
+            $this->load->model('Holdingcapacities', 'capacity');
             foreach ($result as $i=>$r) {
-                $r->holdingplaces = $this->holdingplaces->fetchForBreederSite($r->id);
+                $r->capacity = $this->capacity->fetchForBreedersite($r->id);
             }
         }
-        //dump($result);
+        //
         return $result ? $result[0] : $result;
     }
-
+/*
     public function find($id)
     {
         if (!$id) {
@@ -82,7 +87,7 @@ class Breedersites extends MY_Model
         
         return $result;
     }
-
+*/
     public function fetchAll($params = array(), $current = false) 
     {
         $result = parent::fetchAll($params, $current);

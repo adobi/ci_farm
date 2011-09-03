@@ -11,7 +11,7 @@ class Breeders extends MY_Model
     {
         return 3;
     }
-    
+    /*
     public function find($id)
     {
         if (!$id) {
@@ -27,7 +27,7 @@ class Breeders extends MY_Model
                         'columns'=>array('pc1.code as postal_code', 'pc1.city'),
                         'condition'=>"pc1.id = $this->_name.postal_code_id"
                     )
-                ),
+                        ),
                 'where'=>array($this->_name . '.' . $this->_primary=>$id)
             ), true
         );
@@ -45,11 +45,12 @@ class Breeders extends MY_Model
                         'columns'=>array('pc1.code as postal_code', 'pc1.city'),
                         'condition'=>"pc1.id = $this->_name.postal_code_id"
                     )
-                ),
+                        ),
                 'order'=>array('by'=>'name', 'dest'=>'asc')
             ), true
         );        
         
         return $result;
-    }   
+    } 
+    */  
 }

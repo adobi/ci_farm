@@ -53,7 +53,6 @@ class Breedersite extends MY_Controller
         $data['current_item'] = $item;
         
         $this->form_validation->set_rules('code', 'Kód', 'trime|required');
-        $this->form_validation->set_rules('postal_code_id', 'Irányítószám', 'trime|required');
         $this->form_validation->set_rules('address', 'Cím', 'trime|required');
         
         
@@ -121,7 +120,7 @@ class Breedersite extends MY_Controller
         $data['breeder'] = $breeder;
         $sites = $this->site->fetchAll();
 	    
-	    $data['breeder_sites_select'] = $this->site->toAssocArray('id', 'name+code', $sites);
+	    $data['breeder_sites_select'] = $this->site->toAssocArray('id', 'name', $sites);
 	    
 	    /**
 	     * mi van alapbol kivalasztva
@@ -133,7 +132,7 @@ class Breedersite extends MY_Controller
     	    //$this->session->set_userdata('selected_breedersite', $sites ? $sites[0]->id : 0);
 	    }	    
 	    
-        $data['breeder_site'] = $this->site->fetchWithHoldingData($this->session->userdata('selected_breedersite'));
+        $data['breeder_site'] = $this->site->fetchWithHoldingCapacity($this->session->userdata('selected_breedersite'));
 	    //dump($data); die;
         $this->template->build('breeder_site/for_breeder', $data);
     }
