@@ -52,7 +52,7 @@ class Breedersite extends MY_Controller
         $data['current_breeder_site'] = $currentBreederSite;
         $data['current_item'] = $item;
         
-        $this->form_validation->set_rules('code', 'Kód', 'trime|required');
+        //$this->form_validation->set_rules('code', 'Kód', 'trime|required');
         $this->form_validation->set_rules('address', 'Cím', 'trime|required');
         
         
@@ -118,7 +118,7 @@ class Breedersite extends MY_Controller
         }
         
         $data['breeder'] = $breeder;
-        $sites = $this->site->fetchAll();
+        $sites = $this->site->fetchForBreeder($id);
 	    
 	    $data['breeder_sites_select'] = $this->site->toAssocArray('id', 'name', $sites);
 	    

@@ -135,4 +135,14 @@ class Breedersites extends MY_Model
         //dump($result);
         return $result;
     }
+    
+    public function fetchForBreeder($breeder) 
+    {
+        if (!$breeder) {
+            
+            return false;
+        }
+        
+        return $this->fetchRows(array('where'=>array('breeder_id'=>$breeder, 'is_deleted'=>null)));
+    }
 }
