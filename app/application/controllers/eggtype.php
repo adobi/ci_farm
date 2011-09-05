@@ -10,7 +10,9 @@ class Eggtype extends MY_Controller {
 	    
 	    $this->load->model('Eggtypes', 'eggtypes');
 	    
-	    $data['eggtypes'] = $this->eggtypes->fetchAll();
+	    $data['eggtypes_food'] = $this->eggtypes->fetchByType(1);
+	    
+	    $data['eggtypes_production'] = $this->eggtypes->fetchByType(2);
 	    
 		$this->template->build('eggtype/index', $data);
 	}
@@ -20,7 +22,7 @@ class Eggtype extends MY_Controller {
 	    $data = array();
 	    
 	    $this->form_validation->set_rules('code', 'Kód', 'trim|required');
-	    $this->form_validation->set_rules('description', 'Leírás', 'trim|required');
+	    $this->form_validation->set_rules('name', 'Név', 'trim|required');
 	    
 	    $this->load->model("Eggtypes", 'eggtype');
 	    
