@@ -10,7 +10,7 @@
         
             <div class = "zebra span-18 <?= $et->is_for_stock ? 'highlighted' : ''; ?>">
                 <strong><?= $et->is_for_stock ? '[RAKTÁR KÉSZLET] ' : ''; ?><?= $et->name ?></strong> <?= $et->price ? $et->price . ' Ft' : ''; ?>
-                    <a class="button button-small" href="<?= base_url() ?>eggtype/delete/<?= $et->id ?>" class = "delete">töröl</a>
+                    <a class="button button-small delete" href="<?= base_url() ?>eggtype/delete/<?= $et->id ?>">töröl</a>
                 <!-- 
                 <a class="button button-small" href="<?= base_url() ?>eggtype/edit/<?= $et->id ?>" dialog_id = "<?= $et->id ?>" rel = "dialog" title = "Tojástípus szerkesztése">szerkeszt</a>
                  -->

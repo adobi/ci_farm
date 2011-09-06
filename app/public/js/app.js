@@ -76,7 +76,7 @@ App.TriggerDialogOpen = function(dialogId) {
 App.Confirm = function() {
     $('body').delegate('.delete', 'click', function() {
         var self = $(this);
-        var elem = $('<div />', {title: 'Figyelmztetés'}).html('Biztos törlöd?');
+        var elem = $('<div />', {title: 'Figyelmztetés'}).html('<p class = "notice">Biztos törlöd?</p>');
         
         elem.dialog({
             modal: true,

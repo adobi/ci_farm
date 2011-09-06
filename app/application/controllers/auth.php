@@ -14,11 +14,16 @@ class Auth extends MY_Controller
         
     public function index()
     {
+        if ($this->session->userdata('current_user_id')) {
+            
+            redirect(base_url().'welcome');
+        }
         redirect(base_url() . 'auth/login');
     }
     
     public function login() 
     {
+        
         $this->form_validation->set_rules('username', 'Felhasználónév', 'trim|required|callback_check_credentials');
         $this->form_validation->set_rules('password', 'Jelszó', 'trim|required');
         

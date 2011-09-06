@@ -40,6 +40,8 @@ class Eggtype extends MY_Controller {
 	            $this->eggtype->update($_POST, $id);
 	        } else {
 	            
+	            $_POST['cast_id'] = 1;
+	            
                 $this->eggtype->insert($_POST);
 	        }
 	        

@@ -3,13 +3,11 @@
     <a href="<?= base_url(); ?>breeder" <?= $this->uri->segment(1) === 'breeder' || $this->uri->segment(1) === 'breedersite' ? 'class = "selected-sidemenu-item"' : ''?>>Tenyésztők</a>
     
 </li>
-<!-- 
+ 
 <li>
     <span>›</span>
-    <a href="<?= base_url(); ?>breedersite" <?= $this->uri->segment(1) === 'breedersite' ? 'class = "selected-sidemenu-item"' : ''?>>Tenyésztők telephelyei</a>
-    
+    <a href="<?= base_url(); ?>cast" <?= $this->uri->segment(1) === 'cast' ? 'class = "selected-sidemenu-item"' : ''?>>Fajok, fajták</a>
 </li>
- -->
 <li>
     <span>›</span>
     <a href="<?= base_url(); ?>eggtype" <?= $this->uri->segment(1) === 'eggtype' ? 'class = "selected-sidemenu-item"' : '' ?>>Tojás típusok</a>
