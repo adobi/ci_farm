@@ -12,8 +12,19 @@ class Cast extends MY_Controller
         
         $this->load->model('Casts', 'model');
         
-        $data['items'] = $this->model->fetchAllWithType();
+        $data['items'] = $this->model->toAssocArray('id', 'code+name', $this->model->fetchAll(array('order'=>array('by'=>'code', 'dest'=>'asc'))));
                 
+        
+        if ($this->session->userdata('selected_cast')) {
+            
+            
+            $this->load->model('CastTypes', 'castTypes');
+            
+            $data['types'] = $this->castTypes->fetchForCast($this->session->userdata('selected_cast'));
+        } else {
+            $data['types'] = false;
+        }
+        
         $this->template->build('cast/index', $data);
     }
     
@@ -66,5 +77,15 @@ class Cast extends MY_Controller
         }
         
         redirect($_SERVER['HTTP_REFERER']);
+    }
+    
+    public function set_selected_cast()
+    {
+	    if ($this->uri->segment(3))
+	    {
+	        $this->session->set_userdata('selected_cast', $this->uri->segment(3));
+	    }
+	    
+	    die;        
     }
 }

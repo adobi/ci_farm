@@ -27,6 +27,7 @@ App.Dialog = function() {
                     if ($('form input[type=text]').length) {
                         
                         $.each($('form input[type=text]'), function(index, item) {
+                            
                             if ($(item).attr('size') === undefined) {
                                 
                                 $(item).attr('size', 45);
@@ -150,7 +151,7 @@ App.FakkSortable = function() {
 	}).disableSelection();     
 };
 
-
+/*
 App.SetSelectedBreedersite = function() {
     $('select[name=breeder_site_id]').bind('change', function() {
         var breederSite = $(this).val();
@@ -162,6 +163,22 @@ App.SetSelectedBreedersite = function() {
             });
         } 
     });    
+};
+*/
+App.SetSelectValueInSession = function(element, url) {
+    
+    $('body').delegate(element, 'change', function() {
+        var value = $(this).val();
+        
+        if ($.trim(value).length && value != 0) {
+            
+            $.get(App.URL+url+"/"+value, function() {
+                
+                location.reload();
+            });
+            $('#loading-global').show();                
+        } 
+    });
 };
 
 App.CatchLoadWeekDataEvent = function() {

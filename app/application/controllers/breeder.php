@@ -12,7 +12,7 @@ class Breeder extends MY_Controller {
 	    
 	    $this->load->model('Breeders', 'breeder');
 	    
-	    $data['breeders'] = $this->breeder->fetchAll(array('order'=>array('by'=>'name', 'dest'=>'asc')));
+	    $data['breeders'] = $this->breeder->fetchAll();
 	    $data['actualBreederId'] = $this->breeder->getId();
 		$this->template->build('breeder/index', $data);
 	}
@@ -33,9 +33,9 @@ class Breeder extends MY_Controller {
 	    $data['breeder'] = $breeder;
 	    
 	    $this->form_validation->set_rules('name', 'Név', 'trim|required');
-	    $this->form_validation->set_rules('phone', 'Telefonszám', 'trim|required|numeric');
-	    $this->form_validation->set_rules('cell', 'Mobil', 'trim|required|numeric');
-        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');	    
+	    $this->form_validation->set_rules('phone', 'Telefonszám', 'trim|numeric');
+	    $this->form_validation->set_rules('cell', 'Mobil', 'trim|numeric');
+        $this->form_validation->set_rules('email', 'Email', 'trim|valid_email');	    
         
         if ($this->form_validation->run()) {
             

@@ -6,6 +6,8 @@ require_once(BASEPATH.'core/Controller'.EXT);
 
 class MY_Controller extends CI_Controller 
 {
+    
+    
     //php 5 constructor
     public function __construct() 
     {
@@ -13,7 +15,7 @@ class MY_Controller extends CI_Controller
         
         if ($this->uri->segment(1) !== 'auth' && !$this->session->userdata('current_user_id')) {
             
-            if ((array_key_exists('HTTP_X_REQUESTED_WITH', $_SERVER) && $_SERVER['HTTP_X_REQUESTED_WITH'] === 'XMLHttpRequest')) {
+            if ($this->input->is_ajax_request()) {
                 
                 echo '<script type="text/javascript">location.reload();</script>';
                 die;
@@ -22,6 +24,11 @@ class MY_Controller extends CI_Controller
             redirect(base_url() . 'auth/login');
         }
         
+        if ($this->uri->segment(1) !== 'cast' && $this->uri->segment(1) !== 'casttype') {
+            
+            if (!$this->input->is_ajax_request())
+                $this->session->unset_userdata('selected_cast');
+        }
        
     }
 }

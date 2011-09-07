@@ -20,13 +20,15 @@ a:hover{
     -webkit-border-radius:3px;
     border-radius:3px;
 }
-
+fieldset {
+    padding:3px 7px!important;
+}
 fieldset p {
     padding:3px;
     margin:0px;
 }
 #content p {
-    padding:5px;
+    padding:3px;
 }
 .block {
     display:block;
@@ -364,7 +366,7 @@ fieldset {
 
 #loading-global {
     background: url("../img/pie.gif") no-repeat scroll 15px 10px #FFF1A8;//#D8DFEA;
-    display: none;
+    //display: none;
     font-size: 12px;
     font-weight: bold;
     left: 0;
@@ -403,14 +405,15 @@ fieldset {
     float:right;
 }
 
-.button-small {
+.button-small, .button {
     margin-top:5px;
+    margin-right:5px;
 
 }
 
-.button-small span {
-    font-size:12px!important;
-    padding: 0.25em 0.45em!important;
+.button-small span, .button span {
+    font-size:13px!important;
+    padding:3px 10px 4px!important
 }
 
 .highlighted {

@@ -43,6 +43,10 @@
             <input type="text" name="email" value="<?= $breeder ? $breeder->email : '' ?>" id="email" class = "text" />
         </p>
         <p>
+            <label for="priority" class = "block">Prioritás</label>
+            <input type="text" name="priority" value="<?= $breeder ? $breeder->priority : '' ?>" id="priority" size = "5" />
+        </p>        
+        <p>
             <button>Mentés</button>
         </p>
     <?= form_close(); ?>

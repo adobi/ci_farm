@@ -407,7 +407,7 @@ class My_Model extends CI_Model
 	                $r[] = $d->$v;   
 	            }
 	            
-	            $ret[$d->$key] = implode(' ', $r);
+	            $ret[$d->$key] = implode(' - ', $r);
 	        }
 	    }
 	    

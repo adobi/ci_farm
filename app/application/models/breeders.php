@@ -52,5 +52,15 @@ class Breeders extends MY_Model
         
         return $result;
     } 
-    */  
+    */
+    
+    public function fetchAll($params = array(), $current = false) 
+    {
+        if (!array_key_exists('order', $params)) 
+        {
+            $params['order'] = array('by'=>'priority, name', 'dest'=>'asc');
+        }
+        
+        return parent::fetchAll($params, $current);
+    }  
 }
