@@ -12,11 +12,12 @@
     <span>›</span>
     <a href="<?= base_url(); ?>eggtype" <?= $this->uri->segment(1) === 'eggtype' ? 'class = "selected-sidemenu-item"' : '' ?>>Tojás típusok</a>
 </li>
+<!-- 
 <li>
     <span>›</span>
     <a href="<?= base_url(); ?>chickentype" <?= $this->uri->segment(1) === 'chickentype' ? 'class = "selected-sidemenu-item"' : '' ?>>Tyúk (1) fajtakódok</a>
 </li>
-
+ -->
 <li>
     <span>›</span>
     <a href="<?= base_url(); ?>stock" <?= $this->uri->segment(1) === 'stock' ? 'class = "selected-sidemenu-item"' : '' ?>>Állományok</a>

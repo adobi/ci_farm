@@ -18,7 +18,7 @@
     <fieldset class="round">
         <legend>Fajták</legend>
         <p>
-            <a style="float:none;" href="<?= base_url(); ?>casttype/edit/cast/<?= $this->session->userdata('selected_cast'); ?>" class="button  " rel="dialog" title = "Új fajta felvitele">új fajta</a>
+            <a style="float:none;" href="<?= base_url(); ?>casttype/edit/cast/<?= $this->session->userdata('selected_cast'); ?>" class="button  " rel="dialog" title = "Új fajta felvitele">új fajta felvitele</a>
         </p>
         
         <?php if ($types): ?>
