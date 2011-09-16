@@ -33,8 +33,8 @@ class Breeder extends MY_Controller {
 	    $data['breeder'] = $breeder;
 	    
 	    $this->form_validation->set_rules('name', 'Név', 'trim|required');
-	    $this->form_validation->set_rules('phone', 'Telefonszám', 'trim|numeric');
-	    $this->form_validation->set_rules('cell', 'Mobil', 'trim|numeric');
+	    $this->form_validation->set_rules('phone', 'Telefonszám', 'trim');
+	    $this->form_validation->set_rules('cell', 'Mobil', 'trim');
         $this->form_validation->set_rules('email', 'Email', 'trim|valid_email');	    
         
         if ($this->form_validation->run()) {
@@ -53,6 +53,8 @@ class Breeder extends MY_Controller {
 	            
     	        $this->session->set_userdata('validation_error',validation_errors());
     	        $this->session->set_userdata('current_dialog_item', ($id ? $id : 0));
+    	        
+    	        $this->session->set_userdata('filled_data', $_POST);
     	        
     	        redirect($_SERVER['HTTP_REFERER']);
 	        }

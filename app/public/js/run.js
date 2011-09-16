@@ -47,5 +47,8 @@ $(function() {
     
     $(window).unload(function() {
         $('#loading-global').show();
-    });    
+    });   
+    
+    
+    App.ValidateForm(); 
 });

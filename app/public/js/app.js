@@ -61,12 +61,36 @@ App.Dialog = function() {
                     }
                     
                     $('button').button();
+                    
+
+                    $.each($('input[type=text], textarea'), function(i, v) {
+                        $(v).watermark($(v).attr('data-default'), {className: 'watermark'});
+                    });                    
                 });
                 
             }
         });
         
         return false;
+    });
+};
+
+App.ValidateForm = function() {
+    
+    $('body').delegate('form', 'submit', function() {
+        var self = $(this), required = self.find('.required'), error = false;
+        
+        $.each(required, function(i, v) {
+            if (!$.trim($(v).val())) {
+                $(v).parent().addClass('error-required');
+                
+                error = true;
+                
+                return;
+            }
+        });
+        
+        return !error;
     });
 };
 

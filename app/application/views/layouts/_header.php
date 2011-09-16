@@ -22,7 +22,8 @@
 		<script type="text/javascript" charset="utf-8" src = "<?= base_url() ?>js/jquery.min.js"></script>
         <script type="text/javascript" charset="utf-8" src = "<?= base_url() ?>js/jquery-ui.min.js"></script>
         <script type="text/javascript" charset="utf-8" src = "<?= base_url() ?>js/jquery.cookie.js"></script>
-
+        <script type="text/javascript" charset="utf-8" src = "<?= base_url() ?>js/jquery.watermark.min.js"></script>
+        
         <script type="text/javascript" charset="utf-8" src = "<?= base_url() ?>js/app.js"></script>
         <script type="text/javascript" charset="utf-8" src = "<?= base_url() ?>js/egg.js"></script>
         <script type="text/javascript" charset="utf-8" src = "<?= base_url() ?>js/hatching.js"></script>
