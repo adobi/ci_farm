@@ -379,7 +379,7 @@ class My_Model extends CI_Model
 		
 		$r = $this->db->query($sql);
 		
-		return $r ? $r->result() : $this->db->affected_rows();
+		return is_object($r) ? $r->result() : $this->db->affected_rows();
 	}
 	
 	/**

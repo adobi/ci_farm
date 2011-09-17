@@ -18,7 +18,7 @@
     <?php foreach ($breeders as $i=>$item): ?>
         <div class = "zebra span-19 round" style = "border:1px solid #ccc;">
             
-            <strong class = "name"><?= $item->name ?></strong>
+            <strong class = "name"><?= $item->priority ?>. <?= $item->name ?></strong>
             <ul class = "horizontal-list span-18 horizontal-list-header">
                 <li class="span-6">Cím</li>
                 <li class="span-4">Telefonszám</li>

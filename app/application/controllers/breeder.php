@@ -67,7 +67,7 @@ class Breeder extends MY_Controller {
                 $_POST['cell'] = (strlen($cell) === 5 ? '' : $cell);
             }
             
-            if (!isset($_POST['priority'])) {
+            if (!isset($_POST['priority']) || !$_POST['priority']) {
                 $_POST['priority'] = 10000;
             } else {
                 
