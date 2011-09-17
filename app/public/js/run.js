@@ -34,7 +34,7 @@ $(function() {
     if ($('#the-egg-week').length) {
         App.TriggerLoadWeekDataEvent($('#the-egg-week'), 'egg');
     }
-    
+    /*
     $('body').delegate('a', 'click', function() {
         
         if (!$(this).is('.delete')) {
@@ -44,7 +44,7 @@ $(function() {
         
         return true;
     });
-    
+    */
     $(window).unload(function() {
         $('#loading-global').show();
     });   

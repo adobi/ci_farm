@@ -436,7 +436,7 @@ fieldset {
   border-radius: 4px;    
 }
 
-.error-required > label, .close-dialog {
+.error-required > label, .close-dialog, .hide-breeder-info {
     color: #9d261d!important;    
 }
 

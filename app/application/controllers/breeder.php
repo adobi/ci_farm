@@ -38,13 +38,7 @@ class Breeder extends MY_Controller {
 	    $id = $this->uri->segment(3);
 	    
 	    if ($id) {
-	        $breeder = $this->breeder->find((int)$id);
-	        $breeder->phone = $breeder->phone ? explode('-', $breeder->phone) : '';
-	        $breeder->cell = $breeder->cell ? explode('-', $breeder->cell) : '';
-	        
-	        if ($breeder->priority == 10000) {
-	            $breeder->prority = '';
-	        }
+            $breeder = $this->_find($id);
 	    }
 	    $data['breeder'] = $breeder;
 	    
@@ -112,6 +106,66 @@ class Breeder extends MY_Controller {
 	    }
 	    
 	    redirect($_SERVER['HTTP_REFERER']);
+	}
+	
+	/**
+	 * id alapjan megkeres egy breedert
+	 *
+	 * @return void
+	 * @author Dobi Attila
+	 */
+	public function get()
+	{
+	    $data = array();
+	    
+	    $id = $this->uri->segment(3);
+	    
+	    $breeder = false;
+	    if ($id) {
+	        $breeder = $this->_find($id);
+	    }
+	    $data['breeder'] = $breeder;
+	    $this->template->build('breeder/get', $data);
+	}
+	
+	public function autocomplete_search()
+	{
+	    $this->load->model('Breeders', 'breeder');
+	    
+	    $result = $this->breeder->searchByName(urldecode($_GET['term']));
+	    
+	    $return = array();
+	    if ($result) {
+	        foreach ($result as $item) {
+	            $return[] = array('id'=>$item->id, 'label'=>$item->name, 'value'=>$item->name);
+	        }
+	    }
+	    
+	    echo json_encode($return);
+	    
+	    die;
+	}
+	
+	/**
+	 * id alapjan megkeres egy tenyesztot majd atakaitja a megjeleniteshez
+	 *
+	 * @param string $id 
+	 * @return void
+	 * @author Dobi Attila
+	 */
+	private function _find($id) 
+	{
+	    $this->load->model('Breeders', 'breeder');
+	    
+        $breeder = $this->breeder->find((int)$id);
+        $breeder->phone = $breeder->phone ? explode('-', $breeder->phone) : '';
+        $breeder->cell = $breeder->cell ? explode('-', $breeder->cell) : '';
+        
+        if ($breeder->priority == 10000) {
+            $breeder->prority = '';
+        }	    
+        
+        return $breeder;
 	}
 }
 

@@ -15,14 +15,12 @@
     $filled = $this->session->userdata('filled_data');
 ?>
 
-<fieldset class = "round">
-    
-    
+<fieldset class = "round span-9">
     
     <?= form_open(base_url() . 'breeder/edit/' . $this->uri->segment(3)) ?>
         <p>
             <label for="name" class = "block">Név</label>
-            <input type="text" class = "required" name = "name" value = "<?= $filled ? $filled['name']: ($breeder ? $breeder->name : '') ?>" id = "name"/> 
+            <input type="text" class = "required" name = "name" value = "<?= $filled ? $filled['name']: ($breeder ? $breeder->name : '') ?>" id = "breeder_name"/> 
         </p>
 
         <p>
@@ -57,6 +55,10 @@
             <button class = "save-form">Mentés</button>
         </p>
     <?= form_close(); ?>
+</fieldset>
+
+<fieldset class = "round span-8 hidden" id = "breeder-search-result-by-name">
+    
 </fieldset>
 
 <?php $this->session->unset_userdata('filled_data'); ?>

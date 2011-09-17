@@ -59,9 +59,14 @@ App.Dialog = function()
                         });
                     }
                     
-                    elem.find('p:last').append('<button class = "close-dialog">Mégsem</button>');
+                    elem.find('form>p:last').append('<button class = "close-dialog">Mégsem</button>');
 
                     elem.find('button').button();
+                    
+                    if ($('#breeder_name').length) {
+                        
+                        App.SimpleAutcomplete($('#breeder_name'), 'breeder/autocomplete_search', App.ShowBreederInfo);
+                    }
                 });
                 
             }
@@ -69,6 +74,41 @@ App.Dialog = function()
         
         return false;
     });
+};
+
+App.HideBreederInfo = function() {
+    
+    $('body').delegate('.hide-breeder-info', 'click', function() {
+        $('#breeder-search-result-by-name').hide();
+    });
+};
+
+App.ShowBreederInfo = function(id) 
+{
+    var container = $('#breeder-search-result-by-name');
+    
+    container.html('<p style = "text-align:center"><img src = "'+App.URL+'img/pie.gif" /></p>').show();
+    
+    container.load(App.URL+'breeder/get/'+id, function() {
+        App.HideBreederInfo();
+        
+        $('.button').button();
+    });
+};
+
+App.SimpleAutcomplete = function(element, url, callback) 
+{
+    element.autocomplete({
+        source: App.URL + url,
+        select: function(e, ui) {
+            var id = ui.item.id;
+            console.log(id);
+            if (typeof callback === 'function') {
+                
+                callback(id);
+            }
+        }
+    });     
 };
 
 App.CloseDialog = function() 

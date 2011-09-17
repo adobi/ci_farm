@@ -86,4 +86,18 @@ class Breeders extends MY_Model
         
         return $this->execute("update $this->_name set priority = priority+1 where priority >= $priority");
     }
+    
+    public function searchByName($term)
+    {
+        if (!$term) {
+            
+            return false;
+        }
+        
+        $term = mb_strtolower($term);
+        
+        $result = $this->execute("select * from $this->_name where lcase(name) like '$term%'");
+        
+        return $result;        
+    }
 }
