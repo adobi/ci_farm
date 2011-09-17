@@ -7,7 +7,7 @@
             <label for="breedersite-select" style="display:inline">Válasszon tenyészetet</label>
             <?= form_dropdown('breeder_site_id', $breeder_sites_select, $this->session->userdata('selected_breedersite')); ?>
         <?php else: ?>
-            <strong>Előbb vigyen fel tenyészetet</strong>              
+            <!-- <strong>Előbb vigyen fel tenyészetet</strong> -->
         <?php endif ?>
         <a class="button" href="<?= base_url(); ?>breedersite/edit/breeder/<?= $breeder->id; ?>" rel = "dialog" title = "Új telephely felvitele">Új tenyészet felvitele</a>
     </div>

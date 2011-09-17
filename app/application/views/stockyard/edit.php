@@ -15,7 +15,7 @@
     
         <p>
             <label for="name" class = "block">Név</label>
-            <input type="text" name="name" value="<?= $current_stockyard ? $current_stockyard->name : ''; ?>" id="name" class = "text"/>
+            <input type="text" name="name" value="<?= $item ? $item->name : ''; ?>" id="name" class = "required"/>
         </p>
         <p>
             <button>Mentés</button>

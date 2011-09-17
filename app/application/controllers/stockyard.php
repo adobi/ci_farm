@@ -6,13 +6,29 @@ require_once 'MY_Controller.php';
 
 class Stockyard extends MY_Controller 
 {
+    
     public function index() 
     {
+        if ($this->uri->segment(3)) {
+            $this->session->unset_userdata('selected_breedersite');
+            
+            redirect(base_url().'stockyard');
+        }
+        
         $data = array();
         
-        $this->load->model('Stockyards', 'yard');
+        $this->load->model('Stockyards', 'model');
         
-        $this->template->build('/index', $data);
+        $this->load->model('Breedersites', 'site');
+        $this->load->model('Breeders', 'breeder');
+        $sites = $this->site->fetchForBreeder($this->breeder->getId());
+	    
+        $data['breeder'] = $this->breeder->find($this->breeder->getId());
+	    $data['breeder_sites_select'] = $this->site->toAssocArray('id', 'name', $sites);
+	    
+	    $data['stockyards'] = $this->model->fetchForBreedersite($this->session->userdata('selected_breedersite'));
+        
+        $this->template->build('stockyard/index', $data);
     }
     
     public function edit() 
@@ -23,7 +39,9 @@ class Stockyard extends MY_Controller
         
         $this->load->model('Stockyards', 'model');
         $this->load->model("Breedersites", "site");
-        $item = false; $currentBreederSite = false;$currentStockYard = false;
+        $item = false; 
+        /*
+        $currentBreederSite = false;$currentStockYard = false;
         if ($id) {
             // breedersite/edit/breeder/1
             if ($id === 'breeder_site') {
@@ -44,6 +62,13 @@ class Stockyard extends MY_Controller
         //dump($currentStockYard); die;
         $data['current_stockyard'] = $currentStockYard;
         $data['current_breeder_site'] = $currentBreederSite;
+        */
+        $item = false;
+        if ($id) {
+            
+            $item = $this->model->find($id);
+        }
+        $data['item'] = $item;
         
         $this->form_validation->set_rules('name', 'Név', 'trime|required');
         
@@ -53,7 +78,8 @@ class Stockyard extends MY_Controller
                 $this->model->update($_POST, $id);
             } else {
                 
-                $_POST['breeder_site_id'] = $breederSiteId;
+                //$_POST['breeder_site_id'] = $breederSiteId;
+                $_POST['breeder_site_id'] = $this->session->userdata('selected_breedersite');
                 
                 $this->model->insert($_POST);
             }

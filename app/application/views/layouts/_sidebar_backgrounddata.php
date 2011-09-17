@@ -12,12 +12,12 @@
     <span>›</span>
     <a href="<?= base_url(); ?>eggtype" <?= $this->uri->segment(1) === 'eggtype' ? 'class = "selected-sidemenu-item"' : '' ?>>Tojás típusok</a>
 </li>
-<!-- 
+
 <li>
     <span>›</span>
-    <a href="<?= base_url(); ?>chickentype" <?= $this->uri->segment(1) === 'chickentype' ? 'class = "selected-sidemenu-item"' : '' ?>>Tyúk (1) fajtakódok</a>
+    <a href="<?= base_url(); ?>stockyard/index/sidebar" <?= $this->uri->segment(1) === 'stockyard' ? 'class = "selected-sidemenu-item"' : '' ?>>Istállók</a>
 </li>
- -->
+<!-- 
 <li>
     <span>›</span>
     <a href="<?= base_url(); ?>stock" <?= $this->uri->segment(1) === 'stock' ? 'class = "selected-sidemenu-item"' : '' ?>>Állományok</a>
@@ -27,3 +27,4 @@
     <span>›</span>
     <a href="<?= base_url(); ?>machine" <?= $this->uri->segment(1) === 'machine' ? 'class = "selected-sidemenu-item"' : '' ?>>Keltető gépek</a>
 </li>
+ -->
