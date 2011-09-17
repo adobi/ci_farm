@@ -37,7 +37,7 @@
                 <?php endif ?>
           
         <?php else: ?>
-            <p class="info">Nincs adat</p> 
+            <p class="message-info">Nincs adat</p> 
                 
         <?php endif ?>
     </fieldset> 

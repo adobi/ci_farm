@@ -1,6 +1,7 @@
 var App = App || {};
 
-App.Dialog = function() {
+App.Dialog = function() 
+{
 
     $('body').delegate('a[rel*=dialog]', 'click', function() {
         
@@ -39,33 +40,28 @@ App.Dialog = function() {
                         //console.log('datepicker found');
                         App.Datepicker();
                     }
-                    /*
-                    if ($('#postal_code_id').length) {
-                        
-                        App.Autocomplete($('#postal_code_id'),  'postalcode/index/');
-                    }
-                    
-                    if ($('#postal_zip').length) {
-                        
-                        App.Autocomplete($('#postal_zip'),  'postalcode/index/');
-                    }
-                    
-                    if ($('#zip').length) {
-                        
-                        App.Autocomplete($('#zip'),  'postalcode/index/');
-                    }                    
-                    */
+
                     if ($('#buyer_breeder_site_id').length) {
                         
                         App.Autocomplete($('#buyer_breeder_site_id'),  'breedersite/search_code_and_name');
                     }
                     
-                    $('button').button();
+                    App.Placeholder();
                     
+                    App.CloseDialog();
+                    
+                    if ($('.required').length) {
+                        $('form').prepend('<p class="message-info">a <strong class="star-required">*</strong>-gal jelölt mezők kitöltése kötelező</p>');
+                        
+                        $.each($('.required'), function(i, v) {
+                            
+                            $(v).prevAll('label').append(' <strong class="star-required">*</strong>');
+                        });
+                    }
+                    
+                    elem.find('p:last').append('<button class = "close-dialog">Mégsem</button>');
 
-                    $.each($('input[type=text], textarea'), function(i, v) {
-                        $(v).watermark($(v).attr('data-default'), {className: 'watermark'});
-                    });                    
+                    elem.find('button').button();
                 });
                 
             }
@@ -75,13 +71,54 @@ App.Dialog = function() {
     });
 };
 
-App.ValidateForm = function() {
+App.CloseDialog = function() 
+{
+    $('body').delegate('.close-dialog', 'click', function() {
+        $('.ui-dialog-titlebar-close').trigger('click');
+        
+        return false;
+    });
+};
+
+App.Placeholder = function() 
+{
+    var style = {
+        color:'#aaa',
+        //fontStyle:'italic'
+    }, reset = {
+        color:'inherit',
+        fontStyle:'inherit'
+    };
+    
+    $.each($('[placeholder]'), function(i, v) {
+        if (!$.trim($(v).val())) {
+            $(v).css(style);
+        }
+        $(v).watermark($(v).attr('placeholder'), {className: 'placeholder', useNative: true});
+    });                    
+    
+    $('[placeholder]').focus(function() {
+        $(this).css(reset);
+    }).blur(function() {
+        if (!$.trim($(this).val())) {
+            $(this).css(style);
+        }
+    });
+    
+};
+
+App.ValidateForm = function() 
+{
     
     $('body').delegate('form', 'submit', function() {
         var self = $(this), required = self.find('.required'), error = false;
         
+        $.each($('input, textarea'), function(i, v) {
+            $(v).val($.trim($(v).val()));
+        });
+        
         $.each(required, function(i, v) {
-            if (!$.trim($(v).val())) {
+            if (!$(v).val()) {
                 $(v).parent().addClass('error-required');
                 
                 error = true;
@@ -94,11 +131,13 @@ App.ValidateForm = function() {
     });
 };
 
-App.TriggerDialogOpen = function(dialogId) {
+App.TriggerDialogOpen = function(dialogId) 
+{
     $('[dialog_id='+dialogId+']').trigger('click');
 };
 
-App.Confirm = function() {
+App.Confirm = function() 
+{
     $('body').delegate('.delete', 'click', function() {
         var self = $(this);
         var elem = $('<div />', {title: 'Figyelmztetés'}).html('<p class = "notice">Biztos törlöd?</p>');
@@ -119,7 +158,8 @@ App.Confirm = function() {
     });  
 };
 
-App.Datepicker = function() {
+App.Datepicker = function() 
+{
     
     $('.datepicker').datepicker('destroy');
     
@@ -133,7 +173,8 @@ App.Datepicker = function() {
   
 };
 
-App.Autocomplete = function (element, url) {
+App.Autocomplete = function (element, url) 
+{
     
     element.autocomplete({
         source: App.URL + url,
@@ -151,7 +192,8 @@ App.Autocomplete = function (element, url) {
     });    
 };
 
-App.FakkSortable = function() {
+App.FakkSortable = function() 
+{
     $(".fakks-list").sortable({
 		connectWith: ".fakks-list",
 		stop: function (event, ui) {
@@ -189,7 +231,8 @@ App.SetSelectedBreedersite = function() {
     });    
 };
 */
-App.SetSelectValueInSession = function(element, url) {
+App.SetSelectValueInSession = function(element, url) 
+{
     
     $('body').delegate(element, 'change', function() {
         var value = $(this).val();
@@ -205,7 +248,8 @@ App.SetSelectValueInSession = function(element, url) {
     });
 };
 
-App.CatchLoadWeekDataEvent = function() {
+App.CatchLoadWeekDataEvent = function() 
+{
     
     $('body').bind('event_load_week_data', function(event, container, controller) {
          
@@ -216,7 +260,8 @@ App.CatchLoadWeekDataEvent = function() {
     });
 };
 
-App.TriggerLoadWeekDataEvent = function(container, controller) {
+App.TriggerLoadWeekDataEvent = function(container, controller) 
+{
     
     $('body').trigger('event_load_week_data', [container, controller]);
 }

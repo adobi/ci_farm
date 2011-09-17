@@ -12,8 +12,18 @@ class Breeder extends MY_Controller {
 	    
 	    $this->load->model('Breeders', 'breeder');
 	    
-	    $data['breeders'] = $this->breeder->fetchAll();
+	    $params = array();
+	    
+	    if ($this->uri->segment(3) && $this->uri->segment(4)) {
+	        $params['order'] = array('by'=>$this->uri->segment(3), 'dest'=>$this->uri->segment(4));
+	    }
+	    
+	    $data['breeders'] = $this->breeder->fetchAll($params);
 	    $data['actualBreederId'] = $this->breeder->getId();
+	    
+	    $data['by'] = $this->uri->segment(3);
+	    $data['dest'] = ($this->uri->segment(4) === 'asc' ? 'desc' : 'asc');
+	    
 		$this->template->build('breeder/index', $data);
 	}
 	
@@ -29,15 +39,43 @@ class Breeder extends MY_Controller {
 	    
 	    if ($id) {
 	        $breeder = $this->breeder->find((int)$id);
+	        $breeder->phone = $breeder->phone ? explode('-', $breeder->phone) : '';
+	        $breeder->cell = $breeder->cell ? explode('-', $breeder->cell) : '';
+	        
+	        if ($breeder->priority == 10000) {
+	            $breeder->prority = '';
+	        }
 	    }
 	    $data['breeder'] = $breeder;
 	    
 	    $this->form_validation->set_rules('name', 'Név', 'trim|required');
-	    $this->form_validation->set_rules('phone', 'Telefonszám', 'trim');
-	    $this->form_validation->set_rules('cell', 'Mobil', 'trim');
+	    $this->form_validation->set_rules('phone[]', 'Telefon', 'trim');
         $this->form_validation->set_rules('email', 'Email', 'trim|valid_email');	    
         
         if ($this->form_validation->run()) {
+            
+            //dump($_POST);
+            
+            if (isset($_POST['phone'])) {
+                $phone = join('-', $_POST['phone']);
+                
+                $_POST['phone'] = (strlen($phone) === 5 ? '' : $phone);
+            }
+            
+            if (isset($_POST['cell'])) {
+                $cell = join('-', $_POST['cell']);
+                $_POST['cell'] = (strlen($cell) === 5 ? '' : $cell);
+            }
+            
+            if (!isset($_POST['priority'])) {
+                $_POST['priority'] = 10000;
+            } else {
+                
+                if ($this->breeder->priorityExists($_POST['priority'])) {
+                    
+                    $this->breeder->incPriorityGreaterThen($_POST['priority']);
+                }
+            }
             
             if ($id) {
                 

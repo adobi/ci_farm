@@ -153,7 +153,7 @@ em {
     margin:5px 5px;
 }
     .zebra a {
-        float:right;
+        //float:right;
     }
 div.zebra {
 }
@@ -436,8 +436,8 @@ fieldset {
   border-radius: 4px;    
 }
 
-.error-required > label {
-    color: #9d261d;    
+.error-required > label, .close-dialog {
+    color: #9d261d!important;    
 }
 
 .error-required input, .error-required textarea {
@@ -466,14 +466,47 @@ fieldset {
     padding:5px 8px;
 }
 
-.x-large {
-    font-size:2em;
+.star-required {
+    font-size:1.6em;
     line-height:12px;
     position:relative;
-    top:10px;
+    top:7px;
+    color: #9d261d;
 }
 
-.watermark {
-    color:#dadada;
-    font-style:italic;
+.placeholder, ::-webkit-input-placeholder, :-moz-placeholder {
+    color:#aaa;
 }
+
+.save-form {
+    //color:#4C2372!important;
+}
+
+.asc, .desc {
+    display:inline-block;
+    width:10px;
+    height:8px;
+    position:relative;
+    
+}
+
+.asc {
+    background: url(../img/sprite-icons.png) no-repeat scroll -192px -80px transparent;
+}
+
+.desc {
+    background: url(../img/sprite-icons.png) no-repeat scroll -208px -80px transparent;
+}
+
+.horizontal-list {
+    list-style-type:none;
+}
+    .horizontal-list-header {
+        font-weight:bold;
+        border-bottom:1px solid #ccc;
+    }
+    
+    .horizontal-list li {
+        display:inline-block;
+        padding:5px 0;
+    }

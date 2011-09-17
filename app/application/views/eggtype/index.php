@@ -9,15 +9,19 @@
         <?php foreach ($eggtypes_food as $et): ?>
         
             <div class = "zebra span-18 <?= $et->is_for_stock ? 'highlighted' : ''; ?>">
-                <strong><?= $et->is_for_stock ? '[RAKTÁR KÉSZLET] ' : ''; ?><?= $et->name ?></strong> <?= $et->price ? $et->price . ' Ft' : ''; ?>
+                <div class="span-12">
+                    <strong><?= $et->is_for_stock ? '[RAKTÁR KÉSZLET] ' : ''; ?><?= $et->name ?></strong> <?= $et->price ? $et->price . ' Ft' : ''; ?>
+                </div>
+                <div class = "span-5 text-right">
                     <a class="button button-small delete" href="<?= base_url() ?>eggtype/delete/<?= $et->id ?>">töröl</a>
+                </div>
                 <!-- 
                 <a class="button button-small" href="<?= base_url() ?>eggtype/edit/<?= $et->id ?>" dialog_id = "<?= $et->id ?>" rel = "dialog" title = "Tojástípus szerkesztése">szerkeszt</a>
                  -->
             </div>
         <?php endforeach ?>
     <?php else: ?>
-        <p class="info">Nincs adat</p>
+        <p class="message-info">Nincs adat</p>
     <?php endif ?>
 </fieldset>
 
@@ -28,15 +32,19 @@
         <?php foreach ($eggtypes_production as $et): ?>
         
             <div class = "zebra span-18">
-                <strong><?= $et->name ?></strong> <?= $et->price ? $et->price . ' Ft' : ''; ?>
-                <em>(nem törölhető)</em>
+                <div class="span-12">
+                    <strong><?= $et->name ?></strong> <?= $et->price ? $et->price . ' Ft' : ''; ?>
+                    <em>(nem törölhető)</em>
+                </div>
                 
-                <a class="button button-small" href="<?= base_url() ?>eggtype/edit/<?= $et->id ?>" dialog_id = "<?= $et->id ?>" rel = "dialog" title = "Tojástípus szerkesztése">szerkeszt</a>
+                <div class = "span-5 text-right">
+                    <a class="button button-small" href="<?= base_url() ?>eggtype/edit/<?= $et->id ?>" dialog_id = "<?= $et->id ?>" rel = "dialog" title = "Tojástípus szerkesztése">szerkeszt</a>
+                </div>
                 
             </div>
         <?php endforeach ?>
     <?php else: ?>
-        <p class="info">Nincs adat</p>
+        <p class="message-info">Nincs adat</p>
     <?php endif ?>
 </fieldset>
 

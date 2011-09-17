@@ -63,4 +63,27 @@ class Breeders extends MY_Model
         
         return parent::fetchAll($params, $current);
     }  
+    
+    public function priorityExists($priority) 
+    {
+        if (!is_numeric($priority)) {
+            
+            return false;
+        }
+        
+        return $this->fetchRows(array('where'=>array('priority'=>$priority)));
+        
+    }
+    
+    public function incPriorityGreaterThen($priority) 
+    {
+        if (!$priority) {
+            
+            return false;
+        }
+        
+        //return $this->update(array('priority = priority + 1'), array('priority >='=>$priority));
+        
+        return $this->execute("update $this->_name set priority = priority+1 where priority >= $priority");
+    }
 }

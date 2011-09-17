@@ -14,12 +14,12 @@
     <?= form_open(base_url() . 'eggtype/edit/' . $this->uri->segment(3)) ?>
         <p>
             <label for="code" class = "block">Kód</label>
-            <input type="text" class = "text" name = "code" value = "<?= $eggtype ? $eggtype->code : '' ?>" id = "code"/>
+            <input type="text" class = "required" name = "code" value = "<?= $eggtype ? $eggtype->code : '' ?>" id = "code"/>
         </p>
         
         <p>
             <label for="name" class = "block">Név</label>
-            <input type="text" name="name" value="<?= $eggtype ? $eggtype->name : '' ?>" id="name" class = "text" />
+            <input type="text" name="name" value="<?= $eggtype ? $eggtype->name : '' ?>" id="name" class = "required" />
         </p>
         <p>
             <label for="price" class = "block">Ár</label>

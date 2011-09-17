@@ -9,7 +9,7 @@ class Backgrounddata extends MY_Controller {
 	    
 	    $this->session->unset_userdata('selected_breedersite');
 	    
-	    redirect(base_url() . 'breeder');
+	    redirect(base_url() . 'breeder/index/priority/asc');
 	    
 		//$this->template->build('backgrounddata/index');
 	}

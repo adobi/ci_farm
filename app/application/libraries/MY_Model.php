@@ -377,7 +377,9 @@ class My_Model extends CI_Model
 		    return false;
 		}
 		
-		return $this->db->query($sql)->result();
+		$r = $this->db->query($sql);
+		
+		return $r ? $r->result() : $this->db->affected_rows();
 	}
 	
 	/**

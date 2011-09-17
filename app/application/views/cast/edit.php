@@ -14,12 +14,12 @@
     <?= form_open() ?>
         <p>
             <label for="code" class = "block">Kód</label>
-            <input type="text" class = "text" name = "code" value = "<?= $current_item ? $current_item->code : '' ?>" id = "code"/>
+            <input type="text" class = "required" name = "code" value = "<?= $current_item ? $current_item->code : '' ?>" id = "code"/>
         </p>
         
         <p>
             <label for="name" class = "block">Név</label>
-            <input type="text" name="name" value="<?= $current_item ? $current_item->name : '' ?>" id="name" class = "text" />
+            <input type="text" name="name" value="<?= $current_item ? $current_item->name : '' ?>" id="name" class = "required" />
         </p>
         <p>
             <button>Mentés</button>
