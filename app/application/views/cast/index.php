@@ -24,11 +24,11 @@
         <?php if ($types): ?>
                 <?php if ($types): ?>
                     <?php foreach ($types as $item): ?>
-                        <div class="span-19 zebra">
+                        <div class="span-18 zebra">
                             <div class="span-12">
                                 <p><strong><?= $item->code; ?> - <?= $item->name ?></strong></p>
                             </div>                
-                            <div class="span-6 last text-right">    
+                            <div class="span-5 last text-right">    
                                 <a href="<?= base_url(); ?>casttype/delete/<?= $item->id; ?>" class="button   delete">töröl</a>
                                 <a href="<?= base_url(); ?>casttype/edit/<?= $item->id; ?>" class="button  " rel = "dialog" title = "<?= $item->name; ?> szerkesztése">szerkeszt</a>
                             </div>                
