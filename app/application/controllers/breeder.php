@@ -18,6 +18,14 @@ class Breeder extends MY_Controller {
 	        $params['order'] = array('by'=>$this->uri->segment(3), 'dest'=>$this->uri->segment(4));
 	    }
 	    
+	    $page = $this->uri->segment(6) ? $this->uri->segment(6) : 0;
+	    
+	    $data['pagination_links'] = $this->paginate('breeder/index/'.$this->uri->segment(3) . '/' . $this->uri->segment(4) . '/page/', 6, $this->breeder->count());
+	    
+	    $params['limit'] = ITEMS_PER_PAGE;
+	    $params['offset'] = $page;
+	    
+	    //dump($data); die;
 	    $data['breeders'] = $this->breeder->fetchAll($params);
 	    $data['actualBreederId'] = $this->breeder->getId();
 	    

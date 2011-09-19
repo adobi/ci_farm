@@ -31,4 +31,29 @@ class MY_Controller extends CI_Controller
         }
        
     }
+    
+    protected function paginate($url, $uriSegment, $total, $perPage = ITEMS_PER_PAGE) 
+    {
+        $this->load->library('pagination');
+        
+	    $config = array();
+	    $config['base_url'] = base_url() . $url;
+	    $config['total_rows'] = $total;
+	    $config['per_page'] = $perPage;
+	    $config['num_links'] = 10;
+	    $config['uri_segment'] = $uriSegment;
+	    $config['first_link'] = 'Első';
+	    $config['last_link'] = 'Utolsó';
+	    $config['next_link'] = 'Következő &rarr;';
+	    $config['prev_link'] = '&larr; Előző';
+	    $config['next_tag_open'] = '<span class = "next-page">';
+	    $config['next_tag_close'] = '</span>';
+	    $config['prev_tag_open'] = '<span class = "prev-page">';
+	    $config['prev_tag_close'] = '</span>';
+	    
+	    $this->pagination->initialize($config);
+	    
+	    return $this->pagination->create_links();
+	            
+    }
 }

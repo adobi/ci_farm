@@ -121,7 +121,7 @@ class My_Model extends CI_Model
 		 *
 		 * @author Dobi Attila
 		 */
-		if (array_key_exists('limit', $params) && is_array($params['limit']) && is_numeric($params['limit']) && is_numeric($params['offset'])) {
+		if (array_key_exists('limit', $params) /*&& is_array($params['limit'])*/ && is_numeric($params['limit']) && is_numeric($params['offset'])) {
 		    
 		    $query->limit($params['limit'], $params['offset']);
 		}

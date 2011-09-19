@@ -15,6 +15,7 @@
 
  
 <?php if ($breeders): ?>
+
     <?php foreach ($breeders as $i=>$item): ?>
         <div class = "zebra span-19 round" style = "border:1px solid #ccc;">
             
@@ -41,6 +42,10 @@
             </div>
         </div>
     <?php endforeach ?>
+    <div class="pagination span-19">
+        <?= $pagination_links; ?>
+    </div>
+    
 <?php endif ?>
 
 

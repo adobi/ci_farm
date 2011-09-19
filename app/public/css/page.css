@@ -510,3 +510,44 @@ fieldset {
         display:inline-block;
         padding:5px 0;
     }
+
+.pagination {
+    /*
+    margin: 18px 5px;
+    padding:0;    
+    border: 1px solid #ddd!important;
+    border: 1px solid rgba(0, 0, 0, 0.15)!important;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);    
+    */
+    font-size:1.1em;
+}
+    
+.pagination a, .pagination strong {
+    border:1px solid #ddd;
+    margin-right:5px;
+    float: left;
+    padding: 0 6px;
+    line-height: 26px;
+    border-right: 1px solid;
+    border-right-color: #ddd;
+    border-right-color: rgba(0, 0, 0, 0.15);
+    *border-right-color: #ddd;    
+}
+
+.pagination .next-page a , .pagination .prev-page a{
+    border:0px!important;
+}
+
+.pagination .next-page a:hover , .pagination .prev-page a:hover {
+    background:transparent;
+}
+
+.pagination a:hover, .pagination strong {
+    background-color: #eaeaea;
+    color:#FF0052;
+}
