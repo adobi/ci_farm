@@ -425,7 +425,7 @@ fieldset {
     width: 50%;
 }
 .dialog {
-    max-height:550px;
+    max-height:630px;
     overflow-y:scroll;
 }
 

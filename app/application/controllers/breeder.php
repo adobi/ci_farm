@@ -170,7 +170,7 @@ class Breeder extends MY_Controller {
         $breeder->cell = $breeder->cell ? explode('-', $breeder->cell) : '';
         
         if ($breeder->priority == 10000) {
-            $breeder->prority = '';
+            $breeder->priority = '';
         }	    
         
         return $breeder;
