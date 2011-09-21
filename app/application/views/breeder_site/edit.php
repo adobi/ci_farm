@@ -127,11 +127,11 @@
         </p>   
         <p>
             <label for="holding_data_start" class = "block">Tartás/vágás kezdete</label>
-            <input type="text" name = "holding_data_start" class = "text datepicker" id = "holding_data_start" value = "<?= $current_breeder_site ? $current_breeder_site->holding_data_start : '' ?>" />
+            <input type="text" name = "holding_data_start" class = "text datepicker" id = "holding_data_start" value = "<?= $current_breeder_site ? to_date($current_breeder_site->holding_data_start) : '' ?>" />
         </p>   
         <p>
             <label for="holding_data_end" class = "block">Tartás/vágás kezdete</label>
-            <input type="text" name = "holding_data_end" class = "text datepicker" id = "holding_data_end" value = "<?= $current_breeder_site ? $current_breeder_site->holding_data_end : '' ?>" />
+            <input type="text" name = "holding_data_end" class = "text datepicker" id = "holding_data_end" value = "<?= $current_breeder_site ? to_date($current_breeder_site->holding_data_end) : '' ?>" />
         </p>
         <p>
             <label for="holding_data_count" class = "block">Létszám</label>

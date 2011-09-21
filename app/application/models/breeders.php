@@ -61,7 +61,9 @@ class Breeders extends MY_Model
             $params['order'] = array('by'=>'priority, name', 'dest'=>'asc');
         }
         
-        return parent::fetchAll($params, $current);
+        $params['where'] = array('is_deleted IS NULL'=>null);
+        
+        return parent::fetchRows($params, $current);
     }  
     
     public function priorityExists($priority) 
@@ -105,4 +107,15 @@ class Breeders extends MY_Model
     {
         return count($this->fetchAll());
     }
+    
+    
+    public function delete($id) 
+    {
+        if (!$id) {
+            
+            return false;
+        }
+        
+        return $this->update(array('is_deleted'=>1), $id);
+    }    
 }

@@ -21,8 +21,8 @@
                         <p><strong><?= $item->name ?></strong></p>
                     </div>                
                     <div class="span-5 last text-right">    
-                        <a href="<?= base_url(); ?>stockyard/delete/<?= $item->id; ?>" class="button delete">töröl</a>
                         <a href="<?= base_url(); ?>stockyard/edit/<?= $item->id; ?>" class="button " rel = "dialog" title = "<?= $item->name; ?> szerkesztése">szerkeszt</a>
+                        <a href="<?= base_url(); ?>stockyard/delete/<?= $item->id; ?>" class="button delete">töröl</a>
                     </div>                
                 </div>
             <?php endforeach ?>

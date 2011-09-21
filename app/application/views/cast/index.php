@@ -2,14 +2,18 @@
 <fieldset class="round">
     <legend>Válasszon Fajt</legend>
     
-    <?= form_dropdown('cast_id', $items, $this->session->userdata('selected_cast')); ?>
+    <div class="span-19">
+        <?= form_dropdown('cast_id', $items, $this->session->userdata('selected_cast')); ?>
+        
+        <a href="<?= base_url() ?>cast/edit" class="button" dialog_id = "0" rel = "dialog" title = "Állatfaj felvitele">új állatfaj felvitele</a>
+    </div>
     
     <?php if ($this->session->userdata('selected_cast')): ?>
-        <a href="<?= base_url(); ?>cast/edit/<?= $this->session->userdata('selected_cast'); ?>" class="button" rel="dialog">szerkeszt</a>
-        <a href="<?= base_url(); ?>cast/delete/<?= $this->session->userdata('selected_cast'); ?>" class="delete button">töröl</a>
+        <div class="span-19 text-right">
+            <a href="<?= base_url(); ?>cast/edit/<?= $this->session->userdata('selected_cast'); ?>" class="button fl" rel="dialog">szerkeszt</a>
+            <a href="<?= base_url(); ?>cast/delete/<?= $this->session->userdata('selected_cast'); ?>" class="delete button fr">töröl</a>
+        </div>
     <?php endif ?>
-
-    <a href="<?= base_url() ?>cast/edit" class="button" dialog_id = "0" rel = "dialog" title = "Állatfaj felvitele">új állatfaj felvitele</a>
     
 </fieldset>
 
@@ -29,8 +33,8 @@
                                 <p><strong><?= $item->code; ?> - <?= $item->name ?></strong></p>
                             </div>                
                             <div class="span-5 last text-right">    
-                                <a href="<?= base_url(); ?>casttype/delete/<?= $item->id; ?>" class="button   delete">töröl</a>
                                 <a href="<?= base_url(); ?>casttype/edit/<?= $item->id; ?>" class="button  " rel = "dialog" title = "<?= $item->name; ?> szerkesztése">szerkeszt</a>
+                                <a href="<?= base_url(); ?>casttype/delete/<?= $item->id; ?>" class="button   delete">töröl</a>
                             </div>                
                         </div>
                     <?php endforeach ?>

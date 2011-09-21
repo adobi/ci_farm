@@ -24,7 +24,7 @@ class Stockyard extends MY_Controller
         $sites = $this->site->fetchForBreeder($this->breeder->getId());
 	    
         $data['breeder'] = $this->breeder->find($this->breeder->getId());
-	    $data['breeder_sites_select'] = $this->site->toAssocArray('id', 'name', $sites);
+	    $data['breeder_sites_select'] = $this->site->toAssocArray('id', 'code+name', $sites);
 	    
 	    $data['stockyards'] = $this->model->fetchForBreedersite($this->session->userdata('selected_breedersite'));
         

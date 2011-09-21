@@ -32,10 +32,16 @@ a:hover{
 fieldset {
     padding:3px 7px!important;
 }
+
 fieldset p {
     padding:3px;
     margin:0px;
 }
+
+fieldset .span-19 {
+    margin-right:0!important;
+}
+
 #content p {
     padding:3px;
 }
