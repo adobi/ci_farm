@@ -18,7 +18,7 @@
 
 <?= form_open(); ?>
 
-    <fieldset class="scroll round">
+    <fieldset class="round">
         <p>
             <label for="registration_number" class = "block">Telephely iktatószáma:</label>
             <input type="text" name="registration_number" value="<?= $current_breeder_site ? $current_breeder_site->registration_number : ''; ?>" id="registration_number" class = "text"/>

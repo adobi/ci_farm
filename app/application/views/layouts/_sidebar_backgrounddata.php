@@ -17,6 +17,11 @@
     <span>›</span>
     <a href="<?= base_url(); ?>stockyard/index/sidebar" <?= $this->uri->segment(1) === 'stockyard' ? 'class = "selected-sidemenu-item"' : '' ?>>Istállók</a>
 </li>
+<li>
+    <span>›</span>
+    <a href="<?= base_url(); ?>delivery" <?= $this->uri->segment(1) === 'delivery' ? 'class = "selected-sidemenu-item"' : '' ?>>Szállítólevelek</a>
+</li>
+
 <!-- 
 <li>
     <span>›</span>
