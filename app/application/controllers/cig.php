@@ -4,6 +4,8 @@ class Cig extends CI_Controller
 {
     private $_controllerBundle;
     private $_modelBundle;
+    private $_table;
+    private $_originalTable;
     
     public function __construct() 
     {
@@ -22,29 +24,28 @@ class Cig extends CI_Controller
         
         if ($this->form_validation->run()) {
             
-            $table = strtolower(str_replace('_', '', $_POST['table_name']));
+            $this->_table = strtolower(str_replace('_', '', $_POST['table_name']));
             
+            $this->_originalTable = $_POST['table_name'];
             //$result = $this->db->query('show columns from ' . $table)->result();
             
             //dump($result); 
             
-            $this->_generateModel($table);
-            
-            $this->_generateController($table);
+            $this->_generateModel()->_generateController()->_generateView();
             
             //dump(preg_match('/(varchar|int)/', 'datetime'));
             //die;
             
-            $this->_generateView($_POST['table_name'], $table);
-            
-            die;
+            //die;
         }
         
         $this->template->build('cig/index');
     }
     
-    private function _generateController($table)
+    private function _generateController()
     {
+        $table = $this->_table;
+        
         $controllerDefinition = file_get_contents($this->_controllerBundle);
         
         $controllerClassName = ucfirst($table);
@@ -59,15 +60,17 @@ class Cig extends CI_Controller
         
         $controllerDefinition = str_replace($tmpls, $vals, $controllerDefinition);
         
-       
-        
         file_put_contents(APPPATH.'controllers/'.$table.'.php', $controllerDefinition);
         
         //dump($controllerDefinition);
+        
+        return $this;
     }
     
-    private function _generateModel($table) 
+    private function _generateModel() 
     {
+        $table = $this->_table;
+        
         $modelDefinition = file_get_contents($this->_modelBundle);
         
         $model = ucfirst($table . 's');
@@ -77,10 +80,15 @@ class Cig extends CI_Controller
         file_put_contents(APPPATH.'models/'.strtolower($model) . '.php', $modelDefinition);
         
         //dump($modelDefinition);
+        
+        return $this;
     }
     
-    private function _generateView($table, $controller)
+    private function _generateView()
     {
+        $table = $this->_table;
+        $controller = $this->_originalTable;
+        
         $viewDir = APPPATH . 'views/' . $controller;
         @mkdir($viewDir);
         //$this->_buildViewForTable($table);
@@ -89,6 +97,8 @@ class Cig extends CI_Controller
         
         file_put_contents($viewDir . '/index.php', $index);
         file_put_contents($viewDir . '/edit.php', $this->_buildViewForTable($table));
+        
+        return $this;
     }
     
     private function _buildViewForTable($table)
