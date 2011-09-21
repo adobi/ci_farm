@@ -1,10 +1,20 @@
-<h2 style="padding:10px;margin-bottom:0px; padding-bottom:0px;"><?= $breeder->name; ?> telephelyei</h2>
+<!-- <h2 style="padding:10px;margin-bottom:0px; padding-bottom:0px;"><?= $breeder->name; ?> telephelyei</h2> -->
 
-<div class = "span-19" style="margin-bottom:20px">
-    <div class = "span-19 first inline-block">
+<?php if ($breeder_site): ?>
+    <h2 style="padding:10px;margin-bottom:0px; padding-bottom:0px;">
+        <?= $breeder_site->code; ?> - <?= $breeder_site->name; ?>
+    </h2>
+<?php else: ?>
+    <h2 style="padding:10px;margin-bottom:0px; padding-bottom:0px;"><?= $breeder->name; ?> tenyészetei</h2>
+<?php endif ?>
+
+<!-- <div class = "span-19" style="margin-bottom:20px"> -->
+<fieldset class = "round">
+    <legend>Válasszon tenyészetet</legend>
+    <div class = "span-18">
         
         <?php if (isset($breeder_sites_select) && count($breeder_sites_select) !== 1): ?>
-            <label for="breedersite-select" style="display:inline">Válasszon tenyészetet</label>
+            <!-- <label for="breedersite-select" style="display:inline">Válasszon tenyészetet</label> -->
             <?= form_dropdown('breeder_site_id', $breeder_sites_select, $this->session->userdata('selected_breedersite')); ?>
         <?php else: ?>
             <!-- <strong>Előbb vigyen fel tenyészetet</strong> -->
@@ -12,13 +22,14 @@
         <a class="button" href="<?= base_url(); ?>breedersite/edit/breeder/<?= $breeder->id; ?>" rel = "dialog" title = "Új telephely felvitele">Új tenyészet felvitele</a>
     </div>
     <?php if ($breeder_site): ?>
-        <div class="span-19 text-right">
+        <div class="span-19 text-right" style="margin-right:0px;">
             <!-- <a class = "button" style = "margin-right: 30px;" href="<?= base_url(); ?>stockyard/for_breedersite/<?= $breeder_site->id; ?>">istállók</a> -->
-            <a href="<?= base_url() ?>breedersite/edit/<?= $breeder_site->id ?>" class="button" rel = "dialog" title = "tenyészet szerkesztése">szerkeszt</a>
+            <a href="<?= base_url() ?>breedersite/edit/<?= $breeder_site->id ?>" class="button fl" rel = "dialog" title = "tenyészet szerkesztése">szerkeszt</a>
             <a href="<?= base_url() ?>breedersite/delete/<?= $breeder_site->id ?>" class="button delete">töröl</a>
         </div>
     <?php endif ?>
-</div>
+</fieldset>
+<!-- </div> -->
 
 <?php if ($breeder_site): ?>
    

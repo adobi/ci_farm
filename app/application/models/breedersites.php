@@ -7,7 +7,7 @@ class Breedersites extends MY_Model
     protected $_name = "breeder_site";
     protected $_primary = "id";
     
-    private $_types = array('', 'termelés', 'keltetés', 'nevelés');
+    private $_types = array('', 'tojás termelés', 'keltetés', 'nevelés');
     
     public function getTypes()
     {

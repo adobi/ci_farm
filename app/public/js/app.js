@@ -59,7 +59,7 @@ App.Dialog = function()
                         });
                     }
                     
-                    elem.find('form>p:last').append('<button class = "close-dialog">Mégsem</button>');
+                    elem.find('form p:last').append('<button class = "close-dialog">Mégsem</button>');
 
                     elem.find('button').button();
                     

@@ -34,11 +34,12 @@
             </ul>
 
             <div class="span-19 text-right">
-                <a class="button button-small" href="<?= base_url() ?>breedersite/for_breeder/<?= $item->id ?>">tenyészetei</a>
-                <a class="button button-small" href="<?= base_url() ?>breeder/edit/<?= $item->id ?>" rel = "dialog" dialog_id = "<?= $item->id ?>" title = "Tenyésztő szerkesztése">szerkeszt</a>
+                <a class="button button-small fl" href="<?= base_url() ?>breedersite/for_breeder/<?= $item->id ?>">tenyészetei</a>
+                <a class="button button-small fl" href="<?= base_url() ?>breeder/edit/<?= $item->id ?>" rel = "dialog" dialog_id = "<?= $item->id ?>" title = "Tenyésztő szerkesztése">szerkeszt</a>
                 <?php if ($item->id != $actualBreederId): ?>
-                    <a class="button button-small"  href="<?= base_url() ?>breeder/delete/<?= $item->id ?>" class = "delete">töröl</a>
-                <?php endif ?>                <!-- <a href="<?= base_url() ?>breeder/delete/<?= $item->id ?>" class = "delete">töröl</a> -->
+                    <a class="button button-small delete"  href="<?= base_url() ?>breeder/delete/<?= $item->id ?>">töröl</a>
+                <?php endif ?>                
+                <!-- <a href="<?= base_url() ?>breeder/delete/<?= $item->id ?>" class = "delete">töröl</a> -->
             </div>
         </div>
     <?php endforeach ?>

@@ -120,7 +120,7 @@ class Breedersite extends MY_Controller
         $data['breeder'] = $breeder;
         $sites = $this->site->fetchForBreeder($id);
 	    
-	    $data['breeder_sites_select'] = $this->site->toAssocArray('id', 'name', $sites);
+	    $data['breeder_sites_select'] = $this->site->toAssocArray('id', 'code+name', $sites);
 	    
 	    /**
 	     * mi van alapbol kivalasztva

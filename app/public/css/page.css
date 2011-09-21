@@ -20,6 +20,15 @@ a:hover{
     -webkit-border-radius:3px;
     border-radius:3px;
 }
+
+.fl {
+    float:left;
+}
+
+.rf {
+    float:right;
+}
+
 fieldset {
     padding:3px 7px!important;
 }
