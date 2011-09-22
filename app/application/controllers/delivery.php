@@ -23,6 +23,9 @@ class Delivery extends MY_Controller
         
         $this->load->model('Deliverys', 'model');
         
+        $this->load->model('Casts', 'cast');
+        $data['casts'] = $this->cast->toAssocArray('id', 'name', $this->cast->fetchAll());
+        
         $item = false;
         if ($id) {
             $item = $this->model->find((int)$id);

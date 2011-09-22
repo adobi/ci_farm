@@ -39,6 +39,8 @@ App.Dialog = function()
                     if ($('.datepicker').length) {
                         //console.log('datepicker found');
                         App.Datepicker();
+                        
+                        $('.datepicker').attr('size', 10);
                     }
 
                     if ($('#buyer_breeder_site_id').length) {

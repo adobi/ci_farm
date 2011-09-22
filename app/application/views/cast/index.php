@@ -3,7 +3,7 @@
     <legend>Válasszon Fajt</legend>
     
     <div class="span-19">
-        <?= form_dropdown('cast_id', $items, $this->session->userdata('selected_cast')); ?>
+        <?= form_dropdown('cast_id', $items, $this->session->userdata('selected_cast'), 'id = "cast_id"'); ?>
         
         <a href="<?= base_url() ?>cast/edit" class="button" dialog_id = "0" rel = "dialog" title = "Állatfaj felvitele">új állatfaj felvitele</a>
     </div>
