@@ -1,5 +1,7 @@
 var App = App || {};
 
+App.AjaxSubmit = false;
+
 App.Dialog = function() 
 {
 
@@ -52,18 +54,9 @@ App.Dialog = function()
                     
                     App.CloseDialog();
                     
-                    if ($('.required').length) {
-                        $('form').prepend('<p class="message-info">a <strong class="star-required">*</strong>-gal jelölt mezők kitöltése kötelező</p>');
-                        
-                        $.each($('.required'), function(i, v) {
-                            
-                            $(v).prevAll('label').append(' <strong class="star-required">*</strong>');
-                        });
-                    }
-                    
                     elem.find('form p:last').append('<button class = "close-dialog">Mégsem</button>');
 
-                    elem.find('button').button();
+                    //elem.find('button, .button').button();
                     
                     if ($('#breeder_name').length) {
                         
@@ -72,6 +65,54 @@ App.Dialog = function()
                 });
                 
             }
+        });
+        
+        return false;
+    });
+};
+
+App.NewBreederForDelivery = function() 
+{
+    $('body').delegate('#new-breeder-for-delivery', 'click', function() {
+        $(this).parent().prevAll('.select-breeder').find('select').attr('disabled', true);
+        
+        App.AjaxSubmitFormDialog();
+        
+        return true;
+    });
+};
+
+App.AjaxSubmitFormDialog = function() 
+{
+    $('body').delegate('.dialog form', 'submit', function() {
+        
+        var self = $(this);
+        console.log('ajax submit')
+        //console.log(self.serialize());
+        if (!App.Error) {
+            $('.dialog').dialog('close');
+            
+            $('body').undelegate('.dialog form', 'submit');
+        }
+        return false;
+    });
+};
+App.AddBreederFromScratch = function() 
+{
+    
+    $('body').delegate('.add-breedersite-from-scratch', 'click', function() {
+        var self = $(this);
+        
+        $('#add-breeder-from-scratch-form').css(
+            {
+                position:'relative',
+                top:parseInt(self.parents('fieldset:first').offset().top - $('#header').height() - 20, 10)
+            }
+        ).html('<p style = "text-align:center"><img src = "'+App.URL+'img/pie.gif" /></p>')
+        .show().load(self.attr('href'), function() {
+            //App.SimpleAutcomplete($('#breeder_name'), 'breeder/autocomplete_search', function(id) {
+            //    console.log('breeder id', id);
+            //});
         });
         
         return false;
@@ -104,10 +145,10 @@ App.SimpleAutcomplete = function(element, url, callback)
         source: App.URL + url,
         select: function(e, ui) {
             var id = ui.item.id;
-            console.log(id);
+
             if (typeof callback === 'function') {
                 
-                callback(id);
+                callback.call(this, id);
             }
         }
     });     
@@ -149,10 +190,33 @@ App.Placeholder = function()
     
 };
 
+App.SetupForm = function() {
+    if ($('.required').length) {
+        
+        $.each($('form'), function(i, v) {
+            
+            if (!$(v).find('.message-info').length) {
+                
+                $(v).prepend('<p class="message-info">a <strong class="star-required">*</strong>-gal jelölt mezők kitöltése kötelező</p>');
+            }
+            
+        });
+        
+        $.each($('.required'), function(i, v) {
+            if (!$(v).prevAll('label').find('.star-required').length) {
+                
+                $(v).prevAll('label').append(' <strong class="star-required">*</strong>');
+            }
+        });
+    }
+};
+
 App.ValidateForm = function() 
 {
     
     $('body').delegate('form', 'submit', function() {
+        App.Error = false;
+        console.log('validation');
         var self = $(this), required = self.find('.required'), error = false;
         
         $.each($('input, textarea'), function(i, v) {
@@ -161,15 +225,16 @@ App.ValidateForm = function()
         
         $.each(required, function(i, v) {
             if (!$(v).val()) {
+                
                 $(v).parent().addClass('error-required');
                 
-                error = true;
+                App.Error = true;
                 
                 return;
             }
         });
         
-        return !error;
+        return !App.Error;
     });
 };
 

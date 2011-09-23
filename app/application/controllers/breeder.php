@@ -84,7 +84,7 @@ class Breeder extends MY_Controller {
                 $this->breeder->update($_POST, $id);
             } else {
                 
-                $this->breeder->insert($_POST);
+                //$this->breeder->insert($_POST);
             }
             
             redirect($_SERVER['HTTP_REFERER']);
@@ -152,6 +152,19 @@ class Breeder extends MY_Controller {
 	    echo json_encode($return);
 	    
 	    die;
+	}
+	
+	public function from_scratch() 
+	{
+	    $data = array();
+	    
+	    //$data['edit_breeder_view'] = $this->template->build('breeder/edit', true);
+	    
+	    $this->load->model('Breeders', 'breeder');
+	    
+	    $data['breeders'] = $this->breeder->toAssocArray('id','name+city', $this->breeder->fetchAll(array('order'=>array('by'=>'name', 'dest'=>'asc'))));
+	    
+	    $this->template->build('breeder/from_scratch', $data);
 	}
 	
 	/**

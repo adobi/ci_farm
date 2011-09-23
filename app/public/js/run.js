@@ -1,4 +1,6 @@
 $(function() {
+    App.NewBreederForDelivery();
+    
     App.Dialog();
     App.Confirm();
     
@@ -13,6 +15,11 @@ $(function() {
        })
        .ajaxStop(function() {
     		$(this).hide();
+    		
+    		$('button, input[type=submit], .button').button();
+    		
+    		App.SetupForm();
+    		//App.Dialog();
     });
     
     App.CatchLoadWeekDataEvent();
@@ -51,4 +58,6 @@ $(function() {
     
     
     App.ValidateForm(); 
+    
+    App.AddBreederFromScratch();
 });

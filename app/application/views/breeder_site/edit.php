@@ -25,7 +25,7 @@
         </p>  
         <p>
             <label for="code" class = "block">Tartó/üzemeltető ügyfél-regisztrációszsáma</label>
-            <input type="text" name="code" value="<?= $current_breeder_site ? $current_breeder_site->code : ''; ?>" id="code" class = "text"/>
+            <input type="text" name="code" value="<?= $current_breeder_site ? $current_breeder_site->code : ''; ?>" id="code" class = "text required"/>
         </p>
         <p>
             <label for="breeder_name" class = "block">Tartó/üzemeltető neve</label>

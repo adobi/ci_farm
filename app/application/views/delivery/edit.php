@@ -1,4 +1,4 @@
-<fieldset class="span-13" style="border:0px; padding:0;">
+<fieldset class="span-10" style="border:0px; padding:0;">
         
     <?= form_open(); ?>
     
@@ -39,6 +39,7 @@
             <p>
                 <label class = "block" for="seller_id">Indító tenyészetkódja</label>
                 <input type="text" name = "seller_id" id = "seller_id" value="<?= $current_item ? $current_item->seller_id : '' ?>" />
+                <a href="<?= base_url() ?>breeder/from_scratch" class = "button small-button add-breedersite-from-scratch">Új tenyészet felvitele</a>
             </p>
             <p>
                 <label class = "block" for="sell_date">Indítás ideje</label>
@@ -55,6 +56,7 @@
             <p>
                 <label class = "block" for="buyer_id">Célállomás tenyészetkódja</label>
                 <input type="text" name = "buyer_id" id = "buyer_id" value="<?= $current_item ? $current_item->buyer_id : '' ?>" />
+                <a href="<?= base_url() ?>breeder/from_scratch" class = "button small-button add-breedersite-from-scratch">Új tenyészet felvitele</a>
             </p>
     
             <p>
@@ -109,4 +111,8 @@
         </fieldset>
     
     <?= form_close(); ?>
+</fieldset>
+
+<fieldset class = "hidden span-9 round fr" id = "add-breeder-from-scratch-form" style="position:relative; left:-10px">
+    
 </fieldset>
