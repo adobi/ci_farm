@@ -98,7 +98,7 @@ class Breeders extends MY_Model
         
         $term = mb_strtolower($term);
         
-        $result = $this->execute("select * from $this->_name where lcase(name) like '$term%'");
+        $result = $this->execute("select * from $this->_name where is_deleted is null and lcase(name) like '$term%'");
         
         return $result;        
     }

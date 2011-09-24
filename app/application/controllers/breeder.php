@@ -81,13 +81,20 @@ class Breeder extends MY_Controller {
             
             if ($id) {
                 
-                $this->breeder->update($_POST, $id);
+                $result = $this->breeder->update($_POST, $id);
             } else {
                 
-                //$this->breeder->insert($_POST);
+                $result = $this->breeder->insert($_POST);
             }
             
-            redirect($_SERVER['HTTP_REFERER']);
+            if ($this->input->is_ajax_request()) {
+            	
+            	echo $result;
+            	die;
+            } else {
+		            
+	            redirect($_SERVER['HTTP_REFERER']);
+            }
         } else {
 	        if ($_POST) {
 	            

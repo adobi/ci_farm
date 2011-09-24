@@ -88,8 +88,12 @@ class Breedersites extends MY_Model
         return $result;
     }
 */
-    public function fetchAll($params = array(), $current = false) 
+    public function fetchAll($params = array(), $current = false, $showSelfColumns) 
     {
+    	$params['where'] = array('breeder_site.is_deleted is null'=>null);
+    	
+    	return $this->fetchRows($params, $current, false, $showSelfColumns);
+    	/*
         $result = parent::fetchAll($params, $current);
         
         $return = false;
@@ -102,8 +106,8 @@ class Breedersites extends MY_Model
                 }
             }    
         }
-        
-        return $return;
+        */
+        //return $return;
     }
     
     public function delete($id) 
@@ -145,4 +149,24 @@ class Breedersites extends MY_Model
         
         return $this->fetchRows(array('where'=>array('breeder_id'=>$breeder, 'is_deleted'=>null)));
     }
+    
+    /**
+     * osszeszedi az osszes tenyeszetet a tenyeszto adataival
+     *
+     * @return void
+     * @author Dobi Attila
+     */
+    public function fetchSiteWithBreederInfo($columns = array('breeder_site.id as id', 'breeder_site.code', 'breeder.name', 'breeder.city')) 
+    {
+    	$result = $this->fetchAll(array(
+    		'columns'=>$columns,
+    		'join'=>array(
+    			array('table'=>'breeder', 'condition'=>'breeder_site.breeder_id = breeder.id')
+    		),
+    		'order'=>array('by'=>'breeder.name', 'dest'=>'asc')
+    	), false, false, false);
+    	//dump($result); die;
+    	return $result;
+    }
+ 
 }

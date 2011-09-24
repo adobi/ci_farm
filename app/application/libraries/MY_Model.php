@@ -47,7 +47,7 @@ class My_Model extends CI_Model
 	 * @return void
 	 * @author Dobi Attila
 	 */
-	public function fetchAll($params = array(), $current = false) 
+	public function fetchAll($params = array(), $current = false, $showSelfColumns = true) 
 	{
 		
 		$db = $this->db;
@@ -57,10 +57,21 @@ class My_Model extends CI_Model
 		 *
 		 * @author Dobi Attila
 		 */
-		$cols = "$this->_name.*";
+		if ($showSelfColumns) {
+		    
+		    $cols = "$this->_name.*";
+		} else {
+		    
+		    $cols = "";
+		}
 		if (array_key_exists('columns', $params)) {
 		    
-		    $cols .= ', ' . join(', ', $params['columns']);   
+			if ($cols) {
+				$cols .= ', ';
+			}
+			
+		    $cols .= join(', ', $params['columns']);
+		    
 		}
 		
 		/**
@@ -163,7 +174,11 @@ class My_Model extends CI_Model
 		
 		if (array_key_exists('columns', $params)) {
 		    
-		    $cols .= ', ' . join(', ', $params['columns']);   
+			if ($cols) {
+				$cols .= ', ';
+			}
+			
+		    $cols .= join(', ', $params['columns']);   
 		}
 		
 		/**
@@ -406,7 +421,8 @@ class My_Model extends CI_Model
 	        foreach ($data as $d) {
 	            $r = array();
 	            foreach ($valuesArray as $v) {
-	                $r[] = $d->$v;   
+	            	if ($d->$v)
+	                	$r[] = $d->$v;   
 	            }
 	            
 	            $ret[$d->$key] = implode(' - ', $r);

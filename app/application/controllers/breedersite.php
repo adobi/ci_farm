@@ -161,4 +161,16 @@ class Breedersite extends MY_Controller
         
         die;
     }
+    
+    public function save_from_scratch()
+    {
+    	if ($_POST) {
+    		
+    		$this->load->model('Breedersites', 'sites');
+    		
+    		echo $this->sites->insert($_POST);
+    	} 
+    	
+    	die;
+    }
 }

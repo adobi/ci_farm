@@ -70,7 +70,9 @@ App.Dialog = function()
         return false;
     });
 };
-
+/**
+ * szallitolvelenel ajaxosan elmenti az uj tenyeszto formot
+ */
 App.NewBreederForDelivery = function() 
 {
     $('body').delegate('#new-breeder-for-delivery', 'click', function() {
@@ -81,7 +83,9 @@ App.NewBreederForDelivery = function()
         return true;
     });
 };
-
+/**
+ * ajaxos form mentes dialogbol
+ */
 App.AjaxSubmitFormDialog = function() 
 {
     $('body').delegate('.dialog form', 'submit', function() {
@@ -90,18 +94,38 @@ App.AjaxSubmitFormDialog = function()
         console.log('ajax submit')
         //console.log(self.serialize());
         if (!App.Error) {
-            $('.dialog').dialog('close');
-            
-            $('body').undelegate('.dialog form', 'submit');
+        	
+        	$.post(self.attr('action'), self.serialize(), function(response) {
+        		
+	        	$('#add-breeder-and-site').find('.select-breeder').append($('<input />',  {
+	        		type:'text',
+	        		name: 'breeder_id',
+	        		value: response,
+	        		//disabled:true
+	        	}));
+	        	
+	        	$('#add-breeder-from-scratch-form').find('select').removeAttr('name');
+	        	
+	            $('.dialog').dialog('close');
+	            
+	            $('body').undelegate('.dialog form', 'submit');
+        	});
         }
         return false;
     });
 };
+/**
+ * szallitolevelnel megjeleni az uj tenyeszto es tenyeszet hozzaadasa formot
+ */
 App.AddBreederFromScratch = function() 
 {
     
     $('body').delegate('.add-breedersite-from-scratch', 'click', function() {
         var self = $(this);
+        
+        $('.selected-breedersite-from-scratch').removeClass('selected-breedersite-from-scratch');
+        
+        self.addClass('selected-breedersite-from-scratch');
         
         $('#add-breeder-from-scratch-form').css(
             {
@@ -119,7 +143,35 @@ App.AddBreederFromScratch = function()
     });
 };
 
-App.HideBreederInfo = function() {
+/**
+ * szallitolevelnel elmenti az uj tenyeszto es tenyeszet hozzaadasa formot
+ */
+App.SaveBreederAndSite = function() 
+{
+	$('body').delegate('#add-breeder-and-site', 'submit', function() {
+		
+		var self = $(this);
+		
+		$.post(self.attr('action'), self.serialize(), function(response) {
+			// select elemrol levenni a name-et, hidden inputot felvenni
+			var fieldset = $('.selected-breedersite-from-scratch').parents('fieldset:first');
+			
+			var name = fieldset.find('select').attr('name'),
+				elem = $('<input />', {type: 'text', name: name, value: response, disabled:true});;
+			fieldset.find('select').removeAttr('name').attr('disabled', true).parents('p:first').append(elem);
+			
+			//fieldset.append(elem);
+			
+			//console.log(elem);
+			$('#add-breeder-from-scratch-form').hide();
+		});
+		
+		return false;
+	});
+}
+
+App.HideBreederInfo = function() 
+{
     
     $('body').delegate('.hide-breeder-info', 'click', function() {
         $('#breeder-search-result-by-name').hide();

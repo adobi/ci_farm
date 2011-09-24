@@ -38,8 +38,9 @@
             <legend>Szállítmány adatai</legend>
             <p>
                 <label class = "block" for="seller_id">Indító tenyészetkódja</label>
-                <input type="text" name = "seller_id" id = "seller_id" value="<?= $current_item ? $current_item->seller_id : '' ?>" />
-                <a href="<?= base_url() ?>breeder/from_scratch" class = "button small-button add-breedersite-from-scratch">Új tenyészet felvitele</a>
+                <!-- <input type="text" name = "seller_id" id = "seller_id" value="<?= $current_item ? $current_item->seller_id : '' ?>" /> -->
+                <?= form_dropdown('seller_id', $breedersites, $current_item ? $current_item->seller_id : '') ?>
+                <a href="<?= base_url() ?>breeder/from_scratch/" class = "button small-button add-breedersite-from-scratch">Új tenyészet</a>
             </p>
             <p>
                 <label class = "block" for="sell_date">Indítás ideje</label>
@@ -55,14 +56,20 @@
             <legend>Célállomás</legend>
             <p>
                 <label class = "block" for="buyer_id">Célállomás tenyészetkódja</label>
-                <input type="text" name = "buyer_id" id = "buyer_id" value="<?= $current_item ? $current_item->buyer_id : '' ?>" />
-                <a href="<?= base_url() ?>breeder/from_scratch" class = "button small-button add-breedersite-from-scratch">Új tenyészet felvitele</a>
+                <!-- <input type="text" name = "buyer_id" id = "buyer_id" value="<?= $current_item ? $current_item->buyer_id : '' ?>" /> -->
+                <?= form_dropdown('buyer_id', $breedersites, $current_item ? $current_item->buyer_id : '') ?>
+                <a href="<?= base_url() ?>breeder/from_scratch/" class = "button small-button add-breedersite-from-scratch">Új tenyészet</a>
             </p>
     
             <p>
-                <label class = "block" for="buyer_country_code">Cálország neve</label>
-                <input type="text" name = "buyer_country_code" id = "buyer_country_code" value="<?= $current_item ? $current_item->buyer_country_code : '' ?>" />
+                <label class = "block" for="buyer_country_code">Cálország kódja</label>
+                <input type="text" name = "buyer_country_code" id = "buyer_country_code" value="<?= $current_item ? $current_item->buyer_country_code : '' ?>" size = "5"/>
             </p>
+            <p>
+                <label class = "block" for="buyer_country_name">Cálország neve</label>
+                <input type="text" name = "buyer_country_name" id = "buyer_country_name" value="<?= $current_item ? $current_item->buyer_country_name : '' ?>" />
+            </p>
+    
     
             <p>
                 <label class = "block" for="buyer_intra">INTRA/KÁBO szám</label>
@@ -85,7 +92,8 @@
             <legend>Szállítmány beérkezése</legend>
             <p>
                 <label class = "block" for="receiver_id">Beérkeztető tenyészetkódja</label>
-                <input type="text" name = "receiver_id" id = "receiver_id" value="<?= $current_item ? $current_item->receiver_id : '' ?>" />
+                <!-- <input type="text" name = "receiver_id" id = "receiver_id" value="<?= $current_item ? $current_item->receiver_id : '' ?>" /> -->
+                <?= form_dropdown('receiver_id', $breedersites, $current_item ? $current_item->receiver_id : '') ?>
             </p>
             <p>
                 <label class = "block" for="received">Beérkezés dátuma</label>

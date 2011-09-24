@@ -1,7 +1,7 @@
-<?= form_open() ?>
+<?= form_open(base_url().'breedersite/save_from_scratch', array('id'=>'add-breeder-and-site')) ?>
     <p class="select-breeder">
         <label for="" class = "block">Válasszon tenyésztőt</label>
-        <?= form_dropdown('breeder[breeder_id]', $breeders) ?>
+        <?= form_dropdown('breeder_id', $breeders) ?>
         <!-- <input type="text" id = "breeder_name" class = "text" name = "breeder_id"/> -->
     </p>
     <p>
@@ -9,7 +9,7 @@
     </p>
     <p>
         <label for="code" class = "block">Tenyészet kódja</label>
-        <input type="text" name = "breedersite[code]" id = "code" class = "required text required" />
+        <input type="text" name = "code" id = "code" class = "required text required" />
     </p>
     
     <p>

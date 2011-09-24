@@ -56,8 +56,10 @@ $(function() {
         $('#loading-global').show();
     });   
     
-    
+    App.SetupForm();
     App.ValidateForm(); 
     
     App.AddBreederFromScratch();
+    
+    App.SaveBreederAndSite();
 });

@@ -23,14 +23,21 @@ class Delivery extends MY_Controller
         
         $this->load->model('Deliverys', 'model');
         
+        // a fajtak listaja
         $this->load->model('Casts', 'cast');
         $data['casts'] = $this->cast->toAssocArray('id', 'name', $this->cast->fetchAll());
+        
+        // tenyeszetek listaja
+        $this->load->model('Breedersites', 'sites');
+        $data['breedersites'] = $this->sites->toAssocArray('id', 'name+city+code', $this->sites->fetchSiteWithBreederInfo());
         
         $item = false;
         if ($id) {
             $item = $this->model->find((int)$id);
         }
         $data['current_item'] = $item;
+        
+        $this->form_validation->set_rules('serial_number', 'Sorszám', 'trim|required');
         
         if ($this->form_validation->run()) {
         
