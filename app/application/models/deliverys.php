@@ -32,7 +32,28 @@ class Deliverys extends MY_Model
     
     public function fetchAll($params = array(), $current = false, $showSelfColumns = true)
     {
-        $params['join'] = array(
+        $params['join'] = $this->_buildJoin();
+        
+        return parent::fetchAll($params, $current, $showSelfColumns);
+    }
+    
+    public function findBySerialNumber($serial) 
+    {
+        if (!$serial) {
+            
+            return false;
+        }
+        
+        $params['join'] = $this->_buildJoin();
+        $params['where'] = array('serial_number'=>$serial);
+        $result = $this->fetchRows($params);
+        
+        return $result;
+    }
+    
+    private function _buildJoin()
+    {
+        return array(
             array('table'=>'cast', 'condition'=>'cast.id = delivery.cast_id', 'columns'=>array('cast.name as cast_name')),
             array('table'=>'breeder_site buyer_site', 'condition'=>'buyer_site.id = delivery.buyer_id', 'columns'=>array('buyer_site.code as buyer_code, buyer_site.address as buyer_address')),
             array('table'=>'breeder buyer_breeder', 'condition'=>'buyer_site.breeder_id = buyer_breeder.id', 'columns'=>array('buyer_breeder.name as buyer_name')),
@@ -41,7 +62,5 @@ class Deliverys extends MY_Model
             array('table'=>'breeder_site receiver_site', 'condition'=>'receiver_site.id = delivery.receiver_id', 'columns'=>array('receiver_site.code as receiver_code, receiver_site.address as receiver_address')),
             array('table'=>'breeder receiver_breeder', 'condition'=>'receiver_site.breeder_id = receiver_breeder.id', 'columns'=>array('receiver_breeder.name as receiver_name')),
         );
-        
-        return parent::fetchAll($params, $current, $showSelfColumns);
     }
 }
