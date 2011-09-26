@@ -12,7 +12,7 @@ class Delivery extends MY_Controller
         
         $this->load->model('Deliverys', 'model');
         
-        if ($_POST) {
+        if ($_POST && $_POST['serial_number']) {
             
             $data['items'] = $this->model->findBySerialNumber($_POST['serial_number']);
             

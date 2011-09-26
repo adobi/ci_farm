@@ -91,14 +91,13 @@ App.AjaxSubmitFormDialog = function()
     $('body').delegate('.dialog form', 'submit', function() {
         
         var self = $(this);
-        console.log('ajax submit')
-        //console.log(self.serialize());
+
         if (!App.Error) {
         	
         	$.post(self.attr('action'), self.serialize(), function(response) {
         		
 	        	$('#add-breeder-and-site').find('.select-breeder').append($('<input />',  {
-	        		type:'text',
+	        		type:'hidden',
 	        		name: 'breeder_id',
 	        		value: response,
 	        		//disabled:true
@@ -157,7 +156,8 @@ App.SaveBreederAndSite = function()
 			var fieldset = $('.selected-breedersite-from-scratch').parents('fieldset:first');
 			
 			var name = fieldset.find('select').attr('name'),
-				elem = $('<input />', {type: 'text', name: name, value: response, disabled:true});;
+				elem = $('<input />', {type: 'hidden', name: name, value: response});
+			
 			fieldset.find('select').removeAttr('name').attr('disabled', true).parents('p:first').append(elem);
 			
 			//fieldset.append(elem);
@@ -268,7 +268,7 @@ App.ValidateForm = function()
     
     $('body').delegate('form', 'submit', function() {
         App.Error = false;
-        console.log('validation');
+        
         var self = $(this), required = self.find('.required'), error = false;
         
         $.each($('input, textarea'), function(i, v) {

@@ -9,9 +9,12 @@
     </p>
     <p>
         <label for="code" class = "block">Tenyészet kódja</label>
-        <input type="text" name = "code" id = "code" class = "required text required" />
+        <input type="text" name = "code" id = "code" class = "text" />
     </p>
-    
+    <p>
+        <label for="address" class = "block">Tenyészet címe</label>
+        <input type="text" name = "address" id = "address" class = "required text" />
+    </p>    
     <p>
         <button>Mentés</button>
     </p>
