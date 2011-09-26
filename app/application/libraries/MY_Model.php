@@ -431,4 +431,9 @@ class My_Model extends CI_Model
 	    
 	    return $ret;
 	}
+    
+    public function count()
+    {
+        return count($this->fetchAll());
+    }	
 }

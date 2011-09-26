@@ -11,6 +11,19 @@ class Delivery extends MY_Controller
         $data = array();
         
         $this->load->model('Deliverys', 'model');
+
+        $page = $this->uri->segment(4) ? $this->uri->segment(4) : 0;
+
+	    $data['pagination_links'] = $this->paginate('delivery/index/page/', 4, $this->model->count(), DELIVERY_ITEMS_PER_PAGE);
+	    //dump($this->model->count()); die;
+	    $params['limit'] = DELIVERY_ITEMS_PER_PAGE;
+	    $params['offset'] = $page;        
+        
+        $data['items'] = $this->model->fetchAll($params);
+        
+        $data['model'] = $this->model;
+        
+        //dump($data['items']); die;
         
         $this->template->build('delivery/index', $data);
     }
@@ -22,6 +35,10 @@ class Delivery extends MY_Controller
         $id = $this->uri->segment(3);
         
         $this->load->model('Deliverys', 'model');
+        
+        $data['types'] = $this->model->getType();
+        
+        $data['intended'] = $this->model->getIntendedUse();
         
         // a fajtak listaja
         $this->load->model('Casts', 'cast');
@@ -46,7 +63,9 @@ class Delivery extends MY_Controller
             } else {
                 $this->model->insert($_POST);
             }
-            redirect($_SERVER['HTTP_REFERER']);
+            //redirect($_SERVER['HTTP_REFERER']);
+            redirect(base_url().'delivery');
+            
         } else {
             if ($_POST) {
                 

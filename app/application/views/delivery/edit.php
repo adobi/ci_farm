@@ -20,13 +20,13 @@
             <p>
                 <label class = "block" for="type">Élőállat vagy tojás</label>
                 <!-- <input type="text" name = "type" id = "type" value="<?= $current_item ? $current_item->type : '' ?>" /> -->
-                <?= form_dropdown('type', array('0'=>'', '1'=>'Állat', '2'=>'Tojás'), $current_item ? $current_item->type : ''); ?>
+                <?= form_dropdown('type', $types, $current_item ? $current_item->type : ''); ?>
             </p>
     
             <p>
                 <label class = "block" for="intended_use">Felhasználási cél</label>
                 <!-- <input type="text" name = "intended_use" id = "intended_use" value="<?= $current_item ? $current_item->intended_use : '' ?>" /> -->
-                <?= form_dropdown('intended_use', array('0'=>'', '1'=>'Tenyésztés', '2'=>'Végtermék előállítás'), $current_item ? $current_item->intended_use : ''); ?>
+                <?= form_dropdown('intended_use', $intended, $current_item ? $current_item->intended_use : ''); ?>
             </p>
     
             <p>
@@ -73,7 +73,7 @@
     
             <p>
                 <label class = "block" for="buyer_intra">INTRA/KÁBO szám</label>
-                <input type="text" name = "buyer_intra" id = "buyer_intra" value="<?= $current_item ? $current_item->buyer_intra : '' ?>" />
+                <input type="text" name = "buyer_intra" id = "buyer_intra" value="<?= $current_item ? $current_item->buyer_intra : '' ?>" size = "45"/>
             </p>
         </fieldset>
         <fieldset class="round">

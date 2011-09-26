@@ -103,12 +103,6 @@ class Breeders extends MY_Model
         return $result;        
     }
     
-    public function count()
-    {
-        return count($this->fetchAll());
-    }
-    
-    
     public function delete($id) 
     {
         if (!$id) {
