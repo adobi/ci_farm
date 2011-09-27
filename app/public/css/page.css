@@ -459,13 +459,13 @@ fieldset {
     color: #9d261d!important;    
 }
 
-.error-required input, .error-required textarea {
+.error-required input, .error-required textarea, .error-required select {
   border: 1px solid #c87872!important;
   -webkit-box-shadow: 0 0 3px rgba(171, 41, 32, 0.25)!important;
   -moz-box-shadow: 0 0 3px rgba(171, 41, 32, 0.25)!important;
   box-shadow: 0 0 3px rgba(171, 41, 32, 0.25)!important;
 }
-.error-required input:focus, .error-required textarea:focus {
+.error-required input:focus, .error-required textarea:focus, .error-required select:focus {
   border: 1px solid #b9554d!important;
   -webkit-box-shadow: 0 0 6px rgba(171, 41, 32, 0.5)!important;
   -moz-box-shadow: 0 0 6px rgba(171, 41, 32, 0.5)!important;
