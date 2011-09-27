@@ -25,7 +25,7 @@ App.Dialog = function()
                     elem.html(response);
                     //alert(window.innerHeight);
                     elem.dialog('option', 'position', [Math.floor(((window.innerWidth  - elem.width()) / 2)), window.pageYOffset]);
-                    $('.ui-dialog').css('top',  window.pageYOffset + 70)
+                    $('.ui-dialog').css('top',  window.pageYOffset + 70);
                     
                     if ($('form input[type=text]').length) {
                         
@@ -99,11 +99,11 @@ App.AjaxSubmitFormDialog = function()
 	        	$('#add-breeder-and-site').find('.select-breeder').append($('<input />',  {
 	        		type:'hidden',
 	        		name: 'breeder_id',
-	        		value: response,
+	        		value: response
 	        		//disabled:true
 	        	}));
 	        	
-	        	$('#add-breeder-from-scratch-form').find('select').removeAttr('name');
+	        	$('#add-breeder-and-site').find('select').removeAttr('name').attr('disabled', true);
 	        	
 	            $('.dialog').dialog('close');
 	            
@@ -126,17 +126,32 @@ App.AddBreederFromScratch = function()
         
         self.addClass('selected-breedersite-from-scratch');
         
-        $('#add-breeder-from-scratch-form').css(
-            {
-                position:'relative',
-                top:parseInt(self.parents('fieldset:first').offset().top - $('#header').height() - 20, 10)
-            }
-        ).html('<p style = "text-align:center"><img src = "'+App.URL+'img/pie.gif" /></p>')
-        .show().load(self.attr('href'), function() {
-            //App.SimpleAutcomplete($('#breeder_name'), 'breeder/autocomplete_search', function(id) {
-            //    console.log('breeder id', id);
-            //});
-        });
+        $('#add-breeder-from-scratch-form').remove();
+        
+        self.parents('p:first').after($('<fieldset />', {
+            'class':"span-18 round fr",
+            'id': "add-breeder-from-scratch-form",
+            'style':'background:#F7F7F7'
+        }));
+        
+        $('#add-breeder-from-scratch-form')
+            .html('<p style = "text-align:center"><img src = "'+App.URL+'img/pie.gif" /></p>')
+            .load(self.attr('href'), function() {
+                //App.SimpleAutcomplete($('#breeder_name'), 'breeder/autocomplete_search', function(id) {
+                //    console.log('breeder id', id);
+                //});
+                //console.log($('#add-breeder-and-site'));
+                //App.SaveBreederAndSite();
+            });
+        
+        return false;
+    });
+};
+
+App.SaveBreederAndSite = function() 
+{
+    $('body').delegate('#save-breedersite-from-scratch', 'click', function() {
+        $('#add-breeder-and-site').trigger('submit');
         
         return false;
     });
@@ -145,30 +160,47 @@ App.AddBreederFromScratch = function()
 /**
  * szallitolevelnel elmenti az uj tenyeszto es tenyeszet hozzaadasa formot
  */
-App.SaveBreederAndSite = function() 
+App.SaveBreederAndSite2 = function() 
 {
-	$('body').delegate('#add-breeder-and-site', 'submit', function() {
+    $('body').delegate('#add-breeder-and-site', 'submit', function(e) {
+    //$('body').delegate('#save-breedersite-from-scratch', 'click', function() {
+        //alert('hello');
+        
+		var self = $(this);//.parents('form:first');
 		
-		var self = $(this);
 		
-		$.post(self.attr('action'), self.serialize(), function(response) {
-			// select elemrol levenni a name-et, hidden inputot felvenni
-			var fieldset = $('.selected-breedersite-from-scratch').parents('fieldset:first');
-			
-			var name = fieldset.find('select').attr('name'),
-				elem = $('<input />', {type: 'hidden', name: name, value: response});
-			
-			fieldset.find('select').removeAttr('name').attr('disabled', true).parents('p:first').append(elem);
-			
-			//fieldset.append(elem);
-			
-			//console.log(elem);
-			$('#add-breeder-from-scratch-form').hide();
-		});
+		if (!App.Error) {
+		    
+    		$.post(self.attr('action'), self.serialize(), function(response) {
+    			// select elemrol levenni a name-et, hidden inputot felvenni
+    			var fieldset = $('.selected-breedersite-from-scratch').parents('fieldset:first');
+    			
+    			var name = fieldset.find('select').attr('name'),
+    				elem = $('<input />', {type: 'hidden', name: name, value: response});
+    			
+    			fieldset.find('select').removeAttr('name').attr('disabled', true).removeClass('required').parents('p:first').append(elem);
+    			
+    			//fieldset.append(elem);
+    			
+    			//console.log(elem);
+    			$('#add-breeder-from-scratch-form').remove();
+    		});
+		}
 		
 		return false;
 	});
-}
+};
+
+App.CloseFromScartch = function() 
+{
+    $('body').delegate('.close-from-scratch', 'click', function() {
+        var self = $(this);
+        
+        self.parents('#add-breeder-from-scratch-form').remove();
+        
+        return false;
+    });
+};
 
 App.HideBreederInfo = function() 
 {
@@ -218,7 +250,7 @@ App.CloseDialog = function()
 App.Placeholder = function() 
 {
     var style = {
-        color:'#aaa',
+        color:'#aaa'
         //fontStyle:'italic'
     }, reset = {
         color:'inherit',
@@ -270,13 +302,15 @@ App.ValidateForm = function()
         App.Error = false;
         
         var self = $(this), required = self.find('.required'), error = false;
-        
-        $.each($('input, textarea'), function(i, v) {
+
+        $.each($('input, textarea, select'), function(i, v) {
+            
             $(v).val($.trim($(v).val()));
         });
         
         $.each(required, function(i, v) {
-            if (!$(v).val()) {
+            
+            if (!$(v).val() || $(v).val() === '0') {
                 
                 $(v).parent().addClass('error-required');
                 
@@ -423,5 +457,5 @@ App.TriggerLoadWeekDataEvent = function(container, controller)
 {
     
     $('body').trigger('event_load_week_data', [container, controller]);
-}
+};
 

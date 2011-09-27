@@ -164,7 +164,7 @@ class Breedersite extends MY_Controller
     
     public function save_from_scratch()
     {
-    	if ($_POST) {
+    	if ($_POST && $_POST['breeder_id'] && $_POST['address']) {
     		
     		$this->load->model('Breedersites', 'sites');
     		

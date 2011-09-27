@@ -62,4 +62,7 @@ $(function() {
     App.AddBreederFromScratch();
     
     App.SaveBreederAndSite();
+    App.SaveBreederAndSite2();
+    
+    App.CloseFromScartch();
 });

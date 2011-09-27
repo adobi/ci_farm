@@ -54,6 +54,10 @@ fieldset .span-19 {
     width:150px;
 }
 
+.inline-block {
+    display:inline-block;
+}
+
 em {
     font-size:11px;
 }
@@ -451,7 +455,7 @@ fieldset {
   border-radius: 4px;    
 }
 
-.error-required > label, .close-dialog, .hide-breeder-info {
+.error-required > label, .close-dialog, .hide-breeder-info, .close-from-scratch {
     color: #9d261d!important;    
 }
 
