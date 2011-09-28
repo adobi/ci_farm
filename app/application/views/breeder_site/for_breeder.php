@@ -37,10 +37,13 @@
             <legend>Telephely adatai</legend>
             
             <p>
+                <strong>Tenyészetkód:</strong> <span style="font-weight:bold;color:#000; font-size:1.2em"><?= $breeder_site->code; ?></span>
+            </p>            
+            <p>
                 <strong>Telephely iktatószáma:</strong> <?= $breeder_site->registration_number; ?>
             </p>
             <p>
-                <strong>Tartó/üzemeltető ügyfél-regisztrációszsáma:</strong> <?= $breeder_site->code; ?>
+                <strong>Tartó/üzemeltető ügyfél-regisztrációsszáma:</strong> <?= $breeder_site->culture_code; ?>
             </p>
             <p>
                 <strong>Tartó/üzemeltető neve:</strong> <?= $breeder_site->breeder_name ?>

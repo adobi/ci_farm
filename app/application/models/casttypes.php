@@ -16,4 +16,9 @@ class Casttypes extends MY_Model
         
         return $this->fetchRows(array('where'=>array('cast_id'=>$cast)));
     }
+    
+    public function fetchForChicken()
+    {
+        return $this->fetchForCast(10);
+    }
 }

@@ -28,7 +28,6 @@
 
 <?php if ($items): ?>    
     
-    
         <?php foreach ($items as $item): ?>
             <fieldset class="round">
                 <div class="span-18">
@@ -54,6 +53,44 @@
                         <label>Indítás dátuma: </label><?= to_date($item->sell_date); ?>
                         <label class="text-center">Indított databszám: </label><?= $item->sell_piece; ?>
                     </p>
+                </div>
+
+                <?php if ($item->chickenstocks): ?>
+                    <div class="span-18">
+                        <table class="zebra-striped">
+                            <thead style="font-size:0.9em;">
+                                <tr>
+                                    
+                                    <th colspan = "2">Törzsállomány</th>
+                                    <th>INTRA/KÁBO szám</th>
+                                    <th>Keltető teny. kódja</th>
+                                    <th>Kelés dátuma</th>
+                                    <th>Darabszám</th>
+                                    <th>&nbsp;</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php $i = 1; foreach ($item->chickenstocks as $stock): ?>
+                                <tr>
+                                    <td><?= $i++; ?></td>
+                                    <td><?= $stock->stock_code; ?></td>
+                                    <td><?= $stock->intra_code; ?></td>
+                                    <td class="text-center"><?= $stock->seller_code; ?></td>
+                                    <td class="text-center"><?= to_date($stock->hatching_date); ?></td>
+                                    <td class="text-center"><?= $stock->piece; ?></td>
+                                    <td>
+                                        <a  href="<?= base_url(); ?>chickenstock/edit/<?= $stock->id; ?>" rel = "dialog" title = "Módosítás">szerkeszt</a>
+                                        <a class="delete" href="<?= base_url(); ?>chickenstock/delete/<?= $stock->id; ?>">töröl</a>
+                                    </td>
+                                </tr>
+                            <?php endforeach ?>
+                            </tbody>
+                        </table>
+                    </div>    
+                <?php endif ?>
+                
+                <div class="span-18 text-right" style="background:#eaeaea">
+                    <a href="<?= base_url(); ?>chickenstock/edit/delivery/<?= $item->id; ?>" rel = "dialog" title = "Új állomány felvitele" class="button small-button">új állomány</a>
                 </div>
                 
                 <div class="span-18">
@@ -88,7 +125,6 @@
                 </div>
                 
                 <div class="span-18 text-right" style="background:#eaeaea">
-                    <a href="<?= base_url(); ?>delivery" class="button small-button">állományok</a>
                     <a href="<?= base_url(); ?>delivery/edit/<?= $item->id; ?>"  class="button small-button">szerkeszt</a>
                     <a href="<?= base_url(); ?>delivery/delete/<?= $item->id; ?>" class="button small-button delete">töröl</a>
                 </div>

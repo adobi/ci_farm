@@ -12,7 +12,7 @@
 
 <script type="text/javascript">
     $(function() {
-        $('#header, #sidebar').remove();
-        $('#content').css('margin-top', 0).removeClass('span-20').addClass('span-24')
+        $('#sidebar').remove();
+        //$('#content').css('margin-top', 0).removeClass('span-20').addClass('span-24')
     })
 </script>

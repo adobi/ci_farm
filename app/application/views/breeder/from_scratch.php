@@ -17,7 +17,7 @@
         <input type="text" name = "address" id = "address" class = "required text" />
     </p>    
     <p>
-        <button id = "save-breedersite-from-scratch">Mentés</button>
-        <button class="close-from-scratch">Mégsem</button>
+        <button class="button-small" id = "save-breedersite-from-scratch">Mentés</button>
+        <button class="button-small close-from-scratch">Mégsem</button>
     </p>
 <?= form_close() ?>

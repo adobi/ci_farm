@@ -69,11 +69,11 @@ class Cig extends CI_Controller
     
     private function _generateModel() 
     {
-        $table = $this->_table;
+        $table = $this->_originalTable;
         
         $modelDefinition = file_get_contents($this->_modelBundle);
         
-        $model = ucfirst($table . 's');
+        $model = ucfirst($this->_table . 's');
         
         $modelDefinition = str_replace(array('%%MODEL_CLASS_NAME%%', "%%TABLE_NAME%%"), array($model, $table), $modelDefinition);
         
@@ -89,7 +89,7 @@ class Cig extends CI_Controller
         $table = $this->_table;
         $controller = $this->_originalTable;
         
-        $viewDir = APPPATH . 'views/' . $controller;
+        $viewDir = APPPATH . 'views/' . $table;
         @mkdir($viewDir);
         //$this->_buildViewForTable($table);
         
@@ -105,7 +105,7 @@ class Cig extends CI_Controller
     {
         $edit = file_get_contents($this->_bundleDir . 'edit_open.php');
         
-        $result = $this->db->query('show columns from ' . $table)->result();
+        $result = $this->db->query('show columns from ' . $this->_originalTable)->result();
         
         if (!$result) {
             

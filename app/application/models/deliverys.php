@@ -34,7 +34,17 @@ class Deliverys extends MY_Model
     {
         $params['join'] = $this->_buildJoin();
         
-        return parent::fetchAll($params, $current, $showSelfColumns);
+        $result = parent::fetchAll($params, $current, $showSelfColumns);
+        
+        if ($result) {
+            
+            $this->load->model('Chickenstocks', 'stocks');
+            
+            foreach ($result as $r) {
+                $r->chickenstocks = $this->stocks->fetchForDelivery($r->id);
+            }
+        }
+        return $result;
     }
     
     public function findBySerialNumber($serial) 
@@ -47,7 +57,14 @@ class Deliverys extends MY_Model
         $params['join'] = $this->_buildJoin();
         $params['where'] = array('serial_number'=>$serial);
         $result = $this->fetchRows($params);
-        
+        if ($result) {
+            
+            $this->load->model('Chickenstocks', 'stocks');
+            
+            foreach ($result as $r) {
+                $r->chickenstocks = $this->stocks->fetchForDelivery($r->id);
+            }
+        }        
         return $result;
     }
     

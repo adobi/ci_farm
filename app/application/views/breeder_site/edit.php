@@ -24,8 +24,12 @@
             <input type="text" name="registration_number" value="<?= $current_breeder_site ? $current_breeder_site->registration_number : ''; ?>" id="registration_number" class = "text"/>
         </p>  
         <p>
-            <label for="code" class = "block">Tartó/üzemeltető ügyfél-regisztrációszsáma</label>
+            <label for="code" class = "block">Tenyészetkód:</label>
             <input type="text" name="code" value="<?= $current_breeder_site ? $current_breeder_site->code : ''; ?>" id="code" class = "text required"/>
+        </p>          
+        <p>
+            <label for="culture_code" class = "block">Tartó/üzemeltető ügyfél-regisztrációsszáma</label>
+            <input type="text" name="culture_code" value="<?= $current_breeder_site ? $current_breeder_site->culture_code : ''; ?>" id="culture_code" class = "text"/>
         </p>
         <p>
             <label for="breeder_name" class = "block">Tartó/üzemeltető neve</label>
