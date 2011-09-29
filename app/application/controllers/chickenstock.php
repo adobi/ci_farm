@@ -11,6 +11,13 @@ class Chickenstock extends MY_Controller
         $data = array();
         
         $this->load->model('Chickenstocks', 'model');
+        $this->load->model('Breedersites', 'site');
+        $this->load->model('Breeders', 'breeder');
+        $data['breeder_id'] = $this->breeder->getId();
+        $sites = $this->site->fetchForBreeder($this->breeder->getId());
+	    $data['breeder_sites_select'] = $this->site->toAssocArray('id', 'code+name', $sites);
+        
+	    $data['items'] = $this->model->fetchForBreedersite($this->session->userdata('selected_breedersite'));
         
         $this->template->build('chickenstock/index', $data);
     }
@@ -56,6 +63,7 @@ class Chickenstock extends MY_Controller
                 if ($d) {
                     
                     $_POST['hatching_breeder_site_id'] = $d->seller_id;
+                    $_POST['holder_breeder_site_id'] = $d->buyer_id;
                 }
                 
                 $this->model->insert($_POST);

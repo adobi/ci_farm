@@ -21,4 +21,19 @@ class Chickenstocks extends MY_Model
             )
         ));
     }
+    
+    public function fetchForBreederSite($siteId)
+    {
+        if (!$siteId) {
+            
+            return false;
+        }
+        
+        return $this->fetchRows(array(
+            'where'=>array('holder_breeder_site_id'=>$siteId),
+            //'join'=>array(
+            //    array('table'=>'breeder_site', 'columns'=>array('breeder_site.code as seller_code'), 'condition'=>'hatching_breeder_site_id = breeder_site.id')
+            //)
+        )); 
+    }
 }

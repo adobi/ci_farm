@@ -100,6 +100,7 @@ em {
         font-size:1.4em;
         padding:5px 11px;
         color:#79B94A;
+        color:#46A546;
         font-weight:bold;
         //box-shadow:0 2px 8px #AAAAAA;
         //border:1px solid #f2f2f2;
@@ -130,6 +131,8 @@ em {
         padding:0px;
         line-height:30px;
         color:#FF0052;
+        color:#C43C35;
+        font-size:13px;
     }
     
     #side-navigation li span {
@@ -431,7 +434,7 @@ fieldset {
 }
 
 .button-small span, .button span {
-    font-size:13px!important;
+    font-size:12px!important;
     padding:3px 10px 4px!important
 }
 

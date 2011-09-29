@@ -84,10 +84,10 @@
                                             <a href="<?= base_url(); ?>chickenstock/show/<?= $stock->id; ?>" rel = "dialog" title = "Részletek">bővebben</a>
                                         </p>
                                          -->
-                                        <p>
-                                            <a  href="<?= base_url(); ?>chickenstock/edit/<?= $stock->id; ?>" rel = "dialog" title = "Módosítás">szerkeszt</a>
-                                            <a class="delete" href="<?= base_url(); ?>chickenstock/delete/<?= $stock->id; ?>">töröl</a>
-                                        </p>
+                                        <!-- <p> -->
+                                            <a class="button button-small"  href="<?= base_url(); ?>chickenstock/edit/<?= $stock->id; ?>" rel = "dialog" title = "Módosítás">szerkeszt</a>
+                                            <a class="delete button button-small" href="<?= base_url(); ?>chickenstock/delete/<?= $stock->id; ?>">töröl</a>
+                                        <!-- </p> -->
                                     </td>
                                 </tr>
                             <?php endforeach ?>
@@ -97,7 +97,7 @@
                 <?php endif ?>
                 
                 <div class="span-18 text-right" style="background:#eaeaea">
-                    <a href="<?= base_url(); ?>chickenstock/edit/delivery/<?= $item->id; ?>" rel = "dialog" title = "Új állomány felvitele" class="button small-button">új állomány</a>
+                    <a href="<?= base_url(); ?>chickenstock/edit/delivery/<?= $item->id; ?>" rel = "dialog" title = "Új állomány felvitele" class="button button-small">új állomány</a>
                 </div>
                 
                 <div class="span-18">

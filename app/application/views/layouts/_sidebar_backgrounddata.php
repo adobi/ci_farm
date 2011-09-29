@@ -21,7 +21,10 @@
     <span>›</span>
     <a href="<?= base_url(); ?>delivery" <?= $this->uri->segment(1) === 'delivery' ? 'class = "selected-sidemenu-item"' : '' ?>>Szállítólevelek</a>
 </li>
-
+<li>
+    <span>›</span>
+    <a href="<?= base_url(); ?>chickenstock" <?= $this->uri->segment(1) === 'chickenstock' ? 'class = "selected-sidemenu-item"' : '' ?>>Állományok</a>
+</li>
 <!-- 
 <li>
     <span>›</span>
