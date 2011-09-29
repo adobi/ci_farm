@@ -75,6 +75,17 @@ class Chickenstock extends MY_Controller
         $this->template->build('chickenstock/edit', $data);
     }
     
+    public function show()
+    {
+        $id = $this->uri->segment(3);
+        
+        $this->load->model('Chickenstocks', 'model');
+        
+        $data['item'] = $this->model->find($id);
+        
+        $this->template->build('chickenstock/show', $data);
+    }
+    
     public function delete()
     {
         $id = $this->uri->segment(3);

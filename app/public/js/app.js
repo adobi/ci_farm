@@ -42,7 +42,7 @@ App.Dialog = function()
                         //console.log('datepicker found');
                         App.Datepicker();
                         
-                        $('.datepicker').attr('size', 10);
+                        $('.datepicker').attr('size', 15);
                     }
 
                     if ($('#buyer_breeder_site_id').length) {
@@ -279,7 +279,7 @@ App.SetupForm = function() {
         
         $.each($('form'), function(i, v) {
             
-            if (!$(v).find('.message-info').length) {
+            if ($(v).find('.required').length && !$(v).find('.message-info').length) {
                 
                 $(v).prepend('<p class="message-info">a <strong class="star-required">*</strong>-gal jelölt mezők kitöltése kötelező</p>');
             }

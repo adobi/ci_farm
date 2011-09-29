@@ -33,8 +33,9 @@ class Deliverys extends MY_Model
     public function fetchAll($params = array(), $current = false, $showSelfColumns = true)
     {
         $params['join'] = $this->_buildJoin();
+        $params['where'] = array('delivery.is_deleted is null' => null);
         
-        $result = parent::fetchAll($params, $current, $showSelfColumns);
+        $result = parent::fetchRows($params, $current, $showSelfColumns);
         
         if ($result) {
             
@@ -79,5 +80,15 @@ class Deliverys extends MY_Model
             array('table'=>'breeder_site receiver_site', 'condition'=>'receiver_site.id = delivery.receiver_id', 'columns'=>array('receiver_site.code as receiver_code, receiver_site.address as receiver_address')),
             array('table'=>'breeder receiver_breeder', 'condition'=>'receiver_site.breeder_id = receiver_breeder.id', 'columns'=>array('receiver_breeder.name as receiver_name')),
         );
+    }
+    
+    public function delete($id)
+    {
+        if (!$id) {
+            
+            return false;
+        }
+        
+        return $this->update(array('is_deleted'=>1), $id);
     }
 }

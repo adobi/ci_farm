@@ -13,7 +13,7 @@
     <legend>Keresés sorszámra</legend>
     <?= form_open(); ?>
         <p>
-            <input type="text" name = "serial_number" value = "<?= @$_POST['serial_number']; ?>">
+            <input type="text" name = "serial_number" value = "<?= @$_POST['serial_number']; ?>" size = "45"/>
             <button class="button-small">Keres</button>
         </p>
     <?= form_close(); ?>
@@ -79,8 +79,15 @@
                                     <td class="text-center"><?= to_date($stock->hatching_date); ?></td>
                                     <td class="text-center"><?= $stock->piece; ?></td>
                                     <td>
-                                        <a  href="<?= base_url(); ?>chickenstock/edit/<?= $stock->id; ?>" rel = "dialog" title = "Módosítás">szerkeszt</a>
-                                        <a class="delete" href="<?= base_url(); ?>chickenstock/delete/<?= $stock->id; ?>">töröl</a>
+                                        <!-- 
+                                        <p>
+                                            <a href="<?= base_url(); ?>chickenstock/show/<?= $stock->id; ?>" rel = "dialog" title = "Részletek">bővebben</a>
+                                        </p>
+                                         -->
+                                        <p>
+                                            <a  href="<?= base_url(); ?>chickenstock/edit/<?= $stock->id; ?>" rel = "dialog" title = "Módosítás">szerkeszt</a>
+                                            <a class="delete" href="<?= base_url(); ?>chickenstock/delete/<?= $stock->id; ?>">töröl</a>
+                                        </p>
                                     </td>
                                 </tr>
                             <?php endforeach ?>

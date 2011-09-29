@@ -592,10 +592,10 @@ fieldset {
       border-bottom-width: 2px;
     }
     .zebra-striped tbody tr:nth-child(odd) td {
-      background-color: #f9f9f9;
+      background-color: #fff;
     }
     .zebra-striped tbody tr:hover td {
-      background-color: #f5f5f5;
+      background-color: #f2fcff;
     }
     .zebra-striped .header {
       cursor: pointer;
