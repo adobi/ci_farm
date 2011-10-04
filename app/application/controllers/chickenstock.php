@@ -104,6 +104,26 @@ class Chickenstock extends MY_Controller
         $this->template->build('chickenstock/show', $data);
     }
     
+    public function add_certificate()
+    {
+        $id = $this->uri->segment(3);
+        
+        $this->load->model('Chickenstocks', 'model');
+        
+        $this->form_validation->set_rules('certificate_code', 'Törzsállomány azonosító száma', 'trim|required');
+        
+        $data['item'] = $this->model->find($id);
+        
+        if ($this->form_validation->run()) 
+        {
+            $this->model->update($_POST, $id);
+            
+            redirect($_SERVER['HTTP_REFERER']);
+        }
+        
+        $this->template->build('chickenstock/add_certificate', $data);
+    }
+    
     public function delete()
     {
         $id = $this->uri->segment(3);

@@ -7,7 +7,7 @@
 <style type="text/css">
     .span-18 {
         background:#f7f7f7;
-        margin:3px 10px;
+        margin:3px 20px;
     }
     
     .span-18 label {
@@ -26,7 +26,6 @@
     }
 </style>
 
-<fieldset class="round">
     <?php if ($items): ?>
         <?php foreach ($items as $item): ?>
             <fieldset class="round">
@@ -34,9 +33,10 @@
                     <p>
                         <label>Törzsállomány azonosító szám:</label>
                         <?php if (!$item->certificate_code): ?>
-                            <a class = "button button-small" rel = "dialog" href="<?= base_url(); ?>chickenstock/add_certificate">azonosító szám felvitele</a>
+                            <a class = "button button-small" rel = "dialog" href="<?= base_url(); ?>chickenstock/add_certificate/<?= $item->id; ?>" title = "Törzsállomány azonosító száma felvitele">azonosító szám felvitele</a>
                         <?php else: ?>
-                            <span style="font-size:2em;"><?= $item->certificate_code; ?></span>
+                            <span style="font-size:2em; position:relative; top:5px;"><?= $item->certificate_code; ?></span>
+                            <a class = "fr button button-small" rel = "dialog" href="<?= base_url(); ?>chickenstock/add_certificate/<?= $item->id; ?>" title = "Törzsállomány azonosító száma módosítása">szerkeszt</a>
                         <?php endif ?>
                     </p>
                 </div>
@@ -111,4 +111,3 @@
             </div>    
         <?php endif ?>        
     <?php endif ?>
-</fieldset>
