@@ -432,8 +432,8 @@ class My_Model extends CI_Model
 	    return $ret;
 	}
     
-    public function count()
+    public function count($condition = array()) 
     {
-        return count($this->fetchAll());
+        return empty($condition) ? count($this->fetchAll()) : count($this->fetchRows(array('where'=>$condition)));
     }	
 }

@@ -16,8 +16,18 @@ class Chickenstock extends MY_Controller
         $data['breeder_id'] = $this->breeder->getId();
         $sites = $this->site->fetchForBreeder($this->breeder->getId());
 	    $data['breeder_sites_select'] = $this->site->toAssocArray('id', 'code+name', $sites);
+
+        $page = $this->uri->segment(4) ? $this->uri->segment(4) : 0;
+    
+        $data['pagination_links'] = $this->paginate(
+                                            'chickenstock/index/page/', 
+                                            4, 
+                                            $this->model->count(array('holder_breeder_site_id'=>$this->session->userdata('selected_breedersite'))), 
+                                            DELIVERY_ITEMS_PER_PAGE);
+        $params['limit'] = DELIVERY_ITEMS_PER_PAGE;
+        $params['offset'] = $page; 
         
-	    $data['items'] = $this->model->fetchForBreedersite($this->session->userdata('selected_breedersite'));
+	    $data['items'] = $this->model->fetchForBreedersite($this->session->userdata('selected_breedersite'), $params);
         
         $this->template->build('chickenstock/index', $data);
     }

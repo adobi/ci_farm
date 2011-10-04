@@ -136,9 +136,10 @@ em {
     }
     
     #side-navigation li span {
-        font-size:1.2em!important;
+        font-size:1.3em!important;
         font-family:tahoma;
         font-weight:bold;
+        color:#C43C35;
     }
     
     .selected-sidemenu-item {
@@ -439,7 +440,7 @@ fieldset {
 }
 
 .highlighted {
-    background:#D9F7BB;
+    background:#D9F7BB!important;
 }
 
 .breedersite p strong {
