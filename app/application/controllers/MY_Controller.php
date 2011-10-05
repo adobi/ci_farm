@@ -32,8 +32,10 @@ class MY_Controller extends CI_Controller
         
         if ($this->uri->segment(1) !== 'chickenstock') {
             
-            if (!$this->input->is_ajax_request())
-                $this->session->unset_userdata('selected_breedersite');
+            if (!$this->input->is_ajax_request()) {
+                
+                //$this->session->unset_userdata('selected_breedersite');
+            }
         }
        
     }

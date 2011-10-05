@@ -22,7 +22,7 @@ class Chickenstock extends MY_Controller
         $data['pagination_links'] = $this->paginate(
                                             'chickenstock/index/page/', 
                                             4, 
-                                            $this->model->count(array('holder_breeder_site_id'=>$this->session->userdata('selected_breedersite'))), 
+                                            $this->model->count(array('holder_breeder_site_id'=>$this->session->userdata('selected_breedersite'), '(male_piece != 0  or female_piece != 0)' => null)), 
                                             DELIVERY_ITEMS_PER_PAGE);
         $params['limit'] = DELIVERY_ITEMS_PER_PAGE;
         $params['offset'] = $page; 

@@ -103,7 +103,7 @@ App.AjaxSubmitFormDialog = function()
 	        		//disabled:true
 	        	}));
 	        	
-	        	$('#add-breeder-and-site').find('select').removeAttr('name').attr('disabled', true);
+	        	$('#add-breeder-and-site').find('select').removeAttr('name').attr('disabled', true).removeClass('required');
 	        	
 	            $('.dialog').dialog('close');
 	            
