@@ -72,7 +72,10 @@
                             <tbody>
                             <?php $i = 1; foreach ($item->chickenstocks as $stock): ?>
                                 <tr>
-                                    <td><?= $i++; ?></td>
+                                    <td>
+                                        <input type="checkbox" name = "concentrate" />
+                                        <?= $i++; ?>
+                                    </td>
                                     <td><?= $stock->stock_code; ?></td>
                                     <td><?= $stock->intra_code; ?></td>
                                     <td class="text-center"><?= $stock->seller_code; ?></td>
