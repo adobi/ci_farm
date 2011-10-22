@@ -61,7 +61,8 @@ class Delivery extends MY_Controller
         if ($id) {
             $item = $this->model->find((int)$id);
         }
-        $data['current_item'] = $item;
+        
+        $data['current_item'] = $item ? $item[0] : false;
         
         $this->form_validation->set_rules('serial_number', 'Sorszám', 'trim|required');
         

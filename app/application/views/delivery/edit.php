@@ -53,7 +53,7 @@
             
             <p>
                 <label class = "inline-block" for="sell_date">Indítás ideje</label>
-                <input type="text" name = "sell_date" id = "sell_date" value="<?= $current_item ? $current_item->sell_date : '' ?>" class = "datepicker" />
+                <input type="text" name = "sell_date" id = "sell_date" value="<?= $current_item ? to_date($current_item->sell_date) : '' ?>" class = "datepicker" />
             </p>
     
             <p>
@@ -94,7 +94,7 @@
             </p>
             <p>
                 <label class = "inline-block" for="start_date">Szállítás várható időtartama</label>
-                <input type="text" name = "start_date" id = "start_date" value="<?= $current_item ? $current_item->start_date : '' ?>" class = "datepicker" />
+                <input type="text" name = "start_date" id = "start_date" value="<?= $current_item ? to_date($current_item->start_date) : '' ?>" class = "datepicker" />
             </p>
         </fieldset>
         <fieldset class="round">
@@ -106,7 +106,7 @@
             </p>
             <p>
                 <label class = "inline-block" for="received">Beérkezés dátuma</label>
-                <input type="text" name = "received" id = "received" value="<?= $current_item ? $current_item->received : '' ?>" class = "datepicker" />
+                <input type="text" name = "received" id = "received" value="<?= $current_item ? to_date($current_item->received) : '' ?>" class = "datepicker" />
             </p>
     
             <p>
@@ -118,7 +118,7 @@
             <legend>Beérkeztető állattartó aláírása</legend>
             <p>
                 <label class = "inline-block" for="arrival_date">Aláírás dátuma</label>
-                <input type="text" name = "arrival_date" id = "arrival_date" value="<?= $current_item ? $current_item->arrival_date : '' ?>" class = "datepicker" />
+                <input type="text" name = "arrival_date" id = "arrival_date" value="<?= $current_item ? to_date($current_item->arrival_date) : '' ?>" class = "datepicker" />
             </p>
         </fieldset>
         <fieldset class="round">
