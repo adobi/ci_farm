@@ -687,3 +687,11 @@ fieldset {
       background-color: #e2d5f0;
     }
 /* end zebra striped table*/
+
+.checkbox-wrapper {
+     padding:3px!important; margin:0;position:relative; top:5px;
+     //background:#e0e0e0;
+     //border:1px solid #ccc!important;
+     width:20px;
+     //-moz-border-radius:3px;
+}

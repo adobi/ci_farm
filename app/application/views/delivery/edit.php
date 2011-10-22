@@ -122,6 +122,160 @@
             </p>
         </fieldset>
         <fieldset class="round">
+            <legend>Allategészségügyi igazolás</legend>
+            
+            <div class = "span-18">
+                <div class="span-18">
+                    Alúlírott kezelő állatorvos igazolom hogy:
+                </div>
+                <ul style="list-style-type:none; margin-bottom:0px;" class="span-18">
+                    <li class="span-18">
+                        <div class="span-17" style="padding:0px;">
+                            <div class="span-1 checkbox-wrapper" style="top:15px;">
+                                <input type="checkbox" name = "" id = "" value = "1" /> 
+                            </div>
+                            <div class = "span-16" style="margin:0;">
+                                a szállítólevélen leírt állatokat <input type="text" name = "" id = "" class = "datepicker" />-án/én
+                                <input type="text" name = "" id = "" size = "2"/> óra <input type="text" name = "" id = "" size = "2"/> perckor 
+                                az indító tenyészetben megvizsgáltam és azokat egészségesnek találtam,
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="span-18">
+                        <div class = "span-17" style="padding:0px;">
+                            <div class="span-1 checkbox-wrapper">
+                                <input type="checkbox" name = "" id = "" value = "1" /> 
+                            </div>
+                            <div class = "span-16" style="margin:0;">
+                                a vizsgálat időpontjában a szállítólevélen leírt állatok a vonatkozó állatvédelmi jogszabályokkal összhangban
+                                a tervezett szállításra alkalmas állapotban voltak;
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="span-18">
+                        <div class = "span-17" style="padding:0px;">
+                            <div class="span-1 checkbox-wrapper">
+                                <input type="checkbox" name = "" id = "" value = "1" /> 
+                            </div>
+                            <div class = "span-16" style="margin:0;">
+                                a szállítólevélen leírt szállítmány, illetve származási állománya baromfipestis elleni immunizálásra került 
+                                az alábbiak szerint
+                                <table class="zebra-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Felhasznált oltóanyag</th>
+                                            <th>immunizálás időpontja</th>
+                                            <th>a használt törzs neve</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <input type="text" name = "" id = "" />
+                                            </td>
+                                            <td>
+                                                <input type="text" name = "" id = "" class = "datepicker" />
+                                            </td>
+                                            <td>
+                                                <input type="text" name = "" id = "" class = "datepicker" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input type="text" name = "" id = "" />
+                                            </td>
+                                            <td>
+                                                <input type="text" name = "" id = "" class = "datepicker" />
+                                            </td>
+                                            <td>
+                                                <input type="text" name = "" id = "" class = "datepicker" />
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <div class="span-18">
+                    Vágásra történő szállítás:
+                </div>
+                <ul style="list-style-type:none; margin-bottom:0px;" class="span-18">
+                    <li class="span-18">
+                        <div class = "span-17" style="padding:0px;">
+                            <div class="span-1 checkbox-wrapper">
+                                <input type="checkbox" name = "" id = "" value = "1" /> 
+                            </div>
+                            <div class = "span-16" style="margin:0;">
+                                az említett állatokkal kapcsolatos nyilvántartás és dokumentáció megfelel a jogi követelménynek
+                                és nem akadályozza az állatok levágását
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <div class="span-18">
+                    Nem vágásra történő szállítás:
+                </div>
+                <ul style="list-style-type:none; margin-bottom:0px;" class="span-18">
+                    <li class="span-18">
+                        <div class = "span-17" style="padding:0px;">
+                            <div class="span-1 checkbox-wrapper">
+                                <input type="checkbox" name = "" id = "" value = "1" /> 
+                            </div>
+                            <div class = "span-16" style="margin:0;">
+                                a szállítólevélen leírt szállítmány, illetve származási állománya immunizálásra került az alábbiak szerint
+                                <table class="zebra-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Felhasznált oltóanyag</th>
+                                            <th>immunizálás időpontja</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <input type="text" name = "" id = "" />
+                                            </td>
+                                            <td>
+                                                <input type="text" name = "" id = "" class = "datepicker" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input type="text" name = "" id = "" />
+                                            </td>
+                                            <td>
+                                                <input type="text" name = "" id = "" class = "datepicker" />
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>                                
+                            </div>
+                        </div>
+                    </li>
+                    <li class="span-18">
+                        <div class = "span-17" style="padding:0px;">
+                            <div class="span-1 checkbox-wrapper">
+                                <input type="checkbox" name = "" id = "" value = "1" /> 
+                            </div>
+                            <div class = "span-16" style="margin:0;">
+                                egyéb az állomány állat egészségügyi státusára, kezelésére vonatkozó információk
+                                (Salmonell, Mycoplasma, diagnosztikai vizsgálatok eredménye, stb)
+                                <textarea name = "" id="" cols="60" rows="1" style="height:30px; width: 630px;"></textarea>
+                            </div>
+                        </div>
+                    </li>                    
+                </ul>
+                <div class="span-18">
+                    Dátum <input type="text" name = "" id = "" class = "datepicker" />
+                    <div  style="width:100px;display:inline-block;"></div>
+                    Kezelő állatorvos <input type="text" name = "" id = "" size = "40"/>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset class="round">
             <p>
                 <button>Mentés</button>
             </p>
