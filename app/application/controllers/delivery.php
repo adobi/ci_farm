@@ -68,12 +68,12 @@ class Delivery extends MY_Controller
         if ($this->form_validation->run()) {
             $recordId = false;
             if ($id) {
-                $recordId = $this->model->update($_POST, $id);
+                $this->model->update($_POST, $id);
             } else {
                 $recordId = $this->model->insert($_POST);
             }
             //redirect($_SERVER['HTTP_REFERER']);
-            redirect(base_url().'delivery/show/'.$recordId);
+            redirect(base_url().'delivery/'.$recordId ? "show/$recordId" : '');
             
         } else {
             if ($_POST) {
