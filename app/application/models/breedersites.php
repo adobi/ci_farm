@@ -156,7 +156,7 @@ class Breedersites extends MY_Model
      * @return void
      * @author Dobi Attila
      */
-    public function fetchSiteWithBreederInfo($columns = array('breeder_site.id as id', 'breeder_site.code', 'breeder.name', 'breeder.city')) 
+    public function fetchSiteWithBreederInfo($columns = array('breeder_site.id as id', 'breeder_site.code', 'breeder_site.address', 'breeder.name', 'breeder.city')) 
     {
     	$result = $this->fetchAll(array(
     		'columns'=>$columns,
@@ -165,7 +165,23 @@ class Breedersites extends MY_Model
     		),
     		'order'=>array('by'=>'breeder.name', 'dest'=>'asc')
     	), false, false, false);
-    	//dump($result); die;
+    	
+    	if ($result) {
+    	    foreach ($result as $r) {
+    	        $address = $r->address;
+                
+    	        if ($address) {
+    	            
+    	            $exploded = preg_split("/( |,)/", $address);
+    	            
+    	            if (is_array($exploded) && isset($exploded[1])) {
+    	                
+    	                $r->address = $exploded[1];
+    	            }
+    	        }
+    	    }
+    	}
+    	
     	return $result;
     }
  

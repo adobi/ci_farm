@@ -34,7 +34,7 @@ class Delivery extends MY_Controller
         }
         $data['model'] = $this->model;
 
-        $this->template->build('delivery/index', $data);
+        $this->template->set_partial('delivery_item', '_partials/delivery', $data)->build('delivery/index', $data);
     }
     
     public function edit() 
@@ -55,7 +55,7 @@ class Delivery extends MY_Controller
         
         // tenyeszetek listaja
         $this->load->model('Breedersites', 'sites');
-        $data['breedersites'] = $this->sites->toAssocArray('id', 'name+city+code', $this->sites->fetchSiteWithBreederInfo());
+        $data['breedersites'] = $this->sites->toAssocArray('id', 'name+address+code', $this->sites->fetchSiteWithBreederInfo());
         
         $item = false;
         if ($id) {
@@ -66,14 +66,14 @@ class Delivery extends MY_Controller
         $this->form_validation->set_rules('serial_number', 'Sorszám', 'trim|required');
         
         if ($this->form_validation->run()) {
-        
+            $recordId = false;
             if ($id) {
-                $this->model->update($_POST, $id);
+                $recordId = $this->model->update($_POST, $id);
             } else {
-                $this->model->insert($_POST);
+                $recordId = $this->model->insert($_POST);
             }
             //redirect($_SERVER['HTTP_REFERER']);
-            redirect(base_url().'delivery');
+            redirect(base_url().'delivery/show/'.$recordId);
             
         } else {
             if ($_POST) {
@@ -83,6 +83,23 @@ class Delivery extends MY_Controller
         }
         
         $this->template->build('delivery/edit', $data);
+    }
+    
+    public function show() 
+    {
+        $id = $this->uri->segment(3);
+        
+        $data = array();
+        
+        if ($id) {
+
+            $this->load->model("Deliverys", 'model');
+                                   
+            $data['items'] = $this->model->find($id);
+            $data['model'] = $this->model;
+        }
+        
+        $this->template->set_partial('delivery_item', '_partials/delivery', $data)->build('delivery/show', $data);
     }
     
     public function delete()

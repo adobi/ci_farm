@@ -30,6 +30,27 @@ class Deliverys extends MY_Model
         return $use;
     }
     
+    public function find($id) 
+    {
+        $params = array();
+        
+        $params['join'] = $this->_buildJoin();
+        $params['where'] = array('delivery.id'=>$id,'delivery.is_deleted is null' => null);
+        
+        $result = parent::fetchRows($params, false, true);
+        
+        if ($result) {
+            
+            $this->load->model('Chickenstocks', 'stocks');
+            
+            foreach ($result as $r) {
+                $r->chickenstocks = $this->stocks->fetchForDelivery($r->id);
+            }
+        }
+        
+        return $result;
+    }
+    
     public function fetchAll($params = array(), $current = false, $showSelfColumns = true)
     {
         $params['join'] = $this->_buildJoin();
