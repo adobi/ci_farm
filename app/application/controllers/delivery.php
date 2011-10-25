@@ -12,6 +12,15 @@ class Delivery extends MY_Controller
         
         $this->load->model('Deliverys', 'model');
         
+        
+        $data['types'] = $this->model->getType();
+        
+        $data['intended'] = $this->model->getIntendedUse();
+        
+        // a fajtak listaja
+        $this->load->model('Casts', 'cast');
+        $data['casts'] = $this->cast->toAssocArray('id', 'name', $this->cast->fetchAll());        
+        
         if (($_POST && $_POST['serial_number']) || ($this->uri->segment(3) === 'q' && $this->uri->segment(4))) {
             
             if ($_POST) {
@@ -68,13 +77,28 @@ class Delivery extends MY_Controller
         
         if ($this->form_validation->run()) {
             $recordId = false;
+            
+            if (!$_POST['seller_id']) {
+                $_POST['seller_id'] = -1;
+            }
+            
+            if (!$_POST['buyer_id']) {
+                $_POST['buyer_id'] = -1;
+            } 
+            
+            if (!$_POST['receiver_id']) {
+                $_POST['receiver_id'] = -1;
+            }                        
+            
+            //dump($_POST); die;
+            
             if ($id) {
                 $this->model->update($_POST, $id);
             } else {
                 $recordId = $this->model->insert($_POST);
             }
             //redirect($_SERVER['HTTP_REFERER']);
-            redirect(base_url().'delivery/'.$recordId ? "show/$recordId" : '');
+            redirect(base_url().'delivery/'.($recordId ? "show/$recordId" : ''));
             
         } else {
             if ($_POST) {

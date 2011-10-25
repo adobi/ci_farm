@@ -26,7 +26,7 @@
                 
                 <div class="span-18">
                     <p>
-                        <label>Indító tenylszetkódja:</label><?= $item->seller_code; ?>
+                        <label>Indító tenylszetkódja:</label><?= $item->seller_code ? $item->seller_code : 'kistermelő'; ?>
                     </p>
                     <p>
                         <label>Állattartó neve, tenyészet címe:</label> <?= $item->seller_name; ?> <?= $item->seller_address; ?>

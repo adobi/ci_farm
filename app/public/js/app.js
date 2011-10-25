@@ -305,6 +305,8 @@ App.ValidateForm = function()
 
         $.each($('input, textarea, select'), function(i, v) {
             
+            $(v).parent().removeClass('error-required');
+            
             $(v).val($.trim($(v).val()));
         });
         
@@ -319,6 +321,12 @@ App.ValidateForm = function()
                 return;
             }
         });
+        
+        if (App.Error) {
+            
+            $.scrollTo($('.error-required:first'), 800);
+            $.scrollTo('-=100px', 800)
+        }
         
         return !App.Error;
     });

@@ -21,13 +21,13 @@
             <p>
                 <label class = "inline-block" for="cast_id">Állatfaj</label>
                 <!-- <input type="text" name = "cast_id" id = "cast_id" value="<?= $current_item ? $current_item->cast_id : '' ?>" /> -->
-                <?= form_dropdown('cast_id', $casts, $current_item ? $current_item->cast_id : ''); ?>
+                <?= form_dropdown('cast_id', $casts, $current_item ? $current_item->cast_id : '', 'class = "required"'); ?>
             </p>
     
             <p>
                 <label class = "inline-block" for="type">Élőállat vagy tojás</label>
                 <!-- <input type="text" name = "type" id = "type" value="<?= $current_item ? $current_item->type : '' ?>" /> -->
-                <?= form_dropdown('type', $types, $current_item ? $current_item->type : ''); ?>
+                <?= form_dropdown('type', $types, $current_item ? $current_item->type : '', 'class = "required"'); ?>
             </p>
     
             <p>
@@ -71,7 +71,7 @@
             </p>
             
             <p>
-                <label class = "inline-block" for="buyer_country_code">Cálország kódja</label>
+                <label class = "inline-block" for="buyer_country_code">Célország kódja</label>
                 <input type="text" name = "buyer_country_code" id = "buyer_country_code" value="<?= $current_item ? $current_item->buyer_country_code : '' ?>" size = "5"/>
             </p>
             <p>

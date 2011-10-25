@@ -55,6 +55,7 @@ class Deliverys extends MY_Model
     {
         $params['join'] = $this->_buildJoin();
         $params['where'] = array('delivery.is_deleted is null' => null);
+        $params['order'] = array('by'=>'arrival_date', 'dest'=>'desc');
         
         $result = parent::fetchRows($params, $current, $showSelfColumns);
         
