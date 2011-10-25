@@ -27,6 +27,15 @@
 </style>
 
     <?php if ($items): ?>
+        <fieldset class="round">
+            <legend>Keresés szűllítólevél sorszámra</legend>
+            <?= form_open(); ?>
+                <p>
+                    <input type="text" name = "serial_number" value = "<?= @$_POST['serial_number']; ?>" size = "45"/>
+                    <button class="button-small">Keres</button>
+                </p>
+            <?= form_close(); ?>
+        </fieldset>        
         <?php foreach ($items as $item): ?>
             <fieldset class="round">
                 <div class="span-18 highlighted">

@@ -39,10 +39,9 @@
 
                 <?php if ($item->chickenstocks): ?>
                     <div class="span-18">
-                        <table class="zebra-striped">
+                        <table class="zebra-striped zebra-striped-ternary">
                             <thead style="font-size:0.9em;">
                                 <tr>
-                                    
                                     <th colspan = "2">Törzsállomány</th>
                                     <th class="span-3">INTRA/KÁBO szám</th>
                                     <th>Keltető teny. kódja</th>
@@ -63,7 +62,7 @@
                                     <td class="text-center"><?= $stock->seller_code; ?></td>
                                     <td class="text-center"><?= to_date($stock->hatching_date); ?></td>
                                     <td class="text-center"><?= $stock->piece; ?></td>
-                                    <td>
+                                    <td class="text-right">
                                         <!-- 
                                         <p>
                                             <a href="<?= base_url(); ?>chickenstock/show/<?= $stock->id; ?>" rel = "dialog" title = "Részletek">bővebben</a>
@@ -73,6 +72,19 @@
                                             <a class="button button-small"  href="<?= base_url(); ?>chickenstock/edit/<?= $stock->id; ?>" rel = "dialog" title = "Módosítás">szerkeszt</a>
                                             <a class="delete button button-small" href="<?= base_url(); ?>chickenstock/delete/<?= $stock->id; ?>">töröl</a>
                                         <!-- </p> -->
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan = "5" style="background: #FEFBF3">
+                                        Törzsállomány azonosító száma (Hatósági bizonyítvány): <strong><?= $stock->certificate_code; ?></strong>
+                                    </td>
+                                    <td colspan = "2" class = "text-right" style="background: #FEFBF3">
+                                        <?php if (!$stock->certificate_code): ?>
+                                            <a class = "button button-small" rel = "dialog" href="<?= base_url(); ?>chickenstock/add_certificate/<?= $stock->id; ?>" title = "Törzsállomány azonosító száma felvitele">azononosító felvitele</a>
+                                        <?php else: ?>
+                                            <a class = "fr button button-small" rel = "dialog" href="<?= base_url(); ?>chickenstock/add_certificate/<?= $stock->id; ?>" title = "Törzsállomány azonosító száma módosítása">azononosító szerkesztése</a>
+                                        <?php endif ?>
+                                        
                                     </td>
                                 </tr>
                             <?php endforeach ?>
