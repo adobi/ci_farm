@@ -28,7 +28,7 @@
 
     <?php if ($items): ?>
         <fieldset class="round">
-            <legend>Keresés szűllítólevél sorszámra</legend>
+            <legend>Keresés szállítólevél sorszámra</legend>
             <?= form_open(); ?>
                 <p>
                     <input type="text" name = "serial_number" value = "<?= @$_POST['serial_number']; ?>" size = "45"/>
@@ -42,10 +42,10 @@
                     <p>
                         <label>Törzsállomány azonosító szám:</label>
                         <?php if (!$item->certificate_code): ?>
-                            <a class = "button button-small" rel = "dialog" href="<?= base_url(); ?>chickenstock/add_certificate/<?= $item->id; ?>" title = "Törzsállomány azonosító száma felvitele">azonosító szám felvitele</a>
+                            <!-- <a class = "button button-small" rel = "dialog" href="<?= base_url(); ?>chickenstock/add_certificate/<?= $item->id; ?>" title = "Törzsállomány azonosító száma felvitele">azonosító szám felvitele</a> -->
                         <?php else: ?>
-                            <span style="font-size:2em; position:relative; top:5px;"><?= $item->certificate_code; ?></span>
-                            <a class = "fr button button-small" rel = "dialog" href="<?= base_url(); ?>chickenstock/add_certificate/<?= $item->id; ?>" title = "Törzsállomány azonosító száma módosítása">szerkeszt</a>
+                            <span style="font-size:1.6em; position:relative; top:2px;"><?= $item->certificate_code; ?></span>
+                            <!-- <a class = "fr button button-small" rel = "dialog" href="<?= base_url(); ?>chickenstock/add_certificate/<?= $item->id; ?>" title = "Törzsállomány azonosító száma módosítása">szerkeszt</a> -->
                         <?php endif ?>
                     </p>
                 </div>

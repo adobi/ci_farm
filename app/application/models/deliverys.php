@@ -14,7 +14,7 @@ class Deliverys extends MY_Model
         if ($index && array_key_exists($index, $types)) {
             
             return $types[$index];
-        }
+        } 
         
         return $types;
     }
@@ -26,6 +26,8 @@ class Deliverys extends MY_Model
             
             return $use[$index];
         }
+        
+        if ($index !== false && $index === '0') return '';
         
         return $use;
     }
@@ -54,11 +56,13 @@ class Deliverys extends MY_Model
     public function fetchAll($params = array(), $current = false, $showSelfColumns = true)
     {
         $params['join'] = $this->_buildJoin();
-        $params['where'] = array('delivery.is_deleted is null' => null);
-        $params['order'] = array('by'=>'arrival_date', 'dest'=>'desc');
+
+        $params['where'] = $this->_prepareCondition(isset($params['where']) ? $params['where'] : false);
+        
+        $params['order'] = array('by'=>'delivery.arrival_date', 'dest'=>'desc');
         
         $result = parent::fetchRows($params, $current, $showSelfColumns);
-        
+        //dump($params['where']); die;
         if ($result) {
             
             $this->load->model('Chickenstocks', 'stocks');
@@ -91,6 +95,45 @@ class Deliverys extends MY_Model
         return $result;
     }
     
+    public function delete($id)
+    {
+        if (!$id) {
+            
+            return false;
+        }
+        
+        return $this->update(array('is_deleted'=>1), $id);
+    }
+    
+    public function count($condition) {
+        
+        $params['join'] = $this->_buildJoin();
+
+        $params['where'] = $this->_prepareCondition($condition);
+        //dump($params['where']);
+        $result = parent::fetchRows($params);        
+        
+        return count($result);
+    }
+    
+    private function _prepareCondition($condition)
+    {
+        $params = array();
+        if ($condition) {
+            foreach ($condition as $col => $value) {
+                if (!$value) {
+                    unset($params[$col]);
+                } else {
+                    $params["delivery.$col"] = $value;
+                }
+            }            
+        }
+        
+        $params['delivery.is_deleted is null'] = null;
+        
+        return $params;
+    }
+    
     private function _buildJoin()
     {
         return array(
@@ -103,14 +146,5 @@ class Deliverys extends MY_Model
             array('table'=>'breeder receiver_breeder', 'condition'=>'receiver_site.breeder_id = receiver_breeder.id', 'columns'=>array('receiver_breeder.name as receiver_name')),
         );
     }
-    
-    public function delete($id)
-    {
-        if (!$id) {
-            
-            return false;
-        }
-        
-        return $this->update(array('is_deleted'=>1), $id);
-    }
+
 }

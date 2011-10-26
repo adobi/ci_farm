@@ -19,7 +19,7 @@
 </li>
 <li>
     <span>›</span>
-    <a href="<?= base_url(); ?>delivery" <?= $this->uri->segment(1) === 'delivery' ? 'class = "selected-sidemenu-item"' : '' ?>>Szállítólevelek</a>
+    <a href="<?= base_url(); ?>delivery/index2" <?= $this->uri->segment(1) === 'delivery' ? 'class = "selected-sidemenu-item"' : '' ?>>Szállítólevelek</a>
 </li>
 <li>
     <span>›</span>

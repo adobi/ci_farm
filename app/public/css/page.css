@@ -601,12 +601,12 @@ fieldset {
     }
 
     .zebra-striped-ternary tbody tr:nth-child(odd) td {
-      background-color: transparent;
+        background-color: transparent;
+        border-bottom:0px;
     }
     .zebra-striped-ternary tbody tr:nth-child(4n+1) td {
-      background-color: #fff;
+        background-color: #fff;
     }
-
 
     .zebra-striped tbody tr:hover td {
       background-color: #f2fcff;
