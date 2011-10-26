@@ -26,16 +26,21 @@
     }
 </style>
 
+    <fieldset class="round">
+        <legend>Keresés szállítólevél sorszámra</legend>
+        <?= form_open(); ?>
+            <p>
+                <input type="text" name = "serial_number" value = "<?= $this->session->userdata('delivery_serial_number') ?>" size = "45"/>
+                <button class="button-small">Keres</button>
+            </p>
+        <?= form_close(); ?>
+    </fieldset>     
     <?php if ($items): ?>
-        <fieldset class="round">
-            <legend>Keresés szállítólevél sorszámra</legend>
-            <?= form_open(); ?>
-                <p>
-                    <input type="text" name = "serial_number" value = "<?= @$_POST['serial_number']; ?>" size = "45"/>
-                    <button class="button-small">Keres</button>
-                </p>
-            <?= form_close(); ?>
-        </fieldset>        
+        <?php if (isset($pagination_links)): ?>
+            <div class="pagination span-19">
+                <?= $pagination_links; ?>
+            </div>    
+        <?php endif ?>                
         <?php foreach ($items as $item): ?>
             <fieldset class="round">
                 <div class="span-18 highlighted">

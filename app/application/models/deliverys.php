@@ -74,24 +74,32 @@ class Deliverys extends MY_Model
         return $result;
     }
     
-    public function findBySerialNumber($serial) 
+    public function findBySerialNumber($serial, $simple = false) 
     {
         if (!$serial) {
             
             return false;
         }
-        
-        $params['join'] = $this->_buildJoin();
+        if (!$simple) {
+            
+            $params['join'] = $this->_buildJoin();
+        }
         $params['where'] = array('serial_number'=>$serial);
+        
         $result = $this->fetchRows($params);
-        if ($result) {
+
+        if (!$simple) {
             
-            $this->load->model('Chickenstocks', 'stocks');
-            
-            foreach ($result as $r) {
-                $r->chickenstocks = $this->stocks->fetchForDelivery($r->id);
-            }
-        }        
+            if ($result) {
+                
+                $this->load->model('Chickenstocks', 'stocks');
+                
+                foreach ($result as $r) {
+                    $r->chickenstocks = $this->stocks->fetchForDelivery($r->id);
+                }
+            }        
+        } 
+        
         return $result;
     }
     

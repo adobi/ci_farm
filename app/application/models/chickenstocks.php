@@ -7,35 +7,83 @@ class Chickenstocks extends MY_Model
     protected $_name = "chicken_stock";
     protected $_primary = "id";
     
-    public function fetchForDelivery($deliveryId) 
+    public function fetchForDelivery($deliveryId, $params = array()) 
     {
         if (!$deliveryId) {
             
             return false;
         }
         
+        $params['where'] = $this->_prepareCondition(isset($params['where']) ? $params['where'] : false);
+        
+        $params['where']['delivery_id'] = $deliveryId;
+        $params['join'] = array(
+            array('table'=>'breeder_site', 'columns'=>array('breeder_site.code as seller_code'), 'condition'=>'hatching_breeder_site_id = breeder_site.id')
+        );
+        
+        return $this->fetchRows($params);
+        
+        /*
         return $this->fetchRows(array(
             'where'=>array('delivery_id'=>$deliveryId),
             'join'=>array(
                 array('table'=>'breeder_site', 'columns'=>array('breeder_site.code as seller_code'), 'condition'=>'hatching_breeder_site_id = breeder_site.id')
             )
         ));
+        */
     }
     
-    public function fetchForBreederSite($siteId, $params = array())
+    public function fetchFor($type, $id, $params = array())
     {
-        if (!$siteId) {
+        if (!$id) {
             
             return false;
         }
         
         $params['join'] = $this->_buildJoin();
         
-        $params['where'] = array('holder_breeder_site_id'=>$siteId, '(male_piece != 0  or female_piece != 0)' => null);
+        $params['where'] = $this->_prepareCondition(isset($params['where']) ? $params['where'] : false);
+        
+        if ('breedersite' === $type) {
+            $params['where']['holder_breeder_site_id'] = $id;
+        }        
+            
+        if ('delivery' === $type) {
+            $params['where']['delivery_id'] = $id;
+        }
+        //$params['where'] = array('holder_breeder_site_id'=>$siteId, '(male_piece != 0  or female_piece != 0)' => null);
         
         return $this->fetchRows($params); 
     }
     
+    public function count($condition) {
+        
+        $params['join'] = $this->_buildJoin();
+
+        $params['where'] = $this->_prepareCondition($condition);
+        //dump($params['where']);
+        $result = parent::fetchRows($params);        
+        
+        return count($result);
+    }    
+    
+    private function _prepareCondition($condition)
+    {
+        $params = array();
+        if ($condition) {
+            foreach ($condition as $col => $value) {
+                if (!$value) {
+                    unset($params[$col]);
+                } else {
+                    $params["chicken_stock.$col"] = $value;
+                }
+            }            
+        }
+
+        $params['(male_piece != 0  or female_piece != 0)'] = null;
+        
+        return $params;
+    }
     
     private function _buildJoin()
     {

@@ -6,6 +6,16 @@ require_once 'MY_Controller.php';
 
 class Chickenstock extends MY_Controller 
 {
+    
+    public function index2() 
+    {
+        $this->session->unset_userdata('selected_breedersite');
+        $this->session->unset_userdata('delivery_id');
+        $this->session->unset_userdata('delivery_serial_number');
+        
+        redirect(base_url() . 'chickenstock/index');
+    }
+    
     public function index() 
     {
         $data = array();
@@ -13,22 +23,61 @@ class Chickenstock extends MY_Controller
         $this->load->model('Chickenstocks', 'model');
         $this->load->model('Breedersites', 'site');
         $this->load->model('Breeders', 'breeder');
+
         $data['breeder_id'] = $this->breeder->getId();
         $sites = $this->site->fetchForBreeder($this->breeder->getId());
 	    $data['breeder_sites_select'] = $this->site->toAssocArray('id', 'code+name', $sites);
 
         $page = $this->uri->segment(4) ? $this->uri->segment(4) : 0;
     
-        $data['pagination_links'] = $this->paginate(
-                                            'chickenstock/index/page/', 
-                                            4, 
-                                            $this->model->count(array('holder_breeder_site_id'=>$this->session->userdata('selected_breedersite'), '(male_piece != 0  or female_piece != 0)' => null)), 
-                                            DELIVERY_ITEMS_PER_PAGE);
+        if ($_POST && isset($_POST['serial_number']) && $_POST['serial_number']) {
+            
+            $this->session->set_userdata('delivery_serial_number', $_POST['serial_number']);
+            
+            $this->load->model('Deliverys', 'delivery');
+            
+            $delivery = $this->delivery->findBySerialNumber($_POST['serial_number'], true);
+            
+            if ($delivery) {
+                $delivery = $delivery[0];
+                $this->session->set_userdata('delivery_id', $delivery->id);
+            }
+        }
+        
         $params['limit'] = DELIVERY_ITEMS_PER_PAGE;
         $params['offset'] = $page; 
         
-	    $data['items'] = $this->model->fetchForBreedersite($this->session->userdata('selected_breedersite'), $params);
+        if ($this->session->userdata('selected_breedersite')) {
+            
+            $this->session->unset_userdata('delivery_id');            
+            
+            $data['pagination_links'] = $this->paginate(
+                                                'chickenstock/index/page/', 
+                                                4, 
+                                                $this->model->count(array('holder_breeder_site_id'=>$this->session->userdata('selected_breedersite'))), 
+                                                DELIVERY_ITEMS_PER_PAGE);
+            
+    	    $data['items'] = $this->model->fetchFor('breedersite', $this->session->userdata('selected_breedersite'), $params);
         
+    	} elseif ( $this->session->userdata('delivery_id')) {
+            
+    	    $this->session->unset_userdata('selected_breedersite');
+    	    
+            $data['pagination_links'] = $this->paginate(
+                                                'chickenstock/index/page/', 
+                                                4, 
+                                                $this->model->count(array('delivery_id'=>$this->session->userdata('selected_breedersite'))), 
+                                                DELIVERY_ITEMS_PER_PAGE);
+            
+    	    $data['items'] = $this->model->fetchFor('delivery', $this->session->userdata('delivery_id'), $params);
+    	        	    
+    	} else {
+    	    $data['pagination_links'] = false;
+    	    $data['items'] = false;
+    	}
+        
+        
+
         $this->template->build('chickenstock/index', $data);
     }
     

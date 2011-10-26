@@ -23,7 +23,7 @@
 </li>
 <li>
     <span>›</span>
-    <a href="<?= base_url(); ?>chickenstock" <?= $this->uri->segment(1) === 'chickenstock' ? 'class = "selected-sidemenu-item"' : '' ?>>Állományok</a>
+    <a href="<?= base_url(); ?>chickenstock/index2" <?= $this->uri->segment(1) === 'chickenstock' ? 'class = "selected-sidemenu-item"' : '' ?>>Állományok</a>
 </li>
 <!-- 
 <li>
