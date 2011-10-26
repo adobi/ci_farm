@@ -65,6 +65,8 @@ class Delivery extends MY_Controller
     
         }
         
+        
+        
 	    $data['pagination_links'] = $this->paginate('delivery/index/page/', 4, $this->model->count($this->session->userdata('delivery_filter_params')), DELIVERY_ITEMS_PER_PAGE);
 	    
 	    $params['limit'] = DELIVERY_ITEMS_PER_PAGE;

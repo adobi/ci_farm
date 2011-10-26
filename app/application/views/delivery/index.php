@@ -23,6 +23,10 @@
             <?= form_dropdown('intended_use', $intended, $_POST ? $_POST['intended_use'] : ''); ?>
         </p>
         <p>
+            <label class = "inline-block" for="buyer_id">Vevőkód</label>
+            <input type="text" id = "buyer_id" value = "" size = "40"/>
+        </p>
+        <p>
             <button class="button-small">Szűrés</button>
         </p>
     <?= form_close(); ?>

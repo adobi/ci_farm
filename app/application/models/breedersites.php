@@ -129,11 +129,11 @@ class Breedersites extends MY_Model
         
         $db = $this->db;
         
-        $query =    $db->select()
+        $query =    $db->select('breeder_site.*, breeder.name')
                        ->from($this->_name)
                        ->join('breeder', "breeder.id=$this->_name.breeder_id")
-                       ->where('code LIKE', $db->escape_like_str($term).'%')
-                       ->or_where('name LIKE', $db->escape_like_str($term).'%');
+                       ->where('breeder_site.code LIKE', $db->escape_like_str($term).'%')
+                       ->or_where('breeder.name LIKE', $db->escape_like_str($term).'%');
     
         $result = $query->get()->result();
         //dump($result);

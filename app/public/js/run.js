@@ -65,4 +65,6 @@ $(function() {
     App.SaveBreederAndSite2();
     
     App.CloseFromScartch();
+    
+    App.Autocomplete($('#buyer_id'),  'breedersite/search_code_and_name');
 });
