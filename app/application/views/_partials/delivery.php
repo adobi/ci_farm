@@ -128,7 +128,163 @@
                     </p>
                 </div>
                 
+                    
+                    
+                    <div class = "span-18 hidden" id = "delivery-vacinarry">
+                        <label>Allategészségügyi igazolás</label>
+                        <div class="span-18">
+                            Alúlírott kezelő állatorvos igazolom hogy:
+                        </div>
+                        <ul style="list-style-type:none; margin-bottom:0px;" class="span-18">
+                            <li class="span-18">
+                                <div class="span-17" style="padding:0px;">
+                                    <div class="span-1 checkbox-wrapper" style="top:15px;">
+                                        <input type="checkbox" name = "stmt_1" id = "stmt_1" value = "1" <?= $item->stmt_1 ? 'checked = "checked"' : ''; ?>/> 
+                                    </div>
+                                    <div class = "span-16" style="margin:0;">
+                                        a szállítólevélen leírt állatokat <?= $item ? to_date($item->stmt_1_date) : '' ?>-án/én
+                                        <!-- <input type="text" name = "" id = "" size = "2"/> óra <input type="text" name = "" id = "" size = "2"/> perckor  -->
+                                        az indító tenyészetben megvizsgáltam és azokat egészségesnek találtam,
+                                    </div>
+                                </div>
+                            </li>
+                            
+                            <li class="span-18">
+                                <div class = "span-17" style="padding:0px;">
+                                    <div class="span-1 checkbox-wrapper">
+                                        <input type="checkbox" name = "stmt_2" id = "stmt_2" value = "1" <?= $item->stmt_2 ? 'checked = "checked"' : ''; ?> /> 
+                                    </div>
+                                    <div class = "span-16" style="margin:0;">
+                                        a vizsgálat időpontjában a szállítólevélen leírt állatok a vonatkozó állatvédelmi jogszabályokkal összhangban
+                                        a tervezett szállításra alkalmas állapotban voltak;
+                                    </div>
+                                </div>
+                            </li>
+                            
+                            <li class="span-18">
+                                <div class = "span-17" style="padding:0px;">
+                                    <div class="span-1 checkbox-wrapper">
+                                        <input type="checkbox" name = "stmt_3" id = "stmt_3" value = "1"  <?= $item->stmt_3 ? 'checked = "checked"' : ''; ?>/> 
+                                    </div>
+                                    <div class = "span-16" style="margin:0;">
+                                        a szállítólevélen leírt szállítmány, illetve származási állománya baromfipestis elleni immunizálásra került 
+                                        az alábbiak szerint
+                                        <table class="zebra-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Felhasznált oltóanyag</th>
+                                                    <th>immunizálás időpontja</th>
+                                                    <th>a használt törzs neve</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <?= $item ? $item->vaccine_1 : ''; ?>
+                                                    </td>
+                                                    <td>
+                                                        <?= $item ? to_date($item->vaccine_1_date) : '' ?>
+                                                    </td>
+                                                    <td>
+                                                        <?= $item ? $item->trunk_1 : ''; ?>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <?= $item ? $item->vaccine_2 : ''; ?>
+                                                    </td>
+                                                    <td>
+                                                        <?= $item ? to_date($item->vaccine_2_date) : '' ?>
+                                                    </td>
+                                                    <td>
+                                                        <?= $item ? $item->trunk_2 : ''; ?>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="span-18">
+                            Vágásra történő szállítás:
+                        </div>
+                        <ul style="list-style-type:none; margin-bottom:0px;" class="span-18">
+                            <li class="span-18">
+                                <div class = "span-17" style="padding:0px;">
+                                    <div class="span-1 checkbox-wrapper">
+                                        <input type="checkbox" name = "stmt_4" id = "stmt_4" value = "1"  <?= $item->stmt_4 ? 'checked = "checked"' : ''; ?>/> 
+                                    </div>
+                                    <div class = "span-16" style="margin:0;">
+                                        az említett állatokkal kapcsolatos nyilvántartás és dokumentáció megfelel a jogi követelménynek
+                                        és nem akadályozza az állatok levágását
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="span-18">
+                            Nem vágásra történő szállítás:
+                        </div>
+                        <ul style="list-style-type:none; margin-bottom:0px;" class="span-18">
+                            <li class="span-18">
+                                <div class = "span-17" style="padding:0px;">
+                                    <div class="span-1 checkbox-wrapper">
+                                        <input type="checkbox" name = "stmt_5" id = "stmt_5" value = "1"  <?= $item->stmt_5 ? 'checked = "checked"' : ''; ?>/> 
+                                    </div>
+                                    <div class = "span-16" style="margin:0;">
+                                        a szállítólevélen leírt szállítmány, illetve származási állománya immunizálásra került az alábbiak szerint
+                                        <table class="zebra-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Felhasznált oltóanyag</th>
+                                                    <th>immunizálás időpontja</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <?= $item ? $item->vaccine_3 : ''; ?>
+                                                    </td>
+                                                    <td>
+                                                        <?= $item ? to_date($item->vaccine_3_date) : '' ?>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <?= $item ? $item->vaccine_4 : ''; ?>
+                                                    </td>
+                                                    <td>
+                                                        <?= $item ? to_date($item->vaccine_4_date) : '' ?>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>                                
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="span-18">
+                                <div class = "span-17" style="padding:0px;">
+                                    <div class="span-1 checkbox-wrapper">
+                                        <input type="checkbox" name = "stmt_6" id = "stmt_6" value = "1"  <?= $item->stmt_6 ? 'checked = "checked"' : ''; ?>/> 
+                                    </div>
+                                    <div class = "span-16" style="margin:0;">
+                                        egyéb az állomány állat egészségügyi státusára, kezelésére vonatkozó információk
+                                        (Salmonell, Mycoplasma, diagnosztikai vizsgálatok eredménye, stb)
+                                        <?= $item ? $item->comment : ''; ?>
+                                    </div>
+                                </div>
+                            </li>                    
+                        </ul>
+                        <div class="span-18">
+                            Dátum <?= $item ? to_date($item->medical_certificate_date) : '' ?>
+                            <div  style="width:100px;display:inline-block;"></div>
+                            Kezelő állatorvos <?= $item ? $item->medic_name : ''; ?>
+                        </div>
+                    </div>
+
                 <div class="span-18 text-right" style="background:#eaeaea">
+                   
+                    <a href="javascript:void(0);" onclick = "$('#delivery-vacinarry').toggle();"  class="button small-button">Állatorvosi igazolás</a>
                     <a href="<?= base_url(); ?>delivery/edit/<?= $item->id; ?>"  class="button small-button">szerkeszt</a>
                     <a href="<?= base_url(); ?>delivery/delete/<?= $item->id; ?>" class="button small-button delete">töröl</a>
                 </div>

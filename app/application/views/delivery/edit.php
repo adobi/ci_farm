@@ -132,10 +132,10 @@
                     <li class="span-18">
                         <div class="span-17" style="padding:0px;">
                             <div class="span-1 checkbox-wrapper" style="top:15px;">
-                                <input type="checkbox" name = "" id = "" value = "1" /> 
+                                <input type="checkbox" name = "stmt_1" id = "stmt_1" value = "1" <?= $current_item->stmt_1 ? 'checked = "checked"' : ''; ?>/> 
                             </div>
                             <div class = "span-16" style="margin:0;">
-                                a szállítólevélen leírt állatokat <input type="text" name = "" id = "" class = "datepicker" />-án/én
+                                a szállítólevélen leírt állatokat <input type="text" name = "stmt_1_date" id = "stmt_1_date" class = "datepicker" value = "<?= $current_item ? to_date($current_item->stmt_1_date) : '' ?>" />-án/én
                                 <input type="text" name = "" id = "" size = "2"/> óra <input type="text" name = "" id = "" size = "2"/> perckor 
                                 az indító tenyészetben megvizsgáltam és azokat egészségesnek találtam,
                             </div>
@@ -145,7 +145,7 @@
                     <li class="span-18">
                         <div class = "span-17" style="padding:0px;">
                             <div class="span-1 checkbox-wrapper">
-                                <input type="checkbox" name = "" id = "" value = "1" /> 
+                                <input type="checkbox" name = "stmt_2" id = "stmt_2" value = "1" <?= $current_item->stmt_2 ? 'checked = "checked"' : ''; ?> /> 
                             </div>
                             <div class = "span-16" style="margin:0;">
                                 a vizsgálat időpontjában a szállítólevélen leírt állatok a vonatkozó állatvédelmi jogszabályokkal összhangban
@@ -157,7 +157,7 @@
                     <li class="span-18">
                         <div class = "span-17" style="padding:0px;">
                             <div class="span-1 checkbox-wrapper">
-                                <input type="checkbox" name = "" id = "" value = "1" /> 
+                                <input type="checkbox" name = "stmt_3" id = "stmt_3" value = "1"  <?= $current_item->stmt_3 ? 'checked = "checked"' : ''; ?>/> 
                             </div>
                             <div class = "span-16" style="margin:0;">
                                 a szállítólevélen leírt szállítmány, illetve származási állománya baromfipestis elleni immunizálásra került 
@@ -173,24 +173,24 @@
                                     <tbody>
                                         <tr>
                                             <td>
-                                                <input type="text" name = "" id = "" />
+                                                <input type="text" name = "vaccine_1" id = "vaccine_1" value = "<?= $current_item ? $current_item->vaccine_1 : ''; ?>"/>
                                             </td>
                                             <td>
-                                                <input type="text" name = "" id = "" class = "datepicker" />
+                                                <input type="text" name = "vaccine_1_date" id = "vaccine_1_date" class = "datepicker" value = "<?= $current_item ? to_date($current_item->vaccine_1_date) : '' ?>"/>
                                             </td>
                                             <td>
-                                                <input type="text" name = "" id = "" class = "datepicker" />
+                                                <input type="text" name = "trunk_1" id = "trunk_1"  value = "<?= $current_item ? $current_item->trunk_1 : ''; ?>"/>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <input type="text" name = "" id = "" />
+                                                <input type="text" name = "vaccine_2" id = "vaccine_2"  value = "<?= $current_item ? $current_item->vaccine_2 : ''; ?>"/>
                                             </td>
                                             <td>
-                                                <input type="text" name = "" id = "" class = "datepicker" />
+                                                <input type="text" name = "vaccine_2_date" id = "vaccine_2_date" class = "datepicker"  value = "<?= $current_item ? to_date($current_item->vaccine_2_date) : '' ?>"/>
                                             </td>
                                             <td>
-                                                <input type="text" name = "" id = "" class = "datepicker" />
+                                                <input type="text" name = "trunk_2" id = "trunk_2"  value = "<?= $current_item ? $current_item->trunk_2 : ''; ?>"/>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -206,7 +206,7 @@
                     <li class="span-18">
                         <div class = "span-17" style="padding:0px;">
                             <div class="span-1 checkbox-wrapper">
-                                <input type="checkbox" name = "" id = "" value = "1" /> 
+                                <input type="checkbox" name = "stmt_4" id = "stmt_4" value = "1"  <?= $current_item->stmt_4 ? 'checked = "checked"' : ''; ?>/> 
                             </div>
                             <div class = "span-16" style="margin:0;">
                                 az említett állatokkal kapcsolatos nyilvántartás és dokumentáció megfelel a jogi követelménynek
@@ -222,7 +222,7 @@
                     <li class="span-18">
                         <div class = "span-17" style="padding:0px;">
                             <div class="span-1 checkbox-wrapper">
-                                <input type="checkbox" name = "" id = "" value = "1" /> 
+                                <input type="checkbox" name = "stmt_5" id = "stmt_5" value = "1"  <?= $current_item->stmt_5 ? 'checked = "checked"' : ''; ?>/> 
                             </div>
                             <div class = "span-16" style="margin:0;">
                                 a szállítólevélen leírt szállítmány, illetve származási állománya immunizálásra került az alábbiak szerint
@@ -236,18 +236,18 @@
                                     <tbody>
                                         <tr>
                                             <td>
-                                                <input type="text" name = "" id = "" />
+                                                <input type="text" name = "vaccine_3" id = "vaccine_3"  value = "<?= $current_item ? $current_item->vaccine_3 : ''; ?>"/>
                                             </td>
                                             <td>
-                                                <input type="text" name = "" id = "" class = "datepicker" />
+                                                <input type="text" name = "vaccine_3_date" id = "vaccine_3_date" class = "datepicker"  value = "<?= $current_item ? to_date($current_item->vaccine_3_date) : '' ?>"/>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <input type="text" name = "" id = "" />
+                                                <input type="text" name = "vaccine_4" id = "vaccine_4"  value = "<?= $current_item ? $current_item->vaccine_4 : ''; ?>"/>
                                             </td>
                                             <td>
-                                                <input type="text" name = "" id = "" class = "datepicker" />
+                                                <input type="text" name = "vaccine_4_date" id = "vaccine_4_date" class = "datepicker"  value = "<?= $current_item ? to_date($current_item->vaccine_4_date) : '' ?>"/>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -258,20 +258,20 @@
                     <li class="span-18">
                         <div class = "span-17" style="padding:0px;">
                             <div class="span-1 checkbox-wrapper">
-                                <input type="checkbox" name = "" id = "" value = "1" /> 
+                                <input type="checkbox" name = "stmt_6" id = "stmt_6" value = "1"  <?= $current_item->stmt_6 ? 'checked = "checked"' : ''; ?>/> 
                             </div>
                             <div class = "span-16" style="margin:0;">
                                 egyéb az állomány állat egészségügyi státusára, kezelésére vonatkozó információk
                                 (Salmonell, Mycoplasma, diagnosztikai vizsgálatok eredménye, stb)
-                                <textarea name = "" id="" cols="60" rows="1" style="height:30px; width: 630px;"></textarea>
+                                <textarea name = "comment" id="comment" cols="60" rows="1" style="height:30px; width: 630px;"><?= $current_item ? $current_item->comment : ''; ?></textarea>
                             </div>
                         </div>
                     </li>                    
                 </ul>
                 <div class="span-18">
-                    Dátum <input type="text" name = "" id = "" class = "datepicker" />
+                    Dátum <input type="text" name = "medical_certificate_date" id = "medical_certificate_date" class = "datepicker"  value = "<?= $current_item ? to_date($current_item->medical_certificate_date) : '' ?>"/>
                     <div  style="width:100px;display:inline-block;"></div>
-                    Kezelő állatorvos <input type="text" name = "" id = "" size = "40"/>
+                    Kezelő állatorvos <input type="text" name = "medic_name" id = "medic_name" size = "40" value = "<?= $current_item ? $current_item->medic_name : ''; ?>"/>
                 </div>
             </div>
         </fieldset>
