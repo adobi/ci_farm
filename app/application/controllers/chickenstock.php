@@ -125,6 +125,8 @@ class Chickenstock extends MY_Controller
                     $_POST['holder_breeder_site_id'] = $d->buyer_id;
                 }
                 
+                $_POST['state'] = 1;
+                
                 $this->model->insert($_POST);
             }
             redirect($_SERVER['HTTP_REFERER']);
