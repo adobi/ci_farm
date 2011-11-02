@@ -28,12 +28,12 @@
                 <label class = "inline-block" for="hatching_date">Kelés dátuma</label>
                 <input type="text" name = "hatching_date" id = "hatching_date" value="<?= $current_item ? to_date($current_item->hatching_date) : '' ?>" class = "datepicker required" />
             </p>
-    
+            <!-- 
             <p>
                 <label class = "inline-block" for="piece">Darabszám</label>
                 <input class="required" type="text" name = "piece" id = "piece" value="<?= $current_item ? $current_item->piece : '' ?>"  size = "15"/>
             </p>
-    
+             -->
         </fieldset>
         <?php if (!$current_item): ?>
             

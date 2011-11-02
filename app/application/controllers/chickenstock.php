@@ -104,18 +104,20 @@ class Chickenstock extends MY_Controller
         //$this->form_validation->set_rules('stock_code', 'Törzsállomány', 'trim|required');
         //$this->form_validation->set_rules('hatching_breeder_site_id', 'Keltető tenyészet kódja', 'trim|required');
         $this->form_validation->set_rules('hatching_date', 'Kelés dátuma', 'trim|required');
-        $this->form_validation->set_rules('piece', 'Darabszám', 'trim|required');
+        //$this->form_validation->set_rules('piece', 'Darabszám', 'trim|required');
         
         if ($this->form_validation->run()) {
             
+            $this->load->model('Deliverys', 'delivery');
+            
+            $_POST['piece'] = $_POST['male_piece'] + $_POST['female_piece'];
+            
             if (is_numeric($id)) {
+                
                 $this->model->update($_POST, $id);
             } else if ($delivery) {
 
-
                 $_POST['delivery_id'] = $delivery;
-                
-                $this->load->model('Deliverys', 'delivery');
                 
                 $d = $this->delivery->find($delivery);
                 
@@ -128,6 +130,22 @@ class Chickenstock extends MY_Controller
                 $_POST['state'] = 1;
                 
                 $this->model->insert($_POST);
+            }
+
+            if ($item && $item->piece !== $_POST['piece']) {
+                
+                $diff = 0;
+                //dump($item->piece);
+                //dump($_POST['piece']);
+                if ($item->piece > $_POST['piece']) {
+                    $diff = - ($item->piece - $_POST['piece']);
+                }
+                
+                if ($item->piece < $_POST['piece']) {
+                    $diff = ($_POST['piece'] - $item->piece);
+                }
+                //dump($diff); die;
+                $this->delivery->incTotalPiece($item->delivery_id, $diff);
             }
             redirect($_SERVER['HTTP_REFERER']);
         } else {

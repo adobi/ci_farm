@@ -124,6 +124,30 @@ class Deliverys extends MY_Model
         return count($result);
     }
     
+    /**
+     * adott $id-hez tartozo szallitolvelen talalhato ossz darabszamot noveli $amount-al
+     *
+     * @param string $id 
+     * @param string $amount 
+     * @return false
+     * @author Dobi Attila
+     */
+    public function incTotalPiece($id, $amount) 
+    {
+        
+        if (!$id) {
+            
+            return false;
+        }
+        $item = $this->find($id);
+        //dump($amount); 
+        //dump(intval($item[0]->sell_piece));
+        $amount = intval($item[0]->sell_piece) + $amount;
+        //dump($amount); die;
+        return $this->update(array('sell_piece'=>$amount), $id);
+        
+    }
+    
     private function _prepareCondition($condition)
     {
         $params = array();

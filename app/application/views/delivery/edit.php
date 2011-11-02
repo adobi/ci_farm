@@ -55,11 +55,12 @@
                 <label class = "inline-block" for="sell_date">Indítás ideje</label>
                 <input type="text" name = "sell_date" id = "sell_date" value="<?= $current_item ? to_date($current_item->sell_date) : '' ?>" class = "datepicker" />
             </p>
-    
+            <!-- 
             <p>
                 <label class = "inline-block" for="sell_piece">Indított állatok/tojások száma</label>
                 <input type="text" name = "sell_piece" id = "sell_piece" value="<?= $current_item ? $current_item->sell_piece : '' ?>" size = "10"/>
             </p>
+             -->
         </fieldset>
         <fieldset class="round">
             <legend>Célállomás</legend>
