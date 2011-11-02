@@ -67,6 +67,17 @@ class Chickenstocks extends MY_Model
         return count($result);
     }    
     
+    
+    public function delete($id)
+    {
+        if (!$id) {
+            
+            return false;
+        }
+        
+        return $this->update(array('is_deleted'=>1), $id);
+    }    
+    
     private function _prepareCondition($condition)
     {
         $params = array();
@@ -80,7 +91,8 @@ class Chickenstocks extends MY_Model
             }            
         }
 
-        $params['(male_piece != 0  or female_piece != 0)'] = null;
+        $params['(chicken_stock.male_piece != 0  or chicken_stock.female_piece != 0)'] = null;
+        $params['chicken_stock.is_deleted IS NULL'] = null;
         
         return $params;
     }
