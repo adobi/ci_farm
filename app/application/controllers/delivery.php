@@ -11,7 +11,7 @@ class Delivery extends MY_Controller
     {
         $this->session->unset_userdata('delivery_filter_params');
         
-        redirect(base_url() . 'delivery/index');
+        redirect(base_url() . 'delivery/index/all');
     }
     
     public function index() 
@@ -51,9 +51,18 @@ class Delivery extends MY_Controller
         }
 */        
         
-        $page = $this->uri->segment(4) ? $this->uri->segment(4) : 0;
+        $listType = $this->uri->segment(3);
+
+        $page = $this->uri->segment(5) ? $this->uri->segment(5) : 0;
 
         $params = array();
+        
+        $data['type'] = $listType;
+        
+        $where = array();
+        
+        $params['type'] = $listType;
+        
         if ($_POST) {
 
             $this->session->set_userdata('delivery_filter_params', $_POST);
@@ -65,9 +74,11 @@ class Delivery extends MY_Controller
     
         }
         
-        
-        
-	    $data['pagination_links'] = $this->paginate('delivery/index/page/', 4, $this->model->count($this->session->userdata('delivery_filter_params')), DELIVERY_ITEMS_PER_PAGE);
+        $condition = $this->session->userdata('delivery_filter_params');
+        $condition['type'] = $listType;
+	    $data['pagination_links'] = $this->paginate('delivery/index/'.$listType.'/page/', 5, $this->model->count($condition), DELIVERY_ITEMS_PER_PAGE);
+	    
+	    //$params['where'] = $where;
 	    
 	    $params['limit'] = DELIVERY_ITEMS_PER_PAGE;
 	    $params['offset'] = $page;  

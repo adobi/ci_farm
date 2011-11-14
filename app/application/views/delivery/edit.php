@@ -133,7 +133,7 @@
                     <li class="span-18">
                         <div class="span-17" style="padding:0px;">
                             <div class="span-1 checkbox-wrapper" style="top:15px;">
-                                <input type="checkbox" name = "stmt_1" id = "stmt_1" value = "1" <?= $current_item->stmt_1 ? 'checked = "checked"' : ''; ?>/> 
+                                <input type="checkbox" name = "stmt_1" id = "stmt_1" value = "1" <?= $current_item && $current_item->stmt_1 ? 'checked = "checked"' : ''; ?>/> 
                             </div>
                             <div class = "span-16" style="margin:0;">
                                 a szállítólevélen leírt állatokat <input type="text" name = "stmt_1_date" id = "stmt_1_date" class = "datepicker" value = "<?= $current_item ? to_date($current_item->stmt_1_date) : '' ?>" />-án/én
@@ -146,7 +146,7 @@
                     <li class="span-18">
                         <div class = "span-17" style="padding:0px;">
                             <div class="span-1 checkbox-wrapper">
-                                <input type="checkbox" name = "stmt_2" id = "stmt_2" value = "1" <?= $current_item->stmt_2 ? 'checked = "checked"' : ''; ?> /> 
+                                <input type="checkbox" name = "stmt_2" id = "stmt_2" value = "1" <?= $current_item && $current_item->stmt_2 ? 'checked = "checked"' : ''; ?> /> 
                             </div>
                             <div class = "span-16" style="margin:0;">
                                 a vizsgálat időpontjában a szállítólevélen leírt állatok a vonatkozó állatvédelmi jogszabályokkal összhangban
@@ -158,7 +158,7 @@
                     <li class="span-18">
                         <div class = "span-17" style="padding:0px;">
                             <div class="span-1 checkbox-wrapper">
-                                <input type="checkbox" name = "stmt_3" id = "stmt_3" value = "1"  <?= $current_item->stmt_3 ? 'checked = "checked"' : ''; ?>/> 
+                                <input type="checkbox" name = "stmt_3" id = "stmt_3" value = "1"  <?= $current_item && $current_item->stmt_3 ? 'checked = "checked"' : ''; ?>/> 
                             </div>
                             <div class = "span-16" style="margin:0;">
                                 a szállítólevélen leírt szállítmány, illetve származási állománya baromfipestis elleni immunizálásra került 
@@ -207,7 +207,7 @@
                     <li class="span-18">
                         <div class = "span-17" style="padding:0px;">
                             <div class="span-1 checkbox-wrapper">
-                                <input type="checkbox" name = "stmt_4" id = "stmt_4" value = "1"  <?= $current_item->stmt_4 ? 'checked = "checked"' : ''; ?>/> 
+                                <input type="checkbox" name = "stmt_4" id = "stmt_4" value = "1"  <?= $current_item && $current_item->stmt_4 ? 'checked = "checked"' : ''; ?>/> 
                             </div>
                             <div class = "span-16" style="margin:0;">
                                 az említett állatokkal kapcsolatos nyilvántartás és dokumentáció megfelel a jogi követelménynek
@@ -223,7 +223,7 @@
                     <li class="span-18">
                         <div class = "span-17" style="padding:0px;">
                             <div class="span-1 checkbox-wrapper">
-                                <input type="checkbox" name = "stmt_5" id = "stmt_5" value = "1"  <?= $current_item->stmt_5 ? 'checked = "checked"' : ''; ?>/> 
+                                <input type="checkbox" name = "stmt_5" id = "stmt_5" value = "1"  <?= $current_item && $current_item->stmt_5 ? 'checked = "checked"' : ''; ?>/> 
                             </div>
                             <div class = "span-16" style="margin:0;">
                                 a szállítólevélen leírt szállítmány, illetve származási állománya immunizálásra került az alábbiak szerint
@@ -259,7 +259,7 @@
                     <li class="span-18">
                         <div class = "span-17" style="padding:0px;">
                             <div class="span-1 checkbox-wrapper">
-                                <input type="checkbox" name = "stmt_6" id = "stmt_6" value = "1"  <?= $current_item->stmt_6 ? 'checked = "checked"' : ''; ?>/> 
+                                <input type="checkbox" name = "stmt_6" id = "stmt_6" value = "1"  <?= $current_item && $current_item->stmt_6 ? 'checked = "checked"' : ''; ?>/> 
                             </div>
                             <div class = "span-16" style="margin:0;">
                                 egyéb az állomány állat egészségügyi státusára, kezelésére vonatkozó információk

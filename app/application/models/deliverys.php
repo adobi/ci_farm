@@ -37,7 +37,9 @@ class Deliverys extends MY_Model
         $params = array();
         
         $params['join'] = $this->_buildJoin();
-        $params['where'] = array('delivery.id'=>$id,'delivery.is_deleted is null' => null);
+        $where = array('delivery.id'=>$id,'delivery.is_deleted is null' => null);
+        
+        $params['where'] = $where;        
         
         $result = parent::fetchRows($params, false, true);
         
@@ -56,8 +58,18 @@ class Deliverys extends MY_Model
     public function fetchAll($params = array(), $current = false, $showSelfColumns = true)
     {
         $params['join'] = $this->_buildJoin();
+        
+        $where = array();
+        $type = $params['type'];
+        unset($params['type']);
 
-        $params['where'] = $this->_prepareCondition(isset($params['where']) ? $params['where'] : false);
+        $where = $this->_prepareCondition(isset($params['where']) ? $params['where'] : false);
+        
+        $this->_getConditionForListType($where, $type);
+        
+        $params['where'] = $where;
+        //dump($params); die;
+        
         
         $params['order'] = array('by'=>'delivery.arrival_date', 'dest'=>'desc');
         
@@ -71,6 +83,9 @@ class Deliverys extends MY_Model
                 $r->chickenstocks = $this->stocks->fetchForDelivery($r->id);
             }
         }
+        
+        //dump($result); die;
+        
         return $result;
     }
     
@@ -117,8 +132,17 @@ class Deliverys extends MY_Model
         
         $params['join'] = $this->_buildJoin();
 
-        $params['where'] = $this->_prepareCondition($condition);
-        //dump($params['where']);
+        $where = array();
+        $type = $condition['type'];
+        unset($condition['type']);
+
+        $where = $this->_prepareCondition($condition);
+
+        $this->_getConditionForListType($where, $type);
+        
+        $params['where'] = $where;        
+        
+        //dump($params['where']); die;
         $result = parent::fetchRows($params);        
         
         return count($result);
@@ -146,6 +170,24 @@ class Deliverys extends MY_Model
         //dump($amount); die;
         return $this->update(array('sell_piece'=>$amount), $id);
         
+    }
+    
+    private function _getConditionForListType(&$where, $type) 
+    {
+        $this->load->model('Breeders', 'breeder');
+        $me = $this->breeder->getid();
+        switch ($type) {
+            case 'all':
+                break;
+            case 'from':
+                $where['seller_id in (select id from breeder_site where breeder_id = '.$me.')'] = null;
+                break;
+            case 'to':
+                $where['buyer_id in (select id from breeder_site where breeder_id = '.$me.')'] = null;
+                break;
+        }
+        
+        return $where;
     }
     
     private function _prepareCondition($condition)

@@ -9,6 +9,16 @@
     <?= form_close(); ?>
 </fieldset>
  -->
+
+<fieldset class="round">
+    <legend>Küldő</legend>
+    <p>
+        <a href="<?= base_url(); ?>delivery/index/all" <?= $type === 'all' ? 'class = "selected-sidemenu-item"' : ''; ?>>Összes szállítólevél</a>
+        <a href="<?= base_url(); ?>delivery/index/from/" <?= $type === 'from' ? 'class = "selected-sidemenu-item"' : ''; ?>>Tisza Attila küldte</a>
+        <a href="<?= base_url(); ?>delivery/index/to/" <?= $type === 'to' ? 'class = "selected-sidemenu-item"' : ''; ?>>Tisza Attila kapta</a>
+    </p>
+</fieldset> 
+ 
 <fieldset class="round">
     <legend>Szállítólevelek szűrése</legend>
     <?= form_open(); ?>
