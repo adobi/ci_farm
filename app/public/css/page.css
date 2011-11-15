@@ -577,6 +577,13 @@ fieldset {
 }
 
 /* zebra striped table*/
+
+    .bordered-table {
+      border: 1px solid #DDDDDD;
+      border-collapse: separate;
+      border-radius: 4px 4px 4px 4px;
+    }
+
     table {
       width: 100%;
       margin-bottom: 18px;

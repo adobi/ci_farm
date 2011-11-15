@@ -59,7 +59,57 @@ class Fakk extends MY_Controller
         
         redirect($_SERVER['HTTP_REFERER']);
     }
+
+    public function for_breedersite() 
+    {
+        $siteId = $this->uri->segment(3);
+        
+        $data = array();
+        
+        $this->load->model('Stockyards', 'yards');
+        $this->load->model('Breedersites', 'sites');
+        $this->load->model('Fakks', 'fakk');
+        
+        $data['site'] = $this->sites->find($siteId);
+        
+        $this->form_validation->set_rules('stock_yard_id', 'Istálló', 'trim|requierd');
+        $this->form_validation->set_rules('number_of', 'Fakkok darabszáma', 'trim|required|numeric');
+        
+        if ($this->form_validation->run()) {
+            
+            $data['is_permitted_to_create_fakks'] = $this->fakk->isPermittedToCreate($_POST['stock_yard_id']);
+            
+            $data['fakks'] = $this->fakk->fetchForStockyard($_POST['stock_yard_id']);
+            
+            if (isset($_POST['names']) && $_POST['names']) {
+                
+                $d = array(
+                    'stock_yard_id'=>$_POST['stock_yard_id'],
+                    'created'=>date('Y-m-d H-i-s', time())
+                );
+                
+                foreach ($_POST['names'] as $item) {
+                    $d['name'] = $item;
+                    
+                    $this->fakk->insert($d);
+                }
+                
+                redirect($_SERVER['HTTP_REFERER']);
+            }
+        } 
+        
+        
+        $data['stockyards'] = $this->yards->toAssocArray('id', 'name', $this->yards->fetchForBreedersite($siteId));
+        
+        $this->template->build('fakk/for_breedersite', $data);
+    }
     
+    /**
+     * not used
+     *
+     * @return void
+     * @author Dobi Attila
+     */
     public function add_to_group()
     {
         $group = $this->uri->segment(3);
@@ -79,7 +129,12 @@ class Fakk extends MY_Controller
         
         $this->template->build('fakk/edit');
     }
-
+    /**
+     * not used
+     *
+     * @return void
+     * @author Dobi Attila
+     */
     public function change_group()
     {
         if ($_POST) {
