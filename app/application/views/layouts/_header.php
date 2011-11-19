@@ -50,7 +50,7 @@
             			        <a href="<?= base_url(); ?>welcome"><img src="<?= base_url(); ?>img/home.png" alt="" width=24 height=24></a>
             			    </li>
             			    <li>
-            			        <a href="<?= base_url(); ?>egg" <?= $this->uri->segment(1) === "egg" ? 'class = "selected-header-menu-item"' : ''; ?>>tojástermelés</a>
+            			        <a href="<?= base_url(); ?>egg/index2" <?= $this->uri->segment(1) === "egg" ? 'class = "selected-header-menu-item"' : ''; ?>>tojástermelés</a>
             			    </li>
             			    <li>
             			    <!-- hatching -->

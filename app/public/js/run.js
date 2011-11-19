@@ -29,6 +29,7 @@ $(function() {
     //App.SetSelectedBreedersite();
     App.SetSelectValueInSession('select[name=breeder_site_id]', "egg/set_selected_breedersite/");
     App.SetSelectValueInSession('#cast_id', "cast/set_selected_cast/");
+    App.SetSelectValueInSession('select[name=stock_yard_id]', 'egg/set_selected_stockyard/');
     
     App.Egg.UpdatePeoductionData();
     App.Egg.DeleteProductionData();

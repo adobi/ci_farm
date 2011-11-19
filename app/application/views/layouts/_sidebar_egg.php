@@ -1,5 +1,5 @@
 <li>
-    <a href="<?= base_url(); ?>egg/" <?= $this->uri->segment(1) === 'egg' ? 'class = "selected-sidemenu-item"' : ''?>>Betelepítés</a>
+    <a href="<?= base_url(); ?>egg/index2" <?= $this->uri->segment(1) === 'egg' ? 'class = "selected-sidemenu-item"' : ''?>>Betelepítés</a>
     
 </li>
 
