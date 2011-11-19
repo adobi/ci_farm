@@ -149,6 +149,25 @@ class Deliverys extends MY_Model
     }
     
     /**
+     * megnezi, hogy a $serial letezik e az adatbazisban
+     *
+     * @param string $serial 
+     * @return void
+     * @author Dobi Attila
+     */
+    public function serialExists($serial) 
+    {
+        if (!$serial) {
+            
+            return false;
+        }
+        
+        $result = $this->fetchRows(array('where'=>array('serial_number'=>$serial)));
+        //dump($result); die;
+        return count($result) === 1;
+    }
+    
+    /**
      * adott $id-hez tartozo szallitolvelen talalhato ossz darabszamot noveli $amount-al
      *
      * @param string $id 

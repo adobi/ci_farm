@@ -148,11 +148,27 @@ class Delivery extends MY_Controller
         } else {
             if ($_POST) {
                 
-                redirect($_SERVER['HTTP_REFERER']);
+                //redirect($_SERVER['HTTP_REFERER']);
             }
         }
         
         $this->template->build('delivery/edit', $data);
+    }
+    
+    public function delivery_serial_exists() 
+    {
+        $this->load->model("Deliverys", 'model');
+        
+        //$this->form_validation->set_message('delivery_serial_exists', 'Ilyen sorszámmal már létezik szállítólevél');
+        
+        //return !$this->model->serialExists($_POST['serial_number']);
+        if ($this->model->serialExists($_POST['serial_number'])) {
+            echo 'Ilyen sorszámmal már létezik szállítólevél';
+        } else {
+            echo '';
+        }
+        
+        die;
     }
     
     public function show() 

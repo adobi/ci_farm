@@ -13,7 +13,8 @@
         
             <p>
                 <label class = "inline-block" for="serial_number">Sorszám</label>
-                <input class="required" type="text" name = "serial_number" id = "serial_number" value="<?= $current_item ? $current_item->serial_number : '' ?>" />
+                <input maxlength = "8" class="required" type="text" name = "serial_number" id = "serial_number" value="<?= $current_item ? $current_item->serial_number : '' ?>" />
+                <em>maximum 8 karakter</em>
             </p>
         </fieldset>
         <fieldset class="round">
@@ -95,7 +96,7 @@
             </p>
             <p>
                 <label class = "inline-block" for="start_date">Szállítás várható időtartama</label>
-                <input type="text" name = "start_date" id = "start_date" value="<?= $current_item ? to_date($current_item->start_date) : '' ?>" class = "datepicker" />
+                <input type="text" name = "start_date" id = "start_date" value="<?= $current_item ? to_date($current_item->start_date) : '' ?>" maxlength="2" />
             </p>
         </fieldset>
         <fieldset class="round">
@@ -285,3 +286,21 @@
     <?= form_close(); ?>
 </fieldset>
 
+<script type="text/javascript">
+    $(function() {
+        $('#serial_number').bind('blur focus', function() {
+            var self = $(this), token = $('[name=csrf_test_name]').val();
+            $.post(App.URL + 'delivery/delivery_serial_exists', {serial_number: self.val(), csrf_test_name: token}, function(response) {
+                
+                if ($.trim(response).length) {
+                    
+                    if (!self.parents('fieldset:first').find('.error').length) {
+                        self.parents('fieldset:first').append($('<div />', {'class': 'error span-17'}).html(response));
+                    }
+                } else {
+                    self.parents('fieldset:first').find('.error').remove();
+                }
+            });
+        });
+    })
+</script>
