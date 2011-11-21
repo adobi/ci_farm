@@ -24,14 +24,14 @@
         <?= form_open(); ?>
             <div class = "span-5">
                 <legend class="inline-block">Vélasszon istállót</legend>
-                <?= form_dropdown('stock_yard_id', $stockyards, ($_POST && isset($_POST['stock_yard_id']) ? $_POST['stock_yard_id'] : '')); ?>
+                <?= form_dropdown('stock_yard_id', $stockyards, ($_POST && isset($_POST['stock_yard_id']) ? $_POST['stock_yard_id'] : $this->session->userdata('selected_stockyard'))); ?>
             </div>
             <div class = "span-6">
                 <legend class = "inline-block">Fakkok darabszáma:</legend>
                 <input type="text" name = "number_of" value = "<?= $_POST && isset($_POST['number_of']) ? $_POST['number_of'] : ''; ?>" size = "10" />
             </div>
             <div class="span-2" style="margin-top:5px;">
-                <button>Mehet</button>
+                <button class="button-small">Mehet</button>
             </div>
         <?= form_close() ?>
     </fieldset>
@@ -70,8 +70,8 @@
             <?php endif ?>
         <?php endif ?>
     <?php endif ?>
-
-    <?php if (isset($fakks)): ?>
+    
+    <?php if (isset($fakks) && $fakks): ?>
         <fieldset class="round">
             <legend>Jelenlegi fakkok</legend>
             <table class="bordered-table zebra-striped">

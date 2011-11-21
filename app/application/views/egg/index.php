@@ -17,11 +17,14 @@
                 <label for="">Válasszon istállót</label>
                 <?= form_dropdown('stock_yard_id', $yards_select, $this->session->userdata('selected_stockyard')); ?>
             </p>
-            
-            <p>
-                <a href="<?= base_url() ?>egg/index/new_hatching" class = "button">Új betelepítés</a>
-            </p>
-            
+            <?php if ($this->session->userdata('selected_stockyard')): ?>
+                
+                <p>
+                    <a href="<?= base_url() ?>egg/index/new_hatching" class = "button">Új betelepítés</a>
+                </p>
+        
+            <?php endif ?>
+    
         <?php else: ?>
             <div class="info">
                 A kiválasztott tenyészethez nem szerepel istálló.
@@ -45,5 +48,12 @@
     </fieldset>
     <fieldset class="round span-9 fr">
         <legend>Állományok</legend>
+        <?php if ($stocks): ?>
+            <?php foreach ($stocks as $item): ?>
+                <div class="span-8">
+                    <?= $item->stock_code; ?> (<?= $item->piece; ?>  db <?= $item->cast_type_name; ?>)
+                </div>
+            <?php endforeach ?>
+        <?php endif ?>
     </fieldset>
 <?php endif ?>

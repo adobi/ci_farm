@@ -98,6 +98,7 @@ class Fakk extends MY_Controller
             }
         } 
         
+        $data['fakks'] = $this->fakk->fetchForStockyard($this->session->userdata('selected_stockyard'));
         
         $data['stockyards'] = $this->yards->toAssocArray('id', 'name', $this->yards->fetchForBreedersite($siteId));
         

@@ -78,6 +78,23 @@ class Chickenstocks extends MY_Model
         return $this->update(array('is_deleted'=>1), $id);
     }    
     
+    public function fetchForBreedersite($site) 
+    {
+        if (!$site) {
+            
+            return false;
+        }
+        $params = array();
+        
+        $params['join'] = $this->_buildJoin();
+
+        $params['where'] = $this->_prepareCondition(array('holder_breeder_site_id'=>$site));
+        
+        $result = $this->fetchRows($params);
+        
+        return $result;
+    }
+    
     private function _prepareCondition($condition)
     {
         $params = array();

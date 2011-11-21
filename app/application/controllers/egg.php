@@ -54,6 +54,10 @@ class Egg extends MY_Controller
     	        $this->load->model('Fakks', 'fakk');
     	        
     	        $data['fakks'] = $this->fakk->fetchForStockyard($this->session->userdata('selected_stockyard'));
+    	        
+    	        $this->load->model('Chickenstocks', 'stocks');
+    	        
+    	        $data['stocks'] = $this->stocks->fetchForBreedersite($this->session->userdata('selected_breedersite'));
     	    }
 	    }
 	    
