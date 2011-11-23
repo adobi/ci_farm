@@ -34,9 +34,21 @@ class Egg extends MY_Controller
 	        
 	        $data['yards_select'] = $this->yard->toAssocArray('id', 'name', $this->yard->fetchForBreedersite($this->session->userdata('selected_breedersite')));
 	    }
-        
+        $data['can_start_new_hatching'] = false;
 	    if ($this->session->userdata('selected_breedersite') && $this->session->userdata('selected_stockyard')) {
 	        
+	        $this->load->model('Hutchings', 'hutching');
+	        
+	        /**
+	         * ha nincs aktualis betelepites akkor mutatjuk au uj betelepites gombot
+	         *
+	         * @author Dobi Attila
+	         */
+	        
+	        if (!$this->hutching->hasActual($this->session->userdata('selected_breedersite'), $this->session->userdata('selected_stockyard'))) {
+	            $data['can_start_new_hatching'] = true;
+	        }
+	         
     	    if ($this->uri->segment(3) === 'new_hatching') {
     	        
     	        /**
@@ -44,24 +56,49 @@ class Egg extends MY_Controller
     	         *
     	         * @author Dobi Attila
     	         */
-    	        
-    	        /**
-    	          * mikor lehet uj betelepitest kezdeni? (amikor minden fakk kiment)
-    	          *
-    	          * @author Dobi Attila
-    	          */
-    	         
-    	        $this->load->model('Fakks', 'fakk');
-    	        
-    	        $data['fakks'] = $this->fakk->fetchForStockyard($this->session->userdata('selected_stockyard'));
-    	        
-    	        $this->load->model('Chickenstocks', 'stocks');
-    	        
-    	        $data['stocks'] = $this->stocks->fetchForBreedersite($this->session->userdata('selected_breedersite'));
+                $this->hutching->insert(array(
+                    'breeder_site_id'=>$this->session->userdata('selected_breedersite'),
+                    'stock_yard_id'=>$this->session->userdata('selected_stockyard'),
+                    'created'=>date('Y-m-d H:i:s', time())
+                ));
+                
+                redirect(base_url() . 'egg');
     	    }
+	        
+	        /**
+	         * listazni az aktualis betelepitest
+	         *
+	         * @author Dobi Attila
+	         */
+            $actualHutching = $this->hutching->fetchActual($this->session->userdata('selected_breedersite'), $this->session->userdata('selected_stockyard'));
+    	    $data['actual_hatching'] = $actualHutching;
+            
+    	    /**
+    	     * fakkok, allomanyok listaja
+    	     *
+    	     * @author Dobi Attila
+    	     */
+	        $this->load->model('Fakks', 'fakk');
+	        
+	        $data['fakks'] = $this->fakk->fetchForStockyard($this->session->userdata('selected_stockyard'));
+	        
+	        $this->load->model('Chickenstocks', 'stocks');
+	        
+	        $data['stocks'] = $this->stocks->fetchForBreedersite($this->session->userdata('selected_breedersite'));
+    	    
+	    } else {
+	        
+	        if ($this->uri->segment(3) === 'new_hatching') {
+	            redirect(base_url() . 'egg/index');
+	        }
 	    }
 	    
         $this->template->build('egg/index', $data);
+    }
+    
+    public function add_stock_to_fakk() 
+    {
+        $this->template->build('egg/add_stock_to_fakk');
     }
 	
 	/**
@@ -72,6 +109,8 @@ class Egg extends MY_Controller
 	 */
 	public function set_selected_breedersite()
 	{
+	    $this->session->unset_userdata('selected_stockyard');
+	    
 	    if ($this->uri->segment(3)) {
 	        $this->session->set_userdata('selected_breedersite', $this->uri->segment(3));
 	    }

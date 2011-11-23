@@ -717,3 +717,17 @@ fieldset {
      width:20px;
      //-moz-border-radius:3px;
 }
+
+.left-arrow-big {
+    background:url(../img/sprite-icons-2.png) no-repeat scroll 0px -304px transparent;
+    display:inline-block;
+    height:32px;
+    width:16px;
+    padding:0px!important;
+    position:fixed;
+}
+
+label.input-wrapper {
+    width:auto;
+    font-weight:normal;
+}

@@ -31,16 +31,16 @@ $(function() {
     App.SetSelectValueInSession('#cast_id', "cast/set_selected_cast/");
     App.SetSelectValueInSession('select[name=stock_yard_id]', 'egg/set_selected_stockyard/');
     
-    App.Egg.UpdatePeoductionData();
-    App.Egg.DeleteProductionData();
+    //App.Egg.UpdatePeoductionData();
+    //App.Egg.DeleteProductionData();
     
-    App.Egg.UpdateFoodOrDeathForDay();
+    //App.Egg.UpdateFoodOrDeathForDay();
     
-    App.Egg.UpdateCommenOrVitamin('.update-production-comment', 'comment');
-    App.Egg.UpdateCommenOrVitamin('.update-production-vitamin', 'vitamin');
+    //App.Egg.UpdateCommenOrVitamin('.update-production-comment', 'comment');
+    //App.Egg.UpdateCommenOrVitamin('.update-production-vitamin', 'vitamin');
     
     if ($('#the-egg-week').length) {
-        App.TriggerLoadWeekDataEvent($('#the-egg-week'), 'egg');
+        //App.TriggerLoadWeekDataEvent($('#the-egg-week'), 'egg');
     }
     /*
     $('body').delegate('a', 'click', function() {
