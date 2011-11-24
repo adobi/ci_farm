@@ -1,3 +1,71 @@
+$.fn.toEm = function(settings){
+	settings = jQuery.extend({
+		scope: 'body'
+	}, settings);
+	var that = parseInt(this[0],10);
+	var scopeTest = jQuery('<div style="display: none; font-size: 1em; margin: 0; padding:0; height: auto; line-height: 1; border:0;">&nbsp;</div>').appendTo(settings.scope);
+	var scopeVal = scopeTest.height();
+	scopeTest.remove();
+	return (that / scopeVal).toFixed(8) + 'em';
+};
+
+
+$.fn.toPx = function(settings){
+	settings = jQuery.extend({
+		scope: 'body'
+	}, settings);
+	var that = parseFloat(this[0]);
+	var scopeTest = jQuery('<div style="display: none; font-size: 1em; margin: 0; padding:0; height: auto; line-height: 1; border:0;">&nbsp;</div>').appendTo(settings.scope);
+	var scopeVal = scopeTest.height();
+	scopeTest.remove();
+	return Math.round(that * scopeVal) + 'px';
+};
+
+Number.prototype.pxToEm = String.prototype.pxToEm = function(settings){
+	//set defaults
+	settings = jQuery.extend({
+		scope: 'body',
+		reverse: false
+	}, settings);
+	
+	var pxVal = (this == '') ? 0 : parseFloat(this);
+	var scopeVal;
+	var getWindowWidth = function(){
+		var de = document.documentElement;
+		return self.innerWidth || (de && de.clientWidth) || document.body.clientWidth;
+	};	
+	
+	/* When a percentage-based font-size is set on the body, IE returns that percent of the window width as the font-size. 
+		For example, if the body font-size is 62.5% and the window width is 1000px, IE will return 625px as the font-size. 	
+		When this happens, we calculate the correct body font-size (%) and multiply it by 16 (the standard browser font size) 
+		to get an accurate em value. */
+				
+	if (settings.scope == 'body' && $.browser.msie && (parseFloat($('body').css('font-size')) / getWindowWidth()).toFixed(1) > 0.0) {
+		var calcFontSize = function(){		
+			return (parseFloat($('body').css('font-size'))/getWindowWidth()).toFixed(3) * 16;
+		};
+		scopeVal = calcFontSize();
+	}
+	else { scopeVal = parseFloat(jQuery(settings.scope).css("font-size")); };
+			
+	var result = (settings.reverse == true) ? (pxVal * scopeVal).toFixed(2) + 'px' : (pxVal / scopeVal).toFixed(2) + 'em';
+	return result;
+};
+
+$.fn.equalHeights = function(px) {
+	$(this).each(function(){
+		var currentTallest = 0;
+		$(this).children().each(function(i){
+			if ($(this).height() > currentTallest) { currentTallest = $(this).height(); }
+		});
+		if (!px || !Number.prototype.pxToEm) currentTallest = currentTallest.pxToEm(); //use ems unless px is specified
+		// for ie6, set height since min-height isn't supported
+		if ($.browser.msie && $.browser.version == 6.0) { $(this).children().css({'height': currentTallest}); }
+		$(this).children().css({'min-height': currentTallest}); 
+	});
+	return this;
+};
+
 $(function() {
     App.NewBreederForDelivery();
     

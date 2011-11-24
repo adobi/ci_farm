@@ -14,6 +14,7 @@ class Egg extends MY_Controller
     {
         $this->session->unset_userdata('selected_breedersite');
         $this->session->unset_userdata('selected_stockyard');
+        $this->session->unset_userdata('actual_hutching_id');
         
         redirect(base_url().'egg');
     }
@@ -35,6 +36,7 @@ class Egg extends MY_Controller
 	        $data['yards_select'] = $this->yard->toAssocArray('id', 'name', $this->yard->fetchForBreedersite($this->session->userdata('selected_breedersite')));
 	    }
         $data['can_start_new_hatching'] = false;
+        $data['stock_in_fakk'] = false;
 	    if ($this->session->userdata('selected_breedersite') && $this->session->userdata('selected_stockyard')) {
 	        
 	        $this->load->model('Hutchings', 'hutching');
@@ -66,12 +68,13 @@ class Egg extends MY_Controller
     	    }
 	        
 	        /**
-	         * listazni az aktualis betelepitest
+	         * az aktualis betelepites
 	         *
 	         * @author Dobi Attila
 	         */
-            $actualHutching = $this->hutching->fetchActual($this->session->userdata('selected_breedersite'), $this->session->userdata('selected_stockyard'));
+            $actualHutching = current($this->hutching->fetchActual($this->session->userdata('selected_breedersite'), $this->session->userdata('selected_stockyard')));
     	    $data['actual_hatching'] = $actualHutching;
+            $this->session->set_userdata('actual_hutching_id', $actualHutching ? $actualHutching->id : 0);
             
     	    /**
     	     * fakkok, allomanyok listaja
@@ -84,8 +87,17 @@ class Egg extends MY_Controller
 	        
 	        $this->load->model('Chickenstocks', 'stocks');
 	        
-	        $data['stocks'] = $this->stocks->fetchForBreedersite($this->session->userdata('selected_breedersite'));
+	        $data['stocks'] = $this->stocks->fetchForBreedersiteAndHutching($this->session->userdata('selected_breedersite'), $this->session->userdata('actual_hutching_id'));
     	    
+	        /**
+	         * az aktualis betelepitesben szereplo allomanyok fakkokban
+	         *
+	         * @author Dobi Attila
+	         */
+	        $this->load->model('Stockinfakk', 'sif');
+	        
+	        $data['stock_in_fakk'] = $this->sif->fetchForHutching($this->session->userdata('actual_hutching_id'));
+	        
 	    } else {
 	        
 	        if ($this->uri->segment(3) === 'new_hatching') {
@@ -98,7 +110,35 @@ class Egg extends MY_Controller
     
     public function add_stock_to_fakk() 
     {
-        $this->template->build('egg/add_stock_to_fakk');
+        $data = array(); 
+        
+        $fakk = $this->uri->segment(3);
+        $stock = $this->uri->segment(4);
+        
+        $this->load->model('Chickenstocks', 'stocks');
+        
+        $chickenstock = $this->stocks->fetchPieceNotInFakks($stock);
+        
+        $data['piece'] = $chickenstock->piece;
+
+        $this->form_validation->set_rules('piece', 'trime|required|numeric|less_than['.$data['piece'].']');
+        
+        if ($this->form_validation->run()) {
+            
+            $this->load->model('Stockinfakk', 'sif');
+            
+            $this->sif->insert(array(
+                'fakk_id'=>$fakk,
+                'stock_id'=>$stock,
+                'piece'=>$_POST['piece'],
+                'created'=>date('Y-m-d H:i:s', time()),
+                'hutching_id'=>$this->session->userdata('actual_hutching_id')
+            ));
+            
+            redirect(base_url() . 'egg');
+        } 
+        
+        $this->template->build('egg/add_stock_to_fakk', $data);
     }
 	
 	/**
@@ -110,6 +150,7 @@ class Egg extends MY_Controller
 	public function set_selected_breedersite()
 	{
 	    $this->session->unset_userdata('selected_stockyard');
+	    $this->session->unset_userdata('actual_hutching_id');
 	    
 	    if ($this->uri->segment(3)) {
 	        $this->session->set_userdata('selected_breedersite', $this->uri->segment(3));

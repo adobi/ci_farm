@@ -718,10 +718,10 @@ fieldset {
      //-moz-border-radius:3px;
 }
 
-.left-arrow-big {
-    background:url(../img/sprite-icons-2.png) no-repeat scroll 0px -304px transparent;
+.right-arrow-big {
+    background:url(../img/sprite-icons-2.png) no-repeat scroll 0px -336px transparent;
     display:inline-block;
-    height:32px;
+    height:34px;
     width:16px;
     padding:0px!important;
     position:fixed;

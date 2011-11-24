@@ -95,6 +95,66 @@ class Chickenstocks extends MY_Model
         return $result;
     }
     
+    public function fetchForBreedersiteAndHutching($site, $hutching) 
+    {
+        if (!$site || !$hutching) {
+            
+            return false;
+        }
+        /*
+        $params = array();
+        
+        $params['join'] = $this->_buildJoin();
+
+        $params['where'] = $this->_prepareCondition(array('holder_breeder_site_id'=>$site));
+        
+        $result = $this->fetchRows($params);
+        
+        return $result;        
+        */
+        
+        $sql = "select 
+                	cs.id, 
+                	cs.stock_code,
+                	cs.piece, 
+                	((select sum(piece) from stock_in_fakk sif where sif.hutching_id = $hutching group by sif.stock_id having sif.stock_id = cs.id)) piece_in_fakk,
+                	ct.name as cast_type_name
+                from 
+                	chicken_stock cs 
+                	join cast_type ct on cs.cast_type_id = ct.id
+                where 
+                	cs.holder_breeder_site_id = $site
+                	and (cs.male_piece != 0  or cs.female_piece != 0)
+                	and (cs.is_deleted IS NULL)
+                	and (
+                		cs.piece > (
+                			select sum(piece) from stock_in_fakk sif where sif.hutching_id = $hutching group by sif.stock_id having sif.stock_id = cs.id
+                		) or (
+                		cs.id not in (select id from stock_in_fakk)
+                		)
+                    )";
+        return $this->execute($sql);
+    }
+    
+    public function fetchPieceNotInFakks($stock) 
+    {
+        if (!$stock) {
+            
+            return false;
+        }
+        
+        $sql = "select 
+                	(piece - (
+                				select sum(piece) from stock_in_fakk sif where sif.hutching_id = 2 group by sif.stock_id having sif.stock_id = $stock
+                			)
+                	) piece
+                from chicken_stock where id = $stock";
+        
+        $result = $this->execute($sql);
+        
+        return $result[0]->piece ? $result[0] : $this->find($stock);
+    }
+    
     private function _prepareCondition($condition)
     {
         $params = array();

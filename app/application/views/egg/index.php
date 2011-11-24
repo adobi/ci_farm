@@ -36,39 +36,67 @@
     
 </fieldset>
 <?php if (!$can_start_new_hatching && $this->session->userdata('selected_breedersite') && $this->session->userdata('selected_stockyard')): ?>
-    <?php  echo form_open() ?>
-    <fieldset class="round span-8" id="fakks">
-        <legend>Fakkok</legend>
-        <?php if ($fakks): ?>
-            <?php foreach ($fakks as $item): ?>
-                <div class="span-7">
-                    <label class="input-wrapper">
-                        <input type="radio" name = "fakk_id" value = "<?php echo $item->id ?>"/>
-                        <?php echo $item->name ?>
-                    </label>
-                </div>
-            <?php endforeach ?>
-            
-        <?php endif ?>
-    </fieldset>
-    <div class="span-2 text-center" style="margin-top:20px;">
-        <a href="javascript:void(0)" class="left-arrow-big" id="add-stock-to-fakk"></a>
-        <a href="<?php echo base_url() ?>egg/add_stock_to_fakk/" class="hidden" rel = "dialog" title = "Állomány fakkba telepítése" id="dialog-add-stock-to-fakk"></a>
-    </div>
-    <fieldset class="round span-8" id="stocks">
-        <legend>Állományok</legend>
-        <?php if ($stocks): ?>
-            <?php foreach ($stocks as $item): ?>
-                <div class="span-7">
-                    <label class="input-wrapper">
-                        <input type="radio" name = "stock_yard_id" value = "<?php echo $item->id ?>"/>
-                        <?= $item->stock_code; ?> (<?= $item->piece; ?>  db <?= $item->cast_type_name; ?>)
-                    </label>
-                </div>
-            <?php endforeach ?>
-        <?php endif ?>
-    </fieldset>
+    <?php  echo form_open('', array('id'=>'fakks-and-stocks')) ?>
+        <fieldset class="round span-8" id="stocks">
+            <legend>Állományok</legend>
+            <?php if ($stocks): ?>
+                <?php foreach ($stocks as $item): ?>
+                    <div class="span-7">
+                        <label class="input-wrapper">
+                            <input type="radio" name = "stock_yard_id" value = "<?php echo $item->id ?>"/>
+                            <?= $item->stock_code; ?> (<?= $item->piece - $item->piece_in_fakk; ?>  db <?= $item->cast_type_name; ?>)
+                        </label>
+                    </div>
+                <?php endforeach ?>
+            <?php endif ?>
+        </fieldset>
+        <fieldset class="round span-8" id="fakks">
+            <legend>Fakkok</legend>
+            <?php if ($fakks): ?>
+                <?php foreach ($fakks as $item): ?>
+                    <div class="span-7">
+                        <label class="input-wrapper">
+                            <input type="radio" name = "fakk_id" value = "<?php echo $item->id ?>"/>
+                            <?php echo $item->name ?>
+                        </label>
+                    </div>
+                <?php endforeach ?>
+                
+            <?php endif ?>
+        </fieldset>
+        <div class="span-2 text-center" style="margin-top:5px;">
+            <a href="javascript:void(0)" class="right-arrow-big_ button" id="add-stock-to-fakk" style="margin-top:50%">Beólaz</a>
+            <a href="<?php echo base_url() ?>egg/add_stock_to_fakk/" class="hidden" rel = "dialog" title = "Állomány fakkba telepítése" id="dialog-add-stock-to-fakk"></a>
+        </div>
     <?php echo form_close() ?>
+<?php endif ?>
+
+<?php if ($stock_in_fakk): ?>
+    <fieldset class="round" style="clear:both;">
+        <legend>Betelepített állományok</legend>
+        <table class="bordered-table zebra-striped">
+            <thead>
+                <tr>
+                    <th>Fakk</th>
+                    <th>Állomány</th>
+                    <th>Fajta</th>
+                    <th>Darab</th>
+                    <th>&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($stock_in_fakk as $item): ?>
+                    <tr>
+                        <td><?php echo $item->fakk_name ?></td>
+                        <td><?php echo $item->stock_code ?></td>
+                        <td><?php echo $item->cast_type_name ?></td>
+                        <td><?php echo $item->piece ?></td>
+                        <td></td>
+                    </tr>
+                <?php endforeach ?>
+            </tbody>
+        </table>
+    </fieldset>
 <?php endif ?>
 
 

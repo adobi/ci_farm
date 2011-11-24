@@ -15,6 +15,8 @@ App.Egg = {
             
             return false;
         });
+        
+        $('#fakks-and-stocks').equalHeights();
     }
 };
 
