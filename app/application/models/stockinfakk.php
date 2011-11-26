@@ -15,7 +15,7 @@ class Stockinfakk extends MY_Model
         }
         
         return $this->fetchRows(array(
-            'columns'=>array('stock_in_fakk.fakk_id', 'stock_in_fakk.stock_id', 'stock_in_fakk.hutching_id', 'stock_in_fakk.created', 'sum(stock_in_fakk.piece) as piece'),
+            'columns'=>array('stock_in_fakk.id, stock_in_fakk.fakk_id', 'stock_in_fakk.stock_id', 'stock_in_fakk.hutching_id', 'stock_in_fakk.created', 'sum(stock_in_fakk.piece) as piece'),
             'join'=>$this->_buildJoin(),
             'where'=>array('hutching_id'=>$hutchingId, 'stock_in_fakk.closed is null'=>null),
             'group_by'=>'fakk_id'

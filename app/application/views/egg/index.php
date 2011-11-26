@@ -77,6 +77,7 @@
         <table class="bordered-table zebra-striped">
             <thead>
                 <tr>
+                    <th>Dátum</th>
                     <th>Fakk</th>
                     <th>Állomány</th>
                     <th>Fajta</th>
@@ -87,11 +88,15 @@
             <tbody>
                 <?php foreach ($stock_in_fakk as $item): ?>
                     <tr>
+                        <td><?php echo to_date($item->created) ?></td>
                         <td><?php echo $item->fakk_name ?></td>
                         <td><?php echo $item->stock_code ?></td>
                         <td><?php echo $item->cast_type_name ?></td>
                         <td><?php echo $item->piece ?></td>
-                        <td></td>
+                        <td>
+                            <a href="<?php echo base_url() ?>edit_stock_in_fakk/<?php echo $item->id ?> ?>" rel = "dialog" title = "Fakkban lévő állomány szerkesztése" class = "button button-small">szerkeszt</a>
+                            <a href="<?= base_url() ?>egg/remove_stock_from_fakk/<?php echo $item->id ?>" class = "button button-small delete">töröl</a>
+                        </td>
                     </tr>
                 <?php endforeach ?>
             </tbody>

@@ -131,7 +131,7 @@ class Egg extends MY_Controller
                 'fakk_id'=>$fakk,
                 'stock_id'=>$stock,
                 'piece'=>$_POST['piece'],
-                'created'=>date('Y-m-d H:i:s', time()),
+                'created'=>$_POST['created'],
                 'hutching_id'=>$this->session->userdata('actual_hutching_id')
             ));
             
@@ -139,6 +139,15 @@ class Egg extends MY_Controller
         } 
         
         $this->template->build('egg/add_stock_to_fakk', $data);
+    }
+    
+    public function remove_stock_from_fakk() 
+    {
+        $this->load->model('Stockinfakk', 'sif');
+        
+        $this->sif->delete($this->uri->segment(3));
+        
+        redirect($_SERVER['HTTP_REFERER']);
     }
 	
 	/**
