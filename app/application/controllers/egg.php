@@ -50,7 +50,7 @@ class Egg extends MY_Controller
 	        if (!$this->hutching->hasActual($this->session->userdata('selected_breedersite'), $this->session->userdata('selected_stockyard'))) {
 	            $data['can_start_new_hatching'] = true;
 	        }
-	         
+            
     	    if ($this->uri->segment(3) === 'new_hatching') {
     	        
     	        /**
@@ -75,7 +75,7 @@ class Egg extends MY_Controller
             $actualHutching = current($this->hutching->fetchActual($this->session->userdata('selected_breedersite'), $this->session->userdata('selected_stockyard')));
     	    $data['actual_hatching'] = $actualHutching;
             $this->session->set_userdata('actual_hutching_id', $actualHutching ? $actualHutching->id : 0);
-            
+
     	    /**
     	     * fakkok, allomanyok listaja
     	     *
@@ -88,7 +88,7 @@ class Egg extends MY_Controller
 	        $this->load->model('Chickenstocks', 'stocks');
 	        
 	        $data['stocks'] = $this->stocks->fetchForBreedersiteAndHutching($this->session->userdata('selected_breedersite'), $this->session->userdata('actual_hutching_id'));
-    	    
+    	    //dump($data); die;
 	        /**
 	         * az aktualis betelepitesben szereplo allomanyok fakkokban
 	         *

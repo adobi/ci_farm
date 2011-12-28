@@ -24,7 +24,9 @@
     <?php if ($breeder_site): ?>
         <div class="span-19 text-right" style="margin-right:0px;">
             <!-- <a class = "button" style = "margin-right: 30px;" href="<?= base_url(); ?>stockyard/for_breedersite/<?= $breeder_site->id; ?>">istállók</a> -->
-            <a href="<?= base_url(); ?>fakk/for_breedersite/<?= $breeder_site->id; ?>" class = "button fl">fakkok kialakítása</a>
+            <?php if ($breeder_site->breeder_id == $the_breeder_id): ?>
+                <a href="<?= base_url(); ?>fakk/for_breedersite/<?= $breeder_site->id; ?>" class = "button fl">fakkok kialakítása</a>
+            <?php endif ?>
             <a href="<?= base_url() ?>breedersite/edit/<?= $breeder_site->id ?>" class="button" rel = "dialog" title = "tenyészet szerkesztése">szerkeszt</a>
             <a href="<?= base_url() ?>breedersite/delete/<?= $breeder_site->id ?>" class="button delete">töröl</a>
         </div>

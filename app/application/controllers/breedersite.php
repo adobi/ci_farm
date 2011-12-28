@@ -108,6 +108,8 @@ class Breedersite extends MY_Controller
         
         $data = array();
         
+        $data['the_breeder_id'] = $this->breeder->getId();
+        
         $data['site_types'] = $this->site->getTypes();
         
         $breeder = $this->breeder->find((int)$id);

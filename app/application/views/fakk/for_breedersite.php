@@ -22,15 +22,16 @@
     <fieldset class="round">
         <legend>Fakk kialakítása</legend>
         <?= form_open(); ?>
-            <div class = "span-5">
-                <legend class="inline-block">Vélasszon istállót</legend>
+            <div class = "span-6">
+                <label class="block">Vélasszon istállót</label>
                 <?= form_dropdown('stock_yard_id', $stockyards, ($_POST && isset($_POST['stock_yard_id']) ? $_POST['stock_yard_id'] : $this->session->userdata('selected_stockyard'))); ?>
             </div>
-            <div class = "span-6">
-                <legend class = "inline-block">Fakkok darabszáma:</legend>
+            <div class = "span-7">
+                <label class = "block">Fakkok darabszáma</label>
                 <input type="text" name = "number_of" value = "<?= $_POST && isset($_POST['number_of']) ? $_POST['number_of'] : ''; ?>" size = "10" />
             </div>
             <div class="span-2" style="margin-top:5px;">
+                <label for="" class="block">&nbsp;</label>
                 <button class="button-small">Mehet</button>
             </div>
         <?= form_close() ?>

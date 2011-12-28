@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50051
 File Encoding         : 65001
 
-Date: 2011-12-28 18:38:03
+Date: 2011-12-28 20:39:27
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -229,54 +229,6 @@ INSERT INTO `chicken_stock` VALUES ('9', '', 'INTRA FR 2010 0047520', '15', '201
 INSERT INTO `chicken_stock` VALUES ('10', '', 'INTRA FR 2010 0058816', '15', '2010-08-13 00:00:00', '1140', '176', '10', 'III', '140', '10', '1000', '10', 'Kelés', 'INTRA FR 2010 0058816', 'INTRA FR 2010 0058816', '8', 'R 39', '2011-10-31 00:00:00', '2010-08-13 00:00:00', '4', '214254', null, null);
 
 -- ----------------------------
--- Table structure for `chicken_stock_`
--- ----------------------------
-DROP TABLE IF EXISTS `chicken_stock_`;
-CREATE TABLE `chicken_stock_` (
-  `id` int(11) NOT NULL auto_increment,
-  `code` varchar(45) default NULL,
-  `birth_date` datetime default NULL,
-  `chicken_type_id` int(11) default NULL,
-  `klass` varchar(5) default NULL,
-  `parent_male_code` varchar(45) default NULL,
-  `parent_male_code_2` varchar(45) default NULL,
-  `parent_female_code` varchar(45) default NULL,
-  `parent_female_code_2` varchar(45) default NULL,
-  `number_of_male` int(11) default NULL,
-  `number_of_female` int(11) default NULL,
-  `egg_code` varchar(45) default NULL,
-  `validity_date` datetime default NULL,
-  `buy_date` datetime default NULL,
-  `is_deleted` int(11) default NULL,
-  PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of chicken_stock_
--- ----------------------------
-
--- ----------------------------
--- Table structure for `chicken_stock_in_fakk`
--- ----------------------------
-DROP TABLE IF EXISTS `chicken_stock_in_fakk`;
-CREATE TABLE `chicken_stock_in_fakk` (
-  `id` int(11) NOT NULL auto_increment,
-  `fakk_id` int(11) default NULL,
-  `chicken_stock_id` int(11) default NULL,
-  `start_date` datetime default NULL,
-  `end_date` datetime default NULL,
-  PRIMARY KEY  (`id`),
-  KEY `fk_csif_fakk` (`fakk_id`),
-  KEY `fk_csif_chicken_stock` (`chicken_stock_id`),
-  CONSTRAINT `fk_csif_chicken_stock` FOREIGN KEY (`chicken_stock_id`) REFERENCES `chicken_stock` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_csif_fakk` FOREIGN KEY (`fakk_id`) REFERENCES `fakk` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of chicken_stock_in_fakk
--- ----------------------------
-
--- ----------------------------
 -- Table structure for `chicken_type`
 -- ----------------------------
 DROP TABLE IF EXISTS `chicken_type`;
@@ -431,14 +383,18 @@ CREATE TABLE `fakk` (
   `id` int(11) NOT NULL auto_increment,
   `name` varchar(150) default NULL,
   `stock_yard_id` int(11) default NULL,
+  `created` datetime default NULL,
+  `closed` datetime default NULL,
   PRIMARY KEY  (`id`),
   KEY `fk_fakk_stock_yard` (`stock_yard_id`),
   CONSTRAINT `fk_fakk_stock_yard` FOREIGN KEY (`stock_yard_id`) REFERENCES `stock_yard` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of fakk
 -- ----------------------------
+INSERT INTO `fakk` VALUES ('1', 'kisvárda  keltető fakk 1', '6', '2011-12-28 19:16:54', null);
+INSERT INTO `fakk` VALUES ('2', 'döge fakk 1', '7', '2011-12-28 19:34:39', null);
 
 -- ----------------------------
 -- Table structure for `holding_capacity`
@@ -465,6 +421,52 @@ INSERT INTO `holding_capacity` VALUES ('4', 'Istálló hasznos nm', '750', '2008
 INSERT INTO `holding_capacity` VALUES ('5', 'Istálló hasznos nm', '400', '2008-02-15 00:00:00', '8');
 INSERT INTO `holding_capacity` VALUES ('6', 'Istálló hasznos nm', '448', '1990-10-20 00:00:00', '10');
 INSERT INTO `holding_capacity` VALUES ('7', 'Istálló hasznos nm', '260', '2008-03-27 00:00:00', '13');
+
+-- ----------------------------
+-- Table structure for `hutching`
+-- ----------------------------
+DROP TABLE IF EXISTS `hutching`;
+CREATE TABLE `hutching` (
+  `id` int(11) NOT NULL auto_increment,
+  `stock_yard_id` int(11) default NULL,
+  `breeder_site_id` int(11) default NULL,
+  `created` datetime default NULL,
+  `closed` datetime default NULL,
+  PRIMARY KEY  (`id`),
+  KEY `fk_hutchin_stockg_yard` USING BTREE (`stock_yard_id`),
+  KEY `fk_hutching_breeder_site` USING BTREE (`breeder_site_id`),
+  CONSTRAINT `hutching_ibfk_2` FOREIGN KEY (`stock_yard_id`) REFERENCES `stock_yard` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `hutching_ibfk_1` FOREIGN KEY (`breeder_site_id`) REFERENCES `breeder_site` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of hutching
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `stock_in_fakk`
+-- ----------------------------
+DROP TABLE IF EXISTS `stock_in_fakk`;
+CREATE TABLE `stock_in_fakk` (
+  `id` int(11) NOT NULL auto_increment,
+  `hutching_id` int(11) default NULL,
+  `fakk_id` int(11) default NULL,
+  `stock_id` int(11) default NULL,
+  `piece` int(11) default NULL,
+  `created` datetime default NULL,
+  `closed` datetime default NULL,
+  PRIMARY KEY  (`id`),
+  KEY `fk_stock_in_fakk_hutching` USING BTREE (`hutching_id`),
+  KEY `fk_stock_in_fakk_fakk` USING BTREE (`fakk_id`),
+  KEY `fk_stock_in_fakk_stock` USING BTREE (`stock_id`),
+  CONSTRAINT `stock_in_fakk_ibfk_1` FOREIGN KEY (`fakk_id`) REFERENCES `fakk` (`id`),
+  CONSTRAINT `stock_in_fakk_ibfk_2` FOREIGN KEY (`hutching_id`) REFERENCES `hutching` (`id`),
+  CONSTRAINT `stock_in_fakk_ibfk_3` FOREIGN KEY (`stock_id`) REFERENCES `chicken_stock` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of stock_in_fakk
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `stock_yard`

@@ -48,7 +48,7 @@ class MY_Controller extends CI_Controller
 	    $config['base_url'] = base_url() . $url;
 	    $config['total_rows'] = $total;
 	    $config['per_page'] = $perPage;
-	    $config['num_links'] = 10;
+	    $config['num_links'] = 5;
 	    $config['uri_segment'] = $uriSegment;
 	    $config['first_link'] = 'Első';
 	    $config['last_link'] = 'Utolsó';
@@ -58,6 +58,7 @@ class MY_Controller extends CI_Controller
 	    $config['next_tag_close'] = '</span>';
 	    $config['prev_tag_open'] = '<span class = "prev-page">';
 	    $config['prev_tag_close'] = '</span>';
+	    //$config['display_pages'] = FALSE;
 	    
 	    $this->pagination->initialize($config);
 	    

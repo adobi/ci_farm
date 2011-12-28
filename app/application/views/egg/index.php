@@ -19,10 +19,13 @@
             </p>
             <?php if ($this->session->userdata('selected_stockyard')): ?>
                 <?php if ($can_start_new_hatching): ?>
-                    
-                    <p>
-                        <a href="<?= base_url() ?>egg/index/new_hatching" class = "button">Új betelepítés</a>
-                    </p>
+                    <?php //if ($fakks && $stocks): ?>
+                        
+                        <p>
+                            <a href="<?= base_url() ?>egg/index/new_hatching" class = "button">Új betelepítés</a>
+                        </p>
+                    <?php //else: ?>
+                    <?php //endif ?>
             
                 <?php endif ?>
             <?php endif ?>
@@ -35,7 +38,7 @@
     <?php endif ?>
     
 </fieldset>
-<?php if (!$can_start_new_hatching && $this->session->userdata('selected_breedersite') && $this->session->userdata('selected_stockyard') && $stocks && $fakks): ?>
+<?php if (!$can_start_new_hatching && $this->session->userdata('selected_breedersite') && $this->session->userdata('selected_stockyard')): ?>
     <?php  echo form_open('', array('id'=>'fakks-and-stocks')) ?>
         <fieldset class="round span-8" id="stocks">
             <legend>Állományok</legend>
@@ -50,6 +53,10 @@
                         </div>
                     <?php //endif ?>
                 <?php endforeach ?>
+            <?php else: ?>
+                <div class="error">
+                    Előbb vigyen fel szállítólevelet és állományt.
+                </div>                
             <?php endif ?>
         </fieldset>
         <fieldset class="round span-8" id="fakks">
@@ -63,7 +70,11 @@
                         </label>
                     </div>
                 <?php endforeach ?>
-                
+            <?php else: ?>
+                <div class="error">
+                    Előbb vigyen fel fakkot 
+                    <a href="<?php echo base_url() ?>fakk/for_breedersite/<?php echo $this->session->userdata('selected_breedersite') ?>" class="button">Fakk kialakítása</a>
+                </div>
             <?php endif ?>
         </fieldset>
         <div class="span-2 text-center" style="margin-top:5px;">
