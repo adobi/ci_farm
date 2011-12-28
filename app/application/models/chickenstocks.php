@@ -113,26 +113,31 @@ class Chickenstocks extends MY_Model
         return $result;        
         */
         
-        $sql = "select 
-                	cs.id, 
-                	cs.stock_code,
-                	cs.piece, 
-                	((select sum(piece) from stock_in_fakk sif where sif.hutching_id = $hutching group by sif.stock_id having sif.stock_id = cs.id)) piece_in_fakk,
-                	ct.name as cast_type_name
-                from 
-                	chicken_stock cs 
-                	join cast_type ct on cs.cast_type_id = ct.id
-                where 
-                	cs.holder_breeder_site_id = $site
-                	and (cs.male_piece != 0  or cs.female_piece != 0)
-                	and (cs.is_deleted IS NULL)
-                	and (
-                		cs.piece > (
-                			select sum(piece) from stock_in_fakk sif where sif.hutching_id = $hutching group by sif.stock_id having sif.stock_id = cs.id
-                		) or (
-                		cs.id not in (select id from stock_in_fakk)
-                		)
-                    )";
+        $sql = "select * from (
+                    select 
+                    	cs.id, 
+                    	cs.stock_code,
+                    	cs.piece, 
+                    	((select sum(piece) from stock_in_fakk sif where sif.hutching_id = $hutching group by sif.stock_id having sif.stock_id = cs.id)) piece_in_fakk,
+                    	ct.name as cast_type_name
+                    from 
+                    	chicken_stock cs 
+                    	join cast_type ct on cs.cast_type_id = ct.id
+                    where 
+                    	cs.holder_breeder_site_id = $site
+                    	and (cs.male_piece != 0  or cs.female_piece != 0)
+                    	and (cs.is_deleted IS NULL)
+                    	and (
+                    		cs.piece > (
+                    			select sum(piece) from stock_in_fakk sif where sif.hutching_id = $hutching group by sif.stock_id having sif.stock_id = cs.id
+                    		) or (
+                    		cs.id not in (select id from stock_in_fakk)
+                    		)
+                        )
+                    ) r
+                    where r.piece - r.piece_in_fakk > 0 or r.piece - r.piece_in_fakk is null
+                ";
+        //dump($sql); die;
         return $this->execute($sql);
     }
     

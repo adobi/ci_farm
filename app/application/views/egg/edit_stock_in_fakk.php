@@ -3,11 +3,11 @@
     <?= form_open() ?>
         <p>
             <label for="name" class = "block">Darabszám</label>
-            <input type="text" name="piece" value="<?php echo $piece ?>" id="piece" class = "required" data-max = "<?php echo $piece ?>"/>
+            <input type="text" name="piece" value="<?php echo $item->piece ?>" id="piece" class = "required" data-max = "<?php echo $piece ?>"/>
         </p>
         <p>
             <label for="created" class = "block">Dátum</label>
-            <input type="text" name="created" value="<?php echo date('Y-m-d', time()) ?>" id="created" class = "required datepicker" data-max = "<?php echo $piece ?>"/>
+            <input type="text" name="created" value="<?php echo to_date($item->created) ?>" id="created" class = "required datepicker" data-max = "<?php echo $piece ?>"/>
         </p>
         <p>
             <button>Mentés</button>
@@ -17,7 +17,7 @@
 
 <script type="text/javascript">
     $('[name=piece]').numeric();
-
+    
     $('[name=piece]').bind('keyup', function(event) {
         var self = $(this);
         
@@ -25,4 +25,5 @@
             self.val(self.attr('data-max'));
         }
     });
+    
 </script>

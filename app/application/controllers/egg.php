@@ -141,6 +141,42 @@ class Egg extends MY_Controller
         $this->template->build('egg/add_stock_to_fakk', $data);
     }
     
+    public function edit_stock_in_fakk() 
+    {
+        $data = array();
+        
+        $id = $this->uri->segment(3);
+        
+        $this->load->model('Stockinfakk', 'sif');
+        
+        $item = $this->sif->find($id);
+        
+        $data['item'] = $item;
+        
+        $this->load->model('Chickenstocks', 'stocks');
+        
+        //$chickenstock = $this->stocks->fetchPieceNotInFakks($item->stock_id);
+        $chickenstock = $this->stocks->find($item->stock_id);
+        
+        $data['piece'] = $chickenstock->piece;
+        
+        $this->form_validation->set_rules('piece', 'trime|required|numeric|less_than['.$data['piece'].']');
+        
+        if ($this->form_validation->run()) {
+            
+            $this->load->model('Stockinfakk', 'sif');
+            
+            $this->sif->update(array(
+                'piece'=>$_POST['piece'],
+                'created'=>$_POST['created'],
+            ), $id);
+            
+            redirect(base_url() . 'egg');
+        }        
+        
+        $this->template->build('egg/edit_stock_in_fakk', $data);
+    }
+    
     public function remove_stock_from_fakk() 
     {
         $this->load->model('Stockinfakk', 'sif');
