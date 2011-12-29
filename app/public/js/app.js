@@ -2,6 +2,8 @@ var App = App || {};
 
 App.AjaxSubmit = false;
 
+App.Loading = false;
+
 App.Dialog = function() 
 {
 
@@ -439,12 +441,13 @@ App.SetSelectValueInSession = function(element, url)
         var value = $(this).val();
         
         if ($.trim(value).length && value != 0) {
-            
-            $.get(App.URL+url+"/"+value, function() {
-                
+            App.Loading = true;
+            $.get(App.URL+url+value, function() {
+                $('#loading-global').show();
+
                 location.reload();
             });
-            $('#loading-global').show();                
+            $('#loading-global').show();
         } 
     });
 };

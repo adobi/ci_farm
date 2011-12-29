@@ -27,13 +27,25 @@ class Fakks extends MY_Model
             
             return false;
         }
-        
+        /*
         $result = $this->fetchRows(array(
             'where'=>array('stock_yard_id'=>$yard),
             'order'=>array('by'=>'closed', 'dest'=>'asc')
         ));
                 
         return $result;        
+        */
+        
+        $sql = "select 
+                	f.*, sif.id as sif_id
+                from 
+                	fakk f
+                	left join stock_in_fakk sif on f.id = sif.fakk_id
+                where f.stock_yard_id = $yard and f.closed is null";
+        
+        $result = $this->execute($sql);
+        
+        return $result;
     }    
     
     public function fetchForBreedersite ($site) 
@@ -61,14 +73,35 @@ class Fakks extends MY_Model
             
             return false;
         }
-        
+        /*
         $result = $this->fetchRows(array(
             'where' => array(
                 'stock_yard_id' => $stockYardId,
                 'closed is null' => null
             )
         ));
+        */
         
-        return count($result) === 0;
+        $sql = "select 
+                	f.*, sif.id as sif_id
+                from 
+                	fakk f
+                	left join stock_in_fakk sif on f.id = sif.fakk_id
+                where f.stock_yard_id = $stockYardId and f.closed is null";
+        
+        $result = $this->execute($sql);
+        
+        if ($result) {
+            
+            foreach ($result as $r) {
+                
+                if ($r->sif_id) {
+                    return false;
+                }
+            }
+        }
+        
+        return true;
+        //return count($result) === 0;
     }
 }

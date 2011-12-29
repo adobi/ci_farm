@@ -731,3 +731,8 @@ label.input-wrapper {
     width:auto;
     font-weight:normal;
 }
+
+input[type=checkbox], input[type=radio] {
+    position:relative;
+    top:3px;
+}

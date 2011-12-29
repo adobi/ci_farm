@@ -82,13 +82,18 @@ $(function() {
     		$(this).show();
        })
        .ajaxStop(function() {
-    		$(this).hide();
-    		
+            if (!App.Loading) {
+                
+    		    $(this).hide();
+            } else {
+                App.Loading = false;
+            }
+           
     		$('button, input[type=submit], .button').button();
     		
     		App.SetupForm();
     		//App.Dialog();
-    });
+        });
     
     App.CatchLoadWeekDataEvent();
     
@@ -121,9 +126,6 @@ $(function() {
         return true;
     });
     */
-    $(window).unload(function() {
-        $('#loading-global').show();
-    });   
     
     App.SetupForm();
     App.ValidateForm(); 
@@ -136,4 +138,18 @@ $(function() {
     App.CloseFromScartch();
     
     App.Autocomplete($('#buyer_id'),  'breedersite/search_code_and_name');
+    
+    $('#loading-global').show();
+    
+    
 });
+
+$(window).unload(function() {
+    $('#loading-global').show();
+    
+});  
+$(window).load(function() {
+    
+    $('#loading-global').hide();
+});    
+  

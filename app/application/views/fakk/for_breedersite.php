@@ -11,6 +11,13 @@
  </style> 
 
 <h3 class="span-20" style="margin-top:10px; margin-left:10px;">Telephely: <?= $site->name; ?></h3>
+
+<fieldset class = "round">
+    <legend>Válasszon tenyészetet</legend>
+    
+    <?= form_dropdown('breeder_site_id', $breeder_sites_select, $this->session->userdata('selected_breedersite')); ?>
+    
+</fieldset>
  
 <?php if (count($stockyards) !== 1): ?>
     
@@ -19,23 +26,33 @@
         
     <?php endif ?>
     
-    <fieldset class="round">
-        <legend>Fakk kialakítása</legend>
-        <?= form_open(); ?>
-            <div class = "span-6">
-                <label class="block">Vélasszon istállót</label>
-                <?= form_dropdown('stock_yard_id', $stockyards, ($_POST && isset($_POST['stock_yard_id']) ? $_POST['stock_yard_id'] : $this->session->userdata('selected_stockyard'))); ?>
-            </div>
-            <div class = "span-7">
-                <label class = "block">Fakkok darabszáma</label>
-                <input type="text" name = "number_of" value = "<?= $_POST && isset($_POST['number_of']) ? $_POST['number_of'] : ''; ?>" size = "10" />
-            </div>
-            <div class="span-2" style="margin-top:5px;">
-                <label for="" class="block">&nbsp;</label>
-                <button class="button-small">Mehet</button>
-            </div>
-        <?= form_close() ?>
-    </fieldset>
+    <?php if (isset($is_permitted_to_create_fakks) && !$is_permitted_to_create_fakks): ?>
+        <div class="span-19 error">
+            A kivállasztott istállóban szerepel olyan fakk ami még tartalmaz jószágot.
+        </div>
+    <?php else: ?>
+            
+        
+        <fieldset class="round">
+            <legend>Fakk kialakítása</legend>
+            <?= form_open(); ?>
+                <div class = "span-6">
+                    <label class="block">Vélasszon istállót</label>
+                    <?= form_dropdown('stock_yard_id', $stockyards, ($_POST && isset($_POST['stock_yard_id']) ? $_POST['stock_yard_id'] : $this->session->userdata('selected_stockyard'))); ?>
+                </div>
+                <div class = "span-7">
+                    <label class = "block">Fakkok darabszáma</label>
+                    <input type="text" name = "number_of" value = "<?= $_POST && isset($_POST['number_of']) ? $_POST['number_of'] : ''; ?>" size = "10" />
+                </div>
+                <div class="span-2" style="margin-top:5px;">
+                    <label for="" class="block">&nbsp;</label>
+                    <button class="button-small">Mehet</button>
+                </div>
+            <?= form_close() ?>
+        </fieldset>
+        
+    <?php endif ?>    
+
     
     <?php if (!validation_errors() && isset($is_permitted_to_create_fakks) && $is_permitted_to_create_fakks): ?>
         
@@ -64,11 +81,7 @@
     <?php else: ?>
         <?php if ($_POST): ?>
             
-            <?php if (!isset($is_permitted_to_create_fakks) || !$is_permitted_to_create_fakks): ?>
-                <div class="error">
-                    A kivállasztott istállóban szerepel olyan fakk ami még tartalmaz jószágot.
-                </div>
-            <?php endif ?>
+
         <?php endif ?>
     <?php endif ?>
     
@@ -91,7 +104,10 @@
                             <td class="text-center"><?= to_date($item->created); ?></td>
                             <td class="text-center"><?= to_date($item->closed); ?></td>
                             <td>
-                                
+                                <a href="<?php echo base_url() ?>fakk/edit/<?php echo $item->id ?>" class="button button-small" rel = "dialog" title = "Fakk szerkesztése">szerkeszt</a>
+                                <?php if (null === $item->sif_id): ?>
+                                    <a href="<?php echo base_url() ?>fakk/delete/<?php echo $item->id ?>" class="button button-small delete">töröl</a>
+                                <?php endif ?>
                             </td>
                         </tr>
                     <?php endforeach ?>

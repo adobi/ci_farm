@@ -21,13 +21,15 @@ class Fakk extends MY_Controller
         
         $id = $this->uri->segment(3);
         
-        $this->load->model('', 'model');
+        $this->load->model('Fakks', 'model');
         
         $item = false;
         if ($id) {
             $item = $this->model->find((int)$id);
         }
         $data['current_item'] = $item;
+        
+        $this->form_validation->set_rules('name', 'Név', 'trim|required');
         
         if ($this->form_validation->run()) {
         
@@ -44,7 +46,7 @@ class Fakk extends MY_Controller
             }
         }
         
-        $this->template->build('/edit', $data);
+        $this->template->build('fakk/edit', $data);
     }
     
     public function delete()
@@ -72,12 +74,23 @@ class Fakk extends MY_Controller
         
         $data['site'] = $this->sites->find($siteId);
         
+        $sites = $this->sites->fetchForBreeder($data['site']->breeder_id);
+	    
+        if ($this->session->userdata('selected_breedersite') !== $siteId) {
+            redirect(base_url() . 'fakk/for_breedersite/'.$this->session->userdata('selected_breedersite'));
+        }
+        
+	    $data['breeder_sites_select'] = $this->sites->toAssocArray('id', 'code+name', $sites);        
+        
         $this->form_validation->set_rules('stock_yard_id', 'Istálló', 'trim|requierd');
         $this->form_validation->set_rules('number_of', 'Fakkok darabszáma', 'trim|required|numeric');
         
-        if ($this->form_validation->run()) {
+        if ($this->session->userdata('selected_stockyard')) {
             
-            $data['is_permitted_to_create_fakks'] = $this->fakk->isPermittedToCreate($_POST['stock_yard_id']);
+            $data['is_permitted_to_create_fakks'] = $this->fakk->isPermittedToCreate($this->session->userdata('selected_stockyard'));
+        }
+        
+        if ($this->form_validation->run()) {
             
             $data['fakks'] = $this->fakk->fetchForStockyard($_POST['stock_yard_id']);
             
