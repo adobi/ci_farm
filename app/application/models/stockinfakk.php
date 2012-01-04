@@ -59,7 +59,18 @@ class Stockinfakk extends MY_Model
         }
         
         return array('total_piece'=>$sum, 'items'=>$allItems);
-    }    
+    } 
+    
+    public function delete($id) 
+    {
+        if (!$id) return false;
+        
+        $item = $this->find($id);
+        
+        if (!$item) return false;
+        
+        return parent::delete(array('hutching_id'=>$item->hutching_id, 'fakk_id'=>$item->fakk_id));
+    }   
     
     private function _buildJoin()
     {
