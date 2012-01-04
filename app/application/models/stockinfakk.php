@@ -22,6 +22,45 @@ class Stockinfakk extends MY_Model
         ), false, false, false);
     }
     
+    
+    /**
+     * adott sotck_in_fakk id-hez megkeresi az ide tartozo fakkhoz es hutchinghoz tartozo osszes allomanyt
+     *
+     * @param string $id 
+     * @return array
+     * @author Dobi Attila
+     */
+    public function findWithDetails($id) 
+    {
+        if (!$id) return false;
+        
+        $item = $this->find($id);
+        
+        if (!$item) return false;
+        
+        //$allItems = $this->fetchRows(array('where'=>array('hutching_id'=>$item->hutching_id, 'fakk_id'=>$item->fakk_id)));
+        
+        $sql = "select 
+                    sif.*, cs.piece as max_piece, cs.stock_code
+                from $this->_name as sif
+                join chicken_stock cs on cs.id = sif.stock_id
+                where hutching_id = $item->hutching_id and fakk_id = $item->fakk_id
+        ";
+        
+        $allItems = $this->execute($sql);
+        
+        if (!$allItems) return false;
+        
+        $this->load->model('Chickenstocks', 'stocks');
+        
+        $sum = 0;
+        foreach ($allItems as $i) {
+            $sum += $i->piece;
+        }
+        
+        return array('total_piece'=>$sum, 'items'=>$allItems);
+    }    
+    
     private function _buildJoin()
     {
         return array(

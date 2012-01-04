@@ -31,8 +31,9 @@
             <?php endif ?>
     
         <?php else: ?>
-            <div class="info">
-                A kiválasztott tenyészethez nem szerepel istálló.
+            <div class="message-info">
+                A kiválasztott tenyészethez nem szerepel istálló. 
+                <a class = "button button-small" rel = "dialog" title="Új istálló felvitele" href="<?php echo base_url() ?>stockyard/edit/breeder_site/<?php echo $this->session->userdata('selected_breedersite') ?>">új istálló felvitele</a>
             </div>
         <?php endif ?>
     <?php endif ?>

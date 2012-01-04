@@ -28,7 +28,7 @@
     
     <?php if (isset($is_permitted_to_create_fakks) && !$is_permitted_to_create_fakks): ?>
         <div class="span-19 error">
-            A kivállasztott istállóban szerepel olyan fakk ami még tartalmaz jószágot.
+            A kivállasztott istállóban szerepel olyan fakk ami még tartalmaz jószágot. Csak akkor lehet új fakkot felvinni, ha az eddigiek midegyike üres.
         </div>
     <?php else: ?>
             
@@ -105,7 +105,7 @@
                             <td class="text-center"><?= to_date($item->closed); ?></td>
                             <td>
                                 <a href="<?php echo base_url() ?>fakk/edit/<?php echo $item->id ?>" class="button button-small" rel = "dialog" title = "Fakk szerkesztése">szerkeszt</a>
-                                <?php if (null === $item->sif_id): ?>
+                                <?php if (0 == $item->in_stock): ?>
                                     <a href="<?php echo base_url() ?>fakk/delete/<?php echo $item->id ?>" class="button button-small delete">töröl</a>
                                 <?php endif ?>
                             </td>

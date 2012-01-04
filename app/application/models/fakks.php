@@ -21,6 +21,13 @@ class Fakks extends MY_Model
         return $result;        
     }
     
+    /**
+     * adott istallohoz szedi ossze a fakkokat
+     *
+     * @param string $yard 
+     * @return void
+     * @author Dobi Attila
+     */
     public function fetchForStockyard($yard) 
     {
         if (!$yard) {
@@ -37,10 +44,9 @@ class Fakks extends MY_Model
         */
         
         $sql = "select 
-                	f.*, sif.id as sif_id
+                	f.*, (select count(fakk_id) from stock_in_fakk sif where sif.fakk_id = f.id) as in_stock
                 from 
                 	fakk f
-                	left join stock_in_fakk sif on f.id = sif.fakk_id
                 where f.stock_yard_id = $yard and f.closed is null";
         
         $result = $this->execute($sql);

@@ -149,20 +149,21 @@ class Egg extends MY_Controller
         
         $this->load->model('Stockinfakk', 'sif');
         
-        $item = $this->sif->find($id);
+        $items = $this->sif->findWithDetails($id);
         
-        $data['item'] = $item;
+        $data['items'] = $items;
         
         $this->load->model('Chickenstocks', 'stocks');
         
         //$chickenstock = $this->stocks->fetchPieceNotInFakks($item->stock_id);
-        $chickenstock = $this->stocks->find($item->stock_id);
+        //$chickenstock = $this->stocks->find($item->stock_id);
         
-        $data['piece'] = $chickenstock->piece;
+        //$data['piece'] = $chickenstock->piece;
         
-        $this->form_validation->set_rules('piece', 'trime|required|numeric|less_than['.$data['piece'].']');
+        //$this->form_validation->set_rules('piece', 'trime|required|numeric|less_than['.$data['piece'].']');
         
-        if ($this->form_validation->run()) {
+        //if ($this->form_validation->run()) {
+        if ($_POST) {
             
             $this->load->model('Stockinfakk', 'sif');
             

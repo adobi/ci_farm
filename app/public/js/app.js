@@ -25,6 +25,7 @@ App.Dialog = function()
                 
                 $.get(self.attr('href'), function(response) {
                     elem.html(response);
+                    
                     //alert(window.innerHeight);
                     elem.dialog('option', 'position', [Math.floor(((window.innerWidth  - elem.width()) / 2)), window.pageYOffset]);
                     $('.ui-dialog').css('top',  window.pageYOffset + 70);
@@ -64,6 +65,8 @@ App.Dialog = function()
                         
                         App.SimpleAutcomplete($('#breeder_name'), 'breeder/autocomplete_search', App.ShowBreederInfo);
                     }
+                    
+                    
                 });
                 
             }
@@ -283,7 +286,10 @@ App.SetupForm = function() {
             
             if ($(v).find('.required').length && !$(v).find('.message-info').length) {
                 
-                $(v).prepend('<p class="message-info">a <strong class="star-required">*</strong>-gal jelölt mezők kitöltése kötelező</p>');
+                if (!$('.form-required-message').length) {
+                    
+                    $(v).prepend('<p class="message-info form-required-message">a <strong class="star-required">*</strong>-gal jelölt mezők kitöltése kötelező</p>');
+                }
             }
             
         });
