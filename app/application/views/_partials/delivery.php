@@ -103,7 +103,7 @@
                 <?php endif ?>
                 
                 <div class="span-18 text-right" style="background:#eaeaea">
-                    <a class="button button-small" href="<?php echo base_url() ?>" rel = "dialog" title="Napos származási igazolás">származási igazolás</a>
+                    <a class="button button-small" href="<?php echo base_url() ?>proofoforigin/edit/delivery/<?php echo $item->id ?>" rel = "dialog" title="Napos származási igazolás">származási igazolás</a>
                     <a href="<?= base_url(); ?>chickenstock/edit/delivery/<?= $item->id; ?>" rel = "dialog" title = "Új állomány felvitele" class="button button-small">új állomány</a>
                 </div>
                 
