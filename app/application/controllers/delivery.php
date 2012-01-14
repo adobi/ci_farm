@@ -27,29 +27,7 @@ class Delivery extends MY_Controller
         
         // a fajtak listaja
         $this->load->model('Casts', 'cast');
-        $data['casts'] = $this->cast->toAssocArray('id', 'name', $this->cast->fetchAll());        
-/*
-        if (($_POST && $_POST['serial_number']) || ($this->uri->segment(3) === 'q' && $this->uri->segment(4))) {
-            
-            if ($_POST) {
-                
-                redirect(base_url() . 'delivery/index/q/'.$_POST['serial_number']);
-            }
-            
-            $data['items'] = $this->model->findBySerialNumber($this->uri->segment(4));
-            
-        } else {
-            
-            $page = $this->uri->segment(4) ? $this->uri->segment(4) : 0;
-    
-    	    $data['pagination_links'] = $this->paginate('delivery/index/page/', 4, $this->model->count(), DELIVERY_ITEMS_PER_PAGE);
-    	    $params['limit'] = DELIVERY_ITEMS_PER_PAGE;
-    	    $params['offset'] = $page;        
-            
-            $data['items'] = $this->model->fetchAll($params);
-            
-        }
-*/        
+        $data['casts'] = $this->cast->toAssocArray('id', 'name', $this->cast->fetchAll());      
         
         $listType = $this->uri->segment(3);
 
@@ -109,7 +87,7 @@ class Delivery extends MY_Controller
         
         // tenyeszetek listaja
         $this->load->model('Breedersites', 'sites');
-        $data['breedersites'] = $this->sites->toAssocArray('id', 'name+address+code', $this->sites->fetchSiteWithBreederInfo());
+        $data['breedersites'] = $this->sites->toAssocArray('id', 'code+name+address', $this->sites->fetchSiteWithBreederInfo());
         
         $item = false;
         if ($id) {

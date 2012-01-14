@@ -84,9 +84,18 @@
                                         <?php else: ?>
                                             <a class = "fr button button-small" rel = "dialog" href="<?= base_url(); ?>chickenstock/add_certificate/<?= $stock->id; ?>" title = "Törzsállomány azonosító száma módosítása">azononosító szerkesztése</a>
                                         <?php endif ?>
-                                        
                                     </td>
                                 </tr>
+                                <!-- 
+                                <tr>
+                                    <td colspan = "5" style="background: #FEFBF3">
+                                        Napos származási igazolás
+                                    </td>
+                                    <td colspan = "2" class = "text-right" style="background: #FEFBF3">
+                                        <a class="button button-small" href="<?php echo base_url() ?>" rel = "dialog" title="Napos származási igazolás">igazolás</a>
+                                    </td>
+                                </tr>
+                                 -->
                             <?php endforeach ?>
                             </tbody>
                         </table>
@@ -94,6 +103,7 @@
                 <?php endif ?>
                 
                 <div class="span-18 text-right" style="background:#eaeaea">
+                    <a class="button button-small" href="<?php echo base_url() ?>" rel = "dialog" title="Napos származási igazolás">származási igazolás</a>
                     <a href="<?= base_url(); ?>chickenstock/edit/delivery/<?= $item->id; ?>" rel = "dialog" title = "Új állomány felvitele" class="button button-small">új állomány</a>
                 </div>
                 
@@ -284,7 +294,7 @@
 
                 <div class="span-18 text-right" style="background:#eaeaea">
                    
-                    <a href="javascript:void(0);" onclick = "$('#delivery-vacinarry').toggle();"  class="button small-button">Állatorvosi igazolás</a>
+                    <a href="javascript:void(0);" onclick = "$('#delivery-vacinarry').toggle();"  class="button small-button">állatorvosi igazolás</a>
                     <a href="<?= base_url(); ?>delivery/edit/<?= $item->id; ?>"  class="button small-button">szerkeszt</a>
                     <a href="<?= base_url(); ?>delivery/delete/<?= $item->id; ?>" class="button small-button delete">töröl</a>
                 </div>

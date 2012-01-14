@@ -100,6 +100,14 @@
             </p>
         </fieldset>
         <fieldset class="round">
+            <legend>Indító állattartó nyilatkozata</legend>
+            <p>
+                <label class = "inline-block" for="launch_date">Aláírás dátuma</label>
+                <input type="text" name = "launch_date" id = "launch_date" value="<?= $current_item ? to_date($current_item->launch_date) : '' ?>" class = "datepicker" />
+            </p>
+        </fieldset>
+        
+        <fieldset class="round">
             <legend>Szállítmány beérkezése</legend>
             <p>
                 <label class = "inline-block" for="receiver_id">Beérkeztető tenyészetkódja</label>
