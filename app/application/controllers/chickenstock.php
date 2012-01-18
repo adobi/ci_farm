@@ -93,15 +93,16 @@ class Chickenstock extends MY_Controller
         if (is_numeric($id)) {
 
             $item = $this->model->find((int)$id);
-            //$delivery = $this->uri->segment(5);
+            $delivery = $this->uri->segment(5);
         } else {
 
             $delivery = $this->uri->segment(4);
-            $this->load->model('Deliverys', 'delivery');
-            $d = $this->delivery->find($delivery);
-            
-            $current_delivery = ($d ? $d[0] : false);
         }
+        
+        $this->load->model('Deliverys', 'delivery');
+        $d = $this->delivery->find($delivery);
+        
+        $current_delivery = ($d ? $d[0] : false);
         
         $data['current_item'] = $item;
         $data['current_delivery'] = $current_delivery;

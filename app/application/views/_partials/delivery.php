@@ -69,7 +69,7 @@
                                         </p>
                                          -->
                                         <!-- <p> -->
-                                            <a class="button button-small"  href="<?= base_url(); ?>chickenstock/edit/<?= $stock->id; ?>" rel = "dialog" title = "Módosítás">szerkeszt</a>
+                                            <a class="button button-small"  href="<?= base_url(); ?>chickenstock/edit/<?= $stock->id; ?>/delivery/<?php echo $item->id ?>" rel = "dialog" title = "Módosítás">szerkeszt</a>
                                             <a class="delete button button-small" href="<?= base_url(); ?>chickenstock/delete/<?= $stock->id; ?>">töröl</a>
                                         <!-- </p> -->
                                     </td>
