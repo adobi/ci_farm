@@ -7,6 +7,14 @@ class Chickenstocks extends MY_Model
     protected $_name = "chicken_stock";
     protected $_primary = "id";
     
+    /**
+     * adott szallitolevelhez tartozo allomanyokat adja vissza
+     *
+     * @param string $deliveryId 
+     * @param string $params 
+     * @return void
+     * @author Dobi Attila
+     */
     public function fetchForDelivery($deliveryId, $params = array()) 
     {
         if (!$deliveryId) {
@@ -18,6 +26,7 @@ class Chickenstocks extends MY_Model
         
         $params['where']['delivery_id'] = $deliveryId;
         $params['join'] = array(
+            array('table'=>'chicken_stok_proof_of_origin', 'columns'=>array('proof_id'), 'condition'=>'chicken_stok_proof_of_origin.stock_id = chicken_stock.id'),
             array('table'=>'delivery', 'columns'=>array(), 'condition'=>'delivery.id = chicken_stock.delivery_id'),
             array('table'=>'breeder_site', 'columns'=>array('breeder_site.code as seller_code'), 'condition'=>'delivery.seller_id = breeder_site.id')
         );
@@ -32,6 +41,23 @@ class Chickenstocks extends MY_Model
             )
         ));
         */
+    }
+    
+    /**
+     * azokat az allomanyokat adja vissza amelyekhez nincs szarmazasi igazolas
+     *
+     * @param string $deliveryId 
+     * @param string $params 
+     * @return void
+     * @author Dobi Attila
+     */
+    public function fetchForDeliveryWithoutProof($deliveryId, $params = array()) 
+    {
+        if (!$deliveryId) return false;
+        
+        $sql = "select * from $this->_name where delivery_id = $deliveryId and id not in (select stock_id from chicken_stok_proof_of_origin)";
+        //dump($sql); die;
+        return $this->execute($sql);
     }
     
     public function fetchFor($type, $id, $params = array())

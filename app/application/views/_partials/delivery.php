@@ -86,16 +86,21 @@
                                         <?php endif ?>
                                     </td>
                                 </tr>
-                                <!-- 
+                                
                                 <tr>
                                     <td colspan = "5" style="background: #FEFBF3">
                                         Napos származási igazolás
                                     </td>
                                     <td colspan = "2" class = "text-right" style="background: #FEFBF3">
-                                        <a class="button button-small" href="<?php echo base_url() ?>" rel = "dialog" title="Napos származási igazolás">igazolás</a>
+                                        <?php if ($stock->proof_id): ?>
+                                            <a class="button button-small" href="<?php echo base_url() ?>proofoforigin/edit/<?php echo $stock->proof_id ?>/delivery/<?php echo $item->id ?>" rel = "dialog" title="Napos származási igazolás">származási igazolás</a>
+                                            <a class="button button-small" href="<?php echo base_url() ?>proofoforigin/delete/<?php echo $stock->proof_id ?>">töröl</a>
+                                        <?php else: ?>
+                                            <em>nincs megadva</em>
+                                        <?php endif ?>
                                     </td>
                                 </tr>
-                                 -->
+                                
                             <?php endforeach ?>
                             </tbody>
                         </table>
@@ -103,7 +108,7 @@
                 <?php endif ?>
                 
                 <div class="span-18 text-right" style="background:#eaeaea">
-                    <a class="button button-small" href="<?php echo base_url() ?>proofoforigin/edit/delivery/<?php echo $item->id ?>" rel = "dialog" title="Napos származási igazolás">származási igazolás</a>
+                    <a class="button button-small" href="<?php echo base_url() ?>proofoforigin/edit/delivery/<?php echo $item->id ?>" rel = "dialog" title="Napos származási igazolás">új származási igazolás</a>
                     <a href="<?= base_url(); ?>chickenstock/edit/delivery/<?= $item->id; ?>" rel = "dialog" title = "Új állomány felvitele" class="button button-small">új állomány</a>
                 </div>
                 
