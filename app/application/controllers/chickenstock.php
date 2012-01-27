@@ -54,7 +54,7 @@ class Chickenstock extends MY_Controller
             $data['pagination_links'] = $this->paginate(
                                                 'chickenstock/index/page/', 
                                                 4, 
-                                                $this->model->count(array('holder_breeder_site_id'=>$this->session->userdata('selected_breedersite'))), 
+                                                $this->model->count(array('buyer_id'=>$this->session->userdata('selected_breedersite'))), 
                                                 DELIVERY_ITEMS_PER_PAGE);
             
     	    $data['items'] = $this->model->fetchFor('breedersite', $this->session->userdata('selected_breedersite'), $params);

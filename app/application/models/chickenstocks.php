@@ -72,7 +72,7 @@ class Chickenstocks extends MY_Model
         $params['where'] = $this->_prepareCondition(isset($params['where']) ? $params['where'] : false);
         
         if ('breedersite' === $type) {
-            $params['where']['holder_breeder_site_id'] = $id;
+            $params['where']['buyer_id'] = $id;
         }        
             
         if ('delivery' === $type) {
@@ -86,7 +86,7 @@ class Chickenstocks extends MY_Model
     public function count($condition) {
         
         $params['join'] = $this->_buildJoin();
-
+        
         $params['where'] = $this->_prepareCondition($condition);
         //dump($params['where']);
         $result = parent::fetchRows($params);        
@@ -115,7 +115,7 @@ class Chickenstocks extends MY_Model
         
         $params['join'] = $this->_buildJoin();
 
-        $params['where'] = $this->_prepareCondition(array('holder_breeder_site_id'=>$site));
+        $params['where'] = $this->_prepareCondition(array('buyer_id'=>$site));
         
         $result = $this->fetchRows($params);
         
@@ -195,7 +195,7 @@ class Chickenstocks extends MY_Model
                 if (!$value) {
                     unset($params[$col]);
                 } else {
-                    $params["chicken_stock.$col"] = $value;
+                    $params["$col"] = $value;
                 }
             }            
         }
@@ -211,10 +211,10 @@ class Chickenstocks extends MY_Model
         return array(
             array('table'=>'delivery', 'condition'=>'delivery.id = chicken_stock.delivery_id'),
             array('table'=>'cast', 'condition'=>'delivery.cast_id = cast.id', 'columns'=>array('cast.name as cast_name')),
-            array('table'=>'cast_type ct', 'condition'=>'ct.id = chicken_stock.cast_type_id', 'columns'=>array('ct.name as cast_type_name')),
-            array('table'=>'breeder_site buyer_site', 'condition'=>'buyer_site.id = chicken_stock.holder_breeder_site_id', 'columns'=>array('buyer_site.code as buyer_code, buyer_site.address as buyer_address')),
+            //array('table'=>'cast_type ct', 'condition'=>'ct.id = chicken_stock.cast_type_id', 'columns'=>array('ct.name as cast_type_name')),
+            array('table'=>'breeder_site buyer_site', 'condition'=>'buyer_site.id = delivery.buyer_id', 'columns'=>array('buyer_site.code as buyer_code, buyer_site.address as buyer_address')),
             array('table'=>'breeder buyer_breeder', 'condition'=>'buyer_site.breeder_id = buyer_breeder.id', 'columns'=>array('buyer_breeder.name as buyer_name')),
-            //array('table'=>'breeder_site seller_site', 'condition'=>'seller_site.id = chicken_stock.hatching_breeder_site_id', 'columns'=>array('seller_site.code as seller_code, seller_site.address as seller_address')),
+            array('table'=>'breeder_site seller_site', 'condition'=>'seller_site.id = delivery.seller_id', 'columns'=>array('seller_site.code as seller_code, seller_site.address as seller_address')),
             array('table'=>'breeder seller_breeder', 'condition'=>'seller_site.breeder_id = seller_breeder.id', 'columns'=>array('seller_breeder.name as seller_name')),
         );
     }    
