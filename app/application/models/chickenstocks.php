@@ -104,7 +104,7 @@ class Chickenstocks extends MY_Model
         
         return $this->update(array('is_deleted'=>1), $id);
     }    
-    
+    /*
     public function fetchForBreedersite($site) 
     {
         if (!$site) {
@@ -121,7 +121,7 @@ class Chickenstocks extends MY_Model
         
         return $result;
     }
-    
+    */
     public function fetchForBreedersiteAndHutching($site, $hutching) 
     {
         if (!$site || !$hutching) {
@@ -185,6 +185,70 @@ class Chickenstocks extends MY_Model
         $result = $this->execute($sql);
         
         return $result[0]->piece ? $result[0] : $this->find($stock);
+    }
+    
+    /**
+     * adott tenyeszethez adja vissza az allomanyokat
+     *
+     * @param string $site 
+     * @param array $params
+     * @return array
+     * @used_at chickenstock/index
+     * @author Dobi Attila
+     */
+    public function fetchForBreedersite($site, $params = array()) 
+    {
+        if (!$site) return false;
+
+        $sqlAllItems = "select
+                	count(cs.id) as all_items
+                from chicken_stock cs 
+                	join delivery d on cs.delivery_id = d.id
+                	join chicken_stok_proof_of_origin cspoo on cspoo.stock_id = cs.id
+                where d.buyer_id = $site and cs.is_deleted is null";
+        $allItems = $this->execute($sqlAllItems);
+        //dump($allItems); die;
+        if (!$allItems) return false;
+        
+        $sql = "select
+                	cs.certificate_code, cs.id as stock_id
+                	, c.`name` as cast_name
+                	, ct.`name` as cast_type_name
+                	, seller.`name` as seller_name
+                	, buyer.`name` as buyer_name
+                	, buyer_bs.`code` as buyer_code, buyer_bs.address as buyer_address
+                	, seller_bs.`code` as seller_code
+                	, d.launch_date as hutching_date
+                	, poo.id as proof_id, poo.mgszh_code, poo.female_stock_id, poo.male_stock_id
+                from chicken_stock cs 
+                	join delivery d on cs.delivery_id = d.id
+                	join cast c on d.cast_id = c.id
+                	join chicken_stok_proof_of_origin cspoo on cspoo.stock_id = cs.id
+                	join proof_of_origin poo on poo.id = cspoo.proof_id
+                	join cast_type ct on ct.id = poo.cast_type_id
+                	join breeder_site seller_bs on d.seller_id = seller_bs.id
+                	join breeder seller on seller_bs.breeder_id = seller.id
+                	join breeder_site buyer_bs on d.buyer_id = buyer_bs.id
+                	join breeder buyer on buyer.id = buyer_bs.breeder_id
+                where d.buyer_id = $site and cs.is_deleted is null";
+        
+        if ($params) {
+            
+            if (isset($params['limit'])) $sql .= " limit " . $params['limit'];
+            if (isset($params['offset'])) $sql .= " offset " . $params['offset'];
+        }
+                        
+        $result = $this->execute($sql);
+        
+        if(!$result) return false;
+        
+        
+        foreach ($result as $r) {
+            $r->female_stock = $this->find($r->female_stock_id);
+            $r->male_stock = $this->find($r->male_stock_id);
+        }
+        
+        return array('count'=>$allItems[0]->all_items, 'items'=>$result);
     }
     
     private function _prepareCondition($condition)

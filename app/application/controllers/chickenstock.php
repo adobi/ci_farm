@@ -47,10 +47,12 @@ class Chickenstock extends MY_Controller
         $params['limit'] = DELIVERY_ITEMS_PER_PAGE;
         $params['offset'] = $page; 
         
+        $data['items'] = false;
         if ($this->session->userdata('selected_breedersite')) {
             
             $this->session->unset_userdata('delivery_id');            
             
+            /*
             $data['pagination_links'] = $this->paginate(
                                                 'chickenstock/index/page/', 
                                                 4, 
@@ -58,7 +60,22 @@ class Chickenstock extends MY_Controller
                                                 DELIVERY_ITEMS_PER_PAGE);
             
     	    $data['items'] = $this->model->fetchFor('breedersite', $this->session->userdata('selected_breedersite'), $params);
-        
+            */
+            
+            $items = $this->model->fetchForBreedersite($this->session->userdata('selected_breedersite'), $params);
+            
+            if ($items && $items['count'] && $items['items']) {
+                
+                $data['pagination_links'] = $this->paginate(
+                                                    'chickenstock/index/page/', 
+                                                    4, 
+                                                    $items['count'], 
+                                                    DELIVERY_ITEMS_PER_PAGE);
+                
+        	    $data['items'] = $items['items'];
+                
+            }
+            
     	} elseif ( $this->session->userdata('delivery_id')) {
             
     	    $this->session->unset_userdata('selected_breedersite');

@@ -55,20 +55,20 @@
                     </p>
                 </div>
                 <div class="span-18">
-                    <p><label>Tenyésztő szervezet azonosítószáma:</label> <?//= $item->mgszh_code; ?></p>
+                    <p><label>Tenyésztő szervezet azonosítószáma:</label> <?= $item->mgszh_code; ?></p>
                     <p><label>Tenyésztő szervezet neve:</label> <?= $item->seller_name; ?></p>
-                    <p><label>Faj:</label> <?//= $item->cast_name; ?></p>
-                    <p><label>Fajta:</label> <?//= $item->cast_type_name; ?></p>
+                    <p><label>Faj:</label> <?= $item->cast_name; ?></p>
+                    <p><label>Fajta:</label> <?= $item->cast_type_name; ?></p>
                     <p><label>Szaporitási fokozat:</label> </p>
-                    <p><label>Létszám érvényesség kezdete: </label> <?= to_date($item->hatching_date); ?></p>
+                    <p><label>Létszám érvényesség kezdete: </label> <?= to_date($item->hutching_date); ?></p>
                     <p><label>Létszám érvényességének vége: </label></p>
                     <p>
                         <label>Létszám</label>
                         <label class = "label-in-label">
-                            Nőivar: <?//= $item->female_piece; ?>
+                            Nőivar: <?= $item->female_stock ? $item->female_stock->piece : ''; ?>
                         </label>
                         <label class = "label-in-label">
-                            Hímivar: <?//= $item->male_piece; ?>
+                            Hímivar: <?= $item->male_stock ? $item->male_stock->piece : ''; ?>
                         </label>
                     </p>
                     <p><label>Tenyészetkód:</label> <?= $item->buyer_code; ?></p>
@@ -77,39 +77,39 @@
                 </div>
                 
                 <div class="span-18">
-                    <p style="margin-top:15px;border-bottom:0px;"><label>Törzsállomány eredete (eredetei):</label></p>
+                    <p style="margin-top:15px;border-bottom:0px; font-size:1.2em"><label>Törzsállomány eredete (eredetei):</label></p>
                     
                     <p style="margin-top:10px;"><label>Keltetés(ek)</label></p>
                     
                 </div>
                 
-                <?php if (@$item->male_piece): ?>
+                <?php if ($item->male_stock): ?>
                     <div class="span-18">
                         <p><label>Keltető tenyészetkódja:</label> <?= $item->seller_code; ?></p>
                         <p><label>Keltető üzembentartó neve:</label> <?= $item->seller_name; ?></p>
-                        <p><label>Szülő törzsállomány azonosítója:</label> <?//= $item->parent_male_code; ?></p>
-                        <p><label>Kelés dátuma:</label> <?= to_date($item->hatching_date); ?></p>
+                        <p><label>Szülő törzsállomány azonosítója:</label> <?= $item->male_stock->stock_code; ?></p>
+                        <p><label>Kelés dátuma:</label> <?= to_date($item->hutching_date); ?></p>
                         <p>
                             <label>Törzsállományhoz tartozó létszám:</label>
                             <label class = "label-in-label">
                                 Nőivar: 
                             </label>
                             <label class = "label-in-label">
-                                Hímivar: <?//= $item->male_piece; ?>
+                                Hímivar: <?= $item->male_stock->piece; ?>
                             </label>                            
                         </p>
                     </div>
                 <?php endif ?>
-                <?php if (@$item->female_piece): ?>
+                <?php if ($item->female_stock): ?>
                     <div class="span-18">
                         <p><label>Keltető tenyészetkódja:</label> <?= $item->seller_code; ?></p>
                         <p><label>Keltető üzembentartó neve:</label> <?= $item->seller_name; ?></p>
-                        <p><label>Szülő törzsállomány azonosítója:</label> <?//= $item->parent_female_code; ?></p>
-                        <p><label>Kelés dátuma:</label> <?= to_date($item->hatching_date); ?></p>
+                        <p><label>Szülő törzsállomány azonosítója:</label> <?= $item->female_stock->stock_code; ?></p>
+                        <p><label>Kelés dátuma:</label> <?= to_date($item->hutching_date); ?></p>
                         <p>
                             <label>Törzsállományhoz tartozó létszám:</label>
                             <label class = "label-in-label">
-                                Nőivar:  <?//= $item->female_piece; ?>
+                                Nőivar:  <?= $item->female_stock->piece; ?>
                             </label>
                             <label class = "label-in-label">
                                 Hímivar:
