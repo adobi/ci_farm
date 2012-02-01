@@ -122,6 +122,15 @@ class Chickenstocks extends MY_Model
         return $result;
     }
     */
+    /**
+     * chickenstock for breedersite and hutching
+     *
+     * @param string $site 
+     * @param string $hutching 
+     * @return array
+     * @used_at egg/index
+     * @author Dobi Attila
+     */
     public function fetchForBreedersiteAndHutching($site, $hutching) 
     {
         if (!$site || !$hutching) {
@@ -149,10 +158,17 @@ class Chickenstocks extends MY_Model
                     	ct.name as cast_type_name
                     from 
                     	chicken_stock cs 
-                    	join cast_type ct on cs.cast_type_id = ct.id
+                    	join delivery d on d.id = cs.delivery_id
+                    	join chicken_stok_proof_of_origin cspoo on cspoo.stock_id = cs.id
+                    	join proof_of_origin poo on poo.id = cspoo.proof_id
+                    	join cast_type ct on poo.cast_type_id = ct.id
+                    	join chicken_stock male_stock on poo.male_stock_id = male_stock.id
+                    	join chicken_stock female_stock on poo.female_stock_id = female_stock.id
                     where 
-                    	cs.holder_breeder_site_id = $site
-                    	and (cs.male_piece != 0  or cs.female_piece != 0)
+                    	-- cs.holder_breeder_site_id = $site
+                    	d.buyer_id = $site
+                    	-- and (cs.male_piece != 0  or cs.female_piece != 0)
+                    	and (male_stock.piece != 0 or female_stock.piece != 0)
                     	and (cs.is_deleted IS NULL)
                     	and (
                     		cs.piece > (

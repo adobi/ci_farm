@@ -86,8 +86,20 @@ class Stockinfakk extends MY_Model
                 'columns'=>array('cs.stock_code')
             ),
             array(
+                'table'=>'delivery d',
+                'condition'=>'cs.delivery_id = d.id',
+            ),
+            array(
+                'table'=>'chicken_stok_proof_of_origin cspoo',
+                'condition'=>'cspoo.stock_id = cs.id',
+            ),  
+            array(
+                'table'=>'proof_of_origin poo',
+                'condition'=>'poo.id = cspoo.proof_id',
+            ),                                    
+            array(
                 'table'=>'cast_type ct', 
-                'condition'=>'ct.id = cs.cast_type_id', 
+                'condition'=>'poo.cast_type_id = ct.id', 
                 'columns'=>array('ct.name as cast_type_name')
             ),
         );
