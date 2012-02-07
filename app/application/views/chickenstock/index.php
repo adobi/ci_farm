@@ -30,7 +30,7 @@
         <legend>Keresés szállítólevél sorszámra</legend>
         <?= form_open(); ?>
             <p>
-                <input type="text" name = "serial_number" value = "<?= $this->session->userdata('delivery_serial_number') ?>" size = "45"/>
+                <input type="text" id="serial_number_ac" name = "serial_number" value = "<?= $this->session->userdata('delivery_serial_number') ?>" size = "45"/>
                 <button class="button-small">Keres</button>
             </p>
         <?= form_close(); ?>

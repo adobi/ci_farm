@@ -80,13 +80,19 @@ class Chickenstock extends MY_Controller
             
     	    $this->session->unset_userdata('selected_breedersite');
     	    
-            $data['pagination_links'] = $this->paginate(
-                                                'chickenstock/index/page/', 
-                                                4, 
-                                                $this->model->count(array('delivery_id'=>$this->session->userdata('selected_breedersite'))), 
-                                                DELIVERY_ITEMS_PER_PAGE);
-            
-    	    $data['items'] = $this->model->fetchFor('delivery', $this->session->userdata('delivery_id'), $params);
+    	    $items = $this->model->fetchForDeliveryAtStocks($this->session->userdata('delivery_id'), $params);
+
+            if ($items && $items['count'] && $items['items']) {
+                
+                $data['pagination_links'] = $this->paginate(
+                                                    'chickenstock/index/page/', 
+                                                    4, 
+                                                    $items['count'], 
+                                                    DELIVERY_ITEMS_PER_PAGE);
+                
+        	    $data['items'] = $items['items'];
+                
+            }
     	        	    
     	} else {
     	    $data['pagination_links'] = false;

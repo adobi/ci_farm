@@ -109,6 +109,7 @@ class Deliverys extends MY_Model
             
             return false;
         }
+        
         if (!$simple) {
             
             $params['join'] = $this->_buildJoin();
