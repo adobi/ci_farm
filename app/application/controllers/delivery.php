@@ -68,6 +68,24 @@ class Delivery extends MY_Controller
 
         $this->template->set_partial('delivery_item', '_partials/delivery', $data)->build('delivery/index', $data);
     }
+
+	public function autocomplete_search()
+	{
+	    $this->load->model('Deliverys', 'model');
+	    
+	    $result = $this->model->searchBySerial(urldecode($_GET['term']));
+	    
+	    $return = array();
+	    if ($result) {
+	        foreach ($result as $item) {
+	            $return[] = array('id'=>$item->id, 'label'=>$item->serial_number, 'value'=>$item->serial_number);
+	        }
+	    }
+	    
+	    echo json_encode($return);
+	    
+	    die;
+	}
     
     public function edit() 
     {

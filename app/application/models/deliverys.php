@@ -88,6 +88,20 @@ class Deliverys extends MY_Model
         
         return $result;
     }
+    public function searchBySerial($term)
+    {
+        if (!$term) {
+            
+            return false;
+        }
+        
+        $term = mb_strtolower($term);
+        
+        $result = $this->execute("select * from $this->_name where is_deleted is null and serial_number like '$term%'");
+        
+        return $result;        
+    }
+    
     
     public function findBySerialNumber($serial, $simple = false) 
     {

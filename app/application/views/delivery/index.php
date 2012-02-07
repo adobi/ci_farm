@@ -23,6 +23,13 @@
     <legend>Szállítólevelek szűrése</legend>
     <?= form_open(); ?>
         <p>
+            <label class = "inline-block" for="cast_id">Sorszám</label>
+            <?php $s = $this->session->userdata('delivery_filter_params') ?>
+            <input type="text" id = "serial_number_ac" name = "serial_number" value="<?php echo $s ? $s['serial_number'] : '' ?>" size = "30" style="margin-right:20px;">
+            <label class = "inline-block" for="buyer_id">Vevőkód</label>
+            <input type="text" id = "buyer_id" value = "" size = "30"/>
+        </p>
+        <p>
             <label class = "inline-block" for="cast_id">Állatfaj</label>
             <?= form_dropdown('cast_id', $casts, $_POST ? $_POST['cast_id'] : '', 'style = "margin-right:20px;"'); ?>
 
@@ -31,10 +38,6 @@
 
             <label class = "inline-block" for="intended_use">Felhasználási cél</label>
             <?= form_dropdown('intended_use', $intended, $_POST ? $_POST['intended_use'] : ''); ?>
-        </p>
-        <p>
-            <label class = "inline-block" for="buyer_id">Vevőkód</label>
-            <input type="text" id = "buyer_id" value = "" size = "40"/>
         </p>
         <p>
             <button class="button-small">Szűrés</button>

@@ -72,6 +72,9 @@ $(function() {
     App.Dialog();
     App.Confirm();
     
+    // delivery search by serial_number
+    App.SimpleAutcomplete($('#serial_number_ac'), 'delivery/autocomplete_search')
+    
     $('#loading-global').hide();
     
     $('button, input[type=submit], .button').button();
