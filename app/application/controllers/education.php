@@ -1,10 +1,11 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php 
+
+if (! defined('BASEPATH')) exit('No direct script access');
 
 require_once 'MY_Controller.php';
 
-class Egg extends MY_Controller 
+class Education extends MY_Controller 
 {
-    
     public function __construct()
     {
         parent::__construct();
@@ -16,7 +17,7 @@ class Egg extends MY_Controller
         $this->session->unset_userdata('selected_stockyard');
         $this->session->unset_userdata('actual_hutching_id');
         
-        redirect(base_url().'egg');
+        redirect(base_url().'education');
     }
     
     public function index()
@@ -64,7 +65,7 @@ class Egg extends MY_Controller
                     'created'=>date('Y-m-d H:i:s', time())
                 ));
                 
-                redirect(base_url() . 'egg');
+                redirect(base_url() . 'education');
     	    }
 	        
 	        /**
@@ -101,11 +102,11 @@ class Egg extends MY_Controller
 	    } else {
 	        
 	        if ($this->uri->segment(3) === 'new_hatching') {
-	            redirect(base_url() . 'egg/index');
+	            redirect(base_url() . 'education/index');
 	        }
 	    }
 	    
-        $this->template->build('egg/index', $data);
+        $this->template->build('education/index', $data);
     }
     
     public function add_stock_to_fakk() 
@@ -120,14 +121,13 @@ class Egg extends MY_Controller
         $chickenstock = $this->stocks->fetchPieceNotInFakks($stock);
         
         $data['piece'] = $chickenstock->piece;
-
-
+        
         $this->load->model('Deliverys', 'delivery');
         
         $delivery = $this->delivery->find($this->stocks->find($stock)->delivery_id);
         
         $data['delivery_date'] = $delivery ? $delivery[0]->sell_date : false;
-                
+        
         $this->form_validation->set_rules('piece', 'trime|required|numeric|less_than['.$data['piece'].']');
         
         if ($this->form_validation->run()) {
@@ -142,10 +142,10 @@ class Egg extends MY_Controller
                 'hutching_id'=>$this->session->userdata('actual_hutching_id')
             ));
             
-            redirect(base_url() . 'egg');
+            redirect(base_url() . 'education');
         } 
         
-        $this->template->build('egg/add_stock_to_fakk', $data);
+        $this->template->build('education/add_stock_to_fakk', $data);
     }
     
     public function edit_stock_in_fakk() 
@@ -162,14 +162,6 @@ class Egg extends MY_Controller
         
         $this->load->model('Chickenstocks', 'stocks');
         
-        //$chickenstock = $this->stocks->fetchPieceNotInFakks($item->stock_id);
-        //$chickenstock = $this->stocks->find($item->stock_id);
-        
-        //$data['piece'] = $chickenstock->piece;
-        
-        //$this->form_validation->set_rules('piece', 'trime|required|numeric|less_than['.$data['piece'].']');
-        
-        //if ($this->form_validation->run()) {
         if ($_POST) {
             
             $this->load->model('Stockinfakk', 'sif');
@@ -179,10 +171,10 @@ class Egg extends MY_Controller
                 'created'=>$_POST['created'],
             ), $id);
             
-            redirect(base_url() . 'egg');
+            redirect(base_url() . 'education');
         }        
         
-        $this->template->build('egg/edit_stock_in_fakk', $data);
+        $this->template->build('education/edit_stock_in_fakk', $data);
     }
     
     public function remove_stock_from_fakk() 
@@ -221,6 +213,3 @@ class Egg extends MY_Controller
 	}	
 
 }
-
-/* End of file welcome.php */
-/* Location: ./application/controllers/welcome.php */

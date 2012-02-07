@@ -22,7 +22,7 @@
                     <?php //if ($fakks && $stocks): ?>
                         
                         <p>
-                            <a href="<?= base_url() ?>egg/index/new_hatching" class = "button">Új betelepítés</a>
+                            <a href="<?= base_url() ?>education/index/new_hatching" class = "button">Új betelepítés</a>
                         </p>
                     <?php //else: ?>
                     <?php //endif ?>
@@ -79,8 +79,8 @@
             <?php endif ?>
         </fieldset>
         <div class="span-2 text-center" style="margin-top:5px;">
-            <a href="javascript:void(0)" class="right-arrow-big_ button" data-target="egg" id="add-stock-to-fakk" style="margin-top:50%">Beólaz</a>
-            <a href="<?php echo base_url() ?>egg/add_stock_to_fakk/" class="hidden" rel = "dialog" title = "Állomány fakkba telepítése" id="dialog-add-stock-to-fakk"></a>
+            <a href="javascript:void(0)" class="right-arrow-big_ button" data-target="education" id="add-stock-to-fakk" style="margin-top:50%">Beólaz</a>
+            <a href="<?php echo base_url() ?>education/add_stock_to_fakk/" class="hidden" rel = "dialog" title = "Állomány fakkba telepítése" id="dialog-add-stock-to-fakk"></a>
         </div>
     <?php echo form_close() ?>
 <?php endif ?>

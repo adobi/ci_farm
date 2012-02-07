@@ -14,4 +14,9 @@
                                 array('hatching'))): ?>
                         <?php require_once '_sidebar_hatching.php'; ?>
                     <?php endif ?>
+                    <?php if (in_array(
+                                $this->uri->segment(1), 
+                                array('education'))): ?>
+                        <?php require_once '_sidebar_education.php'; ?>
+                    <?php endif ?>                    
                 </ul>

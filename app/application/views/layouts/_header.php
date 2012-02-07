@@ -58,7 +58,7 @@
             			        <a href="<?= base_url(); ?>" <?= $this->uri->segment(1) === "hatching" ? 'class = "selected-header-menu-item"' : ''; ?>>keltetés</a>
             			    </li>
             			    <li>
-            			        <a href="#">nevelés</a>
+            			        <a href="<?php echo base_url() ?>education/index2" <?php echo $this->uri->segment(1) === 'education' ? 'class="selected-header-menu-item"' : '' ?>>nevelés</a>
         			        </li>
         			        <li>
         			            <a href="#">értékesítés</a>
