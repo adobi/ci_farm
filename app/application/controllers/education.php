@@ -16,8 +16,20 @@ class Education extends MY_Controller
         $this->session->unset_userdata('selected_breedersite');
         $this->session->unset_userdata('selected_stockyard');
         $this->session->unset_userdata('actual_hutching_id');
+        $this->session->unset_userdata('selected_hatching_date');
         
         redirect(base_url().'education');
+    }
+    
+    public function set_hatching_date()
+    {
+        $this->form_validation->set_rules('hatching_date', 'Kelés dátuma', 'trim|required');
+        
+        if ($this->form_validation->run()) {
+            $this->session->set_userdata('selected_hatching_date', $_POST['hatching_date']);
+        }
+        
+        redirect($_SERVER['HTTP_REFERER']);
     }
     
     public function index()
@@ -88,7 +100,11 @@ class Education extends MY_Controller
 	        
 	        $this->load->model('Chickenstocks', 'stocks');
 	        
-	        $data['stocks'] = $this->stocks->fetchForBreedersiteAndHutching($this->session->userdata('selected_breedersite'), $this->session->userdata('actual_hutching_id'));
+	        $data['stocks'] = $this->stocks->fetchForBreedersiteAndHutching(
+	            $this->session->userdata('selected_breedersite'), 
+	            $this->session->userdata('actual_hutching_id'),
+	            $this->session->userdata('selected_hatching_date')
+	        );
     	    //dump($data); die;
 	        /**
 	         * az aktualis betelepitesben szereplo allomanyok fakkokban

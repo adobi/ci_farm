@@ -433,13 +433,13 @@ fieldset {
     float:right;
 }
 
-.button-small, .button {
+.button-small, .button, .ui-button {
     margin-top:5px;
     margin-right:5px;
 
 }
 
-.button-small span, .button span {
+.button-small span, .button span, .ui-button span {
     font-size:12px!important;
     padding:3px 10px 4px!important
 }
@@ -738,3 +738,7 @@ input[type=checkbox], input[type=radio] {
     position:relative;
     top:3px;
 }
+/*
+.ui-widget-header, .ui-datepicker {
+    padding:0!important;
+}*/

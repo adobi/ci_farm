@@ -4,41 +4,48 @@
         width:150px;
     }
 </style>
-<fieldset class = "round">
-    <p>
-        <label for="">Válasszon tenyészetet</label>
 
-        <?= form_dropdown('breeder_site_id', $breeder_sites_select, $this->session->userdata('selected_breedersite')); ?>
-    </p>
+<fieldset class="round">
+    <?php echo form_open(base_url().'education/set_hatching_date') ?>
+        <p>
+            <label for="">Kelés dátuma</label>
+            <input type="text" class="datepicker" name="hatching_date" value="<?php echo $this->session->userdata('selected_hatching_date') ?>">
+        </p>    
+        <p><button>Mehet</button></p>
+    <?php echo form_close() ?>
+</fieldset>
+
+<?php if ($this->session->userdata('selected_hatching_date')): ?>
+        
+    <fieldset class = "round">
+        <p>
+            <label for="">Válasszon tenyészetet</label>
     
-    <?php if ($this->session->userdata('selected_breedersite')): ?>
-        <?php if (count($yards_select) !== 1): ?>
-            <p>
-                <label for="">Válasszon istállót</label>
-                <?= form_dropdown('stock_yard_id', $yards_select, $this->session->userdata('selected_stockyard')); ?>
-            </p>
-            <?php if ($this->session->userdata('selected_stockyard')): ?>
-                <?php if ($can_start_new_hatching): ?>
-                    <?php //if ($fakks && $stocks): ?>
-                        
+            <?= form_dropdown('breeder_site_id', $breeder_sites_select, $this->session->userdata('selected_breedersite')); ?>
+        </p>
+        
+        <?php if ($this->session->userdata('selected_breedersite')): ?>
+            <?php if (count($yards_select) !== 1): ?>
+                <p>
+                    <label for="">Válasszon istállót</label>
+                    <?= form_dropdown('stock_yard_id', $yards_select, $this->session->userdata('selected_stockyard')); ?>
+                </p>
+                <?php if ($this->session->userdata('selected_stockyard')): ?>
+                    <?php if ($can_start_new_hatching): ?>
                         <p>
                             <a href="<?= base_url() ?>education/index/new_hatching" class = "button">Új betelepítés</a>
                         </p>
-                    <?php //else: ?>
-                    <?php //endif ?>
-            
+                    <?php endif ?>
                 <?php endif ?>
+            <?php else: ?>
+                <div class="message-info">
+                    A kiválasztott tenyészethez nem szerepel istálló. 
+                    <a class = "button button-small" rel = "dialog" title="Új istálló felvitele" href="<?php echo base_url() ?>stockyard/edit/breeder_site/<?php echo $this->session->userdata('selected_breedersite') ?>">új istálló felvitele</a>
+                </div>
             <?php endif ?>
-    
-        <?php else: ?>
-            <div class="message-info">
-                A kiválasztott tenyészethez nem szerepel istálló. 
-                <a class = "button button-small" rel = "dialog" title="Új istálló felvitele" href="<?php echo base_url() ?>stockyard/edit/breeder_site/<?php echo $this->session->userdata('selected_breedersite') ?>">új istálló felvitele</a>
-            </div>
         <?php endif ?>
-    <?php endif ?>
-    
-</fieldset>
+    </fieldset>
+<?php endif ?>
 <?php if (!$can_start_new_hatching && $this->session->userdata('selected_breedersite') && $this->session->userdata('selected_stockyard')): ?>
     <?php  echo form_open('', array('id'=>'fakks-and-stocks')) ?>
         <fieldset class="round span-8" id="stocks">
@@ -79,7 +86,7 @@
             <?php endif ?>
         </fieldset>
         <div class="span-2 text-center" style="margin-top:5px;">
-            <a href="javascript:void(0)" class="right-arrow-big_ button" data-target="education" id="add-stock-to-fakk" style="margin-top:50%">Beólaz</a>
+            <a href="javascript:void(0)" class="right-arrow-big_ button" data-target="education" id="add-stock-to-fakk" style_="margin-top:50%">Beólaz</a>
             <a href="<?php echo base_url() ?>education/add_stock_to_fakk/" class="hidden" rel = "dialog" title = "Állomány fakkba telepítése" id="dialog-add-stock-to-fakk"></a>
         </div>
     <?php echo form_close() ?>

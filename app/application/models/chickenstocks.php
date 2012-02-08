@@ -194,11 +194,12 @@ class Chickenstocks extends MY_Model
      *
      * @param string $site 
      * @param string $hutching 
+     * @param string $data date of hatching
      * @return array
      * @used_at egg/index
      * @author Dobi Attila
      */
-    public function fetchForBreedersiteAndHutching($site, $hutching) 
+    public function fetchForBreedersiteAndHutching($site, $hutching, $date) 
     {
         if (!$site || !$hutching) {
             
@@ -226,16 +227,16 @@ class Chickenstocks extends MY_Model
                     from 
                     	chicken_stock cs 
                     	join delivery d on d.id = cs.delivery_id
-                    	join chicken_stok_proof_of_origin cspoo on cspoo.stock_id = cs.id
-                    	join proof_of_origin poo on poo.id = cspoo.proof_id
-                    	join cast_type ct on poo.cast_type_id = ct.id
-                    	join chicken_stock male_stock on poo.male_stock_id = male_stock.id
-                    	join chicken_stock female_stock on poo.female_stock_id = female_stock.id
+                    	left join chicken_stok_proof_of_origin cspoo on cspoo.stock_id = cs.id
+                    	left join proof_of_origin poo on poo.id = cspoo.proof_id
+                    	left join cast_type ct on poo.cast_type_id = ct.id
+                    	left join chicken_stock male_stock on poo.male_stock_id = male_stock.id
+                    	left join chicken_stock female_stock on poo.female_stock_id = female_stock.id
                     where 
                     	-- cs.holder_breeder_site_id = $site
                     	d.buyer_id = $site
-                    	-- and (cs.male_piece != 0  or cs.female_piece != 0)
-                    	and (male_stock.piece != 0 or female_stock.piece != 0)
+                    	and date(cs.hatching_date) = '$date'
+                    	-- and (male_stock.piece != 0 or female_stock.piece != 0)
                     	and (cs.is_deleted IS NULL)
                     	and (
                     		cs.piece > (
