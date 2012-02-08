@@ -75,7 +75,7 @@ class Chickenstocks extends MY_Model
                 	, buyer.`name` as buyer_name
                 	, buyer_bs.`code` as buyer_code, buyer_bs.address as buyer_address
                 	, seller_bs.`code` as seller_code
-                	, d.launch_date as hutching_date
+                	, d.launch_date as hutching_date, d.id as delivery_id
                 	, poo.id as proof_id, poo.mgszh_code, poo.female_stock_id, poo.male_stock_id
                 from chicken_stock cs 
                 	join delivery d on cs.delivery_id = d.id

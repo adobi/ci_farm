@@ -43,11 +43,21 @@
         <?php endif ?>                
         <?php foreach ($items as $item): ?>
             <fieldset class="round">
+                <div class="span-18" style="text-align:right">
+                    <?php if (!isset($item->proof_id)): ?>
+                        <a class=" button button-small" href="<?php echo base_url() ?>proofoforigin/edit/delivery/<?php echo $item->delivery_id ?>" rel = "dialog" title="Napos származási igazolás">származási igazolás</a>
+                    <?php else: ?>
+                        <a class=" button button-small" href="<?php echo base_url() ?>proofoforigin/edit/<?php echo $item->proof_id ?>/delivery/<?php echo $item->delivery_id ?>" rel = "dialog" title="Napos származási igazolás">származási igazolás</a>
+                    <?php endif ?>                    
+                    <?php if (!$item->certificate_code): ?>
+                        <a class = "button button-small" rel = "dialog" href="<?= base_url(); ?>chickenstock/add_certificate/<?= $item->stock_id; ?>" title = "Törzsállomány azonosító száma felvitele">azonosító szám felvitele</a>
+                    <?php endif ?>
+                    <a class = "button button-small" rel = "dialog" href="<?= base_url(); ?>chickenstock/edit/<?= $item->stock_id; ?>/delivery/<?php echo $item->delivery_id ?>" title = "Állomány szerkesztés">állomány szerkesztése</a>
+                </div>
                 <div class="span-18 highlighted">
                     <p>
                         <label>Törzsállomány azonosító szám:</label>
                         <?php if (!$item->certificate_code): ?>
-                            <!-- <a class = "button button-small" rel = "dialog" href="<?= base_url(); ?>chickenstock/add_certificate/<?= $item->id; ?>" title = "Törzsállomány azonosító száma felvitele">azonosító szám felvitele</a> -->
                         <?php else: ?>
                             <span style="font-size:1.6em; position:relative; top:2px;"><?= $item->certificate_code; ?></span>
                             <!-- <a class = "fr button button-small" rel = "dialog" href="<?= base_url(); ?>chickenstock/add_certificate/<?= $item->id; ?>" title = "Törzsállomány azonosító száma módosítása">szerkeszt</a> -->

@@ -99,7 +99,7 @@ class Chickenstock extends MY_Controller
     	    $data['items'] = false;
     	}
         
-        
+        //dump($data['items']); die;
 
         $this->template->build('chickenstock/index', $data);
     }
@@ -130,16 +130,11 @@ class Chickenstock extends MY_Controller
         $data['current_item'] = $item;
         $data['current_delivery'] = $current_delivery;
         
-        //$this->form_validation->set_rules('stock_code', 'Törzsállomány', 'trim|required');
-        //$this->form_validation->set_rules('hatching_breeder_site_id', 'Keltető tenyészet kódja', 'trim|required');
         $this->form_validation->set_rules('hatching_date', 'Kelés dátuma', 'trim|required');
-        //$this->form_validation->set_rules('piece', 'Darabszám', 'trim|required');
         
         if ($this->form_validation->run()) {
             
             $this->load->model('Deliverys', 'delivery');
-            
-            //$_POST['piece'] = $_POST['male_piece'] + $_POST['female_piece'];
             
             if (is_numeric($id)) {
                 
@@ -147,15 +142,7 @@ class Chickenstock extends MY_Controller
             } else if ($delivery) {
                 
                 $_POST['delivery_id'] = $delivery;
-                /*
-                $d = $this->delivery->find($delivery);
-                
-                if ($d) {
-                    $d = $d[0];
-                    $_POST['hatching_breeder_site_id'] = $d->seller_id;
-                    $_POST['holder_breeder_site_id'] = $d->buyer_id;
-                }
-                */
+
                 $_POST['state'] = 1;
                 
                 $this->model->insert($_POST);
@@ -165,8 +152,6 @@ class Chickenstock extends MY_Controller
             if ($item && $item->piece !== $_POST['piece']) {
                 
                 $diff = 0;
-                //dump($item->piece);
-                //dump($_POST['piece']);
                 if ($item->piece > $_POST['piece']) {
                     $diff = - ($item->piece - $_POST['piece']);
                 }
@@ -174,14 +159,12 @@ class Chickenstock extends MY_Controller
                 if ($item->piece < $_POST['piece']) {
                     $diff = ($_POST['piece'] - $item->piece);
                 }
-                //dump($diff); die;
                 $this->delivery->incTotalPiece($item->delivery_id, $diff);
             } else {
                 
                 $this->delivery->incTotalPiece($delivery, $_POST['piece']);
             }
-            
-            
+
             redirect($_SERVER['HTTP_REFERER']);
         } else {
             if ($_POST) {
