@@ -296,6 +296,7 @@ class Chickenstocks extends MY_Model
         
         $sql = "select
                 	cs.certificate_code, cs.id as stock_id
+                    , cs.delivery_id as delivery_id
                 	, c.`name` as cast_name
                 	, ct.`name` as cast_type_name
                 	, seller.`name` as seller_name
