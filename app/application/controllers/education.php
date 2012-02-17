@@ -96,12 +96,12 @@ class Education extends MY_Controller
     	     */
 	        $this->load->model('Fakks', 'fakk');
 	        
-	        $data['fakks'] = $this->fakk->fetchForStockyard($this->session->userdata('selected_stockyard'));
+	        $data['fakks'] = $this->fakk->fetchForHatching($this->session->userdata('actual_hutching_id'));
 	        
 	        $this->load->model('Chickenstocks', 'stocks');
 	        
 	        $data['stocks'] = $this->stocks->fetchForBreedersiteAndHutching(
-	            $this->session->userdata('selected_breedersite'), 
+	            //$this->session->userdata('selected_breedersite'), 
 	            $this->session->userdata('actual_hutching_id'),
 	            $this->session->userdata('selected_hatching_date')
 	        );
@@ -155,7 +155,6 @@ class Education extends MY_Controller
                 'stock_id'=>$stock,
                 'piece'=>$_POST['piece'],
                 'created'=>$_POST['created'],
-                'hutching_id'=>$this->session->userdata('actual_hutching_id')
             ));
             
             redirect(base_url() . 'education');

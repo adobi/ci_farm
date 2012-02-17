@@ -28,9 +28,9 @@ class Fakks extends MY_Model
      * @return void
      * @author Dobi Attila
      */
-    public function fetchForStockyard($yard) 
+    public function fetchForHatching($hatching) 
     {
-        if (!$yard) {
+        if (!$hatching) {
             
             return false;
         }
@@ -47,7 +47,7 @@ class Fakks extends MY_Model
                 	f.*, (select count(fakk_id) from stock_in_fakk sif where sif.fakk_id = f.id) as in_stock
                 from 
                 	fakk f
-                where f.stock_yard_id = $yard and f.closed is null";
+                where f.hutching_id = $hatching and f.closed is null";
         
         $result = $this->execute($sql);
         
@@ -73,9 +73,9 @@ class Fakks extends MY_Model
      * @return void
      * @author Dobi Attila
      */
-    public function isPermittedToCreate($stockYardId) 
+    public function isPermittedToCreate($hatching) 
     {
-        if (!$stockYardId) {
+        if (!$hatching) {
             
             return false;
         }
@@ -93,7 +93,7 @@ class Fakks extends MY_Model
                 from 
                 	fakk f
                 	left join stock_in_fakk sif on f.id = sif.fakk_id
-                where f.stock_yard_id = $stockYardId and f.closed is null";
+                where f.hutching_id = $hatching and f.closed is null";
         
         $result = $this->execute($sql);
         

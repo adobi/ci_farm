@@ -15,9 +15,9 @@ class Stockinfakk extends MY_Model
         }
         
         return $this->fetchRows(array(
-            'columns'=>array('stock_in_fakk.id, stock_in_fakk.fakk_id', 'stock_in_fakk.stock_id', 'stock_in_fakk.hutching_id', 'stock_in_fakk.created', 'sum(stock_in_fakk.piece) as piece'),
+            'columns'=>array('stock_in_fakk.id, stock_in_fakk.fakk_id', 'stock_in_fakk.stock_id', 'f.hutching_id', 'stock_in_fakk.created', 'sum(stock_in_fakk.piece) as piece'),
             'join'=>$this->_buildJoin(),
-            'where'=>array('hutching_id'=>$hutchingId, 'stock_in_fakk.closed is null'=>null),
+            'where'=>array('f.hutching_id'=>$hutchingId, 'stock_in_fakk.closed is null'=>null),
             'group_by'=>'fakk_id'
         ), false, false, false);
     }
@@ -44,7 +44,7 @@ class Stockinfakk extends MY_Model
                     sif.*, cs.piece as max_piece, cs.stock_code
                 from $this->_name as sif
                 join chicken_stock cs on cs.id = sif.stock_id
-                where hutching_id = $item->hutching_id and fakk_id = $item->fakk_id
+                where fakk_id = $item->fakk_id
         ";
         
         $allItems = $this->execute($sql);
@@ -61,6 +61,7 @@ class Stockinfakk extends MY_Model
         return array('total_piece'=>$sum, 'items'=>$allItems);
     } 
     
+    
     public function delete($id) 
     {
         if (!$id) return false;
@@ -69,7 +70,7 @@ class Stockinfakk extends MY_Model
         
         if (!$item) return false;
         
-        return parent::delete(array('hutching_id'=>$item->hutching_id, 'fakk_id'=>$item->fakk_id));
+        return parent::delete(array('fakk_id'=>$item->fakk_id));
     }   
     
     private function _buildJoin()

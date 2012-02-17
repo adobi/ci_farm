@@ -51,14 +51,14 @@
             			        <a href="<?= base_url(); ?>welcome"><img src="<?= base_url(); ?>img/home.png" alt="" width=24 height=24></a>
             			    </li>
             			    <li>
-            			        <a href="<?= base_url(); ?>egg/index2" <?= $this->uri->segment(1) === "egg" ? 'class = "selected-header-menu-item"' : ''; ?>>tojástermelés</a>
+            			        <a href="#" _href="<?= base_url(); ?>egg/index2" <?= $this->uri->segment(1) === "egg" ? 'class = "selected-header-menu-item"' : ''; ?>>tojástermelés</a>
             			    </li>
             			    <li>
             			    <!-- hatching -->
             			        <a href="<?= base_url(); ?>" <?= $this->uri->segment(1) === "hatching" ? 'class = "selected-header-menu-item"' : ''; ?>>keltetés</a>
             			    </li>
             			    <li>
-            			        <a href="<?php echo base_url() ?>education/index2" <?php echo $this->uri->segment(1) === 'education' ? 'class="selected-header-menu-item"' : '' ?>>nevelés</a>
+            			        <a href="<?php echo base_url() ?>education/index2" <?php echo in_array($this->uri->segment(1), array('education', 'fakk')) ? 'class="selected-header-menu-item"' : '' ?>>nevelés</a>
         			        </li>
         			        <li>
         			            <a href="#">értékesítés</a>
@@ -66,7 +66,7 @@
         			        <li>
         			            <a href="<?= base_url(); ?>backgrounddata" <?= in_array(
                                 $this->uri->segment(1), 
-                                array('stockyard', 'backgrounddata', 'eggtype', 'chickentype', 'breeder', 'breedersite', 'fakk', 'fakkgroup', 'stock', 'machine')) ? 'class = "selected-header-menu-item"' : ''; ?>>háttér adatok</a>
+                                array('stockyard', 'backgrounddata', 'eggtype', 'chickentype', 'breeder', 'breedersite', 'fakkgroup', 'stock', 'machine')) ? 'class = "selected-header-menu-item"' : ''; ?>>háttér adatok</a>
         			        </li>
         			        <li>
         			            <a href="<?= base_url(); ?>auth/logout" style="color:#554444;">kilépes <span style="font-family:'lucida grande'">&raquo;</span></a>

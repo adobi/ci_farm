@@ -62,42 +62,32 @@ class Fakk extends MY_Controller
         redirect($_SERVER['HTTP_REFERER']);
     }
 
-    public function for_breedersite() 
+    public function for_hatching() 
     {
-        $siteId = $this->uri->segment(3);
+        $hatchingId = $this->uri->segment(3);
         
         $data = array();
         
         $this->load->model('Stockyards', 'yards');
         $this->load->model('Breedersites', 'sites');
+        $this->load->model('Stockyards', 'yards');
         $this->load->model('Fakks', 'fakk');
         
-        $data['site'] = $this->sites->find($siteId);
-        
-        $sites = $this->sites->fetchForBreeder($data['site']->breeder_id);
-	    
-        if ($this->session->userdata('selected_breedersite') !== $siteId) {
-            redirect(base_url() . 'fakk/for_breedersite/'.$this->session->userdata('selected_breedersite'));
-        }
-        
-	    $data['breeder_sites_select'] = $this->sites->toAssocArray('id', 'code+name', $sites);        
-        
-        $this->form_validation->set_rules('stock_yard_id', 'Istálló', 'trim|requierd');
+        $data['site'] = $this->sites->find($this->session->userdata('selected_breedersite'));
+        $data['yard'] = $this->yards->find($this->session->userdata('selected_stockyard'));
+
         $this->form_validation->set_rules('number_of', 'Fakkok darabszáma', 'trim|required|numeric');
         
-        if ($this->session->userdata('selected_stockyard')) {
-            
-            $data['is_permitted_to_create_fakks'] = $this->fakk->isPermittedToCreate($this->session->userdata('selected_stockyard'));
-        }
+        $data['is_permitted_to_create_fakks'] = $this->fakk->isPermittedToCreate($this->session->userdata('actual_hutching_id'));
         
         if ($this->form_validation->run()) {
             
-            $data['fakks'] = $this->fakk->fetchForStockyard($_POST['stock_yard_id']);
+            //$data['fakks'] = $this->fakk->fetchForHatching($this->session->userdata('actual_hutching_id'));
             
             if (isset($_POST['names']) && $_POST['names']) {
                 
                 $d = array(
-                    'stock_yard_id'=>$_POST['stock_yard_id'],
+                    'hutching_id'=>$this->session->userdata('actual_hutching_id'),
                     'created'=>date('Y-m-d H-i-s', time())
                 );
                 
@@ -107,15 +97,13 @@ class Fakk extends MY_Controller
                     $this->fakk->insert($d);
                 }
                 
-                redirect($_SERVER['HTTP_REFERER']);
+                redirect('education/index');
             }
         } 
         
-        $data['fakks'] = $this->fakk->fetchForStockyard($this->session->userdata('selected_stockyard'));
+        $data['fakks'] = $this->fakk->fetchForHatching($this->session->userdata('actual_hutching_id'));
         
-        $data['stockyards'] = $this->yards->toAssocArray('id', 'name', $this->yards->fetchForBreedersite($siteId));
-        
-        $this->template->build('fakk/for_breedersite', $data);
+        $this->template->build('fakk/for_hatching', $data);
     }
     
     /**

@@ -72,16 +72,21 @@
             <?php if ($fakks): ?>
                 <?php foreach ($fakks as $item): ?>
                     <div class="span-7">
-                        <label class="input-wrapper">
+                        <label class="input-wrapper" style="margin-right:10px;">
                             <input type="radio" name = "fakk_id" value = "<?php echo $item->id ?>"/>
                             <?php echo $item->name ?>
                         </label>
+                        <a href="<?php echo base_url() ?>fakk/edit/<?php echo $item->id ?>" class="button" rel = "dialog" title="<?php echo $item->name ?> szerkesztése">Szerkeszt</a>
+                        <a href="<?php echo base_url() ?>fakk/edit/<?php echo $item->id ?>" class="button delete">Töröl</a>
                     </div>
                 <?php endforeach ?>
+                <p style="text-align:right">
+                    <a href="<?php echo base_url() ?>fakk/for_hatching/<?php echo $this->session->userdata('actual_hutching_id') ?>" class="button">Fakk kialakítása</a>
+                </p>
             <?php else: ?>
                 <div class="error">
                     Előbb vigyen fel fakkot 
-                    <a href="<?php echo base_url() ?>fakk/for_breedersite/<?php echo $this->session->userdata('selected_breedersite') ?>" class="button">Fakk kialakítása</a>
+                    <a href="<?php echo base_url() ?>fakk/for_hatching/<?php echo $this->session->userdata('actual_hutching_id') ?>" class="button">Fakk kialakítása</a>
                 </div>
             <?php endif ?>
         </fieldset>
@@ -115,13 +120,18 @@
                         <td><?php echo $item->cast_type_name ?></td>
                         <td><?php echo $item->piece ?></td>
                         <td>
-                            <a href="<?php echo base_url() ?>egg/edit_stock_in_fakk/<?php echo $item->id ?>" rel = "dialog" title = "Fakkban lévő állomány szerkesztése" class = "button button-small">szerkeszt</a>
-                            <a href="<?= base_url() ?>egg/remove_stock_from_fakk/<?php echo $item->id ?>" class = "button button-small delete">töröl</a>
+                            <a href="<?php echo base_url() ?>education/edit_stock_in_fakk/<?php echo $item->id ?>" rel = "dialog" title = "Fakkban lévő állomány szerkesztése" class = "button button-small">szerkeszt</a>
+                            <a href="<?= base_url() ?>education/remove_stock_from_fakk/<?php echo $item->id ?>" class = "button button-small delete">töröl</a>
                         </td>
                     </tr>
                 <?php endforeach ?>
             </tbody>
         </table>
+    </fieldset>
+    
+    
+    <fieldset class="round" style="margin-top:20px!important;padding-top:5px!important;padding-bottom:10px!important; text-align:center">
+        <a class="button" href="#"><span style="font-size:16px!important;">Betelepítés vége | Nevelés kezdete</span></a>
     </fieldset>
 <?php endif ?>
 

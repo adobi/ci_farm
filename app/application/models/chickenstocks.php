@@ -196,12 +196,12 @@ class Chickenstocks extends MY_Model
      * @param string $hutching 
      * @param string $data date of hatching
      * @return array
-     * @used_at egg/index
+     * @used_at egg/index, education/index
      * @author Dobi Attila
      */
-    public function fetchForBreedersiteAndHutching($site, $hutching, $date) 
+    public function fetchForBreedersiteAndHutching($hutching, $date) 
     {
-        if (!$site || !$hutching) {
+        if (!$hutching) {
             
             return false;
         }
@@ -216,13 +216,13 @@ class Chickenstocks extends MY_Model
         
         return $result;        
         */
-        
+        $site = 0;
         $sql = "select * from (
                     select 
                     	cs.id, 
                     	cs.stock_code,
                     	cs.piece, 
-                    	((select sum(piece) from stock_in_fakk sif where sif.hutching_id = $hutching group by sif.stock_id having sif.stock_id = cs.id)) piece_in_fakk,
+                    	((select sum(piece) from stock_in_fakk sif join fakk f on sif.fakk_id = f.id where f.hutching_id = $hutching group by sif.stock_id having sif.stock_id = cs.id)) piece_in_fakk,
                     	ct.name as cast_type_name
                     from 
                     	chicken_stock cs 
@@ -234,13 +234,13 @@ class Chickenstocks extends MY_Model
                     	left join chicken_stock female_stock on poo.female_stock_id = female_stock.id
                     where 
                     	-- cs.holder_breeder_site_id = $site
-                    	d.buyer_id = $site
-                    	and date(cs.hatching_date) = '$date'
+                    	-- d.buyer_id = &$site and
+                    	date(cs.hatching_date) = '$date'
                     	-- and (male_stock.piece != 0 or female_stock.piece != 0)
                     	and (cs.is_deleted IS NULL)
                     	and (
                     		cs.piece > (
-                    			select sum(piece) from stock_in_fakk sif where sif.hutching_id = $hutching group by sif.stock_id having sif.stock_id = cs.id
+                    			select sum(piece) from stock_in_fakk sif join fakk f on sif.fakk_id = f.id where f.hutching_id = $hutching group by sif.stock_id having sif.stock_id = cs.id
                     		) or (
                     		cs.id not in (select id from stock_in_fakk)
                     		)
@@ -251,7 +251,14 @@ class Chickenstocks extends MY_Model
         //dump($sql); die;
         return $this->execute($sql);
     }
-    
+    /**
+     * visszaadja adott allomany nem fakkba levo darabszamat
+     *
+     * @param string $stock 
+     * @return void
+     * @used_at education/index
+     * @author Dobi Attila
+     */
     public function fetchPieceNotInFakks($stock) 
     {
         if (!$stock) {
@@ -261,7 +268,7 @@ class Chickenstocks extends MY_Model
         
         $sql = "select 
                 	(piece - (
-                				select sum(piece) from stock_in_fakk sif where sif.hutching_id = 2 group by sif.stock_id having sif.stock_id = $stock
+                				select sum(piece) from stock_in_fakk sif where sif.stock_id = $stock -- group by sif.stock_id having sif.stock_id = $stock
                 			)
                 	) piece
                 from chicken_stock where id = $stock";
