@@ -29,4 +29,19 @@ class Hutchings extends MY_Model
         
         return $result;        
     }
+    
+    public function fetchActualClosed($breedersite, $stockyard)
+    {
+        if (!$breedersite || !$stockyard) return false;
+        
+        $result = $this->fetchRows(
+            array('where'=>array(
+                'breeder_site_id'=>$breedersite,
+                'stock_yard_id'=>$stockyard,
+                'is_actual'=>1,
+            ))
+        );
+        
+        return $result ? $result[0] : false;
+    }
 }

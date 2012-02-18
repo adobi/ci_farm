@@ -64,6 +64,7 @@
             <?php else: ?>
                 <div class="error">
                     Előbb vigyen fel szállítólevelet és állományt.
+                    <a class="button" href="<?php echo base_url() ?>delivery/edit">Új szállítólevél felvitele</a>
                 </div>                
             <?php endif ?>
         </fieldset>
@@ -131,7 +132,7 @@
     
     
     <fieldset class="round" style="margin-top:20px!important;padding-top:5px!important;padding-bottom:10px!important; text-align:center">
-        <a class="button" href="#"><span style="font-size:16px!important;">Betelepítés vége | Nevelés kezdete</span></a>
+        <a class="button" href="<?php echo base_url() ?>education/close" rel="dialog" title="Betelepítés vége | Nevelés kezdete"><span style="font-size:16px!important;">Betelepítés vége | Nevelés kezdete</span></a>
     </fieldset>
 <?php endif ?>
 

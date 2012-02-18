@@ -200,6 +200,89 @@ class Education extends MY_Controller
         
         redirect($_SERVER['HTTP_REFERER']);
     }
+    
+    /**
+     * lezar egy betelepitest elindit egy nevelest
+     *
+     * @return void
+     * @author Dobi Attila
+     */
+    public function close()
+    {
+        $data = array();
+        
+        $hatching = $this->session->userdata('actual_hutching_id');
+        
+        $this->form_validation->set_rules('closed', 'Lezárás dátuma', 'trim|required');
+        
+        if ($this->form_validation->run()) {
+            $this->load->model('Hutchings', 'hatching');
+            
+            $this->hatching->update(array('is_actual'=>0), array(
+                'stock_yard_id'=>$this->session->userdata('selected_stockyard'),
+                'breeder_site_id'=>$this->session->userdata('selected_breedersite'),
+                'is_actual'=>1,
+            ));
+            
+            $this->hatching->update(array('closed'=>$_POST['closed'], 'is_actual'=>1), $hatching);
+            
+            $this->load->model('Educations', 'education');
+            
+            $educationId = $this->education->insert(array(
+                'hatching_id'=>$hatching,
+                'created'=>$_POST['created']
+            ));
+            
+            redirect('education/log/'.$educationId);
+        }
+        
+        $this->template->build('education/close', $data);
+    }
+    
+    public function log2() 
+    {
+        $this->session->unset_userdata('selected_breedersite');
+        $this->session->unset_userdata('selected_stockyard');
+        
+        redirect('education/log');
+    }
+    
+    /**
+     * nevelesi naplo
+     *
+     * @return void
+     * @author Dobi Attila
+     */
+    public function log()
+    {
+        $data = array();
+        
+        $educationId = $this->uri->segment(3);
+                
+        $this->load->model("Educations", 'model');
+        
+        $this->load->model('Breedersites', 'site');
+        $this->load->model('Breeders', 'breeder');
+        $sites = $this->site->fetchForBreeder($this->breeder->getId());
+	    
+	    $data['breeder_sites_select'] = $this->site->toAssocArray('id', 'code+name', $sites);
+	    
+	    if ($this->session->userdata('selected_breedersite')) {
+	        
+	        $this->load->model('Stockyards', 'yard');
+	        
+	        $data['yards_select'] = $this->yard->toAssocArray('id', 'name', $this->yard->fetchForBreedersite($this->session->userdata('selected_breedersite')));
+	    }      
+	    
+	    $breedersite =$this->session->userdata('selected_breedersite');
+	    $yard = $this->session->userdata('selected_stockyard');
+	    
+	    $this->load->model('Hutchings', 'hatching');
+	    
+	    $data['hatching'] = $this->hatching->fetchActualClosed($breedersite, $yard);
+        
+        $this->template->build('education/log', $data);
+    }
 	
 	/**
 	 * beallitja session-be a kivalasztott telephelyet a termeles fooldalan
