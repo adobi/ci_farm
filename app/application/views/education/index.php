@@ -35,6 +35,10 @@
                         <p>
                             <a href="<?= base_url() ?>education/index/new_hatching" class = "button">Új betelepítés</a>
                         </p>
+                    <?php else: ?>
+                        <div class="message-info text-right">
+                            <label for="">Töröljuk ezt a betelepítést</label> <a href="<?php echo base_url() ?>education/delete_hatching/<?php echo $this->session->userdata('actual_hutching_id') ?>" class="button delete">Töröl</a>
+                        </div>
                     <?php endif ?>
                 <?php endif ?>
             <?php else: ?>

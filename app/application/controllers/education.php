@@ -13,10 +13,7 @@ class Education extends MY_Controller
     
     public function index2()
     {
-        $this->session->unset_userdata('selected_breedersite');
-        $this->session->unset_userdata('selected_stockyard');
-        $this->session->unset_userdata('actual_hutching_id');
-        $this->session->unset_userdata('selected_hatching_date');
+        $this->_clear_session();
         
         redirect(base_url().'education');
     }
@@ -284,6 +281,19 @@ class Education extends MY_Controller
         $this->template->build('education/log', $data);
     }
 	
+    public function delete_hatching()
+    {
+        $hatching = $this->uri->segment(3);
+        
+        $this->load->model('Hutchings', 'model');
+        
+        $this->model->delete($hatching);
+        
+        $this->_clear_session();
+        
+        redirect($_SERVER['HTTP_REFERER']);
+    }
+    
 	/**
 	 * beallitja session-be a kivalasztott telephelyet a termeles fooldalan
 	 *
@@ -309,5 +319,13 @@ class Education extends MY_Controller
 
 	    die;
 	}	
+	
+	private function _clear_session() 
+	{
+        $this->session->unset_userdata('selected_breedersite');
+        $this->session->unset_userdata('selected_stockyard');
+        $this->session->unset_userdata('actual_hutching_id');
+        $this->session->unset_userdata('selected_hatching_date');	    
+	}
 
 }

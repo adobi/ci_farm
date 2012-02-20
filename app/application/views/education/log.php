@@ -26,17 +26,20 @@
                 <a class = "button button-small" rel = "dialog" title="Új istálló felvitele" href="<?php echo base_url() ?>stockyard/edit/breeder_site/<?php echo $this->session->userdata('selected_breedersite') ?>">új istálló felvitele</a>
             </div>
         <?php endif ?>
+    
     <?php endif ?>
-    
-    <?php if ($hatching): ?>
-            
-        <p>
-            <label>Telepítésidőpontja</label>
-            <span><?php echo to_date($hatching->created) ?></span>
-        </p>
-    
-    <?php else: ?>
-        <div class="message-info">Nincs aktuális betelepítés</div>
+    <?php if ($this->session->userdata('selected_breedersite') && $this->session->userdata('selected_stockyard')): ?>
+        
+        <?php if ($hatching): ?>
+                
+            <p>
+                <label>Telepítésidőpontja</label>
+                <span><?php echo to_date($hatching->created) ?></span>
+            </p>
+        
+        <?php else: ?>
+            <div class="message-info">Nincs aktuális betelepítés</div>
+        <?php endif ?>
     <?php endif ?>
     
 </fieldset>
