@@ -293,7 +293,7 @@ td.calendar-day, td.calendar-day-np { width:100px; padding:5px; border-bottom:1p
     .week-table p {
         padding:0px!important;
     }
-    .week-table thead td {
+    .week-table thead td, .week-table thead th {
         font-weight:bold;
         font-size:1.2em;
         text-align:center;
@@ -305,10 +305,11 @@ td.calendar-day, td.calendar-day-np { width:100px; padding:5px; border-bottom:1p
     .week-table .td-last {
         vertical-align:middle;
     }
-    .week-table tbody td, .week-table thead td {
+    .week-table tbody td, .week-table thead td, .week-table thead th {
         border-bottom:1px solid #ccc;
+        vertical-align:middle;
     }
-    .week-table td {
+    .week-table td, .week-table th {
         border-right:1px solid #ccc;
         vertical-align:bottom;
     }
@@ -323,7 +324,7 @@ td.calendar-day, td.calendar-day-np { width:100px; padding:5px; border-bottom:1p
         background:#eaeaea;
     }
     .inner-table thead td {
-        font-size:1em;
+        font-size:0.9em;
         text-align:center;
     }
     .inner-table {
@@ -742,3 +743,8 @@ input[type=checkbox], input[type=radio] {
 .ui-widget-header, .ui-datepicker {
     padding:0!important;
 }*/
+
+
+#add-stock-to-fakk span {
+    font-size:16px!important;
+}

@@ -10,8 +10,8 @@
         <p>
             <label for="">Kelés dátuma</label>
             <input type="text" class="datepicker" name="hatching_date" value="<?php echo $this->session->userdata('selected_hatching_date') ?>">
+            <button style="margin-left:20px;">Mehet</button>
         </p>    
-        <p><button>Mehet</button></p>
     <?php echo form_close() ?>
 </fieldset>
 
@@ -96,7 +96,7 @@
             <?php endif ?>
         </fieldset>
         <div class="span-2 text-center" style="margin-top:5px;">
-            <a href="javascript:void(0)" class="right-arrow-big_ button" data-target="education" id="add-stock-to-fakk" style_="margin-top:50%">Beólaz</a>
+            <a href="javascript:void(0)" class="right-arrow-big_ button" data-target="education" id="add-stock-to-fakk">Beólaz</a>
             <a href="<?php echo base_url() ?>education/add_stock_to_fakk/" class="hidden" rel = "dialog" title = "Állomány fakkba telepítése" id="dialog-add-stock-to-fakk"></a>
         </div>
     <?php echo form_close() ?>
