@@ -11,7 +11,7 @@ class Users extends MY_Model
      * beleptet egy felhasznalot
      *
      * @return mixed false ha nincs ilyen felhasznalo, a user egyebkent
-     * @author Dobi Attila
+     * @author
      */
     public function login($username, $password) 
     {

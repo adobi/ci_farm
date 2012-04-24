@@ -154,7 +154,7 @@ class Breedersites extends MY_Model
      * osszeszedi az osszes tenyeszetet a tenyeszto adataival
      *
      * @return void
-     * @author Dobi Attila
+     * @author
      */
     public function fetchSiteWithBreederInfo($columns = array('breeder_site.id as id', 'breeder_site.code', 'breeder_site.address', 'breeder.name', 'breeder.city')) 
     {

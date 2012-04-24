@@ -110,7 +110,7 @@ class Fakk extends MY_Controller
      * not used
      *
      * @return void
-     * @author Dobi Attila
+     * @author
      */
     public function add_to_group()
     {
@@ -135,7 +135,7 @@ class Fakk extends MY_Controller
      * not used
      *
      * @return void
-     * @author Dobi Attila
+     * @author
      */
     public function change_group()
     {

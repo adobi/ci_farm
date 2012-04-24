@@ -42,14 +42,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library">
-      <library name="PHP 5.2.9-2">
-        <CLASSES>
-          <root url="file://$MODULE_DIR$/../../bin/php/php5.2.9-2/PEAR" />
-        </CLASSES>
-        <SOURCES />
-      </library>
-    </orderEntry>
     <orderEntry type="library" name="JsTD Assertion Framework" level="application" />
   </component>
 </module>

@@ -127,7 +127,7 @@ class Breedersite extends MY_Controller
 	    /**
 	     * mi van alapbol kivalasztva
 	     *
-	     * @author Dobi Attila
+	     * @author
 	     */
 	    if (!$this->session->userdata('selected_breedersite')) {
 	        
@@ -143,7 +143,7 @@ class Breedersite extends MY_Controller
      * autocomplete functiohoz listazza a telephely kodokatny tenyeszto nevevel egyutt
      *
      * @return void
-     * @author Dobi Attila
+     * @author
      */
     public function search_code_and_name()
     {

@@ -64,7 +64,7 @@ class Stockegg extends MY_Controller
      * uj tojas allomany
      *
      * @return void
-     * @author Dobi Attila
+     * @author
      */
     public function edit()
     {
@@ -83,7 +83,7 @@ class Stockegg extends MY_Controller
         /**
          * ha a tojastermeloi oldalrol jott a keres
          *
-         * @author Dobi Attila
+         * @author
          */
         if (!$this->session->userdata('selected_breedersite')) {
             
@@ -95,7 +95,7 @@ class Stockegg extends MY_Controller
         /**
          * tojas tipusok
          *
-         * @author Dobi Attila
+         * @author
          */
         $this->load->model('Chickentypes', 'chicken_type');
         $data['chickentypes'] = $this->chicken_type->toAssocArray('id', 'code+name', $this->chicken_type->fetchAll());

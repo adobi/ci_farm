@@ -15,7 +15,7 @@ class Egg extends MY_Controller
         /**
          * annak a datumnak a meghatarozasa amelyre meg nem szerpel mind a 3 bejegyzes
          *
-         * @author Dobi Attila
+         * @author
          */
         $this->load->model('Eggproductiondays', 'days');
         $lastBlank = $this->days->getLastBlankDate();
@@ -49,7 +49,7 @@ class Egg extends MY_Controller
 	    /**
 	     * TODO ha valtozik az ev akkor azt figyelni. amikor a $week eleri a 0-t az ev - 1, ha eleri a veget akkor ev + 1
 	     *
-	     * @author Dobi Attila
+	     * @author
 	     */
 	    
 	    $data = array();
@@ -57,7 +57,7 @@ class Egg extends MY_Controller
 	    /**
 	     * telephelyek lekerdezese
 	     *
-	     * @author Dobi Attila
+	     * @author
 	     */
 	    $this->load->model("Breedersites", "sites");
 	    $sites = $this->sites->fetchRows(array('where'=>array('site_type'=>1), 'order'=>array('by'=>'name', 'dest'=>'asc')));
@@ -67,7 +67,7 @@ class Egg extends MY_Controller
 	    /**
 	     * mi van alapbol kivalasztva
 	     *
-	     * @author Dobi Attila
+	     * @author
 	     */
 	    if (!$this->session->userdata('selected_breedersite')) {
 	        
@@ -77,7 +77,7 @@ class Egg extends MY_Controller
 	    /**
 	      * tenyeszto lekerdezese
 	      *
-	      * @author Dobi Attila
+	      * @author
 	      */ 
 	    $this->load->model("Breeders", "breeders");
 	    $data['breeder'] = $this->breeders->find($this->breeders->getId());
@@ -119,7 +119,7 @@ class Egg extends MY_Controller
             /**
              * minden naphoz lekerdezzu az osszesitett termeloi adatokat
              *
-             * @author Dobi Attila
+             * @author
              */
             foreach ($dates['selectedWeekDays'] as $day) {
                 $eggProductionSum[$day] = $this->production->getSummarizedForBreedersiteForDayByEggtype($this->session->userdata('selected_breedersite'), date('Y-m-d', $day));
@@ -147,7 +147,7 @@ class Egg extends MY_Controller
 	 * megjegyzes tojastermeleshez adott napra
 	 *
 	 * @return void
-	 * @author Dobi Attila
+	 * @author
 	 */
 	public function add_comment()
 	{
@@ -158,14 +158,14 @@ class Egg extends MY_Controller
 	    /**
 	     * kivalasztott telephelyhez tartozo allaomanyok
 	     *
-	     * @author Dobi Attila
+	     * @author
 	     */
         $this->checkSessionForSelectedBreedersite();
 	    
         /**
          * allaomanyok lekerdezese
          *
-         * @author Dobi Attila
+         * @author
          */
         $data['stocks'] = $this->getStocksWithoutCommentOrVitaminForSelectedBreedersite(true, $date, 'comment');
 
@@ -196,7 +196,7 @@ class Egg extends MY_Controller
 	 * listazza adott napra vonatkozoan az osszes allomany  megjegyzeset
 	 *
 	 * @return void
-	 * @author Dobi Attila
+	 * @author
 	 */
 	public function show_comment()
 	{
@@ -205,7 +205,7 @@ class Egg extends MY_Controller
 	    /**
 	     * van a telephely kivalasztva
 	     *
-	     * @author Dobi Attila
+	     * @author
 	     */
         $this->checkSessionForSelectedBreedersite();
         
@@ -220,7 +220,7 @@ class Egg extends MY_Controller
 	 * vitaminok megadasa tojastermeleshez adott napra
 	 *
 	 * @return void
-	 * @author Dobi Attila
+	 * @author
 	 */
 	public function add_vitamin()
 	{
@@ -231,14 +231,14 @@ class Egg extends MY_Controller
 	    /**
 	     * kivalasztott telephelyhez tartozo allaomanyok
 	     *
-	     * @author Dobi Attila
+	     * @author
 	     */
         $this->checkSessionForSelectedBreedersite();
 	    
         /**
          * allaomanyok lekerdezese
          *
-         * @author Dobi Attila
+         * @author
          */
         $data['stocks'] = $this->getStocksWithoutCommentOrVitaminForSelectedBreedersite(true, $date, 'vitamin');
 
@@ -269,7 +269,7 @@ class Egg extends MY_Controller
 	 * adott termelesi naphoz az allomanyok vitanim feljegyzeseit
 	 *
 	 * @return void
-	 * @author Dobi Attila
+	 * @author
 	 */
 	public function show_vitamin()
 	{
@@ -278,7 +278,7 @@ class Egg extends MY_Controller
 	    /**
 	     * van a telephely kivalasztva
 	     *
-	     * @author Dobi Attila
+	     * @author
 	     */
         $this->checkSessionForSelectedBreedersite();
         
@@ -294,7 +294,7 @@ class Egg extends MY_Controller
 	 * tapanyag felvitele adott naphoz
 	 *
 	 * @return void
-	 * @author Dobi Attila
+	 * @author
 	 */
 	public function add_food()
 	{
@@ -305,14 +305,14 @@ class Egg extends MY_Controller
 	    /**
 	     * kivalasztott telephelyhez tartozo allaomanyok
 	     *
-	     * @author Dobi Attila
+	     * @author
 	     */
         $this->checkSessionForSelectedBreedersite();
 	    
         /**
          * allaomanyok lekerdezese
          *
-         * @author Dobi Attila
+         * @author
          */
         $data['stocks'] = $this->getStocksWithoutFoodForSelectedBreedersite(true, $date);
 
@@ -338,7 +338,7 @@ class Egg extends MY_Controller
 	 * adott datumhoz listazza a kivalasztott telephely osszes allomanyak tapanyagat
 	 *
 	 * @return void
-	 * @author Dobi Attila
+	 * @author
 	 */
 	public function show_food()
 	{
@@ -347,7 +347,7 @@ class Egg extends MY_Controller
 	    /**
 	     * van a telephely kivalasztva
 	     *
-	     * @author Dobi Attila
+	     * @author
 	     */
         $this->checkSessionForSelectedBreedersite();
         
@@ -362,7 +362,7 @@ class Egg extends MY_Controller
 	 * tapanyag torlese adott naphoz
 	 *
 	 * @return void
-	 * @author Dobi Attila
+	 * @author
 	 */
 	public function delete_food()
 	{
@@ -374,7 +374,7 @@ class Egg extends MY_Controller
 	 * elhalalozasok megadasa adott naphoz
 	 *
 	 * @return void
-	 * @author Dobi Attila
+	 * @author
 	 */
 	public function add_death()
 	{
@@ -385,14 +385,14 @@ class Egg extends MY_Controller
 	    /**
 	     * kivalasztott telephelyhez tartozo allaomanyok
 	     *
-	     * @author Dobi Attila
+	     * @author
 	     */
         $this->checkSessionForSelectedBreedersite();
 	    
         /**
          * allaomanyok lekerdezese
          *
-         * @author Dobi Attila
+         * @author
          */
         $data['stocks'] = $this->getStocksWithoutDeathForSelectedBreedersite(true, $date);
 
@@ -421,7 +421,7 @@ class Egg extends MY_Controller
 	    /**
 	     * van a telephely kivalasztva
 	     *
-	     * @author Dobi Attila
+	     * @author
 	     */
         $this->checkSessionForSelectedBreedersite();
         
@@ -436,7 +436,7 @@ class Egg extends MY_Controller
 	 * elhalalozas torlese adott naphoz
 	 *
 	 * @return void
-	 * @author Dobi Attila
+	 * @author
 	 */
 	public function delete_death()
 	{
@@ -447,7 +447,7 @@ class Egg extends MY_Controller
 	 * tojastermelesi adatok felvitele adott naphoz
 	 *
 	 * @return void
-	 * @author Dobi Attila
+	 * @author
 	 */
 	public function add_production()
 	{
@@ -458,21 +458,21 @@ class Egg extends MY_Controller
 	    /**
 	     * kivalasztott telephelyhez tartozo allaomanyok
 	     *
-	     * @author Dobi Attila
+	     * @author
 	     */
         $this->checkSessionForSelectedBreedersite();
 	    
         /**
          * allaomanyok lekerdezese
          *
-         * @author Dobi Attila
+         * @author
          */
         $data['stocks'] = $this->getStocksWithoutDataForSelectedBreedersite(true, $date);
 	    
 	    /**
 	     * tojastipusok lekerdezese
 	     *
-	     * @author Dobi Attila
+	     * @author
 	     */
 	    $this->load->model("Eggtypes", "eggtype");
 	    $data['egg_types'] = $this->eggtype->fetchAll();
@@ -511,7 +511,7 @@ class Egg extends MY_Controller
 	 * tojastermelesi adatok torlese adott naphoz
 	 *
 	 * @return void
-	 * @author Dobi Attila
+	 * @author
 	 */
 	public function delete_production()
 	{
@@ -522,7 +522,7 @@ class Egg extends MY_Controller
 	 * adott napra mutaja meg az adott telephely termelesi adatait (bovebben link)
 	 *
 	 * @return void
-	 * @author Dobi Attila
+	 * @author
 	 */
 	public function show_production() 
 	{
@@ -531,7 +531,7 @@ class Egg extends MY_Controller
 	    /**
 	     * van a telephely kivalasztva
 	     *
-	     * @author Dobi Attila
+	     * @author
 	     */
         $this->checkSessionForSelectedBreedersite();
         
@@ -542,7 +542,7 @@ class Egg extends MY_Controller
 	    /**
 	     * tojastipusok
 	     *
-	     * @author Dobi Attila
+	     * @author
 	     */
 	    $this->load->model("Eggtypes", 'eggtype');
 	    $data['egg_types'] = $this->eggtype->fetchAll();
@@ -550,7 +550,7 @@ class Egg extends MY_Controller
 	    /**
 	     * allomanyok
 	     *
-	     * @author Dobi Attila
+	     * @author
 	     */
 	    $stocks = $this->getStocksForSelectedBreedersite();
 
@@ -582,7 +582,7 @@ class Egg extends MY_Controller
 	 * beallitja session-be a kivalasztott telephelyet a termeles fooldalan
 	 *
 	 * @return void
-	 * @author Dobi Attila
+	 * @author
 	 */
 	public function set_selected_breedersite()
 	{
@@ -600,7 +600,7 @@ class Egg extends MY_Controller
 	 * beallitja a kivalasztott allomanyt a termeles fooldalan
 	 *
 	 * @return void
-	 * @author Dobi Attila
+	 * @author
 	 */
 	public function set_selected_chickenstock()
 	{
@@ -617,7 +617,7 @@ class Egg extends MY_Controller
 	 * ellenorzi, hogy lett e kivalasztva telephely
 	 *
 	 * @return void
-	 * @author Dobi Attila
+	 * @author
 	 */
 	private function checkSessionForSelectedBreedersite()
 	{
@@ -634,7 +634,7 @@ class Egg extends MY_Controller
 	 *
 	 * @param $assoc select elemhez kellenek e, vagy sima tombkent
 	 * @return void
-	 * @author Dobi Attila
+	 * @author
 	 */
 	private function getStocksForSelectedBreedersite($assoc = false)
 	{
@@ -727,7 +727,7 @@ class Egg extends MY_Controller
      * @param string $stockId 
      * @param string $date
      * @return int
-     * @author Dobi Attila
+     * @author
      */
     private function getProductionDayIdByStockIdAndDate($stockId, $date) 
     {
@@ -757,7 +757,7 @@ class Egg extends MY_Controller
 	    /**
 	     * allomanyok
 	     *
-	     * @author Dobi Attila
+	     * @author
 	     */
 	    $stocks = $this->getStocksForSelectedBreedersite();
 

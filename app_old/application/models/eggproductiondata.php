@@ -12,7 +12,7 @@ class Eggproductiondata extends MY_Model
      *
      * @param string $id 
      * @return void
-     * @author Dobi Attila
+     * @author
      */
     public function fetchByProductionDayId($id) 
     {
@@ -34,7 +34,7 @@ class Eggproductiondata extends MY_Model
      * @param string $site 
      * @param string $date 
      * @return void
-     * @author Dobi Attila
+     * @author
      */
     public function getSummarizedForBreedersiteForDayByEggtype($site, $date) 
     {
@@ -74,7 +74,7 @@ class Eggproductiondata extends MY_Model
      * @param string $site 
      * @param string $date 
      * @return void
-     * @author Dobi Attila
+     * @author
      */
     public function getSummarizedFarmerForBreedersiteByDay($site, $date)
     {

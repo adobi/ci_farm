@@ -13,7 +13,7 @@ class Eggproductiondays extends MY_Model
      * @param string $date 
      * @param string $production
      * @return object
-     * @author Dobi Attila
+     * @author
      */
     public function findByDateAndProduction($date, $production) 
     {
@@ -35,7 +35,7 @@ class Eggproductiondays extends MY_Model
      * @param string $site 
      * @param string $date 
      * @return void
-     * @author Dobi Attila
+     * @author
      */
     public function getSummarizedFoodForDataAndBreedersite($site, $date) 
     {

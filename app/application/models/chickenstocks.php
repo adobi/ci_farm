@@ -13,7 +13,7 @@ class Chickenstocks extends MY_Model
      * @param string $deliveryId 
      * @param string $params 
      * @return void
-     * @author Dobi Attila
+     * @author
      */
     public function fetchForDelivery($deliveryId, $params = array()) 
     {
@@ -50,7 +50,7 @@ class Chickenstocks extends MY_Model
      * @param string $params 
      * @return void
      * @used_at chickenstock/index search by serial number
-     * @author Dobi Attila
+     * @author
      */
     public function fetchForDeliveryAtStocks($deliveryId, $params = array()) 
     {
@@ -116,7 +116,7 @@ class Chickenstocks extends MY_Model
      * @param string $deliveryId 
      * @param string $params 
      * @return void
-     * @author Dobi Attila
+     * @author
      */
     public function fetchForDeliveryWithoutProof($deliveryId, $params = array()) 
     {
@@ -197,7 +197,7 @@ class Chickenstocks extends MY_Model
      * @param string $data date of hatching
      * @return array
      * @used_at egg/index, education/index
-     * @author Dobi Attila
+     * @author
      */
     public function fetchForBreedersiteAndHutching($hutching, $date) 
     {
@@ -257,7 +257,7 @@ class Chickenstocks extends MY_Model
      * @param string $stock 
      * @return void
      * @used_at education/index
-     * @author Dobi Attila
+     * @author
      */
     public function fetchPieceNotInFakks($stock) 
     {
@@ -285,7 +285,7 @@ class Chickenstocks extends MY_Model
      * @param array $params
      * @return array
      * @used_at chickenstock/index
-     * @author Dobi Attila
+     * @author
      */
     public function fetchForBreedersite($site, $params = array()) 
     {

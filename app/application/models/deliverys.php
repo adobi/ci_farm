@@ -168,7 +168,7 @@ class Deliverys extends MY_Model
      *
      * @param string $serial 
      * @return void
-     * @author Dobi Attila
+     * @author
      */
     public function serialExists($serial) 
     {
@@ -188,7 +188,7 @@ class Deliverys extends MY_Model
      * @param string $id 
      * @param string $amount 
      * @return false
-     * @author Dobi Attila
+     * @author
      */
     public function incTotalPiece($id, $amount) 
     {

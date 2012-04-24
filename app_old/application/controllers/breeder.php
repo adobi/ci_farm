@@ -127,7 +127,7 @@ class Breeder extends MY_Controller {
 	 * id alapjan megkeres egy breedert
 	 *
 	 * @return void
-	 * @author Dobi Attila
+	 * @author
 	 */
 	public function get()
 	{
@@ -179,7 +179,7 @@ class Breeder extends MY_Controller {
 	 *
 	 * @param string $id 
 	 * @return void
-	 * @author Dobi Attila
+	 * @author
 	 */
 	private function _find($id) 
 	{

@@ -26,7 +26,7 @@ class Fakks extends MY_Model
      *
      * @param string $yard 
      * @return void
-     * @author Dobi Attila
+     * @author
      */
     public function fetchForHatching($hatching) 
     {
@@ -71,7 +71,7 @@ class Fakks extends MY_Model
      *
      * @param string $stockYardId 
      * @return void
-     * @author Dobi Attila
+     * @author
      */
     public function isPermittedToCreate($hatching) 
     {

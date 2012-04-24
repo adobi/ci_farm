@@ -12,7 +12,7 @@ class Fakksingroup extends MY_Model
      *
      * @param string $group 
      * @return void
-     * @author Dobi Attila
+     * @author
      */
     public function fetchFakksForGroup($group) 
     {

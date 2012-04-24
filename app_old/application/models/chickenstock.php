@@ -24,7 +24,7 @@ class Chickenstock extends MY_Model
      *
      * @param string $all 
      * @return array
-     * @author Dobi Attila
+     * @author
      */
     public function fetchWithDetails($all = false)
     {
@@ -58,7 +58,7 @@ class Chickenstock extends MY_Model
      *
      * @param string $fakkId 
      * @return void
-     * @author Dobi Attila
+     * @author
      */
     public function fetchForFakk($fakkId) 
     {
@@ -106,7 +106,7 @@ class Chickenstock extends MY_Model
      * @param string $site 
      * @param string $date 
      * @return void
-     * @author Dobi Attila
+     * @author
      */
     public function fetchForBreedersiteWithoutData($site, $date) 
     {
@@ -139,7 +139,7 @@ class Chickenstock extends MY_Model
      * @param string $site 
      * @param string $date 
      * @return void
-     * @author Dobi Attila
+     * @author
      */
     public function fetchForBreedersiteWithoutFood($site, $date) 
     {
@@ -173,7 +173,7 @@ class Chickenstock extends MY_Model
      * @param string $site 
      * @param string $date 
      * @return void
-     * @author Dobi Attila
+     * @author
      */
     public function fetchForBreedersiteWithoutComment($site, $date) 
     {
@@ -206,7 +206,7 @@ class Chickenstock extends MY_Model
      * @param string $site 
      * @param string $date 
      * @return void
-     * @author Dobi Attila
+     * @author
      */
     public function fetchForBreedersiteWithoutVitamin($site, $date) 
     {
@@ -239,7 +239,7 @@ class Chickenstock extends MY_Model
      * @param string $site 
      * @param string $date 
      * @return void
-     * @author Dobi Attila
+     * @author
      */
     public function fetchForBreedersiteWithoutDeath($site, $date) 
     {

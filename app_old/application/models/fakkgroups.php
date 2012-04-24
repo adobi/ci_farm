@@ -40,7 +40,7 @@ class Fakkgroups extends MY_Model
      * minden csoportot listaz a hozza tartozo fakkokkal egyutt
      *
      * @return void
-     * @author Dobi Attila
+     * @author
      */
     public function fetchAll()
     {

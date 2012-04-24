@@ -2,12 +2,10 @@
 <project version="4">
   <component name="PhpProjectConfiguration">
     <sdk>
-      <PhpSdkConfig version="5.2.9-2" home="C:\wamp\bin\php\php5.2.9-2">
+      <PhpSdkConfig version="5.3.5">
         <include_paths>
           <path value="." />
-          <path value="C:\wamp\bin\php\php5.2.9-2\pear" />
-          <path value="C:\wamp\www\chickenfarm\app\application" />
-          <path value="C:\wamp\www\chickenfarm\app\system" />
+          <path value="C:\php\pear" />
         </include_paths>
       </PhpSdkConfig>
     </sdk>

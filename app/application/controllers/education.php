@@ -54,7 +54,7 @@ class Education extends MY_Controller
 	        /**
 	         * ha nincs aktualis betelepites akkor mutatjuk au uj betelepites gombot
 	         *
-	         * @author Dobi Attila
+	         * @author
 	         */
 	        
 	        if (!$this->hutching->hasActual($this->session->userdata('selected_breedersite'), $this->session->userdata('selected_stockyard'))) {
@@ -66,7 +66,7 @@ class Education extends MY_Controller
     	        /**
     	         * beszurni egy sort a betelepites tabalaba a kivalasztott telephely es istallo idvel
     	         *
-    	         * @author Dobi Attila
+    	         * @author
     	         */
                 $this->hutching->insert(array(
                     'breeder_site_id'=>$this->session->userdata('selected_breedersite'),
@@ -80,7 +80,7 @@ class Education extends MY_Controller
 	        /**
 	         * az aktualis betelepites
 	         *
-	         * @author Dobi Attila
+	         * @author
 	         */
             $actualHutching = current($this->hutching->fetchActual($this->session->userdata('selected_breedersite'), $this->session->userdata('selected_stockyard')));
     	    $data['actual_hatching'] = $actualHutching;
@@ -89,7 +89,7 @@ class Education extends MY_Controller
     	    /**
     	     * fakkok, allomanyok listaja
     	     *
-    	     * @author Dobi Attila
+    	     * @author
     	     */
 	        $this->load->model('Fakks', 'fakk');
 	        
@@ -106,7 +106,7 @@ class Education extends MY_Controller
 	        /**
 	         * az aktualis betelepitesben szereplo allomanyok fakkokban
 	         *
-	         * @author Dobi Attila
+	         * @author
 	         */
 	        $this->load->model('Stockinfakk', 'sif');
 	        
@@ -202,7 +202,7 @@ class Education extends MY_Controller
      * lezar egy betelepitest elindit egy nevelest
      *
      * @return void
-     * @author Dobi Attila
+     * @author
      */
     public function close()
     {
@@ -248,7 +248,7 @@ class Education extends MY_Controller
      * nevelesi naplo
      *
      * @return void
-     * @author Dobi Attila
+     * @author
      */
     public function log()
     {
@@ -298,7 +298,7 @@ class Education extends MY_Controller
 	 * beallitja session-be a kivalasztott telephelyet a termeles fooldalan
 	 *
 	 * @return void
-	 * @author Dobi Attila
+	 * @author
 	 */
 	public function set_selected_breedersite()
 	{

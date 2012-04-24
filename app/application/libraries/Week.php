@@ -8,7 +8,7 @@ class Week
 	 * @param string $week 
 	 * @param timestamp $date a het egy datuma
 	 * @return void
-	 * @author Dobi Attila
+	 * @author
 	 */
 	public function generate($week, $date) 
 	{

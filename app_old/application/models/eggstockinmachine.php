@@ -12,7 +12,7 @@ class Eggstockinmachine extends MY_Model
      *
      * @param string $machine 
      * @return void
-     * @author Dobi Attila
+     * @author
      */
     public function fetchStocksInMachine($machine)
     {

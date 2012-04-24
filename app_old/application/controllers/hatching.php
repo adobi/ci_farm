@@ -11,7 +11,7 @@ class Hatching extends MY_Controller
         /**
          * annak a datumnak a meghatarozasa amelyre meg nem szerpel mind a 3 bejegyzes
          *
-         * @author Dobi Attila
+         * @author
          */
         //$this->load->model('Eggproductiondays', 'days');
         $lastBlank = false;//$this->days->getLastBlankDate();
@@ -38,7 +38,7 @@ class Hatching extends MY_Controller
 	    /**
 	     * TODO ha valtozik az ev akkor azt figyelni. amikor a $week eleri a 0-t az ev - 1, ha eleri a veget akkor ev + 1
 	     *
-	     * @author Dobi Attila
+	     * @author
 	     */
 	    
 	    $data = array();
@@ -46,7 +46,7 @@ class Hatching extends MY_Controller
 	    /**
 	     * telephelyek lekerdezese
 	     *
-	     * @author Dobi Attila
+	     * @author
 	     */
 	    $this->load->model("Breedersites", "sites");
 	    $sites = $this->sites->fetchRows(array('where'=>array('site_type'=>2), 'order'=>array('by'=>'name', 'dest'=>'asc')));
@@ -56,7 +56,7 @@ class Hatching extends MY_Controller
 	    /**
 	     * mi van alapbol kivalasztva
 	     *
-	     * @author Dobi Attila
+	     * @author
 	     */
 	    if (!$this->session->userdata('selected_breedersite')) {
 	        
@@ -66,7 +66,7 @@ class Hatching extends MY_Controller
 	    /**
 	      * tenyeszto lekerdezese
 	      *
-	      * @author Dobi Attila
+	      * @author
 	      */ 
 	    $this->load->model("Breeders", "breeders");
 	    $data['breeder'] = $this->breeders->find($this->breeders->getId());
@@ -74,7 +74,7 @@ class Hatching extends MY_Controller
 	    /**
 	     * a kivalasztott telephelynek megfeleo gepek lekerdezese 
 	     *
-	     * @author Dobi Attila
+	     * @author
 	     */
 	    $this->load->model('Machines', 'machines');
 	    $data['machines'] = $this->machines->fetchForBreeder($this->session->userdata('selected_breedersite'));
@@ -131,7 +131,7 @@ class Hatching extends MY_Controller
      * elso lepesben, berak egy tojas allomanyt a gepbe
      *
      * @return void
-     * @author Dobi Attila
+     * @author
      */
     public function add_to_machine()
     {
@@ -171,7 +171,7 @@ class Hatching extends MY_Controller
      * azokat az allomanyokat listazzuk amik adott gepben vannak
      *
      * @return void
-     * @author Dobi Attila
+     * @author
      */
     public function eggstocks_in_machine()
     {
@@ -194,7 +194,7 @@ class Hatching extends MY_Controller
      * az lampazas, bujtatas, keles lepeseit
      *
      * @return void
-     * @author Dobi Attila
+     * @author
      */
     public function step()
     {

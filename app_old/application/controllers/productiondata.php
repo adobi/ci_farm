@@ -10,7 +10,7 @@ class Productiondata extends MY_Controller
      * egg_production_data bejegyzeset szerkeszt, ajaxos, egg_production_day_id alapjan
      *
      * @return void
-     * @author Dobi Attila
+     * @author
      */
     public function edit()
     {
@@ -44,7 +44,7 @@ class Productiondata extends MY_Controller
      * torol minden bejegyzest egy adott egg_production_day_id-hez
      *
      * @return void
-     * @author Dobi Attila
+     * @author
      */
     public function delete()
     {

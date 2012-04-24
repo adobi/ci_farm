@@ -90,7 +90,7 @@ class Fakkgroup extends MY_Controller
      * adott telephelyhez tartozo fakkcsoportokat adja vissza
      *
      * @return void
-     * @author Dobi Attila
+     * @author
      */
     public function for_stockyard()
     {

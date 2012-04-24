@@ -12,7 +12,7 @@ class Eggproductions extends MY_Model
      *
      * @param string $stock 
      * @return void
-     * @author Dobi Attila
+     * @author
      */
     public function findByStockid($stock)
     {

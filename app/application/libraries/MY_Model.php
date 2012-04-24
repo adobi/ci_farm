@@ -7,7 +7,7 @@ if (! defined('BASEPATH')) exit('No direct script access');
  * sajat model osztalyinkat ebbol az osztalybol szarmaztassuk
  * hasznalatakor sajat osztalyaink konstruktoraban a $_name attributomot kell beallitani a megfelelo tablanevre.
  * 
- * @author Dobi Attila
+ * @author
  */
  
 require_once(BASEPATH.'core/Model'.EXT);
@@ -33,7 +33,7 @@ class My_Model extends CI_Model
 	 * visszaadja a tabla nevet
 	 *
 	 * @return string
-	 * @author Dobi Attila
+	 * @author
 	 */
 	public function getName()
 	{
@@ -45,7 +45,7 @@ class My_Model extends CI_Model
 	 *
      * @param array $params a kovetkezo kulcsokkal rendelkezhet: columns, join, order, limit, offset
 	 * @return void
-	 * @author Dobi Attila
+	 * @author
 	 */
 	public function fetchAll($params = array(), $current = false, $showSelfColumns = true) 
 	{
@@ -55,7 +55,7 @@ class My_Model extends CI_Model
 		/**
 		 * osszepakoljuk a $params['columns']-ban kapott oszlopokbol az oszlopok listajat
 		 *
-		 * @author Dobi Attila
+		 * @author
 		 */
 		if ($showSelfColumns) {
 		    
@@ -77,7 +77,7 @@ class My_Model extends CI_Model
 		/**
 		 * osszepakoljuk a $params['join']['columns']-ban kapott oszlopokbol a kapcsolt tabla oszlopaibol a listat
 		 *
-		 * @author Dobi Attila
+		 * @author
 		 */
 		if (array_key_exists('join', $params)) {
 		    
@@ -101,7 +101,7 @@ class My_Model extends CI_Model
 		/**
          * join osszerakasa. $params['join'] kulcsai: tabla, condition
 		 *
-		 * @author Dobi Attila
+		 * @author
 		 */
 		if (array_key_exists('join', $params)) {
 		    
@@ -118,7 +118,7 @@ class My_Model extends CI_Model
 		/**
 		 * order resz: kulcsai: by, limit
 		 *
-		 * @author Dobi Attila
+		 * @author
 		 */
 		if (array_key_exists('order', $params) && is_array($params['order']) && in_array(strtolower($params['order']['dest']), array('asc', 'desc'))) {
 		    
@@ -130,7 +130,7 @@ class My_Model extends CI_Model
 		/**
 		 * limit es offset resz
 		 *
-		 * @author Dobi Attila
+		 * @author
 		 */
 		if (array_key_exists('limit', $params) /*&& is_array($params['limit'])*/ && is_numeric($params['limit']) && is_numeric($params['offset'])) {
 		    
@@ -152,7 +152,7 @@ class My_Model extends CI_Model
 	 *
 	 * @param array $params a kovetkezo kulcsokkal rendelkezhet: columns, join, where, order, limit, offset
 	 * @return object
-	 * @author Dobi Attila
+	 * @author
 	 */
 	public function fetchRows($params, $current = false, $unprotected = false, $showSelfColumns = true) 
 	{
@@ -162,7 +162,7 @@ class My_Model extends CI_Model
 		/**
 		 * osszepakoljuk a $params['columns']-ban kapott oszlopokbol az oszlopok listajat
 		 *
-		 * @author Dobi Attila
+		 * @author
 		 */
 		if ($showSelfColumns) {
 		    
@@ -184,7 +184,7 @@ class My_Model extends CI_Model
 		/**
 		 * osszepakoljuk a $params['join']['columns']-ban kapott oszlopokbol a kapcsolt tabla oszlopaibol a listat
 		 *
-		 * @author Dobi Attila
+		 * @author
 		 */
 		if (array_key_exists('join', $params)) {
 		    
@@ -213,7 +213,7 @@ class My_Model extends CI_Model
 		/**
          * join osszerakasa. $params['join'] kulcsai: tabla, condition
 		 *
-		 * @author Dobi Attila
+		 * @author
 		 */
 		if (array_key_exists('join', $params)) {
 		    
@@ -228,7 +228,7 @@ class My_Model extends CI_Model
 		/**
 		 * group by resz
 		 *
-		 * @author Dobi Attila
+		 * @author
 		 */
 		if (array_key_exists('group_by', $params)) {
 		    
@@ -238,7 +238,7 @@ class My_Model extends CI_Model
 		/**
 		 * order resz: kulcsai: by, limit
 		 *
-		 * @author Dobi Attila
+		 * @author
 		 */
 		if (array_key_exists('order', $params) && is_array($params['order']) && in_array(strtolower($params['order']['dest']), array('asc', 'desc'))) {
 		    
@@ -248,7 +248,7 @@ class My_Model extends CI_Model
 		/**
 		 * limit es offset resz
 		 *
-		 * @author Dobi Attila
+		 * @author
 		 */
 		if (array_key_exists('limit', $params) /*&& is_array($params['limit'])*/ && is_numeric($params['limit']) && is_numeric($params['offset'])) {
 		    
@@ -271,7 +271,7 @@ class My_Model extends CI_Model
 	 *
 	 * @param int $id 
 	 * @return array
-	 * @author Dobi Attila
+	 * @author
 	 */
 	public function find($id) 
 	{
@@ -289,7 +289,7 @@ class My_Model extends CI_Model
 	 *
 	 * @param int $id 
 	 * @return boolean
-	 * @author Dobi Attila
+	 * @author
 	 */
 	public function exists($id) 
 	{
@@ -311,7 +311,7 @@ class My_Model extends CI_Model
 	 * @param array $data 
 	 * @param array $where 
 	 * @return integer
-	 * @author Dobi Attila
+	 * @author
 	 */
 	public function update($data, $where='') 
 	{
@@ -338,7 +338,7 @@ class My_Model extends CI_Model
 	 *
 	 * @param array $data 
 	 * @return integer
-	 * @author Dobi Attila
+	 * @author
 	 */
 	public function insert($data) 
 	{
@@ -355,7 +355,7 @@ class My_Model extends CI_Model
 	 *
 	 * @param int $id 
 	 * @return integer
-	 * @author Dobi Attila
+	 * @author
 	 */
 	public function delete($id) 
 	{
@@ -383,7 +383,7 @@ class My_Model extends CI_Model
 	 *
 	 * @param string $sql 
 	 * @return object - result set object
-	 * @author Dobi Attila
+	 * @author
 	 */
 	public function execute($sql) 
 	{
@@ -402,7 +402,7 @@ class My_Model extends CI_Model
 	 *
 	 * @param string $column 
 	 * @return string
-	 * @author Dobi Attila
+	 * @author
 	 */
 	protected function _quote($column)
 	{

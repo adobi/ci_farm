@@ -28,7 +28,7 @@ class Stockinfakk extends MY_Model
      *
      * @param string $id 
      * @return array
-     * @author Dobi Attila
+     * @author
      */
     public function findWithDetails($id) 
     {

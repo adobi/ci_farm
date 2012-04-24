@@ -64,7 +64,7 @@ class Fakkfeed extends MY_Controller
      * adott fakkcsoporthoz visz fel tapanya bejegyzest
      *
      * @return void
-     * @author Dobi Attila
+     * @author
      */
     public function for_fakk_group()
     {

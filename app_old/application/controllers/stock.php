@@ -21,7 +21,7 @@ class Stock extends MY_Controller
 	    /**
 	     * telephelyek lekerdezese
 	     *
-	     * @author Dobi Attila
+	     * @author
 	     */
 	    $this->load->model("Breedersites", "sites");
 	    $sites = $this->sites->fetchAll(array('order'=>array('by'=>'name', 'dest'=>'asc')));
@@ -72,7 +72,7 @@ class Stock extends MY_Controller
         /**
          * ha a tojastermeloi oldalrol jott a keres
          *
-         * @author Dobi Attila
+         * @author
          */
         if (!$this->session->userdata('selected_breedersite')) {
             
@@ -84,7 +84,7 @@ class Stock extends MY_Controller
         /**
          * minden olyan fakk ami az adott telephelyen van
          *
-         * @author Dobi Attila
+         * @author
          */
         //dump($this->session->userdata);
         $this->load->model("Fakks", 'fakks');
@@ -166,7 +166,7 @@ class Stock extends MY_Controller
      * nem hasznaljuk!
      *
      * @return void
-     * @author Dobi Attila
+     * @author
      */
     public function for_fakk()
     {
@@ -202,7 +202,7 @@ class Stock extends MY_Controller
             /**
              * innen volt attol kikerul 
              *
-             * @author Dobi Attila
+             * @author
              */
             $_POST['fakk_id'] = null;
                         
@@ -218,7 +218,7 @@ class Stock extends MY_Controller
      * beolazas, fakk valasztoval
      *
      * @return void
-     * @author Dobi Attila
+     * @author
      */
     public function add_to_breedersite()
     {
@@ -227,7 +227,7 @@ class Stock extends MY_Controller
         /**
          * ha a tojastermeloi oldalrol jott a keres
          *
-         * @author Dobi Attila
+         * @author
          */
         if (!$this->session->userdata('selected_breedersite')) {
             
@@ -239,7 +239,7 @@ class Stock extends MY_Controller
         /**
          * minden olyan fakk ami az adott telephelyen van
          *
-         * @author Dobi Attila
+         * @author
          */
         //dump($this->session->userdata);
         $this->load->model("Fakks", 'fakks');
@@ -257,7 +257,7 @@ class Stock extends MY_Controller
         /**
          * csirketipusok
          *
-         * @author Dobi Attila
+         * @author
          */
         $this->load->model('Chickentypes', 'chickentypes');
         $data['chickentypes'] = $this->chickentypes->toAssocArray('id', 'name', $this->chickentypes->fetchAll());
@@ -281,7 +281,7 @@ class Stock extends MY_Controller
      * megmutatja az adott allomany szuloallomanyainak kodjait
      *
      * @return void
-     * @author Dobi Attila
+     * @author
      */
     public function show_parents()
     {
@@ -301,7 +301,7 @@ class Stock extends MY_Controller
      *
      * @param array $data 
      * @return void
-     * @author Dobi Attila
+     * @author
      */
     private function insert($data) 
     {

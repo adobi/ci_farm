@@ -13,7 +13,7 @@ class Hatchingdata extends MY_Model
      * @param string $step 
      * @param string $inMachineId 
      * @return object
-     * @author Dobi Attila
+     * @author
      */
     public function fetchByStepAndInMachineId($step, $inMachineId)
     {

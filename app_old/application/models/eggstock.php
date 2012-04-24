@@ -11,7 +11,7 @@ class Eggstock extends MY_Model
      * azokat a tojas allomanyokat adja vissza amik nincsennek gepbe teve
      *
      * @return array
-     * @author Dobi Attila
+     * @author
      */
     public function fetchNoInMachine() 
     {
